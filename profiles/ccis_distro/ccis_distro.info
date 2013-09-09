@@ -49,6 +49,8 @@ dependencies[] = views_ui
 dependencies[] = views_data_export
 dependencies[] = strongarm
 dependencies[] = diff
+dependencies[] = token
+dependencies[] = auto_entitylabel
 
 ; CCIS
 dependencies[] = ccis
