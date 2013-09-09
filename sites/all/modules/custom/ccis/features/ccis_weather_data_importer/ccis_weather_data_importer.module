@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Weather Data Importer feature.
+ */
+
+include_once 'ccis_weather_data_importer.features.inc';

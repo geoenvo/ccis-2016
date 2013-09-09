@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * Implement hook_menu().
+ */
+function ccis_menu() {
+  $items['ccis_dashboard'] = array(
+    'title' => 'Dashboard',
+    'access callback' => TRUE,
+    'page callback' => 'ccis_dashboard_page',
+  );
+  return $items;
+}
+
+/**
+ * Page callback the dashboard page.
+ */
+function ccis_dashboard_page() {
+  $d3 = libraries_get_path('d3');
+  drupal_add_js($d3. '/d3.v3.min.js');
+  $path = drupal_get_path('module', 'ccis');
+  drupal_add_js($path . '/js/d3.ccis.js');
+  return '<div id="ccis_dashboard"></div>';
+
+}
+
+function ccis_feeds_after_parse(FeedsSource $source, FeedsParserResult $result) {
+   foreach ($result->items as &$value) {
+    # $value['date2'] = strtotime($value['date']);
+     $value['date'] = $value['station'] . $value['date'];
+    # dsm($value['date']);
+   }
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function ccis_ctools_plugin_directory($owner, $plugin_type){
+  if ($owner == 'feeds_tamper' && $plugin_type == 'plugins') {
+    return 'plugins';
+  }
+}

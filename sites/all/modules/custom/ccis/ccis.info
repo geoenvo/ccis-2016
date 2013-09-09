@@ -1,0 +1,4 @@
+name = CCIS
+core = 7.x
+
+dependencies[] = d3

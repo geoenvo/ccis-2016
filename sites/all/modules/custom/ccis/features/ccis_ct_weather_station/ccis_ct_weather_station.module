@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS CT Weather Station feature.
+ */
+
+include_once 'ccis_ct_weather_station.features.inc';
