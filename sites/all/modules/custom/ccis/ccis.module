@@ -5,9 +5,14 @@
  */
 function ccis_menu() {
   $items['ccis_dashboard'] = array(
-    'title' => 'Dashboard',
+    'title' => 'D3 lab',
     'access callback' => TRUE,
     'page callback' => 'ccis_dashboard_page',
+  );
+  $items['ccis_datatable'] = array(
+    'title' => 'Datatable lab',
+    'access callback' => TRUE,
+    'page callback' => 'ccis_datatable_page',
   );
   return $items;
 }
@@ -21,7 +26,16 @@ function ccis_dashboard_page() {
   $path = drupal_get_path('module', 'ccis');
   drupal_add_js($path . '/js/d3.ccis.js');
   return '<div id="ccis_dashboard"></div>';
+}
 
+/**
+ * Page callback the dashboard page.
+ */
+function ccis_datatable_page() {
+  drupal_add_library('datatables', 'datatables');
+  $path = drupal_get_path('module', 'ccis');
+  drupal_add_js($path . '/js/datatable.ccis.js');
+  return '<div id="ccis_datatables"></div>';
 }
 
 function ccis_feeds_after_parse(FeedsSource $source, FeedsParserResult $result) {
