@@ -32,7 +32,8 @@ function ccis_dashboard_page() {
  * Page callback the dashboard page.
  */
 function ccis_datatable_page() {
-  drupal_add_library('datatables', 'datatables');
+  $d3 = libraries_get_path('datatables');
+  drupal_add_js($d3. '/media/js/jquery.dataTables.min.js');
   $path = drupal_get_path('module', 'ccis');
   drupal_add_js($path . '/js/datatable.ccis.js');
   return '<div id="ccis_datatables"></div>';
