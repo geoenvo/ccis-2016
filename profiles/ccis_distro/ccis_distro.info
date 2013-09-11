@@ -46,11 +46,11 @@ dependencies[] = openlayers_ui
 dependencies[] = proj4js
 dependencies[] = views
 dependencies[] = views_ui
-dependencies[] = views_data_export
 dependencies[] = strongarm
 dependencies[] = diff
 dependencies[] = token
 dependencies[] = auto_entitylabel
+dependencies[] = mongodb
 
 ; CCIS
 dependencies[] = ccis
@@ -58,6 +58,4 @@ dependencies[] = ccis
 ; Features
 dependencies[] = ccis_ct_weather_data
 dependencies[] = ccis_ct_weather_station
-dependencies[] = ccis_weather_data
-dependencies[] = ccis_weather_data_importer
 dependencies[] = ccis_weather_station_importer

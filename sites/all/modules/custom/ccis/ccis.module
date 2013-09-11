@@ -14,11 +14,23 @@ function ccis_menu() {
     'access callback' => TRUE,
     'page callback' => 'ccis_datatable_page',
   );
+  $items['ccis/import'] = array(
+    'title' => 'CSV Import',
+    'access callback' => TRUE,
+    'page callback' => 'ccis_import_page',
+  );
+  $items['ccis/dataquery/%'] = array(
+    'title' => 'Data query',
+    'access callback' => TRUE,
+    'page callback' => 'ccis_dataquery_page',
+    'page arguments' => array(2),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
 /**
- * Page callback the dashboard page.
+ * Page callback the d3 lab page.
  */
 function ccis_dashboard_page() {
   $d3 = libraries_get_path('d3');
@@ -29,7 +41,7 @@ function ccis_dashboard_page() {
 }
 
 /**
- * Page callback the dashboard page.
+ * Page callback the Datatable lab page.
  */
 function ccis_datatable_page() {
   $d3 = libraries_get_path('datatables');
@@ -39,19 +51,103 @@ function ccis_datatable_page() {
   return '<div id="ccis_datatables"></div>';
 }
 
-function ccis_feeds_after_parse(FeedsSource $source, FeedsParserResult $result) {
-   foreach ($result->items as &$value) {
-    # $value['date2'] = strtotime($value['date']);
-     $value['date'] = $value['station'] . $value['date'];
-    # dsm($value['date']);
-   }
+/**
+ * Page callback to import csv files.
+ */
+function ccis_import_page() {
+  $files = file_scan_directory('private://csv_incoming', '/(\.\.?|\.csv)$/');
+  foreach ($files as $file) {
+    try{
+      $row = 1;
+      $header = $end_data = array();
+      $header_count = 0;
+      if (($handle = fopen($file->uri, "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+          if ($row == 1) {
+            $header = $data;
+            $header_count = count($header);
+          }
+          else{
+            $data_count = count($data);
+            if ($data_count !== $header_count) {
+              continue;
+            }
+            $end_data[] = array_combine($header, $data);
+          }
+          $row++;
+        }
+        fclose($handle);
+      }
+      $col = mongodb_collection($file->name);
+      $col->drop();
+      $col->batchInsert($end_data);
+    }
+    catch (Exception $e ) {
+      watchdog_exception('ccis', $e);
+    }
+    drupal_set_message(t('Imported @file', array('@file' => $file->filename)));
+    file_unmanaged_delete($file->uri);
+  }
+  if (empty($files)) {
+    drupal_set_message('Did not found any csv files.');
+  }
+  return '';
 }
 
 /**
- * Implements hook_ctools_plugin_directory().
+ * Return the json or csv output of a list.
+ * @param string $list
+ *   The list name like bremen_daily, bremen_monthly etc.
+ * @param string $format
+ *   The output format json or csv. Default json.
  */
-function ccis_ctools_plugin_directory($owner, $plugin_type){
-  if ($owner == 'feeds_tamper' && $plugin_type == 'plugins') {
-    return 'plugins';
+function ccis_dataquery_page($list, $format = 'json') {
+  $supported_formats = array('json', 'csv');
+  if (!in_array($format, $supported_formats)) {
+    watchdog('ccis', 'Overgiven format: @format is not supported', array('@format' => $format), WATCHDOG_ERROR);
+    return drupal_not_found();
   }
+  try{
+    $col = mongodb_collection($list);
+    $docs = $col->find();
+    $output = $header = array();
+    if ($docs->hasNext()) {
+      foreach ($docs as $doc) {
+        unset($doc['_id']);
+        $output[] = $doc;
+      }
+      if ($format == 'json') {
+        drupal_add_http_header('Content-Type', 'application/json; charset=utf-8');
+        echo json_encode($output);
+      }
+      else{
+        $header = array_keys(reset($output));
+        $output = array_merge(array($header), $output);
+        drupal_add_http_header('Content-Type', 'text/csv; charset=utf-8');
+        echo _ccis_outputCSV($output);
+      }
+    }
+  }
+  catch (Exception $e) {
+    watchdog_exception('ccis', $e);
+  }
+  drupal_add_http_header('Content-Type', 'application/json; charset=utf-8');
+  echo json_encode(array());
+  drupal_exit();
+}
+
+
+/**
+ * Copy from http://www.php.net/manual/de/function.fputcsv.php#100033
+ */
+function _ccis_outputCSV($data) {
+
+  $outstream = fopen("php://output", 'w');
+
+  function __outputCSV(&$vals, $key, $filehandler) {
+    fputcsv($filehandler, $vals, ',', '"');
+  }
+  array_walk($data, '__outputCSV', $outstream);
+
+  fclose($outstream);
 }

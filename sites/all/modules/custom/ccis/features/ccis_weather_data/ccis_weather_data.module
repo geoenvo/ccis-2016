@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the CCIS Weather Data feature.
- */
-
-include_once 'ccis_weather_data.features.inc';

@@ -1,0 +1,14 @@
+<?php
+/**
+ * @file
+ * Update-Hooks.
+ * TODO Remove Update-Hooks.
+ */
+
+/**
+ * Deletes the feature ccis_weather_data_importer from system table.
+ */
+function ccis_update_7001() {
+  db_delete('system')->condition('name', 'ccis_weather_data_importer')->execute();
+  db_delete('system')->condition('name', 'ccis_weather_data')->execute();
+}
