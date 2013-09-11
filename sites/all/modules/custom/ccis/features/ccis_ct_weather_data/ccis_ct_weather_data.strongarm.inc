@@ -14,14 +14,14 @@ function ccis_ct_weather_data_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_node_weather_data';
-  $strongarm->value = '2';
+  $strongarm->value = '0';
   $export['auto_entitylabel_node_weather_data'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'auto_entitylabel_pattern_node_weather_data';
-  $strongarm->value = '[node:field_station] - [node:field_date]';
+  $strongarm->value = '';
   $export['auto_entitylabel_pattern_node_weather_data'] = $strongarm;
 
   $strongarm = new stdClass();

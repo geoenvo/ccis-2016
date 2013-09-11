@@ -105,7 +105,7 @@ function ccis_dataquery_page($list, $format = 'json') {
   $supported_formats = array('json', 'csv');
   if (!in_array($format, $supported_formats)) {
     watchdog('ccis', 'Overgiven format: @format is not supported', array('@format' => $format), WATCHDOG_ERROR);
-    return drupal_not_found();
+    return MENU_NOT_FOUND;
   }
   try{
     $col = mongodb_collection($list);
@@ -114,6 +114,20 @@ function ccis_dataquery_page($list, $format = 'json') {
     if ($docs->hasNext()) {
       foreach ($docs as $doc) {
         unset($doc['_id']);
+        static $tmp;
+        if (empty($tmp)) {
+          foreach ($doc as $key => $val) {
+            $field = field_info_field('field_' . $key);
+            if (field_access('view', $field, 'node')) {
+              $tmp[$key] = $val;
+            }
+          }
+        }
+        foreach ($doc as $key => $val) {
+          if (!isset($tmp[$key])) {
+            unset($doc[$key]);
+          }
+        }
         $output[] = $doc;
       }
       if ($format == 'json') {
@@ -131,8 +145,6 @@ function ccis_dataquery_page($list, $format = 'json') {
   catch (Exception $e) {
     watchdog_exception('ccis', $e);
   }
-  drupal_add_http_header('Content-Type', 'application/json; charset=utf-8');
-  echo json_encode(array());
   drupal_exit();
 }
 

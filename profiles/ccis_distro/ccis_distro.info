@@ -51,6 +51,7 @@ dependencies[] = diff
 dependencies[] = token
 dependencies[] = auto_entitylabel
 dependencies[] = mongodb
+dependencies[] = field_permissions
 
 ; CCIS
 dependencies[] = ccis

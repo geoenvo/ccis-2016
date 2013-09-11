@@ -1,4 +1,4 @@
 name = CCIS
 core = 7.x
-
+package = CCIS
 dependencies[] = mongodb
