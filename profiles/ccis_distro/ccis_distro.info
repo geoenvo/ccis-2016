@@ -60,3 +60,4 @@ dependencies[] = ccis
 dependencies[] = ccis_ct_weather_data
 dependencies[] = ccis_ct_weather_station
 dependencies[] = ccis_weather_station_importer
+dependencies[] = ccis_dashboard

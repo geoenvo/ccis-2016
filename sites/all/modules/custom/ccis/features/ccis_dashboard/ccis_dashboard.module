@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Dashboard feature.
+ */
+
+include_once 'ccis_dashboard.features.inc';

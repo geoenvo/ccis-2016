@@ -1,0 +1,11 @@
+name = CCIS Dashboard
+core = 7.x
+package = CCIS
+dependencies[] = ctools
+dependencies[] = homebox
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[homebox][] = weather_dashboard
+features[views_view][] = station_info
+project path = sites/all/modules/custom/ccis/features
