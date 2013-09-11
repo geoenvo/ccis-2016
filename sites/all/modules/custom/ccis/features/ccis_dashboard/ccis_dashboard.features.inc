@@ -19,7 +19,7 @@ function ccis_dashboard_homebox() {
 
   $homeboxes['weather_dashboard'] = array (
     'regions' => 5,
-    'cache' => 0,
+    'cache' => 1,
     'color' => 0,
     'colors' => 
     array (
@@ -32,6 +32,42 @@ function ccis_dashboard_homebox() {
     ),
     'blocks' => 
     array (
+      'ccis_d3' => 
+      array (
+        'module' => 'ccis',
+        'delta' => 'd3',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 0,
+        'title' => '',
+        'weight' => -11,
+      ),
+      'ccis_datatables' => 
+      array (
+        'module' => 'ccis',
+        'delta' => 'datatables',
+        'region' => 5,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 0,
+        'title' => '',
+        'weight' => -11,
+      ),
+      'ccis_filter' => 
+      array (
+        'module' => 'ccis',
+        'delta' => 'filter',
+        'region' => 3,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 0,
+        'title' => '',
+        'weight' => -11,
+      ),
       'views_station_info-block' => 
       array (
         'module' => 'views',

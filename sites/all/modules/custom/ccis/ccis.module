@@ -30,6 +30,44 @@ function ccis_menu() {
 }
 
 /**
+ * Implement hook_block_info().
+ */
+function ccis_block_info() {
+  $blocks['filter'] = array(
+    'info' => 'Station Filter',
+  );
+  $blocks['d3'] = array(
+    'info' => 'D3 Graph',
+  );
+  $blocks['datatables'] = array(
+    'info' => 'Datatable',
+  );
+  return $blocks;
+}
+
+/**
+ * Implement hook_block_view().
+ */
+function ccis_block_view($delta) {
+  $block = array();
+  switch ($delta) {
+    case 'filter':
+      $block['subject'] = '<none>';
+      $block['content'] =  _ccis_block_filter();
+      break;
+    case 'd3':
+      $block['subject'] = '<none>';
+      $block['content'] = _ccis_block_d3();
+      break;
+    case 'datatables':
+      $block['subject'] = '<none>';
+      $block['content'] = _ccis_block_datatables();
+      break;
+  }
+  return $block;
+}
+
+/**
  * Page callback the d3 lab page.
  */
 function ccis_dashboard_page() {
@@ -162,4 +200,57 @@ function _ccis_outputCSV($data) {
   array_walk($data, '__outputCSV', $outstream);
 
   fclose($outstream);
+}
+
+/**
+ * Block output for the filter.
+ */
+function _ccis_block_filter() {
+  $form = drupal_get_form('_ccis_block_filter_form');
+  return drupal_render($form);
+}
+
+/**
+ * Filter form.
+ */
+function _ccis_block_filter_form($form, $form_state) {
+  $form['station'] = array(
+    '#title' => t('Station'),
+    '#type' => 'textfield',
+    '#size' => 5,
+  );
+  $form['actions'] = array('#type' => 'actions');
+
+  $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Filter'));
+  return $form;
+}
+
+/**
+ * Submit handler for the form _ccis_block_filter_form().
+ */
+function _ccis_block_filter_form_submit($form, &$form_state) {
+  form_state_values_clean($form_state);
+  $form_state['redirect'] = array(current_path(), array('query' => $form_state['values']));
+}
+
+/**
+ * Block output for the D3 graph.
+ */
+function _ccis_block_d3() {
+  $d3 = libraries_get_path('d3');
+  drupal_add_js($d3. '/d3.v3.min.js');
+  $path = drupal_get_path('module', 'ccis');
+  drupal_add_js($path . '/js/d3.ccis.js');
+  return '<h3>D3 Content</h3><div id="ccis_dashboard"></div>';
+}
+
+/**
+ * Block output for the datatables.
+ */
+function _ccis_block_datatables() {
+  $d3 = libraries_get_path('datatables');
+  drupal_add_js($d3. '/media/js/jquery.dataTables.min.js');
+  $path = drupal_get_path('module', 'ccis');
+  drupal_add_js($path . '/js/datatable.ccis.js');
+  return '<h3>DataTables Content</h3><div id="ccis_datatables"></div>';
 }
