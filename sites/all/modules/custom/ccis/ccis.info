@@ -4,3 +4,4 @@ package = CCIS
 dependencies[] = mongodb
 dependencies[] = openlayers
 dependencies[] = views
+dependencies[] = datatables
