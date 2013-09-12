@@ -2,3 +2,5 @@ name = CCIS
 core = 7.x
 package = CCIS
 dependencies[] = mongodb
+dependencies[] = openlayers
+dependencies[] = views

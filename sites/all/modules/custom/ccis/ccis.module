@@ -36,6 +36,12 @@ function ccis_block_info() {
   $blocks['filter'] = array(
     'info' => 'Station Filter',
   );
+  $blocks['stationinfo'] = array(
+    'info' => 'Station Info',
+  );
+  $blocks['stationmap'] = array(
+    'info' => 'Station map',
+  );
   $blocks['d3'] = array(
     'info' => 'D3 Graph',
   );
@@ -50,6 +56,7 @@ function ccis_block_info() {
  */
 function ccis_block_view($delta) {
   $block = array();
+  $station = isset($_GET['station']) ? $_GET['station'] : NULL;
   switch ($delta) {
     case 'filter':
       $block['subject'] = '<none>';
@@ -62,6 +69,14 @@ function ccis_block_view($delta) {
     case 'datatables':
       $block['subject'] = '<none>';
       $block['content'] = _ccis_block_datatables();
+      break;
+    case 'stationinfo':
+      $block['subject'] = '<none>';
+      $block['content'] = _ccis_block_stationinfo($station);
+      break;
+    case 'stationmap':
+      $block['subject'] = '<none>';
+      $block['content'] = _ccis_block_stationmap($station);
       break;
   }
   return $block;
@@ -221,7 +236,12 @@ function _ccis_block_filter_form($form, $form_state) {
   );
   $form['actions'] = array('#type' => 'actions');
 
-  $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Filter'));
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Filter'),
+    '#ajax' => array('callback' => '_ccis_block_filter_form_ajax_submit'),
+    '#attributes' => array('class' => array('use-ajax-submit')),
+  );
   return $form;
 }
 
@@ -231,6 +251,17 @@ function _ccis_block_filter_form($form, $form_state) {
 function _ccis_block_filter_form_submit($form, &$form_state) {
   form_state_values_clean($form_state);
   $form_state['redirect'] = array(current_path(), array('query' => $form_state['values']));
+}
+
+function _ccis_block_filter_form_ajax_submit($form, &$form_state) {
+  #dsm($form_state['values']);
+  $station = $form_state['values']['station'];
+  #$commands[] = ajax_command_html('#ccis_dashboard', theme('status_messages'));
+  $commands[] = ajax_command_replace('#ccis-station-info-block', _ccis_block_stationinfo($station));
+  $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap($station));
+
+  return array('#type' => 'ajax', '#commands' => $commands);
+
 }
 
 /**
@@ -253,4 +284,31 @@ function _ccis_block_datatables() {
   $path = drupal_get_path('module', 'ccis');
   drupal_add_js($path . '/js/datatable.ccis.js');
   return '<h3>DataTables Content</h3><div id="ccis_datatables"></div>';
+}
+
+/**
+ * Block output for the Station info.
+ */
+function _ccis_block_stationinfo($station = NULL) {
+  $station = empty($station) ? NULL : $station;
+  $output = '';
+  $view = views_embed_view('station_info', 'embed_1', $station);
+  $output = '<div id="ccis-station-info-block">';
+  $output .= $view;
+  $output .= '</div>';
+  return $output;
+}
+
+/**
+ * Block output for the Station map.
+ */
+function _ccis_block_stationmap($station = NULL) {
+  openlayers_include();
+  $station = empty($station) ? NULL : $station;
+  $output = '';
+  $view = views_embed_view('station_map', 'embed_1', $station);
+  $output = '<div id="ccis-station-map-block">';
+  $output .= $view;
+  $output .= '</div>';
+  return $output;
 }

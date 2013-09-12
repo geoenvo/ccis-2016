@@ -68,29 +68,29 @@ function ccis_dashboard_homebox() {
         'title' => '',
         'weight' => -11,
       ),
-      'views_station_info-block' => 
+      'ccis_stationinfo' => 
       array (
-        'module' => 'views',
-        'delta' => 'station_info-block',
+        'module' => 'ccis',
+        'delta' => 'stationinfo',
         'region' => 1,
         'movable' => 1,
         'status' => 1,
         'open' => 1,
-        'closable' => 0,
+        'closable' => 1,
         'title' => '',
-        'weight' => -9,
+        'weight' => -13,
       ),
-      'views_station_info-block_1' => 
+      'ccis_stationmap' => 
       array (
-        'module' => 'views',
-        'delta' => 'station_info-block_1',
+        'module' => 'ccis',
+        'delta' => 'stationmap',
         'region' => 4,
         'movable' => 1,
         'status' => 1,
         'open' => 1,
-        'closable' => 0,
+        'closable' => 1,
         'title' => '',
-        'weight' => -9,
+        'weight' => -13,
       ),
     ),
     'widths' => 
