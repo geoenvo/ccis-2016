@@ -306,10 +306,26 @@ function _ccis_block_d3() {
   $path = drupal_get_path('module', 'ccis');
   drupal_add_js($path . '/js/d3.ccis.js');
   drupal_add_js(_ccis_get_d3_settings('unknown'), 'setting');
-  return '<h3>D3 Content</h3><div id="ccis_dashboard"></div>';
+  return '<div id="ccis_dashboard"></div>';
 }
 
 function _ccis_get_d3_settings($list = 'unknown') {
+  $fields = array(
+      'station' => t('Station'),
+      'date' => t('Date'),
+      'avg_temp' => t('Average mean temperature'),
+      'avg_prec' => t('Average precipitation amount'),
+      'avg_press' => t('Average sea level pressure'),
+      'avg_min_temp' => t('Average min temperature'),
+      'avg_max_temp' => t('Average max temperature'),
+  );
+  $legends = array();
+  foreach ($fields as $key => $title) {
+    $field = field_info_field('field_' . $key);
+    if (field_access('view', $field, 'node')) {
+      $legends[] = $title;
+    }
+  }
   $settings = array(
       'ccis' => array(
           'stations' => array(
@@ -318,6 +334,7 @@ function _ccis_get_d3_settings($list = 'unknown') {
                   'path' => url("ccis/dataquery/$list/d3"),
               ),
           ),
+          'legends' => $legends,
       ),
   );
   return $settings;
