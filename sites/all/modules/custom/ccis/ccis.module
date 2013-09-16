@@ -306,7 +306,7 @@ function _ccis_block_d3() {
   $path = drupal_get_path('module', 'ccis');
   drupal_add_js($path . '/js/d3.ccis.js');
   drupal_add_js(_ccis_get_d3_settings('unknown'), 'setting');
-  return '<div id="ccis_dashboard"></div>';
+  return '<div id="ccis-weather-d3-block"></div>';
 }
 
 function _ccis_get_d3_settings($list = 'unknown') {
@@ -330,7 +330,7 @@ function _ccis_get_d3_settings($list = 'unknown') {
       'ccis' => array(
           'stations' => array(
               array(
-                  'selector' => 'ccis-weather-datatable-block',
+                  'selector' => 'ccis-weather-d3-block',
                   'path' => url("ccis/dataquery/$list/d3"),
               ),
           ),
