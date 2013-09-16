@@ -4,19 +4,9 @@
  * Implement hook_menu().
  */
 function ccis_menu() {
-  $items['ccis_dashboard'] = array(
-    'title' => 'D3 lab',
-    'access callback' => TRUE,
-    'page callback' => 'ccis_dashboard_page',
-  );
-  $items['ccis_datatable'] = array(
-    'title' => 'Datatable lab',
-    'access callback' => TRUE,
-    'page callback' => 'ccis_datatable_page',
-  );
   $items['ccis/import'] = array(
     'title' => 'CSV Import',
-    'access callback' => TRUE,
+    'access arguments' => array('csv_import'),
     'page callback' => 'ccis_import_page',
   );
   $items['ccis/dataquery/%'] = array(
@@ -27,6 +17,20 @@ function ccis_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+/**
+ * Implement hook_permission().
+ */
+function ccis_permission() {
+  $perms['csv_import'] = array(
+    'title' => t('CSV import'),
+    'description' => t('Allows a user to import the csv files from the csv_incoming directory inside the private file system.')
+  );
+  $perms['delete_collections'] = array(
+    'title' => t('Delete mongoDB collections'),
+    'description' => t('Allows a user to delete a mongoDB collection via GUI.')
+  );
 }
 
 /**
@@ -83,68 +87,156 @@ function ccis_block_view($delta) {
 }
 
 /**
- * Page callback the d3 lab page.
- */
-function ccis_dashboard_page() {
-  $d3 = libraries_get_path('d3');
-  drupal_add_js($d3. '/d3.v3.min.js');
-  $path = drupal_get_path('module', 'ccis');
-  drupal_add_js($path . '/js/d3.ccis.js');
-  return '<div id="ccis_dashboard"></div>';
-}
-
-/**
- * Page callback the Datatable lab page.
- */
-function ccis_datatable_page() {
-  $d3 = libraries_get_path('datatables');
-  drupal_add_js($d3. '/media/js/jquery.dataTables.min.js');
-  $path = drupal_get_path('module', 'ccis');
-  drupal_add_js($path . '/js/datatable.ccis.js');
-  return '<div id="ccis_datatables"></div>';
-}
-
-/**
  * Page callback to import csv files.
  */
 function ccis_import_page() {
+  $import_form = drupal_get_form('ccis_import_files_form');
+  $output = drupal_render($import_form);
+  if (user_access('delete_collections')) {
+    $delete_form = drupal_get_form('ccis_collection_delete_form');
+    $output .= drupal_render($delete_form);
+  }
+  return $output;
+}
+
+/**
+ * The form to import the csv files from the directory inside private://csv_incoming.
+ */
+function ccis_import_files_form() {
   $files = file_scan_directory('private://csv_incoming', '/(\.\.?|\.csv)$/');
+  $options = array();
+  $header = array('filename' => t('Filename'));
   foreach ($files as $file) {
-    try{
-      $row = 1;
-      $header = $end_data = array();
-      $header_count = 0;
-      if (($handle = fopen($file->uri, "r")) !== FALSE) {
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-          if ($row == 1) {
-            $header = $data;
-            $header_count = count($header);
-          }
-          else{
-            $data_count = count($data);
-            if ($data_count !== $header_count) {
-              continue;
-            }
-            $end_data[] = array_combine($header, $data);
-          }
-          $row++;
+    $options[$file->uri] = array('filename' => $file->filename);
+  }
+  $form['files'] = array(
+    '#title' => t('Files'),
+    '#type' => 'tableselect',
+    '#header' => $header,
+    '#options' => $options,
+    '#empty' => t('No files available.'),
+  );
+  $form['#fileobj'] = $files;
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Import'),
+  );
+  return $form;
+}
+
+/**
+ * Submit handler for ccis_import_files_form().
+ */
+function ccis_import_files_form_submit($form, $form_state) {
+  $files = array_filter($form_state['values']['files']);
+  if (!empty($files)) {
+    $operations = array();
+    foreach ($files as $filepath) {
+      $file = $form['#fileobj'][$filepath];
+      $operations[] = array('ccis_import_csv_file', array($file));
+    }
+    $batch = array(
+      'operations'    => $operations,
+      'title'         => 'Import files',
+    );
+    batch_set($batch);
+  }
+}
+
+/**
+ * Batch api callback to import a csv file.
+ *
+ * @see ccis_import_files_form_submit
+ */
+function ccis_import_csv_file($file, &$context) {
+  $context['message'] = t('Importing @file', array('@file' => $file->filename));
+  try{
+    $row = 1;
+    $header = $end_data = array();
+    $header_count = 0;
+    if (($handle = fopen($file->uri, "r")) !== FALSE) {
+      while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        if ($row == 1) {
+          $header = $data;
+          $header_count = count($header);
         }
-        fclose($handle);
+        else{
+          $data_count = count($data);
+          if ($data_count !== $header_count) {
+            continue;
+          }
+          $end_data[] = array_combine($header, $data);
+        }
+        $row++;
       }
-      $col = mongodb_collection($file->name);
-      $col->drop();
-      $col->batchInsert($end_data);
+      fclose($handle);
     }
-    catch (Exception $e ) {
+    $col = mongodb_collection($file->name);
+    $col->drop();
+    $col->batchInsert($end_data);
+  }
+  catch (Exception $e ) {
+    watchdog_exception('ccis', $e);
+  }
+  file_unmanaged_delete($filepath);
+}
+
+/**
+ * The form lists the mongoDB collections to delete it via GUI.
+ */
+function ccis_collection_delete_form() {
+  try {
+    $m = mongodb();
+    $collections = $m->getCollectionNames();
+  }
+  catch (Exception $e) {
+    watchdog_exception('ccis', $e);
+  }
+  $options = array();
+  $header = array(
+      'collection' => t('Collection')
+  );
+  foreach ( $collections as $collection ) {
+    $options[$collection] = array(
+      'collection' => $collection
+    );
+  }
+  $form['collections'] = array(
+      '#title' => t('Collections'),
+      '#type' => 'tableselect',
+      '#header' => $header,
+      '#options' => $options,
+      '#empty' => t('No collection available.')
+  );
+  $form['actions'] = array(
+      '#type' => 'actions'
+  );
+  $form['actions']['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Delete')
+  );
+  return $form;
+}
+
+/**
+ * Submit handler for ccis_collection_delete_form().
+ */
+function ccis_collection_delete_form_submit($form, $form_state) {
+  $collections = array_filter($form_state['values']['collections']);
+  if (!empty($collections)) {
+    try{
+      $m = mongodb();
+      foreach ($collections as $col_name) {
+        $collection = $m->selectCollection($col_name);
+        $collection->drop();
+      }
+    }
+    catch (Exception $e) {
       watchdog_exception('ccis', $e);
+      drupal_set_message(t('Could not delete the collections. See logs for more informations.'));
     }
-    drupal_set_message(t('Imported @file', array('@file' => $file->filename)));
-    file_unmanaged_delete($file->uri);
   }
-  if (empty($files)) {
-    drupal_set_message('Did not found any csv files.');
-  }
-  return '';
 }
 
 /**
