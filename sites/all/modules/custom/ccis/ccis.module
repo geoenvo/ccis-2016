@@ -528,7 +528,7 @@ function _ccis_get_station_node($values) {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
   ->entityCondition('bundle', 'weather_station');
-  if ($values['station_filter_by'] == 'code') {
+  if (!empty($values['station_filter_by']) && $values['station_filter_by'] == 'code') {
     $values['station_name'] = '';
   }
   else{
