@@ -5,3 +5,5 @@ dependencies[] = mongodb
 dependencies[] = openlayers
 dependencies[] = views
 dependencies[] = datatables
+dependencies[] = entity
+dependencies[] = date_popup

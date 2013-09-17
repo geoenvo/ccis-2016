@@ -67,8 +67,7 @@ function ccis_block_info() {
  */
 function ccis_block_view($delta) {
   $block = array();
-  $station = isset($_GET['station']) ? $_GET['station'] : NULL;
-  $node = _ccis_get_station_node(array('station' => $station));
+  $node = _ccis_get_station_node($_GET);
   switch ($delta) {
     case 'filter':
       $block['subject'] = '<none>';
@@ -79,7 +78,8 @@ function ccis_block_view($delta) {
       $block['content'] = _ccis_block_d3();
       break;
     case 'datatables':
-      $list = _ccis_get_listname($node);
+      $range = _ccis_get_date_range($_GET);
+      $list = _ccis_get_listname($node, $range);
       $block['subject'] = '<none>';
       $block['content'] = _ccis_block_datatables($list);
       break;
@@ -371,11 +371,18 @@ function _ccis_block_filter_form($form, $form_state) {
     '#size' => 5,
     '#autocomplete_path' => 'ccis/autocomplete/station_name',
   );
-//   $form['range'] = array(
-//     '#type' => 'date_popup',
-//     '#date_year_range' => '-100:0',
-//     '#date_format' => 'd.m.Y'
-//   );
+  $form['start'] = array(
+    '#title' => t('From'),
+    '#type' => 'date_popup',
+    '#date_year_range' => '-100:0',
+    '#date_format' => 'd.m.Y',
+  );
+  $form['end'] = array(
+    '#title' => t('To'),
+    '#type' => 'date_popup',
+    '#date_year_range' => '-100:0',
+    '#date_format' => 'd.m.Y',
+  );
   $form['actions'] = array('#type' => 'actions');
 
   $form['actions']['submit'] = array(
@@ -399,7 +406,8 @@ function _ccis_block_filter_form_ajax_submit($form, &$form_state) {
   #dsm($form_state['values']);
   $station = $form_state['values']['station'];
   $node = _ccis_get_station_node($form_state['values']);
-  $list = _ccis_get_listname($node, 'daily');
+  $range = _ccis_get_date_range($form_state['values']);
+  $list = _ccis_get_listname($node, $range);
   $settings = _ccis_get_d3_settings($list);
   $commands[] = ajax_command_settings($settings, TRUE);
   $commands[] = ajax_command_replace('#ccis-weather-datatable-block', _ccis_block_datatables($list));
@@ -496,15 +504,18 @@ function _ccis_block_datatables($list = 'unknown') {
   return $output;
 }
 
-function _ccis_get_station_node($form_values) {
+function _ccis_get_station_node($values) {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
   ->entityCondition('bundle', 'weather_station');
-  if (!empty($form_values['station'])) {
-    $query->fieldCondition('field_station_number', 'value', $form_values['station'], '=');
+  if (!empty($values['station'])) {
+    $query->fieldCondition('field_station_number', 'value', $values['station'], '=');
   }
-  else if (!empty($form_values['station_name'])) {
-    $query->propertyCondition('title', $form_values['station_name']);
+  else if (!empty($values['station_name'])) {
+    $query->propertyCondition('title', $values['station_name']);
+  }
+  else{
+    return NULL;
   }
   $result = $query->execute();
   if (isset($result['node'])) {
@@ -516,7 +527,29 @@ function _ccis_get_station_node($form_values) {
   return NULL;
 }
 
-function _ccis_get_listname($node, $range = 'daily') {
+function _ccis_get_date_range($values) {
+  $range = 'yearly';
+  if (empty($values['start']) || empty($values['end'])) {
+    return $range;
+  }
+  $date1 = $values['start'];
+  $date2 = $values['end'];
+
+  $diff = abs(strtotime($date2) - strtotime($date1));
+
+  $years = floor($diff / (365*60*60*24));
+  $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+  $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+  if ($years < 2) {
+    $range = 'monthly';
+    if ($years < 1 && $months < 4) {
+      $range = 'daily';
+    }
+  }
+  return $range;
+}
+
+function _ccis_get_listname($node, $range) {
   $list = 'unknown';
   if (!empty($node)) {
     $list = drupal_strtolower($node->title);
