@@ -365,16 +365,30 @@ function _ccis_block_filter() {
  * Filter form.
  */
 function _ccis_block_filter_form($form, $form_state) {
+  $form['station_filter_by'] = array(
+    '#title' => t('Search station by'),
+    '#type' => 'radios',
+    '#options' => array('name' => t('Station name'), 'code' => t('WMO Code or station number')),
+    '#default_value' => 'name',
+  );
   $form['station'] = array(
     '#title' => t('WMO Code or station number'),
     '#type' => 'textfield',
     '#size' => 5,
+    '#title_display' => 'invisible',
+    '#states' => array(
+      'visible' => array(':input[name="station_filter_by"]' => array('value' => 'code'))
+    ),
   );
   $form['station_name'] = array(
     '#title' => t('Station name'),
     '#type' => 'textfield',
     '#size' => 5,
     '#autocomplete_path' => 'ccis/autocomplete/station_name',
+    '#title_display' => 'invisible',
+    '#states' => array(
+      'visible' => array(':input[name="station_filter_by"]' => array('value' => 'name'))
+    ),
   );
   $form['start'] = array(
     '#title' => t('From'),
@@ -392,7 +406,7 @@ function _ccis_block_filter_form($form, $form_state) {
 
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Filter'),
+    '#value' => t('Search'),
     '#ajax' => array('callback' => '_ccis_block_filter_form_ajax_submit'),
     '#attributes' => array('class' => array('use-ajax-submit')),
   );
@@ -411,6 +425,7 @@ function _ccis_block_filter_form_ajax_submit($form, &$form_state) {
   #dsm($form_state['values']);
   form_state_values_clean($form_state);
   $node = _ccis_get_station_node($form_state['values']);
+
   $range = _ccis_get_date_range($form_state['values']);
   $list = _ccis_get_listname($node, $range);
   $settings = _ccis_get_d3_settings($list, $form_state['values']);
@@ -513,6 +528,12 @@ function _ccis_get_station_node($values) {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
   ->entityCondition('bundle', 'weather_station');
+  if ($values['station_filter_by'] == 'code') {
+    $values['station_name'] = '';
+  }
+  else{
+    $values['station'] = '';
+  }
   if (!empty($values['station'])) {
     $query->fieldCondition('field_station_number', 'value', $values['station'], '=');
   }
