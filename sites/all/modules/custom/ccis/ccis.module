@@ -67,21 +67,24 @@ function ccis_block_info() {
  */
 function ccis_block_view($delta) {
   $block = array();
-  $node = _ccis_get_station_node($_GET);
+  $params = drupal_get_query_parameters();
+  $node = _ccis_get_station_node($params);
   switch ($delta) {
     case 'filter':
       $block['subject'] = '<none>';
       $block['content'] =  _ccis_block_filter();
       break;
     case 'd3':
-      $block['subject'] = '<none>';
-      $block['content'] = _ccis_block_d3();
-      break;
-    case 'datatables':
-      $range = _ccis_get_date_range($_GET);
+      $range = _ccis_get_date_range($params);
       $list = _ccis_get_listname($node, $range);
       $block['subject'] = '<none>';
-      $block['content'] = _ccis_block_datatables($list);
+      $block['content'] = _ccis_block_d3($list, $params);
+      break;
+    case 'datatables':
+      $range = _ccis_get_date_range($params);
+      $list = _ccis_get_listname($node, $range);
+      $block['subject'] = '<none>';
+      $block['content'] = _ccis_block_datatables($list, $params);
       break;
     case 'stationinfo':
       $block['subject'] = '<none>';
@@ -268,13 +271,17 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
     $error = TRUE;
   }
   if ($error) {
-    drupal_add_http_header('Content-Type', 'application/json; charset=utf-8');
-    echo json_encode(array());
+    drupal_json_output(array());
     drupal_exit();
   }
+  $params = drupal_get_query_parameters();
   try{
     $col = mongodb_collection($list);
-    $docs = $col->find();
+    $query = array();
+    if (!empty($params['start']) && !empty($params['end'])) {
+      $query = array('date' => array('$gte' => $params['start'], '$lt' => $params['end']));
+    }
+    $docs = $col->find($query)->limit(180);
     $output = $header = array();
     if ($docs->hasNext()) {
       foreach ($docs as $doc) {
@@ -301,12 +308,11 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
         }
       }
       if ($format == 'json') {
-        drupal_add_http_header('Content-Type', 'application/json; charset=utf-8');
         if ($source == 'datatables') {
-          echo json_encode(array('aaData' => $output));
+          echo drupal_json_output(array('aaData' => $output));
         }
         else{
-          echo json_encode($output);
+          echo drupal_json_output($output);
         }
       }
       else{
@@ -317,12 +323,11 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
       }
     }
     else{
-      drupal_add_http_header('Content-Type', 'application/json; charset=utf-8');
       if ($source == 'datatables') {
-       echo json_encode(array('aaData' => $output));
+        echo drupal_json_output(array('aaData' => $output));
       }
       else{
-        echo json_encode($output);
+        echo drupal_json_output($output);
       }
     }
   }
@@ -404,13 +409,13 @@ function _ccis_block_filter_form_submit($form, &$form_state) {
 
 function _ccis_block_filter_form_ajax_submit($form, &$form_state) {
   #dsm($form_state['values']);
-  $station = $form_state['values']['station'];
+  form_state_values_clean($form_state);
   $node = _ccis_get_station_node($form_state['values']);
   $range = _ccis_get_date_range($form_state['values']);
   $list = _ccis_get_listname($node, $range);
-  $settings = _ccis_get_d3_settings($list);
+  $settings = _ccis_get_d3_settings($list, $form_state['values']);
   $commands[] = ajax_command_settings($settings, TRUE);
-  $commands[] = ajax_command_replace('#ccis-weather-datatable-block', _ccis_block_datatables($list));
+  $commands[] = ajax_command_replace('#ccis-weather-datatable-block', _ccis_block_datatables($list, $form_state['values']));
   $commands[] = ajax_command_replace('#ccis-station-info-block', _ccis_block_stationinfo($node));
   $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap($node));
 
@@ -421,16 +426,16 @@ function _ccis_block_filter_form_ajax_submit($form, &$form_state) {
 /**
  * Block output for the D3 graph.
  */
-function _ccis_block_d3() {
+function _ccis_block_d3($list, $params) {
   $d3 = libraries_get_path('d3');
   drupal_add_js($d3. '/d3.v3.min.js');
   $path = drupal_get_path('module', 'ccis');
   drupal_add_js($path . '/js/d3.ccis.js');
-  drupal_add_js(_ccis_get_d3_settings('unknown'), 'setting');
+  drupal_add_js(_ccis_get_d3_settings($list, $params), 'setting');
   return '<div id="ccis-weather-d3-block"></div>';
 }
 
-function _ccis_get_d3_settings($list = 'unknown') {
+function _ccis_get_d3_settings($list = 'unknown', $values) {
   $fields = array(
       'station' => t('Station'),
       'date' => t('Date'),
@@ -452,7 +457,7 @@ function _ccis_get_d3_settings($list = 'unknown') {
           'stations' => array(
               array(
                   'selector' => 'ccis-weather-d3-block',
-                  'path' => url("ccis/dataquery/$list/d3"),
+                  'path' => url("ccis/dataquery/$list/d3", array('query' => $values)),
               ),
           ),
           'legends' => $legends,
@@ -464,7 +469,7 @@ function _ccis_get_d3_settings($list = 'unknown') {
 /**
  * Block output for the datatables.
  */
-function _ccis_block_datatables($list = 'unknown') {
+function _ccis_block_datatables($list = 'unknown', $values) {
 //   $d3 = libraries_get_path('datatables');
 //   drupal_add_js($d3. '/media/js/jquery.dataTables.min.js');
 //   $path = drupal_get_path('module', 'ccis');
@@ -494,7 +499,7 @@ function _ccis_block_datatables($list = 'unknown') {
       'id' => 'ccis_datatables',
       'datatable_options' => array(
         'bProcessing' => true,
-        'sAjaxSource' => url("ccis/dataquery/$list/datatables"),
+        'sAjaxSource' => url("ccis/dataquery/$list/datatables", array('query' => $values)),
       ),
     ),
   );
