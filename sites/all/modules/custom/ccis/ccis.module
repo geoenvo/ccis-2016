@@ -16,6 +16,13 @@ function ccis_menu() {
     'page arguments' => array(2),
     'type' => MENU_CALLBACK,
   );
+  $items['ccis/autocomplete/%'] = array(
+    'title' => 'Autocomplete',
+    'access callback' => TRUE,
+    'page callback' => 'ccis_autocomplete_response',
+    'page arguments' => array(2),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -61,6 +68,7 @@ function ccis_block_info() {
 function ccis_block_view($delta) {
   $block = array();
   $station = isset($_GET['station']) ? $_GET['station'] : NULL;
+  $node = _ccis_get_station_node(array('station' => $station));
   switch ($delta) {
     case 'filter':
       $block['subject'] = '<none>';
@@ -71,16 +79,17 @@ function ccis_block_view($delta) {
       $block['content'] = _ccis_block_d3();
       break;
     case 'datatables':
+      $list = _ccis_get_listname($node);
       $block['subject'] = '<none>';
-      $block['content'] = _ccis_block_datatables();
+      $block['content'] = _ccis_block_datatables($list);
       break;
     case 'stationinfo':
       $block['subject'] = '<none>';
-      $block['content'] = _ccis_block_stationinfo($station);
+      $block['content'] = _ccis_block_stationinfo($node);
       break;
     case 'stationmap':
       $block['subject'] = '<none>';
-      $block['content'] = _ccis_block_stationmap($station);
+      $block['content'] = _ccis_block_stationmap($node);
       break;
   }
   return $block;
@@ -255,7 +264,7 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
     $error = TRUE;
   }
   if (!in_array($source, $supported_sources)) {
-    watchdog('ccis', 'Obergiven source: @source is not supported', array('@source' => $source), WATCHDOG_ERROR);
+    watchdog('ccis', 'Overgiven source: @source is not supported', array('@source' => $source), WATCHDOG_ERROR);
     $error = TRUE;
   }
   if ($error) {
@@ -352,10 +361,21 @@ function _ccis_block_filter() {
  */
 function _ccis_block_filter_form($form, $form_state) {
   $form['station'] = array(
-    '#title' => t('Station'),
+    '#title' => t('WMO Code or station number'),
     '#type' => 'textfield',
     '#size' => 5,
   );
+  $form['station_name'] = array(
+    '#title' => t('Station name'),
+    '#type' => 'textfield',
+    '#size' => 5,
+    '#autocomplete_path' => 'ccis/autocomplete/station_name',
+  );
+//   $form['range'] = array(
+//     '#type' => 'date_popup',
+//     '#date_year_range' => '-100:0',
+//     '#date_format' => 'd.m.Y'
+//   );
   $form['actions'] = array('#type' => 'actions');
 
   $form['actions']['submit'] = array(
@@ -378,12 +398,13 @@ function _ccis_block_filter_form_submit($form, &$form_state) {
 function _ccis_block_filter_form_ajax_submit($form, &$form_state) {
   #dsm($form_state['values']);
   $station = $form_state['values']['station'];
-  $list = _ccis_get_listname($station);
+  $node = _ccis_get_station_node($form_state['values']);
+  $list = _ccis_get_listname($node, 'daily');
   $settings = _ccis_get_d3_settings($list);
   $commands[] = ajax_command_settings($settings, TRUE);
   $commands[] = ajax_command_replace('#ccis-weather-datatable-block', _ccis_block_datatables($list));
-  $commands[] = ajax_command_replace('#ccis-station-info-block', _ccis_block_stationinfo($station));
-  $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap($station));
+  $commands[] = ajax_command_replace('#ccis-station-info-block', _ccis_block_stationinfo($node));
+  $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap($node));
 
   return array('#type' => 'ajax', '#commands' => $commands);
 
@@ -475,18 +496,30 @@ function _ccis_block_datatables($list = 'unknown') {
   return $output;
 }
 
-function _ccis_get_listname($station, $range = 'daily') {
+function _ccis_get_station_node($form_values) {
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
-  ->entityCondition('bundle', 'weather_station')
-  ->fieldCondition('field_station_number', 'value', $station, '=');
+  ->entityCondition('bundle', 'weather_station');
+  if (!empty($form_values['station'])) {
+    $query->fieldCondition('field_station_number', 'value', $form_values['station'], '=');
+  }
+  else if (!empty($form_values['station_name'])) {
+    $query->propertyCondition('title', $form_values['station_name']);
+  }
   $result = $query->execute();
-  $list = 'unknown';
   if (isset($result['node'])) {
     $weather_stations_nids = array_keys($result['node']);
     $weather_stations = entity_load('node', $weather_stations_nids);
     $weather_station = reset($weather_stations);
-    $list = drupal_strtolower($weather_station->title);
+    return $weather_station;
+  }
+  return NULL;
+}
+
+function _ccis_get_listname($node, $range = 'daily') {
+  $list = 'unknown';
+  if (!empty($node)) {
+    $list = drupal_strtolower($node->title);
     $list = $list . '_' . $range;
   }
   return $list;
@@ -495,10 +528,9 @@ function _ccis_get_listname($station, $range = 'daily') {
 /**
  * Block output for the Station info.
  */
-function _ccis_block_stationinfo($station = NULL) {
-  $station = empty($station) ? NULL : $station;
-  $output = '';
-  $view = views_embed_view('station_info', 'embed_1', $station);
+function _ccis_block_stationinfo($node = NULL) {
+  $nid = empty($node) ? NULL : $node->nid;
+  $view = views_embed_view('station_info', 'embed_1', $nid);
   $output = '<div id="ccis-station-info-block">';
   $output .= $view;
   $output .= '</div>';
@@ -508,13 +540,41 @@ function _ccis_block_stationinfo($station = NULL) {
 /**
  * Block output for the Station map.
  */
-function _ccis_block_stationmap($station = NULL) {
+function _ccis_block_stationmap($node = NULL) {
   openlayers_include();
-  $station = empty($station) ? NULL : $station;
-  $output = '';
-  $view = views_embed_view('station_map', 'embed_1', $station);
+  $nid = empty($node) ? NULL : $node->nid;
+  $view = views_embed_view('station_map', 'embed_1', $nid);
   $output = '<div id="ccis-station-map-block">';
   $output .= $view;
   $output .= '</div>';
   return $output;
+}
+
+/**
+ * A wrapper function to use it as autocomplete in the form api.
+ *
+ * Autocomplete path: ccis/autocomplete/{type}
+ *
+ * @param string $type
+ *   A fixed value.
+ *
+ * @param string $string
+ *   The typed string in the form.
+ */
+function ccis_autocomplete_response($type, $string) {
+  $matches = array();
+  if ($type == 'station_name' && $string) {
+    $results = db_select('node')
+      ->fields('node', array('nid'))
+      ->condition('title', db_like($string) . '%', 'LIKE')
+      ->condition('type', 'weather_station')
+      ->range(0, 10)->execute();
+    foreach ($results as $result) {
+      $node = node_load($result->nid);
+      if (node_access('view', $node)) {
+        $matches[$node->title] = check_plain($node->title);
+      }
+    }
+  }
+  drupal_json_output($matches);
 }

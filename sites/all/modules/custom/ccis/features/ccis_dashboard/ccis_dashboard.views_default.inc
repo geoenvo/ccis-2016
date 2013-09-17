@@ -73,16 +73,15 @@ function ccis_dashboard_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content:  WMO Code or station number (field_station_number) */
-  $handler->display->display_options['arguments']['field_station_number_value']['id'] = 'field_station_number_value';
-  $handler->display->display_options['arguments']['field_station_number_value']['table'] = 'field_data_field_station_number';
-  $handler->display->display_options['arguments']['field_station_number_value']['field'] = 'field_station_number_value';
-  $handler->display->display_options['arguments']['field_station_number_value']['default_action'] = 'empty';
-  $handler->display->display_options['arguments']['field_station_number_value']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['field_station_number_value']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_station_number_value']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_station_number_value']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['field_station_number_value']['limit'] = '0';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -98,8 +97,8 @@ function ccis_dashboard_views_default_views() {
     'weather_station' => 'weather_station',
   );
 
-  /* Display: Embed */
-  $handler = $view->new_display('embed', 'Embed', 'embed_1');
+  /* Display: Embed Display (Single) */
+  $handler = $view->new_display('embed', 'Embed Display (Single)', 'embed_1');
   $export['station_info'] = $view;
 
   $view = new view();
@@ -149,16 +148,15 @@ function ccis_dashboard_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content:  WMO Code or station number (field_station_number) */
-  $handler->display->display_options['arguments']['field_station_number_value']['id'] = 'field_station_number_value';
-  $handler->display->display_options['arguments']['field_station_number_value']['table'] = 'field_data_field_station_number';
-  $handler->display->display_options['arguments']['field_station_number_value']['field'] = 'field_station_number_value';
-  $handler->display->display_options['arguments']['field_station_number_value']['default_action'] = 'empty';
-  $handler->display->display_options['arguments']['field_station_number_value']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['field_station_number_value']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_station_number_value']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_station_number_value']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['field_station_number_value']['limit'] = '0';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -174,8 +172,8 @@ function ccis_dashboard_views_default_views() {
     'weather_station' => 'weather_station',
   );
 
-  /* Display: Embed */
-  $handler = $view->new_display('embed', 'Embed', 'embed_1');
+  /* Display: Embed Display (Single) */
+  $handler = $view->new_display('embed', 'Embed Display (Single)', 'embed_1');
   $export['station_map'] = $view;
 
   return $export;
