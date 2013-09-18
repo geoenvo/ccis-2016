@@ -167,13 +167,27 @@ function ccis_import_csv_file($file, &$context) {
     $row = 1;
     $header = $end_data = array();
     $header_count = 0;
+    $expected_fields = _ccis_get_weather_data_labels(FALSE);
     if (($handle = fopen($file->uri, "r")) !== FALSE) {
       while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         if ($row == 1) {
+          $data = array_map('drupal_strtolower', $data);
           $header = $data;
           $header_count = count($header);
+          $expected_fields_count = count($expected_fields);
+          if ($header_count !== $expected_fields_count) {
+            drupal_set_message(t('File not imported: Missing data in @file', array('@file' => $file->filename)), 'error');
+            return FALSE;
+          }
+          foreach ($data as $header_name) {
+            if (!isset($expected_fields['field_' . $header_name])) {
+              drupal_set_message(t('File not imported: Unknown data %col in @file', array('@file' => $file->filename, '%col' => $header_name)), 'error');
+              return FALSE;
+            }
+          }
         }
         else{
+          // Empty data must be comma seperated.
           $data_count = count($data);
           if ($data_count !== $header_count) {
             continue;
@@ -281,25 +295,18 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
     if (!empty($params['start']) && !empty($params['end'])) {
       $query = array('date' => array('$gte' => $params['start'], '$lt' => $params['end']));
     }
-    $docs = $col->find($query)->limit(180);
+    $limit = variable_get('ccis_default_displayed_data_limit', 180);
+    $labels = _ccis_get_weather_data_labels();
+    $fields = array();
+    foreach ($labels as $key => $label) {
+      $_key = str_replace('field_', '', $key);
+      $fields[$_key] = TRUE;
+    }
+    $docs = $col->find($query, $fields)->limit($limit);
     $output = $header = array();
     if ($docs->hasNext()) {
       foreach ($docs as $doc) {
         unset($doc['_id']);
-        static $tmp;
-        if (empty($tmp)) {
-          foreach ($doc as $key => $val) {
-            $field = field_info_field('field_' . $key);
-            if (field_access('view', $field, 'node')) {
-              $tmp[$key] = $val;
-            }
-          }
-        }
-        foreach ($doc as $key => $val) {
-          if (!isset($tmp[$key])) {
-            unset($doc[$key]);
-          }
-        }
         if ($source == 'datatables') {
           $output[] = array_values($doc);
         }
@@ -451,22 +458,6 @@ function _ccis_block_d3($list, $params) {
 }
 
 function _ccis_get_d3_settings($list = 'unknown', $values) {
-  $fields = array(
-      'station' => t('Station'),
-      'date' => t('Date'),
-      'avg_temp' => t('Average mean temperature'),
-      'avg_prec' => t('Average precipitation amount'),
-      'avg_press' => t('Average sea level pressure'),
-      'avg_min_temp' => t('Average min temperature'),
-      'avg_max_temp' => t('Average max temperature'),
-  );
-  $legends = array();
-  foreach ($fields as $key => $title) {
-    $field = field_info_field('field_' . $key);
-    if (field_access('view', $field, 'node')) {
-      $legends[] = $title;
-    }
-  }
   $settings = array(
       'ccis' => array(
           'stations' => array(
@@ -475,7 +466,7 @@ function _ccis_get_d3_settings($list = 'unknown', $values) {
                   'path' => url("ccis/dataquery/$list/d3", array('query' => $values)),
               ),
           ),
-          'legends' => $legends,
+          'legends' => array_values(_ccis_get_weather_data_labels()),
       ),
   );
   return $settings;
@@ -485,26 +476,10 @@ function _ccis_get_d3_settings($list = 'unknown', $values) {
  * Block output for the datatables.
  */
 function _ccis_block_datatables($list = 'unknown', $values) {
-//   $d3 = libraries_get_path('datatables');
-//   drupal_add_js($d3. '/media/js/jquery.dataTables.min.js');
-//   $path = drupal_get_path('module', 'ccis');
-//   drupal_add_js($path . '/js/datatable.ccis.js');
-
-  $fields = array(
-    'station' => t('Station'),
-    'date' => t('Date'),
-    'avg_temp' => t('Average mean temperature'),
-    'avg_prec' => t('Average precipitation amount'),
-    'avg_press' => t('Average sea level pressure'),
-    'avg_min_temp' => t('Average min temperature'),
-    'avg_max_temp' => t('Average max temperature'),
-  );
+  $labels = _ccis_get_weather_data_labels();
   $header = array();
-  foreach ($fields as $key => $title) {
-    $field = field_info_field('field_' . $key);
-    if (field_access('view', $field, 'node')) {
-      $header[] = array('data' => $title);
-    }
+  foreach ($labels as $label) {
+    $header[] = array('data' => $label);
   }
   $rows = array(array());
   $vars = array(
@@ -636,4 +611,35 @@ function ccis_autocomplete_response($type, $string) {
     }
   }
   drupal_json_output($matches);
+}
+
+/**
+ * Returns the labels of all fields, with optional access checks.
+ *
+ * @param array $check
+ *   Set to FALSE when you do not want the field_access() check. Default TRUE.
+ *
+ * @return array
+ *   An array of field labels keyed by field names.
+ */
+function _ccis_get_weather_data_labels($check = TRUE) {
+  $labels = &drupal_static(__FUNCTION__, array());
+  if (empty($labels)) {
+    $tmp = array();
+    $field_infos = field_info_instances('node', 'weather_data');
+    foreach ($field_infos as $field_name => $info) {
+      $tmp[$field_name] = array('label' => $info['label'], 'weight' => $info['widget']['weight']);
+      if ($check) {
+        $field = field_info_field($field_name);
+        if (!field_access('view', $field, 'node')) {
+          unset($tmp[$field_name]);
+        }
+      }
+    }
+    uasort($tmp, 'drupal_sort_weight');
+    foreach ($tmp as $key => $value) {
+      $labels[$key] = t($value['label']);
+    }
+  }
+  return $labels;
 }
