@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Openlayers feature.
+ */
+
+include_once 'ccis_openlayers.features.inc';
