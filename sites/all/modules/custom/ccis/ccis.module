@@ -108,6 +108,22 @@ function ccis_import_page() {
     $delete_form = drupal_get_form('ccis_collection_delete_form');
     $output .= drupal_render($delete_form);
   }
+//   $pattern = "/(.+)\((\d+)\)/";
+//   preg_match($pattern, '12334 Bremen (1)', $matches);
+//   dpm($matches);
+//   $options = array(
+//       'parse mode' => 'terms',
+//       'limit' => 10,
+//     #  'offset' => 0,
+//   );
+
+//   // Initialize the query object.
+//   $query = search_api_query('station_metadata', $options);
+//   dpm(get_class_methods(get_class($query)));
+//   $query->keys('bremen');
+//   $r = $query->execute();
+//   dpm($r);
+#ccis_autocomplete_response('station_search', '1');
   return $output;
 }
 
@@ -221,7 +237,7 @@ function ccis_collection_delete_form() {
   }
   $options = array();
   $header = array(
-      'collection' => t('Collection')
+    'collection' => t('Collection')
   );
   foreach ( $collections as $collection ) {
     $options[$collection] = array(
@@ -229,18 +245,18 @@ function ccis_collection_delete_form() {
     );
   }
   $form['collections'] = array(
-      '#title' => t('Collections'),
-      '#type' => 'tableselect',
-      '#header' => $header,
-      '#options' => $options,
-      '#empty' => t('No collection available.')
+    '#title' => t('Collections'),
+    '#type' => 'tableselect',
+    '#header' => $header,
+    '#options' => $options,
+    '#empty' => t('No collection available.'),
   );
   $form['actions'] = array(
-      '#type' => 'actions'
+    '#type' => 'actions'
   );
   $form['actions']['submit'] = array(
-      '#type' => 'submit',
-      '#value' => t('Delete')
+    '#type' => 'submit',
+    '#value' => t('Delete')
   );
   return $form;
 }
@@ -372,30 +388,16 @@ function _ccis_block_filter() {
  * Filter form.
  */
 function _ccis_block_filter_form($form, $form_state) {
-  $form['station_filter_by'] = array(
-    '#title' => t('Search station by'),
-    '#type' => 'radios',
-    '#options' => array('name' => t('Station name'), 'code' => t('WMO Code or station number')),
-    '#default_value' => 'name',
-  );
-  $form['station'] = array(
-    '#title' => t('WMO Code or station number'),
+  $form['input'] = array(
+    '#title' => t('Search string'),
     '#type' => 'textfield',
-    '#size' => 5,
+    '#autocomplete_path' => 'ccis/autocomplete/station_search',
     '#title_display' => 'invisible',
-    '#states' => array(
-      'visible' => array(':input[name="station_filter_by"]' => array('value' => 'code'))
-    ),
-  );
-  $form['station_name'] = array(
-    '#title' => t('Station name'),
-    '#type' => 'textfield',
-    '#size' => 5,
-    '#autocomplete_path' => 'ccis/autocomplete/station_name',
-    '#title_display' => 'invisible',
-    '#states' => array(
-      'visible' => array(':input[name="station_filter_by"]' => array('value' => 'name'))
-    ),
+//     '#attached' => array(
+//       'css' => array(drupal_get_path('module', 'search_api_autocomplete') . '/search_api_autocomplete.css'),
+//       'js' => array(drupal_get_path('module', 'search_api_autocomplete') . '/search_api_autocomplete.js'),
+//      ),
+    '#description' => t('Enter a station name, Station code etc.'),
   );
   $form['start'] = array(
     '#title' => t('From'),
@@ -419,6 +421,7 @@ function _ccis_block_filter_form($form, $form_state) {
   );
   return $form;
 }
+
 
 /**
  * Submit handler for the form _ccis_block_filter_form().
@@ -500,31 +503,19 @@ function _ccis_block_datatables($list = 'unknown', $values) {
 }
 
 function _ccis_get_station_node($values) {
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'node')
-  ->entityCondition('bundle', 'weather_station');
-  if (!empty($values['station_filter_by']) && $values['station_filter_by'] == 'code') {
-    $values['station_name'] = '';
+  $nid = NULL;
+  if (isset($values['nid'])) {
+    $nid = $values['nid'];
   }
-  else{
-    $values['station'] = '';
+  elseif (isset($values['input'])) {
+    $pattern = "/(.+)\((\d+)\)/";
+    preg_match($pattern, $values['input'], $matches);
+    $nid = isset($matches[2]) ? $matches[2] : NULL;
   }
-  if (!empty($values['station'])) {
-    $query->fieldCondition('field_station_number', 'value', $values['station'], '=');
+  if (!empty($nid)) {
+    return node_load($nid);
   }
-  else if (!empty($values['station_name'])) {
-    $query->propertyCondition('title', $values['station_name']);
-  }
-  else{
-    return NULL;
-  }
-  $result = $query->execute();
-  if (isset($result['node'])) {
-    $weather_stations_nids = array_keys($result['node']);
-    $weather_stations = entity_load('node', $weather_stations_nids);
-    $weather_station = reset($weather_stations);
-    return $weather_station;
-  }
+//
   return NULL;
 }
 
@@ -597,17 +588,23 @@ function _ccis_block_stationmap($node = NULL) {
  */
 function ccis_autocomplete_response($type, $string) {
   $matches = array();
-  if ($type == 'station_name' && $string) {
-    $results = db_select('node')
-      ->fields('node', array('nid'))
-      ->condition('title', db_like($string) . '%', 'LIKE')
-      ->condition('type', 'weather_station')
-      ->range(0, 10)->execute();
+  if ($type == 'station_search' && $string) {
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_station_number', 'f', 'n.nid = f.entity_id');
+    $n_and = db_and()->condition('f.field_station_number_value', db_like($string) . '%', 'LIKE');
+    $f_and = db_and()->condition('n.title', db_like($string) . '%', 'LIKE')->condition('n.type', 'weather_station');
+    $query->fields('n', array('nid', 'title'))
+      ->fields('f', array('field_station_number_value'))
+      ->condition(db_or()->condition($n_and)->condition($f_and))
+      ->addTag('node_access')
+      ->range(0, 10);
+    $results = $query->execute();
     foreach ($results as $result) {
-      $node = node_load($result->nid);
-      if (node_access('view', $node)) {
-        $matches[$node->title] = check_plain($node->title);
-      }
+      // $key will be placed in the input field after the user choose a suggention.
+      $key = $result->title . ' (' . $result->nid . ')';
+      // $title will be shown to user underneath input field will he typing.
+      $title = check_plain("$result->title (WMO Code: $result->field_station_number_value) ");
+      $matches[$key] = $title;
     }
   }
   drupal_json_output($matches);
@@ -642,4 +639,38 @@ function _ccis_get_weather_data_labels($check = TRUE) {
     }
   }
   return $labels;
+}
+
+function ccis_search_api_autocomplete_types() {
+  $types['ccis'] = array(
+    'name' => t('CCIS'),
+    #'description' => t('Searches provided by the <em>Example</em> module.'),
+    'list searches' => 'ccis_list_autocomplete_searches',
+    'create query' => 'ccis_create_autocomplete_query',
+    #'config form' => 'example_autocomplete_config_form',
+  );
+
+  return $types;
+}
+
+function ccis_list_autocomplete_searches() {
+  return array('ccis' => array('name' => 'CCIS'));
+}
+
+function ccis_create_autocomplete_query(SearchApiAutocompleteSearch $search, $complete, $incomplete) {
+  $query = search_api_query($search->index_id);
+  if ($complete) {
+    $query->keys($complete);
+  }
+  if (!empty($search->options['custom']['extra'])) {
+    list($f, $v) = explode('=', $search->options['custom']['extra'], 2);
+    $query->condition($f, $v);
+  }
+  if (!empty($search->options['custom']['user_filters'])) {
+    foreach (explode("\n", $search->options['custom']['user_filters']) as $line) {
+      list($f, $v) = explode('=', $line, 2);
+      $query->condition($f, $v);
+    }
+  }
+  return $query;
 }
