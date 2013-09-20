@@ -62,7 +62,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'geofield',
         'settings' => array(
           'data' => 'full',
-          'map_preset' => 'stationsingle',
+          'map_preset' => 'geofield_formatter_map',
         ),
         'type' => 'geofield_openlayers',
         'weight' => 3,
