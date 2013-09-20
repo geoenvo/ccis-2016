@@ -1,6 +1,7 @@
 name = CCIS Dashboard
 core = 7.x
 package = CCIS
+dependencies[] = ccis_openlayers_single
 dependencies[] = ctools
 dependencies[] = homebox
 dependencies[] = views
