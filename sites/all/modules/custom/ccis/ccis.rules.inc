@@ -59,8 +59,8 @@ function ccis_reverse_geocode_rule_action($values) {
         '@code' => $result->code,
         '@error' => $result->error,
        );
-      $msg = t('HTTP request to http://nominatim.openstreetmap.org/reverse failed.\nCode: @code\nError: @error', $args);
-      throw new Exception($msg);
+      $msg = t("HTTP request to http://nominatim.openstreetmap.org/reverse failed.\nCode: @code\nError: @error", $args);
+      throw new RulesEvaluationException($msg);
     }
     $data = json_decode($result->data);
     $address = !empty($data->display_name) ? $data->display_name : '';
