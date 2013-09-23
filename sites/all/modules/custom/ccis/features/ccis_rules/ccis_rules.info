@@ -1,0 +1,9 @@
+name = CCIS Rules
+core = 7.x
+package = CCIS
+dependencies[] = ccis
+dependencies[] = entity
+dependencies[] = rules
+features[features_api][] = api:2
+features[rules_config][] = rules_geocodetoaddress
+project path = sites/all/modules/custom/ccis/features

@@ -140,7 +140,7 @@ function ccis_dashboard_views_default_views() {
   $handler->display->display_options['fields']['field_station_geodata']['click_sort_column'] = 'wkt';
   $handler->display->display_options['fields']['field_station_geodata']['type'] = 'geofield_openlayers';
   $handler->display->display_options['fields']['field_station_geodata']['settings'] = array(
-    'map_preset' => 'geofield_formatter_map',
+    'map_preset' => 'clone_of_geofield_formatter_map',
     'data' => 'full',
   );
   /* Sort criterion: Content: Post date */

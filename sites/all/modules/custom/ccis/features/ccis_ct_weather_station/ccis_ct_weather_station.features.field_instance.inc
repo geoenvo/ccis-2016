@@ -10,6 +10,46 @@
 function ccis_ct_weather_station_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-weather_station-field_address_data'
+  $field_instances['node-weather_station-field_address_data'] = array(
+    'bundle' => 'weather_station',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_address_data',
+    'label' => 'Address Data',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
   // Exported field_instance: 'node-weather_station-field_station_alias'
   $field_instances['node-weather_station-field_station_alias'] = array(
     'bundle' => 'weather_station',
@@ -176,6 +216,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t(' WMO Code or station number');
   t('5-digit code');
+  t('Address Data');
   t('Current Position');
   t('Station Alias');
   t('Type of station');
