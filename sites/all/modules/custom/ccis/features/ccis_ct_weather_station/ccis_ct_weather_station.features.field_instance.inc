@@ -50,6 +50,46 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-weather_station-field_mongodb_list_name'
+  $field_instances['node-weather_station-field_mongodb_list_name'] = array(
+    'bundle' => 'weather_station',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'In case the station title is not equal with csv file name suffix, enter here the right suffix. Example: Station title is <em>München</em>, File name is <em>munich_yearly.csv</em> then enter <em>munich</em>.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_mongodb_list_name',
+    'label' => 'MongoDB List Suffix',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-weather_station-field_station_alias'
   $field_instances['node-weather_station-field_station_alias'] = array(
     'bundle' => 'weather_station',
@@ -218,6 +258,8 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('5-digit code');
   t('Address Data');
   t('Current Position');
+  t('In case the station title is not equal with csv file name suffix, enter here the right suffix. Example: Station title is <em>München</em>, File name is <em>munich_yearly.csv</em> then enter <em>munich</em>.');
+  t('MongoDB List Suffix');
   t('Station Alias');
   t('Type of station');
 

@@ -522,7 +522,14 @@ function _ccis_get_date_range($values) {
 function _ccis_get_listname($node, $range) {
   $list = 'unknown';
   if (!empty($node)) {
-    $list = drupal_strtolower($node->title);
+    $items = field_get_items('node', $node, 'field_mongodb_list_name');
+    if (!empty($items)) {
+      $item = reset($items);
+      $list = $item['#safe_value'];
+    }
+    else{
+      $list = drupal_strtolower($node->title);
+    }
     $list = $list . '_' . $range;
   }
   return $list;
