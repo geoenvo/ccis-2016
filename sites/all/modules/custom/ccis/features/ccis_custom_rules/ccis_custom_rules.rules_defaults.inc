@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * ccis_rules.rules_defaults.inc
+ * ccis_custom_rules.rules_defaults.inc
  */
 
 /**
  * Implements hook_default_rules_configuration().
  */
-function ccis_rules_default_rules_configuration() {
+function ccis_custom_rules_default_rules_configuration() {
   $items = array();
   $items['rules_geocodetoaddress'] = entity_import('rules_config', '{ "rules_geocodetoaddress" : {
       "LABEL" : "geocodetoaddress",

@@ -12,3 +12,11 @@ function ccis_update_7001() {
   db_delete('system')->condition('name', 'ccis_weather_data_importer')->execute();
   db_delete('system')->condition('name', 'ccis_weather_data')->execute();
 }
+
+/**
+ * Deletes 'ccis_rules' from the system table.
+ */
+function ccis_update_7002() {
+  db_delete('system')->condition('name', 'ccis_rules')->execute();
+  module_enable(array('ccis_custom_rules'));
+}
