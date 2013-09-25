@@ -72,7 +72,7 @@ function ccis_block_view($delta) {
   switch ($delta) {
     case 'filter':
       $block['subject'] = '<none>';
-      $block['content'] =  _ccis_block_filter();
+      $block['content'] =  _ccis_block_filter($node);
       break;
     case 'd3':
       $range = _ccis_get_date_range($params);
@@ -457,21 +457,22 @@ function _ccis_outputCSV($data) {
 /**
  * Block output for the filter.
  */
-function _ccis_block_filter() {
-  $form = drupal_get_form('_ccis_block_filter_form');
+function _ccis_block_filter($node) {
+  $form = drupal_get_form('_ccis_block_filter_form', $node);
   return drupal_render($form);
 }
 
 /**
  * Filter form.
  */
-function _ccis_block_filter_form($form, $form_state) {
+function _ccis_block_filter_form($form, $form_state, $node = NULL) {
   $form['input'] = array(
     '#title' => t('Search string'),
     '#type' => 'textfield',
     '#autocomplete_path' => 'ccis/autocomplete/station_search',
     '#title_display' => 'invisible',
     '#description' => t('Enter a station name, Station code etc.'),
+    '#default_value' => isset($node->title) ? "$node->title ($node->nid)" : '',
   );
   $form['start'] = array(
     '#title' => t('From'),
