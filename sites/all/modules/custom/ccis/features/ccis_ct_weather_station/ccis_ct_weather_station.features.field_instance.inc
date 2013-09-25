@@ -50,6 +50,48 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-weather_station-field_csv_files'
+  $field_instances['node-weather_station-field_csv_files'] = array(
+    'bundle' => 'weather_station',
+    'deleted' => 0,
+    'description' => 'The filename must be in this pattern <em>stationname_(daily|monthly|yearly).csv</em>. Note: It is not possible at the moment to replace a file here.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_csv_files',
+    'label' => 'CSV-Files',
+    'required' => 0,
+    'settings' => array(
+      'description_field' => 0,
+      'file_directory' => 'csv_incoming',
+      'file_extensions' => 'csv',
+      'max_filesize' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'file',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'file_generic',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'node-weather_station-field_mongodb_list_name'
   $field_instances['node-weather_station-field_mongodb_list_name'] = array(
     'bundle' => 'weather_station',
@@ -257,10 +299,12 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t(' WMO Code or station number');
   t('5-digit code');
   t('Address Data');
+  t('CSV-Files');
   t('Current Position');
   t('In case the station title is not equal with csv file name suffix, enter here the right suffix. Example: Station title is <em>München</em>, File name is <em>munich_yearly.csv</em> then enter <em>munich</em>.');
   t('MongoDB List Suffix');
   t('Station Alias');
+  t('The filename must be in this pattern <em>stationname_(daily|monthly|yearly).csv</em>. Note: It is not possible at the moment to replace a file here.');
   t('Type of station');
 
   return $field_instances;

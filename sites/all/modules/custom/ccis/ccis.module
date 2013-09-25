@@ -99,6 +99,96 @@ function ccis_block_view($delta) {
 }
 
 /**
+ * Implement hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function ccis_field_widget_file_generic_form_alter(&$element, &$form_state, $context) {
+  if (!empty($context['field']['field_name']) && $context['field']['field_name'] == 'field_csv_files') {
+    foreach (element_children($element) as $delta) {
+      $element[$delta]['#upload_validators']['ccis_csv_file_header_validate'] = array();
+      $element[$delta]['#upload_validators']['ccis_csv_file_name_validate'] = array();
+    }
+  }
+}
+
+/**
+ * Validates a file that it contains the right header data.
+ *
+ * @see ccis_field_widget_file_generic_form_alter
+ * @see ccis_import_csv_file
+ *
+ * @param object $file
+ */
+function ccis_csv_file_header_validate($file) {
+  $errors = array();
+  $row = 1;
+  $header = $end_data = array();
+  $header_count = 0;
+  $expected_fields = _ccis_get_weather_data_labels(FALSE);
+  if (($handle = fopen($file->uri, "r")) !== FALSE) {
+    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+      if ($row == 1) {
+        $data = array_map('drupal_strtolower', $data);
+        $header = $data;
+        $header_count = count($header);
+        $expected_fields_count = count($expected_fields);
+        if ($header_count !== $expected_fields_count) {
+          $errors[] = t('Missing data in @file', array('@file' => $file->filename));
+        }
+        foreach ($data as $header_name) {
+          if (!isset($expected_fields['field_' . $header_name])) {
+            $errors[] = t('Unknown data %col in @file', array('@file' => $file->filename, '%col' => $header_name));
+          }
+        }
+        break;
+      }
+    }
+    fclose($handle);
+  }
+  return $errors;
+}
+
+/**
+ * Validates the file name that contains a particular pattern and can not uploaded twice.
+ *
+ * @param object $file
+ *   File object.
+ *
+ * @return array
+ *   An array with the error messages.
+ */
+function ccis_csv_file_name_validate($file) {
+  $errors = array();
+  if (strpos($file->destination, 'private://csv_incoming/') !== FALSE) {
+    preg_match_all('/(\w+)_(yearly|monthly|daily)\.csv/', $file->filename, $matches);
+    $matches = array_filter($matches);
+    if (empty($matches)) {
+      $errors[] = t('The filename must be in this pattern <em>stationname_(daily|monthly|yearly).csv');
+      return $errors;
+    }
+    preg_match_all('/private:\/\/csv_incoming\/(\w+)_(yearly|monthly|daily)\.csv/', $file->destination, $matches);
+    $matches = array_filter($matches);
+    if (empty($matches)) {
+      $errors[] = t('There is already a csv file with this filename %filename', array('%filename' => $file->filename));
+    }
+  }
+  return $errors;
+}
+
+/**
+ * Implements hook_file_insert().
+ */
+function ccis_file_insert($file) {
+  $patters = array('yearly', 'monthly', 'daily');
+  foreach ($patters as $pattern) {
+    if (strpos($file->filename, $pattern) !== FALSE) {
+      if (user_access('csv_import')) {
+        drupal_set_message(t('The file can now be imported to mongoDB. See <a href="@url" target="_blank">Import-Page</a> for more information.', array('@url' => url('ccis/import'))));
+      }
+    }
+  }
+}
+
+/**
  * Page callback to import csv files.
  */
 function ccis_import_page() {
@@ -115,7 +205,7 @@ function ccis_import_page() {
  * The form to import the csv files from the directory inside private://csv_incoming.
  */
 function ccis_import_files_form() {
-  $files = file_scan_directory('private://csv_incoming', '/(\.\.?|\.csv)$/');
+  $files = file_scan_directory('private://csv_incoming', '/(\w+)_(yearly|monthly|daily)\.csv$/');
   $options = array();
   $header = array('filename' => t('Filename'));
   foreach ($files as $file) {
@@ -163,6 +253,20 @@ function ccis_import_files_form_submit($form, $form_state) {
  */
 function ccis_import_csv_file($file, &$context) {
   $context['message'] = t('Importing @file', array('@file' => $file->filename));
+  $errors = ccis_csv_file_header_validate($file);
+
+  // Check for errors.
+  if (!empty($errors)) {
+    $message = t('The specified file %name could not be imported.', array('%name' => $file->filename));
+    if (count($errors) > 1) {
+      $message .= theme('item_list', array('items' => $errors));
+    }
+    else {
+      $message .= ' ' . array_pop($errors);
+    }
+    form_set_error('', $message);
+    return FALSE;
+  }
   try{
     $row = 1;
     $header = $end_data = array();
@@ -173,18 +277,7 @@ function ccis_import_csv_file($file, &$context) {
         if ($row == 1) {
           $data = array_map('drupal_strtolower', $data);
           $header = $data;
-          $header_count = count($header);
-          $expected_fields_count = count($expected_fields);
-          if ($header_count !== $expected_fields_count) {
-            drupal_set_message(t('File not imported: Missing data in @file', array('@file' => $file->filename)), 'error');
-            return FALSE;
-          }
-          foreach ($data as $header_name) {
-            if (!isset($expected_fields['field_' . $header_name])) {
-              drupal_set_message(t('File not imported: Unknown data %col in @file', array('@file' => $file->filename, '%col' => $header_name)), 'error');
-              return FALSE;
-            }
-          }
+          $header_count = count($data);
         }
         else{
           // Empty data must be comma seperated.
@@ -205,7 +298,6 @@ function ccis_import_csv_file($file, &$context) {
   catch (Exception $e ) {
     watchdog_exception('ccis', $e);
   }
-  file_unmanaged_delete($filepath);
 }
 
 /**
