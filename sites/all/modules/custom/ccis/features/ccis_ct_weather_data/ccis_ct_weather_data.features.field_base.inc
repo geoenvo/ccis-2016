@@ -17,6 +17,9 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_avg_max_temp',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
@@ -24,7 +27,7 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'settings' => array(
       'decimal_separator' => '.',
       'precision' => 20,
-      'scale' => 10,
+      'scale' => 2,
     ),
     'translatable' => 0,
     'type' => 'number_decimal',
@@ -37,6 +40,9 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_avg_min_temp',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
@@ -44,7 +50,7 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'settings' => array(
       'decimal_separator' => '.',
       'precision' => 20,
-      'scale' => 10,
+      'scale' => 2,
     ),
     'translatable' => 0,
     'type' => 'number_decimal',
@@ -57,6 +63,9 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_avg_prec',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
@@ -64,7 +73,7 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'settings' => array(
       'decimal_separator' => '.',
       'precision' => 13,
-      'scale' => 10,
+      'scale' => 2,
     ),
     'translatable' => 0,
     'type' => 'number_decimal',
@@ -77,6 +86,9 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_avg_press',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
@@ -84,7 +96,7 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'settings' => array(
       'decimal_separator' => '.',
       'precision' => 20,
-      'scale' => 10,
+      'scale' => 2,
     ),
     'translatable' => 0,
     'type' => 'number_decimal',
@@ -107,7 +119,7 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'settings' => array(
       'decimal_separator' => '.',
       'precision' => 13,
-      'scale' => 10,
+      'scale' => 2,
     ),
     'translatable' => 0,
     'type' => 'number_decimal',

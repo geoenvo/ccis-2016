@@ -285,7 +285,9 @@ function ccis_import_csv_file($file, &$context) {
           if ($data_count !== $header_count) {
             continue;
           }
-          $end_data[] = array_combine($header, $data);
+          $data = array_combine($header, $data);
+          array_walk($data, '_ccis_round');
+          $end_data[] = $data;
         }
         $row++;
       }
@@ -722,4 +724,37 @@ function _ccis_get_weather_data_labels($check = TRUE) {
     }
   }
   return $labels;
+}
+
+/**
+ * Helper function to round a number before we import it to mongodb.
+ *
+ * @return number
+ */
+function _ccis_round(&$value, $key) {
+  $fields = _ccis_get_to_round_fields();
+  if (!empty($fields[$key])) {
+    $value = round($value, $fields[$key]);
+  }
+}
+
+/**
+ * Helper function to get all fields for the weather data which are decimal.
+ *
+ * @return array
+ *  The key is the header name of csv data and the value the scale number.
+ */
+function _ccis_get_to_round_fields() {
+  $round = &drupal_static(__FUNCTION__, array());
+  if (empty($round)) {
+    $field_infos = field_info_instances('node', 'weather_data');
+    foreach ($field_infos as $field_name => $info) {
+      $field = field_info_field($field_name);
+      if ($field['type'] == 'number_decimal') {
+        $key = str_replace('field_', '', $field_name);
+        $round[$key] = $field['settings']['scale'];
+      }
+    }
+  }
+  return $round;
 }
