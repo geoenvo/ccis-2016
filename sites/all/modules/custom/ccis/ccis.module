@@ -671,26 +671,31 @@ function ccis_autocomplete_response($type, $string) {
   if ($type == 'station_search' && $string) {
 
     $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_station_number', 'f', 'n.nid = f.entity_id');
+    $query->leftJoin('field_data_field_wmocode', 'f', 'n.nid = f.entity_id');
     $query->leftJoin('field_data_field_address_data', 'f2', 'n.nid = f2.entity_id');
 
     $n_and = db_and()->condition('n.title', db_like($string) . '%', 'LIKE');
-    $f_and = db_and()->condition('f.field_station_number_value', db_like($string) . '%', 'LIKE');
+    $f_and = db_and()->condition('f.field_wmocode_value', db_like($string) . '%', 'LIKE');
     $f2_and = db_and()->condition('f2.field_address_data_value', '%' . db_like($string) . '%', 'LIKE');
 
     $query->fields('n', array('nid', 'title'))
-      ->fields('f', array('field_station_number_value'))
+      ->fields('f', array('field_wmocode_value'))
       ->condition('n.type', 'weather_station')
       ->condition(db_or()->condition($n_and)->condition($f_and)->condition($f2_and))
       ->addTag('node_access')
       ->range(0, 10);
-    $results = $query->execute();
-    foreach ($results as $result) {
-      // $key will be placed in the input field after the user choose a suggention.
-      $key = $result->title . ' (' . $result->nid . ')';
-      // $title will be shown to user underneath input field will he typing.
-      $title = check_plain("$result->title (WMO Code: $result->field_station_number_value) ");
-      $matches[$key] = $title;
+    try{
+      $results = $query->execute();
+      foreach ($results as $result) {
+        // $key will be placed in the input field after the user choose a suggention.
+        $key = $result->title . ' (' . $result->nid . ')';
+        // $title will be shown to user underneath input field will he typing.
+        $title = check_plain("$result->title (WMO Code: $result->field_wmocode_value) ");
+        $matches[$key] = $title;
+      }
+    }
+    catch (Exception $e) {
+      watchdog_exception('ccis', $e);
     }
   }
   drupal_json_output($matches);
