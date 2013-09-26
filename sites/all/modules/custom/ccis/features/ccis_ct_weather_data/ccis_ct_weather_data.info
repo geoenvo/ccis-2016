@@ -26,4 +26,5 @@ features[field_instance][] = node-weather_data-field_date
 features[field_instance][] = node-weather_data-field_station
 features[node][] = weather_data
 features_exclude[dependencies][strongarm] = strongarm
+features_exclude[variable][field_bundle_settings_node__weather_data] = field_bundle_settings_node__weather_data
 project path = sites/all/modules/custom/ccis/features

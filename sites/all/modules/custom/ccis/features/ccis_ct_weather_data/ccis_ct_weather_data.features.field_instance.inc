@@ -289,7 +289,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 9,
+      'weight' => 2,
     ),
   );
 
@@ -329,7 +329,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 1,
     ),
   );
 
