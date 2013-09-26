@@ -53,6 +53,7 @@ dependencies[] = auto_entitylabel
 dependencies[] = mongodb
 dependencies[] = field_permissions
 dependencies[] = rules
+dependencies[] = field_group
 
 ; CCIS
 dependencies[] = ccis
