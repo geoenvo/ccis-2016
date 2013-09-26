@@ -67,7 +67,7 @@ function ccis_weather_station_importer_feeds_importer_default() {
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
         'expire' => '-1',
-        'author' => 0,
+        'author' => '1',
         'authorize' => 1,
         'mappings' => array(
           0 => array(
@@ -101,7 +101,7 @@ function ccis_weather_station_importer_feeds_importer_default() {
             'unique' => FALSE,
           ),
         ),
-        'update_existing' => '2',
+        'update_existing' => '1',
         'input_format' => 'filtered_html',
         'skip_hash_check' => 0,
         'bundle' => 'weather_station',
