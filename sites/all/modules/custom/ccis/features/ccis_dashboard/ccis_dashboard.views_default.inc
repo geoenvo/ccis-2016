@@ -49,14 +49,10 @@ function ccis_dashboard_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content:  WMO Code or station number */
-  $handler->display->display_options['fields']['field_station_number']['id'] = 'field_station_number';
-  $handler->display->display_options['fields']['field_station_number']['table'] = 'field_data_field_station_number';
-  $handler->display->display_options['fields']['field_station_number']['field'] = 'field_station_number';
-  /* Field: Content: Type of station */
-  $handler->display->display_options['fields']['field_station_type']['id'] = 'field_station_type';
-  $handler->display->display_options['fields']['field_station_type']['table'] = 'field_data_field_station_type';
-  $handler->display->display_options['fields']['field_station_type']['field'] = 'field_station_type';
+  /* Field: Content: WMO Code */
+  $handler->display->display_options['fields']['field_wmocode']['id'] = 'field_wmocode';
+  $handler->display->display_options['fields']['field_wmocode']['table'] = 'field_data_field_wmocode';
+  $handler->display->display_options['fields']['field_wmocode']['field'] = 'field_wmocode';
   /* Field: Content: Current Position */
   $handler->display->display_options['fields']['field_station_geodata']['id'] = 'field_station_geodata';
   $handler->display->display_options['fields']['field_station_geodata']['table'] = 'field_data_field_station_geodata';
