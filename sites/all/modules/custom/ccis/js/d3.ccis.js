@@ -8,14 +8,23 @@ Drupal.behaviors.ccis = {
 	var csvFilesystemBase = settings.basePath + 'sites/default/files/csv';
 	//var csvFilesystemYear = csvFilesystemBase + '/FILENAME.csv';
 	// Coding d3.time.format("%d-%b-%y").parse; ...
-
-	var height = 250;
-	var width = 450;
+	
 	var margin = {top: 20, right: 10, bottom: 25, left: 150, left_single: 50};
+	var widthDiv = $("#ccis-weather-d3-block").width(); //621
+	var width = widthDiv - margin.left - margin.right;
+	var height = 250;
 	var axis_sum = 3;
 	var axis_selection = 3;
 	var svg;
-	var colors = ["red", "green", "blue", "orchid", "orange"];
+	var arrayColors = [
+	        ["avg_temp", "red"],
+	        ["avg_prec", "green"],
+	        ["avg_press", "blue"],
+	        ["avg_min_temp", "orchid"],
+	        ["avg_max_temp", "orange"]
+        ];
+	var mouseX;
+	var mouseY;
 	
 	// Parse the JSON
 	d3.json(settings.ccis.stations[0].path, function(json) {
@@ -34,6 +43,14 @@ Drupal.behaviors.ccis = {
 					avg_max_temp: parseFloat(d.avg_max_temp)
 				};        
 			});
+			
+			var arrayNames = [
+	                ["avg_temp", settings.ccis.legends[0]],
+	                ["avg_prec", settings.ccis.legends[1]],
+	                ["avg_press", settings.ccis.legends[2],],
+	                ["avg_min_temp", settings.ccis.legends[3]],
+	                ["avg_max_temp", settings.ccis.legends[4]]
+                ];
 
 			// X Scale
 			var xScale = d3.time.scale()
@@ -64,6 +81,7 @@ Drupal.behaviors.ccis = {
 			function createSvg() {
 				$("#ccis-weather-d3-block").prepend("<div id='d3GraphDiv'></div>");		
 				svg = d3.select("#d3GraphDiv")
+					.style("position", "relative")
 					.append("svg")
 					.attr("width", (width + (margin.left_single)*axis_sum + margin.right))
 					.attr("height", height + margin.top + margin.bottom)
@@ -84,7 +102,7 @@ Drupal.behaviors.ccis = {
 					.append("path")
 				  	.attr("id", "pathAvgTempID")
 					.attr("d", avgTemp(data))
-					.attr("stroke", colors[0])
+					.attr("stroke", arrayColors[0][1])
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");		  
 			}	  
@@ -100,7 +118,7 @@ Drupal.behaviors.ccis = {
 					.append("path")
 				  	.attr("id", "pathAvgPrecID")
 					.attr("d", avgPrec(data))
-					.attr("stroke", colors[1])
+					.attr("stroke", arrayColors[1][1])
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
 			}	  
@@ -116,7 +134,7 @@ Drupal.behaviors.ccis = {
 				  	.append("path")
 				  	.attr("id", "pathAvgPressID")
 					.attr("d", avgPress(data))
-					.attr("stroke", colors[2])
+					.attr("stroke", arrayColors[2][1])
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
 			}	  
@@ -132,7 +150,7 @@ Drupal.behaviors.ccis = {
 					.append("path")
 				  	.attr("id", "pathAvgMinTempID")
 					.attr("d", avgMinTemp(data))
-					.attr("stroke", colors[3])
+					.attr("stroke", arrayColors[3][1])
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
 			}	  
@@ -148,7 +166,7 @@ Drupal.behaviors.ccis = {
 					.append("path")
 				  	.attr("id", "pathAvgMaxTempID")
 					.attr("d", avgMaxTemp(data))
-					.attr("stroke", colors[4])
+					.attr("stroke", arrayColors[4][1])
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
 			}	  
@@ -247,7 +265,7 @@ Drupal.behaviors.ccis = {
 					.css("height", "10px")
 				  	.css("width", "10px")
 				  	.css("outline", "solid 1px black")
-				  	.css("background-color", colors[i-1])
+				  	.css("background-color", arrayColors[i-1][1])
 				  	.css("float", "left")
 				  	.css("margin-left", "5px")
 				  	.css("margin-right", "5px")
@@ -317,25 +335,31 @@ Drupal.behaviors.ccis = {
 				var prec_axis=false;
 				var press_axis=false;
 				
+				arrayNames=[];	// For the tooltips
 				var temperatureArrayNames=[];
 				for (var i=0; i<findTicksArray.length; i++) {
 					var tick = parseInt(findTicksArray[i]);
 					if (tick===1) {
 						temp_axis=true;
 						temperatureArrayNames.push("avg_temp");
+						arrayNames.push(["avg_temp", settings.ccis.legends[0]]);
 					} else if (tick===2) {
 						prec_axis=true;
+						arrayNames.push(["avg_prec", settings.ccis.legends[1]]);
 					} else if (tick===3) {
 						press_axis=true;
+						arrayNames.push(["avg_press", settings.ccis.legends[2]]);
 					} else if (tick===4) {
 						temp_axis=true;
 						temperatureArrayNames.push("avg_min_temp");
+						arrayNames.push(["avg_min_temp", settings.ccis.legends[3]]);
 					} else if (tick===5) {
 						temp_axis=true;
 						temperatureArrayNames.push("avg_max_temp");
+						arrayNames.push(["avg_max_temp", settings.ccis.legends[4]]);
 					} else {}
 				}
-				
+
 				// Update temperature domain
 				var temperatureArrayMax=[];
 				var minTempY = d3.min(data, function(d) { return Math.min(d.avg_temp, d.avg_min_temp, d.avg_max_temp); }); 
@@ -373,6 +397,9 @@ Drupal.behaviors.ccis = {
 					var tick = parseInt(findTicksArray[i])-1;
 					graphsArray[tick]();
 				}
+				
+				//Call hover function
+				hover();
 			}	
 			
 			$("#checkbox1").click(function() {
@@ -389,7 +416,101 @@ Drupal.behaviors.ccis = {
 			});			
 			$("#checkbox5").click(function() {
 				redrawGraph();
-			});			
+			});	
+			
+			// Hover function
+			function hover() {
+				var element = document.getElementById("d3GraphDiv");
+				var position = element.getBoundingClientRect();
+				var x = position.left;
+				var y = position.top;
+				
+				$("#d3GraphDiv").mousemove(function(event) {
+					mouseOver(event);
+				});
+				
+				$("#d3GraphDiv").mouseleave(function(event) {
+					mouseLeave(event);
+				});
+				
+				function mouseOver(event) {
+					mouseX = event.pageX;
+					mouseY = event.pageY;
+					if (mouseX > (x+(margin.left_single*axis_selection)) && mouseX < (x+widthDiv-margin.right)) {
+						$("#hoverLine").show();
+						$("#tooltip").show();
+						hoverLine.attr("x1", mouseX-x).attr("x2", mouseX-x);
+						showLabels((mouseX-x-margin.left_single*axis_selection),500);
+					} else {
+						$("#hoverLine").hide();
+						$("#tooltip").hide();
+					}
+				}
+				
+				function mouseLeave(event) {
+					$("#hoverLine").hide();
+					$("#tooltip").hide();
+				}
+					
+				// Create line
+				var hoverLineGroup = d3.select("svg").append("g")
+					.style("stroke", "black")
+					.attr("id", "hoverLine");
+				// Add line to the group
+				var hoverLine = hoverLineGroup
+					.append("line")
+					.attr("x1", 0).attr("x2", 0)
+					.attr("y1", margin.top).attr("y2", height+margin.top);
+						
+				$("#hoverLine").hide();
+				
+				var showLabels = function(xPosition, yPosition) {
+					// Get the date on X-Axis for the current location
+					var xValue = xScale.invert(xPosition);
+					var bisect = d3.bisector(function(d) { return d.date; }).left;
+					var item = data[bisect(data, xValue)];
+					
+					// Which colors to use in the tooltip
+					function findColor(i) {
+						for (var k=0; k<arrayColors.length; k++) {
+							if (arrayNames[i][0]===arrayColors[k][0]) {
+								return arrayColors[k][1];
+							}
+						}
+					}
+					
+					var tooltipText="";
+					//tooltipText="Date: <b>"+item.date.toDateString()+"</b>";	// Day Data
+					tooltipText="Year: <b>"+item.date.getFullYear()+"</b>";	// Year data
+					for (var i=0; i<arrayNames.length; i++) {
+						tooltipText += "<br><div id='tooltipBox"+i+
+						"' style='height:10px; width:10px; outline:solid 1px black; background-color:"+findColor(i)+"; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div>"+arrayNames[i][1]+": "+item[arrayNames[i][0]].toFixed(1);
+					}
+
+					// Create tooltip
+					$("#d3GraphDiv").append("<div id='tooltip'</div>");				
+					d3.select("#tooltip")
+						.style("position", "absolute")
+						.style("left", (mouseX-x+5)+"px")
+						.style("top", (height/2)+"px")
+						.style("width", "auto")
+						.style("height", "auto")
+						.style("background-color", "white")
+						.style("border", "solid 1px black")
+						.style("font-size","11px")
+						.style("font-family", "Arial")
+						.html(tooltipText);	
+
+					// Change direction of tooltip
+					if (mouseX+($("#tooltip").width()) > x+widthDiv-margin.right) {
+						d3.select("#tooltip")
+							.style("left", (mouseX-x-5-$("#tooltip").width())+"px")
+					}
+				}
+
+			}
+			hover();
+
 		}
 	});
   // CUSTOM CODING END
