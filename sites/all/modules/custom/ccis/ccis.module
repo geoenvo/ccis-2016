@@ -605,9 +605,12 @@ function _ccis_get_date_range($values) {
   $years = floor($diff / (365*60*60*24));
   $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
   $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
-  if ($years < 2) {
+  if ($years < 15) {
     $range = 'monthly';
-    if ($years < 1 && $months < 4) {
+    if ($years < 5 && $years > 1) {
+      $range = 'monthly'; // TODO
+    }
+    if ($years < 1) {
       $range = 'daily';
     }
   }
