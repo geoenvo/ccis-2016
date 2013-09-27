@@ -62,6 +62,21 @@ function ccis_events_views_default_views() {
 
   /* Display: Event Content pane */
   $handler = $view->new_display('panel_pane', 'Event Content pane', 'panel_pane_1');
+
+  /* Display: Events */
+  $handler = $view->new_display('page', 'Events', 'page_1');
+  $handler->display->display_options['display_description'] = 'Events related to CCIS and climate change';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['path'] = 'events';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Events';
+  $handler->display->display_options['menu']['description'] = 'Events related to CCIS and climate change';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $export['event_view'] = $view;
 
   return $export;
