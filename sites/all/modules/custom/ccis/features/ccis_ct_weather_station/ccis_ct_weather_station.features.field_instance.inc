@@ -33,7 +33,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_address',
-    'label' => 'Adress (Street + No.)',
+    'label' => 'Adress (Street + No.) - Organization',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -446,7 +446,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_city',
-    'label' => 'City',
+    'label' => 'City - Organization',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -486,7 +486,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_country',
-    'label' => 'Country',
+    'label' => 'Country - Organization',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -967,7 +967,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_email',
-    'label' => 'E-Mail',
+    'label' => 'E-Mail - Organization',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1100,7 +1100,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_fax',
-    'label' => 'Fax',
+    'label' => 'Fax - Organization',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1900,7 +1900,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_phone',
-    'label' => 'Phone',
+    'label' => 'Phone - Organization',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1940,7 +1940,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_postcode',
-    'label' => 'Postcode',
+    'label' => 'Postcode - Organization',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1980,7 +1980,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_region',
-    'label' => 'Province / Region',
+    'label' => 'Province / Region  - Organization',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -3064,20 +3064,25 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Additional Documents: Links, Publications etc.');
   t('Address Data');
   t('Adress (Street + No.)');
+  t('Adress (Street + No.) - Organization');
   t('Alias');
   t('CSV-Files');
   t('City');
+  t('City - Organization');
   t('Closing date');
   t('Coordinate Reference System');
   t('Corrections made by observer');
   t('Country');
+  t('Country - Organization');
   t('Current Position');
   t('Description, abstract');
   t('Disposable items replacement');
   t('E-Mail');
+  t('E-Mail - Organization');
   t('Elevation and reference plane');
   t('Extent (Bounding Box)');
   t('Fax');
+  t('Fax - Organization');
   t('In case the station title is not equal with csv file name suffix, enter here the right suffix. Example: Station title is <em>München</em>, File name is <em>munich_yearly.csv</em> then enter <em>munich</em>.');
   t('Keywords');
   t('Link to the Dataset');
@@ -3107,10 +3112,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Observing times');
   t('Opening date');
   t('Phone');
+  t('Phone - Organization');
   t('Photos, additional information');
   t('Position and height accuracy, resolution');
   t('Postcode');
+  t('Postcode - Organization');
   t('Province / Region');
+  t('Province / Region  - Organization');
   t('Quality control (accomplished tests etc.)');
   t('Relocations');
   t('Responsible Organization');
