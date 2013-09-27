@@ -348,25 +348,31 @@ Drupal.behaviors.ccis = {
 				var temperatureArrayNames=[];
 				for (var i=0; i<findTicksArray.length; i++) {
 					var tick = parseInt(findTicksArray[i]);
-					if (tick===1) {
-						temp_axis=true;
-						temperatureArrayNames.push("avg_temp");
-						arrayNames.push(["avg_temp", settings.ccis.legends[2]]);
-					} else if (tick===2) {
-						prec_axis=true;
-						arrayNames.push(["avg_prec", settings.ccis.legends[3]]);
-					} else if (tick===3) {
-						press_axis=true;
-						arrayNames.push(["avg_press", settings.ccis.legends[4]]);
-					} else if (tick===4) {
-						temp_axis=true;
-						temperatureArrayNames.push("avg_min_temp");
-						arrayNames.push(["avg_min_temp", settings.ccis.legends[5]]);
-					} else if (tick===5) {
-						temp_axis=true;
-						temperatureArrayNames.push("avg_max_temp");
-						arrayNames.push(["avg_max_temp", settings.ccis.legends[6]]);
-					} else {}
+					switch (tick) {
+						case 1:
+							temp_axis=true;
+							temperatureArrayNames.push("avg_temp");
+							arrayNames.push(["avg_temp", settings.ccis.legends[2]]);
+							break;
+						case 2:
+							prec_axis=true;
+							arrayNames.push(["avg_prec", settings.ccis.legends[3]]);
+							break;
+						case 3:
+							press_axis=true;
+							arrayNames.push(["avg_press", settings.ccis.legends[4]]);
+							break;
+						case 4:
+							temp_axis=true;
+							temperatureArrayNames.push("avg_min_temp");
+							arrayNames.push(["avg_min_temp", settings.ccis.legends[5]]);
+							break;
+						case 5:
+							temp_axis=true;
+							temperatureArrayNames.push("avg_max_temp");
+							arrayNames.push(["avg_max_temp", settings.ccis.legends[6]]);
+							break;				
+					}
 				}
 
 				// Update temperature domain
@@ -432,12 +438,17 @@ Drupal.behaviors.ccis = {
 			
 			// Hover function
 			function hover() {
-				var element = document.getElementById("d3GraphDiv");
-				var position = element.getBoundingClientRect();
-				var x = position.left;
-				var y = position.top;
+				var element;
+				var position;
+				var x;
+				var y;
 				
 				$("#d3GraphDiv").mousemove(function(event) {
+					element = document.getElementById("d3GraphDiv");
+					position = element.getBoundingClientRect();
+					x = position.left;
+					y = position.top;
+					
 					mouseOver(event);
 				});
 				
@@ -506,7 +517,6 @@ Drupal.behaviors.ccis = {
 							.style("position", "absolute")
 							.style("left", (mouseX-x+5)+"px")
 							.style("top", (height/2)+"px")
-							//.style("width", "auto")
 							.style("width", "210px")
 							.style("height", "auto")
 							.style("background-color", "white")
