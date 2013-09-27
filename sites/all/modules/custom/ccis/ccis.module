@@ -38,6 +38,7 @@ function ccis_permission() {
     'title' => t('Delete mongoDB collections'),
     'description' => t('Allows a user to delete a mongoDB collection via GUI.')
   );
+  return $perms;
 }
 
 /**
@@ -98,6 +99,15 @@ function ccis_block_view($delta) {
   return $block;
 }
 
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function ccis_field_widget_info_alter(&$info) {
+#dpm($info);
+  if (!empty($info['file_generic'])) {
+    $info['file_generic']['settings']['save_as_mongodb'] = FALSE;
+  }
+}
 /**
  * Implement hook_field_widget_WIDGET_TYPE_form_alter().
  */
@@ -174,19 +184,19 @@ function ccis_csv_file_name_validate($file) {
   return $errors;
 }
 
-/**
- * Implements hook_file_insert().
- */
-function ccis_file_insert($file) {
-  $patters = array('yearly', 'monthly', 'daily');
-  foreach ($patters as $pattern) {
-    if (strpos($file->filename, $pattern) !== FALSE) {
-      if (user_access('csv_import')) {
-        drupal_set_message(t('The file can now be imported to mongoDB. See <a href="@url" target="_blank">Import-Page</a> for more information.', array('@url' => url('ccis/import'))));
-      }
-    }
-  }
-}
+// /**
+//  * Implements hook_file_insert().
+//  */
+// function ccis_file_insert($file) {
+//   $patters = array('yearly', 'monthly', 'daily');
+//   foreach ($patters as $pattern) {
+//     if (strpos($file->filename, $pattern) !== FALSE) {
+//       if (user_access('csv_import')) {
+//         drupal_set_message(t('The file can now be imported to mongoDB. See <a href="@url" target="_blank">Import-Page</a> for more information.', array('@url' => url('ccis/import'))));
+//       }
+//     }
+//   }
+// }
 
 /**
  * Page callback to import csv files.
@@ -627,6 +637,7 @@ function _ccis_get_listname($node, $range) {
     }
     else{
       $list = drupal_strtolower($node->title);
+      $list = str_replace(' ', '', $list);
     }
     $list = $list . '_' . $range;
   }
