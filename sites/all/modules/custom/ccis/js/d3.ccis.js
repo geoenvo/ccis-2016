@@ -9,23 +9,24 @@ Drupal.behaviors.ccis = {
 	//var csvFilesystemYear = csvFilesystemBase + '/FILENAME.csv';
 	// Coding d3.time.format("%d-%b-%y").parse; ...
 	
-	var margin = {top: 20, right: 10, bottom: 25, left: 150, left_single: 50};
-	var widthDiv = $("#ccis-weather-d3-block").width(); //621
+	var barWidth = 5;
+	var margin = {top: 20, right: 10, bottom: 25, left: 165, left_single: 55};
+	var widthDiv = $("#ccis-weather-d3-block").width();
 	var width = widthDiv - margin.left - margin.right;
 	var height = 250;
 	var axis_sum = 3;
 	var axis_selection = 3;
 	var svg;
 	var arrayColors = [
-	        ["avg_temp", "red"],
-	        ["avg_prec", "green"],
-	        ["avg_press", "blue"],
-	        ["avg_min_temp", "orchid"],
-	        ["avg_max_temp", "orange"]
+	        ["avg_temp", "orange"],
+	        ["avg_prec", "#CAE1FF"],
+	        ["avg_press", "orchid"],
+	        ["avg_min_temp", "green"],
+	        ["avg_max_temp", "red"]
         ];
 	var mouseX;
 	var mouseY;
-	
+
 	// Parse the JSON
 	d3.json(settings.ccis.stations[0].path, function(json) {
 		if (json.length===0) {
@@ -45,18 +46,18 @@ Drupal.behaviors.ccis = {
 			});
 			
 			var arrayNames = [
-	                ["avg_temp", settings.ccis.legends[0]],
-	                ["avg_prec", settings.ccis.legends[1]],
-	                ["avg_press", settings.ccis.legends[2],],
-	                ["avg_min_temp", settings.ccis.legends[3]],
-	                ["avg_max_temp", settings.ccis.legends[4]]
+	                ["avg_temp", settings.ccis.legends[2]],
+	                ["avg_prec", settings.ccis.legends[3]],
+	                ["avg_press", settings.ccis.legends[4],],
+	                ["avg_min_temp", settings.ccis.legends[5]],
+	                ["avg_max_temp", settings.ccis.legends[6]]
                 ];
 
 			// X Scale
 			var xScale = d3.time.scale()
-		  		.domain(d3.extent(data, function(d) { return d.date; }))
-		  		.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
-			
+	  			.domain(d3.extent(data, function(d) { return d.date; }))
+	  			.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
+	  		
 			// Y Scales
 			var minTempY = d3.min(data, function(d) { return Math.min(d.avg_temp, d.avg_min_temp, d.avg_max_temp); });  
 			var maxTempY = d3.max(data, function(d) { return Math.max(d.avg_temp, d.avg_min_temp, d.avg_max_temp); });			
@@ -103,6 +104,7 @@ Drupal.behaviors.ccis = {
 				  	.attr("id", "pathAvgTempID")
 					.attr("d", avgTemp(data))
 					.attr("stroke", arrayColors[0][1])
+					.attr("stroke-width", "1")
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");		  
 			}	  
@@ -110,20 +112,19 @@ Drupal.behaviors.ccis = {
 		  
 			// Average precipitation amount
 			function avgPrecGraph(){
-				var avgPrec = d3.svg.line()
-					.x(function(d){return xScale(d.date)})
-					.y(function(d){return yScalePrec(d.avg_prec)});
-		 
-				d3.select("svg")
-					.append("path")
-				  	.attr("id", "pathAvgPrecID")
-					.attr("d", avgPrec(data))
-					.attr("stroke", arrayColors[1][1])
-					.attr("fill", "none")
-					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
+				// Bars
+				svg.selectAll("rect")
+				   .data(data)
+				   .enter()
+				   .append("rect")
+				   .attr("x", function(d) {return xScale(d.date)-barWidth;})
+				   .attr("y", function(d) {return yScalePrec(d.avg_prec)-1;})
+				   .attr("width", barWidth+"px")
+				   .attr("height", function(d) {return height-yScalePrec(d.avg_prec);})
+				   .attr("fill", arrayColors[1][1]);
 			}	  
 			avgPrecGraph();
-		  
+			
 			// Average sea level pressure
 			function avgPressGraph(){
 				var avgPress = d3.svg.line()
@@ -135,6 +136,7 @@ Drupal.behaviors.ccis = {
 				  	.attr("id", "pathAvgPressID")
 					.attr("d", avgPress(data))
 					.attr("stroke", arrayColors[2][1])
+					.attr("stroke-width", "1")
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
 			}	  
@@ -151,6 +153,7 @@ Drupal.behaviors.ccis = {
 				  	.attr("id", "pathAvgMinTempID")
 					.attr("d", avgMinTemp(data))
 					.attr("stroke", arrayColors[3][1])
+					.attr("stroke-width", "1")
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
 			}	  
@@ -167,6 +170,7 @@ Drupal.behaviors.ccis = {
 				  	.attr("id", "pathAvgMaxTempID")
 					.attr("d", avgMaxTemp(data))
 					.attr("stroke", arrayColors[4][1])
+					.attr("stroke-width", "1")
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
 			}	  
@@ -182,11 +186,10 @@ Drupal.behaviors.ccis = {
 					.ticks(5);
 				svg.append("g")
 					.attr("id", "yAxisLineTemp")
-					.attr("fill", "none")
-					.attr("stroke", "black")
-					.attr("stroke-width", "1")
+					.attr("class", "yAxisClass")
+					.style("font-family", "Arial")
 					.style("font-size","10px")
-					.attr("transform", "translate("+(axisPosition*(-50))+",0)")
+					.attr("transform", "translate("+(axisPosition*(-margin.left_single)-barWidth)+",0)")
 					.call(yAxisTemp);
 				d3.select("#yAxisLineTemp")
 					.append("text")
@@ -203,11 +206,10 @@ Drupal.behaviors.ccis = {
 					.ticks(5);
 				svg.append("g")
 					.attr("id", "yAxisLinePrec")
-					.attr("fill", "none")
-					.attr("stroke", "black")
-					.attr("stroke-width", "1")
+					.attr("class", "yAxisClass")
+					.style("font-family", "Arial")
 					.style("font-size","10px")
-					.attr("transform", "translate("+(axisPosition*(-50))+",0)")
+					.attr("transform", "translate("+(axisPosition*(-margin.left_single)-barWidth)+",0)")
 					.call(yAxisPrec);
 				d3.select("#yAxisLinePrec")
 					.append("text")
@@ -225,11 +227,10 @@ Drupal.behaviors.ccis = {
 					.ticks(5);
 				svg.append("g")
 					.attr("id", "yAxisLinePress")
-					.attr("fill", "none")
-					.attr("stroke", "black")
-					.attr("stroke-width", "1")
+					.attr("class", "yAxisClass")
+					.style("font-family", "Arial")
 					.style("font-size","10px")
-					.attr("transform", "translate("+(axisPosition*(-50))+",0)")
+					.attr("transform", "translate("+(axisPosition*(-margin.left_single)-barWidth)+",0)")
 					.call(yAxisPress);
 				d3.select("#yAxisLinePress")
 					.append("text")
@@ -248,14 +249,22 @@ Drupal.behaviors.ccis = {
 			  	.ticks(5);
 			svg.append("g")
 				.attr("class", "xAxisLine")
+				.style("font-family", "Arial")
+				.style("font-size","10px")
 				.attr("transform", "translate(0," + height + ")")
-				.attr("fill", "none")
-				.attr("stroke", "black")
-				.attr("stroke-width", "1")
 				.call(xAxis);
 			}
 			createxAxis();
 		  
+			// Add CSS
+			function addCss() {
+				$(".yAxisClass path, .yAxisClass line, .xAxisLine path, .xAxisLine line")
+				  .css("fill", "none")
+				  .css("stroke", "#000")
+				  .css("shape-rendering", "crispEdges");
+			}
+			addCss();
+			
 			// Create DIVs for the keys
 			for (var i=1; i<6; i++) {
 				$("#ccis-weather-d3-block").append("<div id='keysDiv"+i+"'></div>");
@@ -271,7 +280,7 @@ Drupal.behaviors.ccis = {
 				  	.css("margin-right", "5px")
 				  	.css("margin-top", "5px");
 				$("#keysDiv"+i).append("<div id='keysText"+i+"'></div>");
-				$("#keysText"+i).append(settings.ccis.legends[i-1]);			
+				$("#keysText"+i).append(settings.ccis.legends[i+1]);			
 			}
 			
 			// Redraw-Graphs functions
@@ -342,21 +351,21 @@ Drupal.behaviors.ccis = {
 					if (tick===1) {
 						temp_axis=true;
 						temperatureArrayNames.push("avg_temp");
-						arrayNames.push(["avg_temp", settings.ccis.legends[0]]);
+						arrayNames.push(["avg_temp", settings.ccis.legends[2]]);
 					} else if (tick===2) {
 						prec_axis=true;
-						arrayNames.push(["avg_prec", settings.ccis.legends[1]]);
+						arrayNames.push(["avg_prec", settings.ccis.legends[3]]);
 					} else if (tick===3) {
 						press_axis=true;
-						arrayNames.push(["avg_press", settings.ccis.legends[2]]);
+						arrayNames.push(["avg_press", settings.ccis.legends[4]]);
 					} else if (tick===4) {
 						temp_axis=true;
 						temperatureArrayNames.push("avg_min_temp");
-						arrayNames.push(["avg_min_temp", settings.ccis.legends[3]]);
+						arrayNames.push(["avg_min_temp", settings.ccis.legends[5]]);
 					} else if (tick===5) {
 						temp_axis=true;
 						temperatureArrayNames.push("avg_max_temp");
-						arrayNames.push(["avg_max_temp", settings.ccis.legends[4]]);
+						arrayNames.push(["avg_max_temp", settings.ccis.legends[6]]);
 					} else {}
 				}
 
@@ -398,7 +407,10 @@ Drupal.behaviors.ccis = {
 					graphsArray[tick]();
 				}
 				
-				//Call hover function
+				// Add again CSS
+				addCss();
+				
+				// Call hover function
 				hover();
 			}	
 			
@@ -479,38 +491,39 @@ Drupal.behaviors.ccis = {
 						}
 					}
 					
-					var tooltipText="";
-					//tooltipText="Date: <b>"+item.date.toDateString()+"</b>";	// Day Data
-					tooltipText="Year: <b>"+item.date.getFullYear()+"</b>";	// Year data
-					for (var i=0; i<arrayNames.length; i++) {
-						tooltipText += "<br><div id='tooltipBox"+i+
-						"' style='height:10px; width:10px; outline:solid 1px black; background-color:"+findColor(i)+"; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div>"+arrayNames[i][1]+": "+item[arrayNames[i][0]].toFixed(1);
-					}
-
-					// Create tooltip
-					$("#d3GraphDiv").append("<div id='tooltip'</div>");				
-					d3.select("#tooltip")
-						.style("position", "absolute")
-						.style("left", (mouseX-x+5)+"px")
-						.style("top", (height/2)+"px")
-						.style("width", "auto")
-						.style("height", "auto")
-						.style("background-color", "white")
-						.style("border", "solid 1px black")
-						.style("font-size","11px")
-						.style("font-family", "Arial")
-						.html(tooltipText);	
-
-					// Change direction of tooltip
-					if (mouseX+($("#tooltip").width()) > x+widthDiv-margin.right) {
+					if (item) {
+						var tooltipText="";
+						tooltipText="Date: <b>"+item.date.toDateString()+"</b>";	// Day Data
+						//tooltipText="Year: <b>"+item.date.getFullYear()+"</b>";	// Year data
+						for (var i=0; i<arrayNames.length; i++) {
+							tooltipText += "<br><div id='tooltipBox"+i+
+							"' style='height:10px; width:10px; outline:solid 1px black; background-color:"+findColor(i)+"; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div>"+arrayNames[i][1]+": "+item[arrayNames[i][0]].toFixed(1);
+						}
+	
+						// Create tooltip
+						$("#d3GraphDiv").append("<div id='tooltip'</div>");				
 						d3.select("#tooltip")
-							.style("left", (mouseX-x-5-$("#tooltip").width())+"px")
+							.style("position", "absolute")
+							.style("left", (mouseX-x+5)+"px")
+							.style("top", (height/2)+"px")
+							//.style("width", "auto")
+							.style("width", "210px")
+							.style("height", "auto")
+							.style("background-color", "white")
+							.style("border", "solid 1px black")
+							.style("font-size","11px")
+							.style("font-family", "Arial")
+							.html(tooltipText);
+	
+						// Change direction of tooltip
+						if (mouseX+($("#tooltip").width()) > x+widthDiv-margin.right) {
+							d3.select("#tooltip")
+								.style("left", (mouseX-x-5-$("#tooltip").width())+"px")
+						}
 					}
 				}
-
 			}
 			hover();
-
 		}
 	});
   // CUSTOM CODING END
