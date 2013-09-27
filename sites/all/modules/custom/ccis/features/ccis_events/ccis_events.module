@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Events feature.
+ */
+
+include_once 'ccis_events.features.inc';
