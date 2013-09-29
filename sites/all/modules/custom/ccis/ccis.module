@@ -99,19 +99,45 @@ function ccis_block_view($delta) {
   return $block;
 }
 
-/**
- * Implements hook_field_widget_info_alter().
- */
-function ccis_field_widget_info_alter(&$info) {
-#dpm($info);
-  if (!empty($info['file_generic'])) {
-    $info['file_generic']['settings']['save_as_mongodb'] = FALSE;
-  }
-}
+// /**
+//  * Implements hook_field_widget_info_alter().
+//  */
+// function ccis_field_widget_info_alter(&$info) {
+// #dpm($info);
+//   if (!empty($info['file_generic'])) {
+//     $info['file_generic']['settings']['save_as_mongodb'] = FALSE;
+//   }
+// }
+
+// /**
+//  * Implements hook_form_FORM_ID_alter().
+//  */
+// function ccis_form_field_ui_field_edit_form_alter(&$form, $form_state) {
+//   if (!isset($form['instance']) || !empty($form['#field']['locked'])) {
+//     return;
+//   }
+//   if ($form['#field']['type'] == 'file') {
+//     $form['instance']['settings']['save_as_mongodb'] = array(
+//       '#type' => 'checkbox',
+//       '#title' => t('Save as mongoDB collection'),
+//       '#description' => t('The uploaded file will be saved as mongodb collection.'),
+//       '#default_value' => $form['#instance']['settings']['save_as_mongodb']
+//     );
+//   }
+// }
+
+// /**
+//  * Implements hook_field_widget_form_alter().
+//  */
+// function ccis_field_widget_form_alter($field, $instance, $has_data) {
+//   dpm(func_get_args());
+// }
+
 /**
  * Implement hook_field_widget_WIDGET_TYPE_form_alter().
  */
 function ccis_field_widget_file_generic_form_alter(&$element, &$form_state, $context) {
+  // dpm($element);
   if (!empty($context['field']['field_name']) && $context['field']['field_name'] == 'field_csv_files') {
     foreach (element_children($element) as $delta) {
       $element[$delta]['#upload_validators']['ccis_csv_file_header_validate'] = array();
@@ -686,16 +712,16 @@ function ccis_autocomplete_response($type, $string) {
 
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_wmocode', 'f', 'n.nid = f.entity_id');
-    $query->leftJoin('field_data_field_address_data', 'f2', 'n.nid = f2.entity_id');
+    #$query->leftJoin('field_data_field_address_data', 'f2', 'n.nid = f2.entity_id');
 
     $n_and = db_and()->condition('n.title', db_like($string) . '%', 'LIKE');
     $f_and = db_and()->condition('f.field_wmocode_value', db_like($string) . '%', 'LIKE');
-    $f2_and = db_and()->condition('f2.field_address_data_value', '%' . db_like($string) . '%', 'LIKE');
+  #  $f2_and = db_and()->condition('f2.field_address_data_value', '%' . db_like($string) . '%', 'LIKE');
 
     $query->fields('n', array('nid', 'title'))
       ->fields('f', array('field_wmocode_value'))
       ->condition('n.type', 'weather_station')
-      ->condition(db_or()->condition($n_and)->condition($f_and)->condition($f2_and))
+      ->condition(db_or()->condition($n_and)->condition($f_and))
       ->addTag('node_access')
       ->range(0, 10);
     try{

@@ -21,7 +21,7 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Data',
-    'weight' => '25',
+    'weight' => '26',
     'children' => array(
       0 => 'field_dataunits',
       1 => 'field_dataquality',
@@ -53,15 +53,15 @@ function ccis_ct_weather_station_field_group_info() {
     'label' => 'Instrumentation',
     'weight' => '13',
     'children' => array(
-      0 => 'field_instrumentationtype',
-      1 => 'field_traininglevel',
-      2 => 'field_observedelements',
-      3 => 'field_observingtimes',
-      4 => 'field_units',
-      5 => 'field_instructions',
-      6 => 'field_routinemaintenance',
-      7 => 'field_itemsreplacement',
-      8 => 'field_observercorrections',
+      0 => 'field_traininglevel',
+      1 => 'field_observingtimes',
+      2 => 'field_units',
+      3 => 'field_instructions',
+      4 => 'field_routinemaintenance',
+      5 => 'field_itemsreplacement',
+      6 => 'field_observercorrections',
+      7 => 'field_instrumentationtype',
+      8 => 'field_observedelements',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -87,7 +87,7 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Metadata Information',
-    'weight' => '26',
+    'weight' => '27',
     'children' => array(
       0 => 'field_mdmetadata',
       1 => 'field_fileidentifier',
@@ -173,7 +173,7 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Station Contact',
-    'weight' => '14',
+    'weight' => '15',
     'children' => array(
       0 => 'field_stationcontact',
       1 => 'field_stationaddress',
