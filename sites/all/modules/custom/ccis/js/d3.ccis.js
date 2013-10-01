@@ -80,7 +80,7 @@ Drupal.behaviors.ccis = {
 			
 			//Create SVG element
 			function createSvg() {
-				$("#ccis-weather-d3-block").prepend("<div id='d3GraphDiv'></div>");		
+				$("#ccis-weather-d3-block").prepend("<div id='d3GraphDiv'></div>");	
 				svg = d3.select("#d3GraphDiv")
 					.style("position", "relative")
 					.append("svg")
@@ -256,7 +256,7 @@ Drupal.behaviors.ccis = {
 			}
 			createxAxis();
 		  
-			// Add CSS
+			// Add CSS to the axes
 			function addCss() {
 				$(".yAxisClass path, .yAxisClass line, .xAxisLine path, .xAxisLine line")
 				  .css("fill", "none")
@@ -382,7 +382,7 @@ Drupal.behaviors.ccis = {
 					temperatureArrayMax.push(d3.max(data, function(d) { return Math.max(d[temperatureArrayNames[i]]); }) );
 				}
 				maxTempY = d3.max(temperatureArrayMax);
-				//yScaleTemp.domain([minTempY, maxTempY])
+				//yScaleTemp.domain([minTempY, maxTempY]);
 				yScaleTemp.domain([30, maxTempY]); // Temporary - Wrong Temperature Data
 
 				// Redraw Y-Axes
@@ -413,7 +413,7 @@ Drupal.behaviors.ccis = {
 					graphsArray[tick]();
 				}
 				
-				// Add again CSS
+				// Add again CSS for the axes
 				addCss();
 				
 				// Call hover function
@@ -436,7 +436,7 @@ Drupal.behaviors.ccis = {
 				redrawGraph();
 			});	
 			
-			// Hover function
+			// *** Hover function - START ***
 			function hover() {
 				var element;
 				var position;
@@ -504,8 +504,7 @@ Drupal.behaviors.ccis = {
 					
 					if (item) {
 						var tooltipText="";
-						tooltipText="Date: <b>"+item.date.toDateString()+"</b>";	// Day Data
-						//tooltipText="Year: <b>"+item.date.getFullYear()+"</b>";	// Year data
+						tooltipText="Date: <b>"+item.date.toDateString()+"</b>";
 						for (var i=0; i<arrayNames.length; i++) {
 							tooltipText += "<br><div id='tooltipBox"+i+
 							"' style='height:10px; width:10px; outline:solid 1px black; background-color:"+findColor(i)+"; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div>"+arrayNames[i][1]+": "+item[arrayNames[i][0]].toFixed(1);
@@ -533,7 +532,97 @@ Drupal.behaviors.ccis = {
 					}
 				}
 			}
+			// *** Hover function - END ***
 			hover();
+				
+			// *** Print functions - START ***
+			$("#ccis-weather-d3-block").append("<br/><button id='printPreviewId' class='buttonId'>Print Preview</button>");
+			
+			// CSS for the Buttons (initial window)
+			$(".buttonId")
+				.css("border", "1px solid #dcdcdc")
+				.css("-webkit-border-radius", "10px")
+				.css("-moz-border-radius", "10px")
+				.css("border-radius", "10px")
+				.css("background-color", "#ededed")
+				.css("color", "#211921")
+				.css("-moz-box-shadow", "inset 0px -1px 0px 0px #877087")
+				.css("-webkit-box-shadow", "inset 0px -1px 0px 0px #877087")
+				.css("box-shadow", "inset 0px -1px 0px 0px #877087");		
+			$(".buttonId").hover( function(){
+			     $(this).css("background-color", "#dfdfdf");
+			},
+			function(){
+				$(this).css('background-color', '#ededed');
+			});
+							
+			$("#printPreviewId").click(function() {
+				printPreview();
+			});
+			function printPreview() {
+				var newWindow=window.open("","","");
+				
+				$(newWindow).ready(function(){
+			
+					// Get the Diagram
+					var html = d3.select("svg")
+				        .node().parentNode.innerHTML;
+					
+					// Get the name of the Station
+					var stationName = document.getElementById("ccis-station-info-block").getElementsByClassName("views-field views-field-title")[0].children[0].innerHTML;
+					
+					// Colors for the Print Page Keys
+					function findColor2(i) {
+						for (var k=0; k<arrayColors.length; k++) {
+							if (arrayNames[i][0]===arrayColors[k][0]) {
+								return arrayColors[k][1];
+							}
+						}
+					}
+					var printKeys = "";
+					for (var i=0; i<arrayNames.length; i++) {
+						// Background-color is not printed by default
+						printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+findColor2(i)+"; border-bottom: 5px solid "+findColor2(i)+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+arrayNames[i][1]+"</span>";
+					}
+					newWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys+"<br/><br/><button id='printButton' class='buttonId'>Print</button>  <button id='closePreviewWindow' class='buttonId'>Close Window</button>";
+					
+					// CSS for the Buttons (new window)
+					$(newWindow.document).contents().find(".buttonId")
+						.css("border", "1px solid #dcdcdc")
+						.css("-webkit-border-radius", "10px")
+						.css("-moz-border-radius", "10px")
+						.css("border-radius", "10px")
+						.css("background-color", "#ededed")
+						.css("color", "#211921")
+						.css("-moz-box-shadow", "inset 0px -1px 0px 0px #877087")
+						.css("-webkit-box-shadow", "inset 0px -1px 0px 0px #877087")
+						.css("box-shadow", "inset 0px -1px 0px 0px #877087");		
+					$(newWindow.document).contents().find(".buttonId").hover( function(){
+					     $(this).css("background-color", "#dfdfdf");
+					},
+					function(){
+						$(this).css('background-color', '#ededed');
+					});
+					
+					$(newWindow.document).contents().find("#printButton").click(function() {
+						printFunction();
+					});	
+					
+					$(newWindow.document).contents().find("#closePreviewWindow").click(function() {
+						newWindow.close();
+					});	
+					
+					function printFunction() {
+						var printWindow=window.open("","","");
+						$(newWindow).ready(function(){
+							printWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys;
+							printWindow.print();
+							printWindow.close();
+						});			
+					}
+				});
+			}
+			// *** Print functions - END ***
 		}
 	});
   // CUSTOM CODING END
