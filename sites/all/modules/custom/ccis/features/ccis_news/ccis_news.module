@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS News feature.
+ */
+
+include_once 'ccis_news.features.inc';

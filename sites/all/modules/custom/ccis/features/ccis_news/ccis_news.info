@@ -1,0 +1,11 @@
+name = CCIS News
+description = News relating to CCIS and climate change
+core = 7.x
+package = CCIS
+dependencies[] = views
+dependencies[] = views_content
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = news_via_feeds
+features_exclude[dependencies][ctools] = ctools
+project path = sites/all/modules/custom/ccis/features
