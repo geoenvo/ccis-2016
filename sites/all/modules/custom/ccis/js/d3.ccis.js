@@ -9,74 +9,163 @@ Drupal.behaviors.ccis = {
 	//var csvFilesystemYear = csvFilesystemBase + '/FILENAME.csv';
 	// Coding d3.time.format("%d-%b-%y").parse; ...
 	
-	var barWidth = 5;
 	var margin = {top: 20, right: 10, bottom: 25, left: 165, left_single: 55};
 	var widthDiv = $("#ccis-weather-d3-block").width();
 	var width = widthDiv - margin.left - margin.right;
 	var height = 250;
 	var axis_sum = 3;
-	var axis_selection = 3;
+	var axis_selection;
 	var svg;
-	var arrayColors = [
-	        ["avg_temp", "orange"],
-	        ["avg_prec", "#CAE1FF"],
-	        ["avg_press", "orchid"],
-	        ["avg_min_temp", "green"],
-	        ["avg_max_temp", "red"]
-        ];
+	
+	// Groups of parameters including the colors
+	var temperature = [
+   	    ["avg_temp", "orange", "Average mean temperature"],
+   	    ["avg_min_temp", "green", "Average min temperature"],
+   	    ["avg_max_temp", "red", "Average max temperature"]
+   	];
+   	var precipitation = [
+   	    ["avg_prec", "blue", "Average precipitation amount"]
+   	];
+   	var pressure = [
+   	    ["avg_press", "orchid", "Average sea level pressure"]
+   	];
+   	
+   	// Parameters parsed for the specific user
+	var temperatureUsed = [];
+	var precipitationUsed = [];
+	var pressureUsed = [];
+	
+	// Parameters shown at the graph (max: 4)
+	var temperatureShown = [];
+	var precipitationShown = [];
+	var pressureShown = [];
+	
 	var mouseX;
 	var mouseY;
-
+	var yAxisArray = [];
+	var temperature_selection;
+	var precipitation_selection;
+	var pressure_selection;
+	
 	// Parse the JSON
 	d3.json(settings.ccis.stations[0].path, function(json) {
 		if (json.length===0) {
 			$("#ccis-weather-d3-block").html("");
 		} else {
 			$("#ccis-weather-d3-block").html("");
+
+			// Get parameters names
+			var dataKeysArray = Object.keys(json[0]);
+			
+			// Create object with the parameters and the values
 			var data = json.map(function(d) {
-				return {
-					//date: d3.time.format("%Y-%m-%d %H:%M:%S").parse(d.date.slice(0,-3), // Datum & Zeit ohne Zeitzone
-					date: d3.time.format("%Y-%m-%d").parse(d.date.slice(0,-12)), // Nur Datum
-					avg_temp: parseFloat(d.avg_temp),
-					avg_prec: parseFloat(d.avg_prec),
-					avg_press: parseFloat(d.avg_press),
-					avg_min_temp: parseFloat(d.avg_min_temp),
-					avg_max_temp: parseFloat(d.avg_max_temp)
-				};        
+				var obj = {};
+				//obj.date: d3.time.format("%Y-%m-%d %H:%M:%S").parse(d.date.slice(0,-3); // Datum & Zeit ohne Zeitzone
+				obj.date = d3.time.format("%Y-%m-%d").parse(d.date.slice(0,-12)); // Nur Datum
+				// i=2: The first two parameters are Station and Date
+				for (var i=2; i<dataKeysArray.length; i++) {
+					obj[dataKeysArray[i]] = parseFloat(d[dataKeysArray[i]]);
+				}
+				return obj;
+  
 			});
 			
-			var arrayNames = [
-	                ["avg_temp", settings.ccis.legends[2]],
-	                ["avg_prec", settings.ccis.legends[3]],
-	                ["avg_press", settings.ccis.legends[4],],
-	                ["avg_min_temp", settings.ccis.legends[5]],
-	                ["avg_max_temp", settings.ccis.legends[6]]
-                ];
+			// Create an array per group with the parameters used, the colors and the legend names
+			for (var i=2; i<dataKeysArray.length; i++) {
+				for (var k=0; k<temperature.length; k++) {
+					if (dataKeysArray[i]===temperature[k][0]) {
+						temperatureUsed.push([temperature[k][0], temperature[k][1], temperature[k][2]]);
+					}
+				}
+				for (var k=0; k<precipitation.length; k++) {
+					if (dataKeysArray[i]===precipitation[k][0]) {
+						precipitationUsed.push([precipitation[k][0], precipitation[k][1], precipitation[k][2]]);
+					}
+				}
+				for (var k=0; k<pressure.length; k++) {
+					if (dataKeysArray[i]===pressure[k][0]) {
+						pressureUsed.push([pressure[k][0], pressure[k][1], pressure[k][2]]);
+					}
+				} 
+			}
+			
+			// Choose initial parameters to show
+			temperatureShown.push(temperatureUsed[0], temperatureUsed[1]);
+			precipitationShown.push(precipitationUsed[0]);
+			//pressureShown.push(pressureUsed[0]);
 
-			// X Scale
-			var xScale = d3.time.scale()
-	  			.domain(d3.extent(data, function(d) { return d.date; }))
-	  			.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
-	  		
+			// Find the max and min values for the Y scales
+			// Temperature values
+			var minTempYArray = [];
+			var maxTempYArray = [];
+			for (var i=0; i<temperatureShown.length; i++) {
+				minTempYArray.push(d3.min(data, function(d) { return Math.min(d[temperatureShown[i][0]]); }) );
+				maxTempYArray.push(d3.max(data, function(d) { return Math.max(d[temperatureShown[i][0]]); }) );  
+			}
+			var minTempY = d3.min(minTempYArray);
+			var maxTempY = d3.max(maxTempYArray);
+			// Precipitation values
+			var minPrecYArray = [];
+			var maxPrecYArray = [];
+			for (var i=0; i<precipitationShown.length; i++) {
+				minPrecYArray.push(d3.min(data, function(d) { return Math.min(d[precipitationShown[i][0]]); }) );
+				maxPrecYArray.push(d3.max(data, function(d) { return Math.max(d[precipitationShown[i][0]]); }) );  
+			}
+			var minPrecY = d3.min(minPrecYArray);
+			var maxPrecY = d3.max(maxPrecYArray);
+			// Pressure values
+			var minPressYArray = [];
+			var maxPressYArray = [];
+			for (var i=0; i<pressureShown.length; i++) {
+				minPressYArray.push(d3.min(data, function(d) { return Math.min(d[pressureShown[i][0]]); }) );
+				maxPressYArray.push(d3.max(data, function(d) { return Math.max(d[pressureShown[i][0]]); }) );  
+			}
+			var minPressY = d3.min(minPressYArray);
+			var maxPressY = d3.max(maxPressYArray);
+			
 			// Y Scales
-			var minTempY = d3.min(data, function(d) { return Math.min(d.avg_temp, d.avg_min_temp, d.avg_max_temp); });  
-			var maxTempY = d3.max(data, function(d) { return Math.max(d.avg_temp, d.avg_min_temp, d.avg_max_temp); });			
 			var yScaleTemp = d3.scale.linear()
 				//.domain([minTempY, maxTempY])
 				.domain([30, maxTempY])	// Temporary - Wrong Temperature Data
 				.range([height, 0]);
-			var minPrecY = d3.min(data, function(d) { return d.avg_prec; });
-			var maxPrecY = d3.max(data, function(d) { return d.avg_prec; });
 			var yScalePrec = d3.scale.linear()
 				//.domain([minPrecY, maxPrecY])
 				.domain([0, maxPrecY]) // Temporary - Wrong Precipitation Data
 				.range([height, 0]);
-			var minPressY = d3.min(data, function(d) { return d.avg_press; });
-			var maxPressY = d3.max(data, function(d) { return d.avg_press; });
 			var yScalePress = d3.scale.linear()
 				//.domain([minPressY, maxPressY])
 				.domain([9800, maxPressY]) // Temporary - Wrong Pressure Data
 				.range([height, 0]);
+			
+			// Which and how many Y-Axes we need
+			function findAxis() {
+				axis_selection = 0;
+				yAxisArray = [];
+				temperature_selection = false;
+				if (temperatureShown.length>0) {
+					temperature_selection=true;
+					yAxisArray.push(["yAxisTemp", yScaleTemp, "Temperature"]);
+					axis_selection=axis_selection+1;
+				}
+				precipitation_selection = false;
+				if (precipitationShown.length>0) {
+					precipitation_selection = true;
+					yAxisArray.push(["yAxisPrec", yScalePrec, "Precipitation"]);
+					axis_selection=axis_selection+1;
+				}
+				pressure_selection = false;
+				if (pressureShown.length>0) {
+					pressure_selection = true;
+					yAxisArray.push(["yAxisPress", yScalePress, "Pressure"]);
+					axis_selection=axis_selection+1;
+				}
+			}
+			findAxis();
+						
+			// X Scale
+			var xScale = d3.time.scale()
+	  			.domain(d3.extent(data, function(d) { return d.date; }))
+	  			.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
 			
 			//Create SVG element
 			function createSvg() {
@@ -91,170 +180,73 @@ Drupal.behaviors.ccis = {
 			}
 			createSvg();
 		  
-			// ***CREATE THE GRAPHS - START***
-			
-			// Average mean temperature
-			function avgTempGraph(){
-				var avgTemp = d3.svg.line()
+			// Create graphs
+			function graphDraw(graphType, yscaleType, color) {
+				
+				var graphObj = {};
+				
+				graphObj[graphType] = d3.svg.line()
 					.x(function(d){return xScale(d.date)})
-					.y(function(d){return yScaleTemp(d.avg_temp)});
-		 
+					.y(function(d){return yscaleType(d[graphType])});
+	 
 				d3.select("svg")
 					.append("path")
-				  	.attr("id", "pathAvgTempID")
-					.attr("d", avgTemp(data))
-					.attr("stroke", arrayColors[0][1])
+				  	.attr("id", "path"+graphType+"ID")
+					.attr("d", graphObj[graphType](data))
+					.attr("stroke", color)
 					.attr("stroke-width", "1")
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");		  
-			}	  
-			avgTempGraph();
-		  
-			// Average precipitation amount
-			function avgPrecGraph(){
-				// Bars
-				svg.selectAll("rect")
-				   .data(data)
-				   .enter()
-				   .append("rect")
-				   .attr("x", function(d) {return xScale(d.date)-barWidth;})
-				   .attr("y", function(d) {return yScalePrec(d.avg_prec)-1;})
-				   .attr("width", barWidth+"px")
-				   .attr("height", function(d) {return height-yScalePrec(d.avg_prec);})
-				   .attr("fill", arrayColors[1][1]);
-			}	  
-			avgPrecGraph();
+			}
+			for (var i=0; i<temperatureShown.length; i++) {
+				graphDraw(temperatureShown[i][0], yScaleTemp, temperatureShown[i][1]);
+			}
+			for (var i=0; i<precipitationShown.length; i++) {
+				graphDraw(precipitationShown[i][0], yScalePrec, precipitationShown[i][1]);
+			}
+			for (var i=0; i<pressureShown.length; i++) {
+				graphDraw(pressureShown[i][0], yScalePress, pressureShown[i][1]);
+			}
 			
-			// Average sea level pressure
-			function avgPressGraph(){
-				var avgPress = d3.svg.line()
-					.x(function(d){return xScale(d.date)})
-					.y(function(d){return yScalePress(d.avg_press)});
-		 
-				  d3.select("svg")
-				  	.append("path")
-				  	.attr("id", "pathAvgPressID")
-					.attr("d", avgPress(data))
-					.attr("stroke", arrayColors[2][1])
-					.attr("stroke-width", "1")
-					.attr("fill", "none")
-					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
-			}	  
-			avgPressGraph();
-			
-			// Average min temperature
-			function avgMinTempGraph(){
-				var avgMinTemp = d3.svg.line()
-					.x(function(d){return xScale(d.date)})
-					.y(function(d){return yScaleTemp(d.avg_min_temp)});
-		 
-				d3.select("svg")
-					.append("path")
-				  	.attr("id", "pathAvgMinTempID")
-					.attr("d", avgMinTemp(data))
-					.attr("stroke", arrayColors[3][1])
-					.attr("stroke-width", "1")
-					.attr("fill", "none")
-					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
-			}	  
-			avgMinTempGraph();
-			
-			// Average max temperature
-			function avgMaxTempGraph(){
-				var avgMaxTemp = d3.svg.line()
-					.x(function(d){return xScale(d.date)})
-					.y(function(d){return yScaleTemp(d.avg_max_temp)});
-		 
-				d3.select("svg")
-					.append("path")
-				  	.attr("id", "pathAvgMaxTempID")
-					.attr("d", avgMaxTemp(data))
-					.attr("stroke", arrayColors[4][1])
-					.attr("stroke-width", "1")
-					.attr("fill", "none")
-					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
-			}	  
-			avgMaxTempGraph();
-			
-			// ***CREATE THE GRAPHS - END***
-			
-			// Create Y Axes
-			function yAxisTempDraw(axisPosition) {
-				var yAxisTemp = d3.svg.axis()
-					.scale(yScaleTemp)
+			// Draw Y Axis
+			function yAxisDraw(axisType, scaleType, label, axisPosition) {
+				var yAxisObj = {};
+				yAxisObj[axisType] = d3.svg.axis()
+					.scale(scaleType)
 					.orient("left")
 					.ticks(5);
 				svg.append("g")
-					.attr("id", "yAxisLineTemp")
+					.attr("id", axisType+"id")
 					.attr("class", "yAxisClass")
 					.style("font-family", "Arial")
 					.style("font-size","10px")
-					.attr("transform", "translate("+(axisPosition*(-margin.left_single)-barWidth)+",0)")
-					.call(yAxisTemp);
-				d3.select("#yAxisLineTemp")
+					.attr("transform", "translate("+(axisPosition*(-margin.left_single))+",0)")
+					.call(yAxisObj[axisType]);
+				d3.select("#"+axisType+"id")
 					.append("text")
-					.text("Temperature")
+					.text(label)
 					.style("font-size","12px")
 					.style("font-family", "Arial")
 					.attr("transform", "rotate (-90 ,90,125)");
 			}
-			yAxisTempDraw(0);
-			function yAxisPrecDraw(axisPosition) {
-				var yAxisPrec = d3.svg.axis()
-					.scale(yScalePrec)
-					.orient("left")
-					.ticks(5);
-				svg.append("g")
-					.attr("id", "yAxisLinePrec")
-					.attr("class", "yAxisClass")
-					.style("font-family", "Arial")
-					.style("font-size","10px")
-					.attr("transform", "translate("+(axisPosition*(-margin.left_single)-barWidth)+",0)")
-					.call(yAxisPrec);
-				d3.select("#yAxisLinePrec")
-					.append("text")
-					.text("Precipitation")
-					.style("font-size","12px")
-					.style("font-family", "Arial")
-					.attr("transform", "rotate (-90 ,90,125)");
+			for (var i=0; i<yAxisArray.length; i++) {
+				yAxisDraw(yAxisArray[i][0], yAxisArray[i][1], yAxisArray[i][2], i);
 			}
-			yAxisPrecDraw(1);
-			function yAxisPressDraw(axisPosition) {
-				var yAxisPress = d3.svg.axis()
-					.scale(yScalePress)
-					.orient("left")
-					.tickFormat(d3.format('.0f'))
-					.ticks(5);
-				svg.append("g")
-					.attr("id", "yAxisLinePress")
-					.attr("class", "yAxisClass")
-					.style("font-family", "Arial")
-					.style("font-size","10px")
-					.attr("transform", "translate("+(axisPosition*(-margin.left_single)-barWidth)+",0)")
-					.call(yAxisPress);
-				d3.select("#yAxisLinePress")
-					.append("text")
-					.text("Sea Level Pressure")
-					.style("font-size","12px")
-					.style("font-family", "Arial")
-					.attr("transform", "rotate (-90 ,85,125)");
-			}
-			yAxisPressDraw(2);	
 			
-			// Create X Axis
-			function createxAxis() {
-			var xAxis = d3.svg.axis()
-				.scale(xScale)
-			  	.orient("bottom")
-			  	.ticks(5);
-			svg.append("g")
-				.attr("class", "xAxisLine")
-				.style("font-family", "Arial")
-				.style("font-size","10px")
-				.attr("transform", "translate(0," + height + ")")
-				.call(xAxis);
+			// Draw X Axis
+			function xAxisDraw() {
+				var xAxis = d3.svg.axis()
+					.scale(xScale)
+				  	.orient("bottom")
+				  	.ticks(5);
+				svg.append("g")
+					.attr("class", "xAxisLine")
+					.style("font-family", "Arial")
+					.style("font-size","10px")
+					.attr("transform", "translate(0," + height + ")")
+					.call(xAxis);
 			}
-			createxAxis();
+			xAxisDraw();
 		  
 			// Add CSS to the axes
 			function addCss() {
@@ -264,177 +256,243 @@ Drupal.behaviors.ccis = {
 				  .css("shape-rendering", "crispEdges");
 			}
 			addCss();
-			
+	
 			// Create DIVs for the keys
-			for (var i=1; i<6; i++) {
-				$("#ccis-weather-d3-block").append("<div id='keysDiv"+i+"'></div>");
-				$("#keysDiv"+i).append("<div id='keysTick"+i+"' style='float:left'><input id='checkbox"+i+"' type='checkbox' value='"+i+"'checked='checked'></div>");
-				$("#keysDiv"+i).append("<div id='keysBox"+i+"'></div>");
-				$("#keysBox"+i)
-					.css("height", "10px")
-				  	.css("width", "10px")
-				  	.css("outline", "solid 1px black")
-				  	.css("background-color", arrayColors[i-1][1])
-				  	.css("float", "left")
-				  	.css("margin-left", "5px")
-				  	.css("margin-right", "5px")
-				  	.css("margin-top", "5px");
-				$("#keysDiv"+i).append("<div id='keysText"+i+"'></div>");
-				$("#keysText"+i).append(settings.ccis.legends[i+1]);			
-			}
-			
-			// Redraw-Graphs functions
-			function graph1(){
-				avgTempGraph();
-			}
-			function graph2(){
-				avgPrecGraph();
-			}
-			function graph3(){
-				avgPressGraph();
-			}
-			function graph4(){
-				avgMinTempGraph();
-			}
-			function graph5(){
-				avgMaxTempGraph();
-			}
-			
-			var graphsArray = [graph1, graph2, graph3, graph4, graph5];
-			
-			// Redraw the Graph
-			function redrawGraph() {
-				var findIDs = $("#ccis-weather-d3-block input:checkbox:checked").map(function(){		        
-					return $(this).val();      
-				});
-				var findTicksArray = findIDs.get();
-				
-				//How many Y-Axes we need
-				axis_selection=0;
-				var temperature_selection=false;		
-				for (var i=0; i<findTicksArray.length; i++) {
-			  		var tick_selection = parseInt(findTicksArray[i]);
-					if (tick_selection===1) {
-						axis_selection=axis_selection+1;
-						temperature_selection=true;
-					} else if (tick_selection===2) {
-						axis_selection=axis_selection+1;
-					} else if (tick_selection===3) {				
-						axis_selection=axis_selection+1;	
-					} else if (tick_selection===4 && temperature_selection===true) {
-						
-					} else if (tick_selection===4 && temperature_selection===false) {
-						axis_selection=axis_selection+1;
-						temperature_selection=true;			
-					} else if (tick_selection===5 && temperature_selection===true) {
-						
-					} else if (tick_selection===5 && temperature_selection===false) {
-						axis_selection=axis_selection+1;
-						temperature_selection=true;
-					} else {}	
-				}
-
-				d3.select("#d3GraphDiv").remove();
-				xScale.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
-				createSvg();
-				createxAxis();
-				
-				// Update Y-Axes
-				var temp_axis=false;
-				var prec_axis=false;
-				var press_axis=false;
-				
-				arrayNames=[];	// For the tooltips
-				var temperatureArrayNames=[];
-				for (var i=0; i<findTicksArray.length; i++) {
-					var tick = parseInt(findTicksArray[i]);
-					switch (tick) {
-						case 1:
-							temp_axis=true;
-							temperatureArrayNames.push("avg_temp");
-							arrayNames.push(["avg_temp", settings.ccis.legends[2]]);
-							break;
-						case 2:
-							prec_axis=true;
-							arrayNames.push(["avg_prec", settings.ccis.legends[3]]);
-							break;
-						case 3:
-							press_axis=true;
-							arrayNames.push(["avg_press", settings.ccis.legends[4]]);
-							break;
-						case 4:
-							temp_axis=true;
-							temperatureArrayNames.push("avg_min_temp");
-							arrayNames.push(["avg_min_temp", settings.ccis.legends[5]]);
-							break;
-						case 5:
-							temp_axis=true;
-							temperatureArrayNames.push("avg_max_temp");
-							arrayNames.push(["avg_max_temp", settings.ccis.legends[6]]);
-							break;				
+			if (temperatureUsed.length>0) {
+				$("#ccis-weather-d3-block").append("<div id='temperatureToggle'><b><span id='tempMinus'>[-]</span> Temperature</b></div>");
+				$("#ccis-weather-d3-block").append("<div id='keysDivTemperature'></div>");
+				for (var i=0; i<temperatureUsed.length; i++) {
+					function findTempChecked() {
+						for (var k=0; k<temperatureShown.length; k++) {
+							if (temperatureUsed[i][0]===temperatureShown[k][0]) {
+								return "checked";
+							}
+						}
 					}
+					$("#keysDivTemperature").append("<div id='keysTemperature"+i+"'></div>");
+					$("#keysTemperature"+i).css("margin-left", "10px");
+					$("#keysTemperature"+i).append("<div id='keysTemperatureTick"+i+"' style='float:left'><input id='checkboxTemperature"+i+"' type='checkbox' value='"+i+"' "+findTempChecked()+"></div>");
+					$("#keysTemperature"+i).append("<div id='keysTemperatureBox"+i+"' class='keysBox'></div>");
+					$("#keysTemperatureBox"+i).css("background-color", temperatureUsed[i][1]);
+					$("#keysTemperature"+i).append("<div id='keysTemperatureText"+i+"'></div>");
+					$("#keysTemperatureText"+i).append(temperatureUsed[i][2]);
+				}		
+			}
+			if (precipitationUsed.length>0) {
+				$("#ccis-weather-d3-block").append("<div id='precipitationToggle'><b><span id='precMinus'>[-]</span> Precipitation</b></div>");
+				$("#ccis-weather-d3-block").append("<div id='keysDivPrecipitation'></div>");
+				for (var i=0; i<precipitationUsed.length; i++) {
+					function findPrecChecked() {
+						for (var k=0; k<precipitationShown.length; k++) {
+							if (precipitationUsed[i][0]===precipitationShown[k][0]) {
+								return "checked";
+							}
+						}
+					}
+					$("#keysDivPrecipitation").append("<div id='keysPrecipitation"+i+"'></div>");
+					$("#keysPrecipitation"+i).css("margin-left", "10px");
+					$("#keysPrecipitation"+i).append("<div id='keysPrecipitationTick"+i+"' style='float:left'><input id='checkboxPrecipitation"+i+"' type='checkbox' value='"+i+"' "+findPrecChecked()+"></div>");
+					$("#keysPrecipitation"+i).append("<div id='keysPrecipitationBox"+i+"' class='keysBox'></div>");
+					$("#keysPrecipitationBox"+i).css("background-color", precipitationUsed[i][1]);
+					$("#keysPrecipitation"+i).append("<div id='keysPrecipitationText"+i+"'></div>");
+					$("#keysPrecipitationText"+i).append(precipitationUsed[i][2]);
+				}
+			}
+			if (pressureUsed.length>0) {
+				$("#ccis-weather-d3-block").append("<div id='pressureToggle'><b><span id='pressMinus'>[-]</span> Pressure</b></div>");	
+				$("#ccis-weather-d3-block").append("<div id='keysDivPressure'></div>");
+				for (var i=0; i<pressureUsed.length; i++) {
+					function findPressChecked() {
+						for (var k=0; k<pressureShown.length; k++) {
+							if (pressureUsed[i][0]===pressureShown[k][0]) {
+								return "checked";
+							}
+						}
+					}
+					$("#keysDivPressure").append("<div id='keysPressure"+i+"'></div>");
+					$("#keysPressure"+i).css("margin-left", "10px");
+					$("#keysPressure"+i).append("<div id='keysPressureTick"+i+"' style='float:left'><input id='checkboxPressure"+i+"' type='checkbox' value='"+i+"' "+findPressChecked()+"></div>");
+					$("#keysPressure"+i).append("<div id='keysPressureBox"+i+"' class='keysBox'></div>");
+					$("#keysPressureBox"+i).css("background-color", pressureUsed[i][1]);
+					$("#keysPressure"+i).append("<div id='keysPressureText"+i+"'></div>");
+					$("#keysPressureText"+i).append(pressureUsed[i][2]);
+				}
+			}
+			$("#ccis-weather-d3-block").append("<i>Select up to 4 diagrams</i>");
+
+			$(".keysBox")
+				.css("height", "10px")
+			  	.css("width", "10px")
+			  	.css("outline", "solid 1px black")
+			  	.css("float", "left")
+			  	.css("margin-left", "5px")
+			  	.css("margin-right", "5px")
+			  	.css("margin-top", "5px");
+			
+			// Maximum checkboxes checked: 4
+			var maxChecked = $("#ccis-weather-d3-block :checkbox:checked").length >= 4; 
+			$("#ccis-weather-d3-block :checkbox").not(":checked").attr("disabled",maxChecked);
+			$("#keysDivTemperature").show();
+					
+			// Collapse
+			$("#tempMinus").click(function() {
+				$("#keysDivTemperature").toggle();
+			}).toggle(function() {
+				$(this).html("[+]");
+			}, function() {
+				$(this).html("[-]");
+			});
+			$("#precMinus").click(function() {
+				$("#keysDivPrecipitation").toggle();
+			}).toggle(function() {
+				$(this).html("[+]");
+			}, function() {
+				$(this).html("[-]");
+			});
+			$("#pressMinus").click(function() {
+				$("#keysDivPressure").toggle();
+			}).toggle(function() {
+				$(this).html("[+]");
+			}, function() {
+				$(this).html("[-]");
+			});
+			
+			// *** Redraw the Graph - START ***
+			function redrawGraph() {
+
+				if (document.getElementById("keysDivTemperature")) {
+					var findIDsTemperature = $("#keysDivTemperature input:checkbox:checked").map(function(){		        
+						return $(this).val();      
+					});
+					var findTicksArrayTemperature = findIDsTemperature.get();
+				}
+				if (document.getElementById("keysDivPrecipitation")) {
+					var findIDsPrecipitation = $("#keysDivPrecipitation input:checkbox:checked").map(function(){		        
+						return $(this).val();      
+					});
+					var findTicksArrayPrecipitation = findIDsPrecipitation.get();
+				}
+				if (document.getElementById("keysDivPressure")) {
+					var findIDsPressure = $("#keysDivPressure input:checkbox:checked").map(function(){		        
+						return $(this).val();      
+					});
+					var findTicksArrayPressure = findIDsPressure.get();
 				}
 
-				// Update temperature domain
-				var temperatureArrayMax=[];
-				var minTempY = d3.min(data, function(d) { return Math.min(d.avg_temp, d.avg_min_temp, d.avg_max_temp); }); 
-				for (var i=0; i<temperatureArrayNames.length; i++) {
-					temperatureArrayMax.push(d3.max(data, function(d) { return Math.max(d[temperatureArrayNames[i]]); }) );
+				// Which parameters are selected
+				temperatureShown = [];
+				var temperatureShownSingle;
+				for (var i=0; i<findTicksArrayTemperature.length; i++) {
+					temperatureShownSingle = temperatureUsed[parseFloat(findTicksArrayTemperature[i])];
+					temperatureShown.push(temperatureShownSingle);			
 				}
-				maxTempY = d3.max(temperatureArrayMax);
-				//yScaleTemp.domain([minTempY, maxTempY]);
-				yScaleTemp.domain([30, maxTempY]); // Temporary - Wrong Temperature Data
+				precipitationShown = [];
+				var precipitationShownSingle;
+				for (var i=0; i<findTicksArrayPrecipitation.length; i++) {
+					precipitationShownSingle = precipitationUsed[parseFloat(findTicksArrayPrecipitation[i])];
+					precipitationShown.push(precipitationShownSingle);			
+				}
+				pressureShown = [];
+				var pressureShownSingle;
+				for (var i=0; i<findTicksArrayPressure.length; i++) {
+					pressureShownSingle = pressureUsed[parseFloat(findTicksArrayPressure[i])];
+					pressureShown.push(pressureShownSingle);			
+				}
+
+				// Which and how many Y-Axes we need
+				findAxis();
+
+				// Remove the whole graph
+				d3.select("#d3GraphDiv").remove();
+				
+				// Update X range
+				xScale.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
+				
+				// Create again the svg
+				createSvg();
+				
+				// Create again the X axis
+				xAxisDraw();
+
+				// Update domains
+				minTempYArray = [];
+				maxTempYArray = [];
+				if (temperature_selection===true) {
+					for (var i=0; i<temperatureShown.length; i++) {
+						minTempYArray.push(d3.min(data, function(d) { return Math.min(d[temperatureShown[i][0]]); }) );
+						maxTempYArray.push(d3.max(data, function(d) { return Math.max(d[temperatureShown[i][0]]); }) );  
+					}
+					minTempY = d3.min(minTempYArray);
+					maxTempY = d3.max(maxTempYArray);
+					//yScaleTemp.domain([minTempY, maxTempY]);
+					yScaleTemp.domain([30, maxTempY]); // Temporary - Wrong Temperature Data
+				}
+				minPrecYArray = [];
+				maxPrecYArray = [];
+				if (precipitation_selection===true) {
+					for (var i=0; i<precipitationShown.length; i++) {
+						minPrecYArray.push(d3.min(data, function(d) { return Math.min(d[precipitationShown[i][0]]); }) );
+						maxPrecYArray.push(d3.max(data, function(d) { return Math.max(d[precipitationShown[i][0]]); }) );  
+					}
+					minPrecY = d3.min(minPrecYArray);
+					maxPrecY = d3.max(maxPrecYArray);
+					//yScalePrec.domain([minPrecY, maxPrecY])
+					yScalePrec.domain([0, maxPrecY]) // Temporary - Wrong Precipitation Data
+				}
+				minPressYArray = [];
+				maxPressYArray = [];
+				if (pressure_selection===true) {
+					for (var i=0; i<pressureShown.length; i++) {
+						minPressYArray.push(d3.min(data, function(d) { return Math.min(d[pressureShown[i][0]]); }) );
+						maxPressYArray.push(d3.max(data, function(d) { return Math.max(d[pressureShown[i][0]]); }) );  
+					}
+					minPressY = d3.min(minPressYArray);
+					maxPressY = d3.max(maxPressYArray);
+					//yScalePress.domain([minPressY, maxPressY])
+					yScalePress.domain([9800, maxPressY]) // Temporary - Wrong Pressure Data
+				}
 
 				// Redraw Y-Axes
-				if (temp_axis===true && prec_axis===false && press_axis===false) {
-					yAxisTempDraw(0);		
-				} else if (temp_axis===true && prec_axis===true && press_axis===false) {
-					yAxisTempDraw(0);
-					yAxisPrecDraw(1);
-				} else if (temp_axis===true && prec_axis===true && press_axis===true) {
-					yAxisTempDraw(0);
-					yAxisPrecDraw(1);
-					yAxisPressDraw(2);
-				} else if (temp_axis===true && prec_axis===false && press_axis===true){
-					yAxisTempDraw(0);
-					yAxisPressDraw(1);
-				} else if (temp_axis===false && prec_axis===true && press_axis===false) {
-					yAxisPrecDraw(0);
-				} else if (temp_axis===false && prec_axis===true && press_axis===true) {
-					yAxisPrecDraw(0);
-					yAxisPressDraw(1);
-				} else if (temp_axis===false && prec_axis===false && press_axis===true) {
-					yAxisPressDraw(0);
-				} else {}
-				
-				// Redraw Graphs
-				for (var i=0; i<findTicksArray.length; i++) {
-					var tick = parseInt(findTicksArray[i])-1;
-					graphsArray[tick]();
+				for (var i=0; i<yAxisArray.length; i++) {
+					yAxisDraw(yAxisArray[i][0], yAxisArray[i][1], yAxisArray[i][2], i);
 				}
 				
 				// Add again CSS for the axes
 				addCss();
 				
+				// Redraw Graphs
+				for (var i=0; i<temperatureShown.length; i++) {
+					graphDraw(temperatureShown[i][0], yScaleTemp, temperatureShown[i][1]);
+				}
+				for (var i=0; i<precipitationShown.length; i++) {
+					graphDraw(precipitationShown[i][0], yScalePrec, precipitationShown[i][1]);
+				}
+				for (var i=0; i<pressureShown.length; i++) {
+					graphDraw(pressureShown[i][0], yScalePress, pressureShown[i][1]);
+				}
+				
 				// Call hover function
 				hover();
 			}	
+			// *** Redraw the Graph - END *** 
 			
-			$("#checkbox1").click(function() {
+			// Click checkbox
+			$("#ccis-weather-d3-block :checkbox").click(function() {
+				// Maximum checkboxes checked: 4
+				var maxChecked = $("#ccis-weather-d3-block :checkbox:checked").length >= 4; 
+				$("#ccis-weather-d3-block :checkbox").not(":checked").attr("disabled",maxChecked);
+				// Redraw the graph
 				redrawGraph();
 			});
-			$("#checkbox2").click(function() {
+			
+			// Maximise-minimize Window	
+			$(".portlet-maximize").click(function(){
+				// Get new width
+				widthDiv = $("#ccis-weather-d3-block").width();
+				width = widthDiv - margin.left - margin.right;
+				// Redraw graph
 				redrawGraph();
-			});  
-			$("#checkbox3").click(function() {
-				redrawGraph();
-			});		
-			$("#checkbox4").click(function() {
-				redrawGraph();
-			});			
-			$("#checkbox5").click(function() {
-				redrawGraph();
-			});	
+			});
 			
 			// *** Hover function - START ***
 			function hover() {
@@ -493,21 +551,20 @@ Drupal.behaviors.ccis = {
 					var bisect = d3.bisector(function(d) { return d.date; }).left;
 					var item = data[bisect(data, xValue)];
 					
-					// Which colors to use in the tooltip
-					function findColor(i) {
-						for (var k=0; k<arrayColors.length; k++) {
-							if (arrayNames[i][0]===arrayColors[k][0]) {
-								return arrayColors[k][1];
-							}
-						}
-					}
-					
 					if (item) {
 						var tooltipText="";
 						tooltipText="Date: <b>"+item.date.toDateString()+"</b>";
-						for (var i=0; i<arrayNames.length; i++) {
+						for (var i=0; i<temperatureShown.length; i++) {
 							tooltipText += "<br><div id='tooltipBox"+i+
-							"' style='height:10px; width:10px; outline:solid 1px black; background-color:"+findColor(i)+"; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div>"+arrayNames[i][1]+": "+item[arrayNames[i][0]].toFixed(1);
+							"' style='height:10px; width:10px; outline:solid 1px black; background-color:"+temperatureShown[i][1]+"; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div>"+temperatureShown[i][2]+": "+item[temperatureShown[i][0]].toFixed(1);
+						}
+						for (var i=0; i<precipitationShown.length; i++) {
+							tooltipText += "<br><div id='tooltipBox"+i+
+							"' style='height:10px; width:10px; outline:solid 1px black; background-color:"+precipitationShown[i][1]+"; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div>"+precipitationShown[i][2]+": "+item[precipitationShown[i][0]].toFixed(1);
+						}
+						for (var i=0; i<pressureShown.length; i++) {
+							tooltipText += "<br><div id='tooltipBox"+i+
+							"' style='height:10px; width:10px; outline:solid 1px black; background-color:"+pressureShown[i][1]+"; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div>"+pressureShown[i][2]+": "+item[pressureShown[i][0]].toFixed(1);
 						}
 	
 						// Create tooltip
@@ -536,7 +593,7 @@ Drupal.behaviors.ccis = {
 			hover();
 				
 			// *** Print functions - START ***
-			$("#ccis-weather-d3-block").append("<br/><button id='printPreviewId' class='buttonId'>Print Preview</button>");
+			$("#ccis-weather-d3-block").append("<br/><br/><button id='printPreviewId' class='buttonId'>Print Preview</button>");
 			
 			// CSS for the Buttons (initial window)
 			$(".buttonId")
@@ -570,20 +627,17 @@ Drupal.behaviors.ccis = {
 					
 					// Get the name of the Station
 					var stationName = document.getElementById("ccis-station-info-block").getElementsByClassName("views-field views-field-title")[0].children[0].innerHTML;
-					
-					// Colors for the Print Page Keys
-					function findColor2(i) {
-						for (var k=0; k<arrayColors.length; k++) {
-							if (arrayNames[i][0]===arrayColors[k][0]) {
-								return arrayColors[k][1];
-							}
-						}
-					}
+
 					var printKeys = "";
-					for (var i=0; i<arrayNames.length; i++) {
-						// Background-color is not printed by default
-						printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+findColor2(i)+"; border-bottom: 5px solid "+findColor2(i)+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+arrayNames[i][1]+"</span>";
+					for (var i=0; i<temperatureShown.length; i++) {
+						printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+temperatureShown[i][1]+"; border-bottom: 5px solid "+temperatureShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+temperatureShown[i][2]+"</span>";
 					}
+					for (var i=0; i<precipitationShown.length; i++) {
+						printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+precipitationShown[i][1]+"; border-bottom: 5px solid "+precipitationShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+precipitationShown[i][2]+"</span>";
+}
+					for (var i=0; i<pressureShown.length; i++) {
+						printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+pressureShown[i][1]+"; border-bottom: 5px solid "+pressureShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+pressureShown[i][2]+"</span>";
+}
 					newWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys+"<br/><br/><button id='printButton' class='buttonId'>Print</button>  <button id='closePreviewWindow' class='buttonId'>Close Window</button>";
 					
 					// CSS for the Buttons (new window)
