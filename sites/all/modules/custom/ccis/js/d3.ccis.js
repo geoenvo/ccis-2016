@@ -167,16 +167,25 @@ Drupal.behaviors.ccis = {
 	  			.domain(d3.extent(data, function(d) { return d.date; }))
 	  			.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
 			
+			// Color of DIV
+			$("#ccis-weather-d3-block").css("background-color", "#F4F4F4");
+			
 			//Create SVG element
 			function createSvg() {
 				$("#ccis-weather-d3-block").prepend("<div id='d3GraphDiv'></div>");	
 				svg = d3.select("#d3GraphDiv")
 					.style("position", "relative")
 					.append("svg")
+					.attr("class", "svgElement")
 					.attr("width", (width + (margin.left_single)*axis_sum + margin.right))
 					.attr("height", height + margin.top + margin.bottom)
 					.append("g")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");
+				
+				// Color & border of SVG
+				$(".svgElement")
+					.css("background-color", "#F5EBE6")
+					.css("outline", "solid 1px #D1D1FF");
 			}
 			createSvg();
 		  
@@ -186,6 +195,7 @@ Drupal.behaviors.ccis = {
 				var graphObj = {};
 				
 				graphObj[graphType] = d3.svg.line()
+					.interpolate("linear")
 					.x(function(d){return xScale(d.date)})
 					.y(function(d){return yscaleType(d[graphType])});
 	 
@@ -211,6 +221,22 @@ Drupal.behaviors.ccis = {
 			// Draw Y Axis
 			function yAxisDraw(axisType, scaleType, label, axisPosition) {
 				var yAxisObj = {};
+				
+				// Grid only for the first y axis
+				if (axisPosition === 0) {
+					var yGrid = -(width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection));
+					yAxisObj["grid"] = d3.svg.axis()
+						.scale(scaleType)
+						.orient("left")
+						.tickSize(yGrid, 0, 0)
+						.tickFormat("")
+						.ticks(5);
+					svg.append("g")
+						.attr("class", "yGrid")
+						.attr("transform", "translate("+(axisPosition*(-margin.left_single))+",0)")
+						.call(yAxisObj["grid"]);
+				}
+
 				yAxisObj[axisType] = d3.svg.axis()
 					.scale(scaleType)
 					.orient("left")
@@ -249,17 +275,21 @@ Drupal.behaviors.ccis = {
 			xAxisDraw();
 		  
 			// Add CSS to the axes
-			function addCss() {
+			function addCss() {	
+				$(".yGrid")
+					.css("stroke", "#D1D1FF")
+					.css("shape-rendering", "crispEdges");
+				
 				$(".yAxisClass path, .yAxisClass line, .xAxisLine path, .xAxisLine line")
-				  .css("fill", "none")
-				  .css("stroke", "#000")
-				  .css("shape-rendering", "crispEdges");
+					.css("fill", "none")
+					.css("stroke", "#000")
+					.css("shape-rendering", "crispEdges");
 			}
 			addCss();
-	
+
 			// Create DIVs for the keys
 			if (temperatureUsed.length>0) {
-				$("#ccis-weather-d3-block").append("<div id='temperatureToggle'><b><span id='tempMinus'>[-]</span> Temperature</b></div>");
+				$("#ccis-weather-d3-block").append("<div id='temperatureToggle'><b><span id='tempMinus' class='minus'>[-]</span> Temperature</b></div>");
 				$("#ccis-weather-d3-block").append("<div id='keysDivTemperature'></div>");
 				for (var i=0; i<temperatureUsed.length; i++) {
 					function findTempChecked() {
@@ -279,7 +309,7 @@ Drupal.behaviors.ccis = {
 				}		
 			}
 			if (precipitationUsed.length>0) {
-				$("#ccis-weather-d3-block").append("<div id='precipitationToggle'><b><span id='precMinus'>[-]</span> Precipitation</b></div>");
+				$("#ccis-weather-d3-block").append("<div id='precipitationToggle'><b><span id='precMinus' class='minus'>[-]</span> Precipitation</b></div>");
 				$("#ccis-weather-d3-block").append("<div id='keysDivPrecipitation'></div>");
 				for (var i=0; i<precipitationUsed.length; i++) {
 					function findPrecChecked() {
@@ -299,7 +329,7 @@ Drupal.behaviors.ccis = {
 				}
 			}
 			if (pressureUsed.length>0) {
-				$("#ccis-weather-d3-block").append("<div id='pressureToggle'><b><span id='pressMinus'>[-]</span> Pressure</b></div>");	
+				$("#ccis-weather-d3-block").append("<div id='pressureToggle'><b><span id='pressMinus' class='minus'>[-]</span> Pressure</b></div>");	
 				$("#ccis-weather-d3-block").append("<div id='keysDivPressure'></div>");
 				for (var i=0; i<pressureUsed.length; i++) {
 					function findPressChecked() {
@@ -329,11 +359,18 @@ Drupal.behaviors.ccis = {
 			  	.css("margin-right", "5px")
 			  	.css("margin-top", "5px");
 			
-			// Maximum checkboxes checked: 4
+			// Maximum checkboxes checked: 4 / Minimum: 1
 			var maxChecked = $("#ccis-weather-d3-block :checkbox:checked").length >= 4; 
 			$("#ccis-weather-d3-block :checkbox").not(":checked").attr("disabled",maxChecked);
+			var minChecked = $("#ccis-weather-d3-block :checkbox:checked").length <= 1;
+			$("#ccis-weather-d3-block :checkbox:checked").attr("disabled",minChecked);
 			$("#keysDivTemperature").show();
-					
+			
+			// Change cursor on hover
+			$(".minus").hover(function() {
+				$(this).css("cursor","pointer");
+			});
+			
 			// Collapse
 			$("#tempMinus").click(function() {
 				$("#keysDivTemperature").toggle();
@@ -411,9 +448,6 @@ Drupal.behaviors.ccis = {
 				// Create again the svg
 				createSvg();
 				
-				// Create again the X axis
-				xAxisDraw();
-
 				// Update domains
 				minTempYArray = [];
 				maxTempYArray = [];
@@ -457,6 +491,9 @@ Drupal.behaviors.ccis = {
 					yAxisDraw(yAxisArray[i][0], yAxisArray[i][1], yAxisArray[i][2], i);
 				}
 				
+				// Redraw X axis
+				xAxisDraw();
+				
 				// Add again CSS for the axes
 				addCss();
 				
@@ -478,10 +515,12 @@ Drupal.behaviors.ccis = {
 			
 			// Click checkbox
 			$("#ccis-weather-d3-block :checkbox").click(function() {
-				// Maximum checkboxes checked: 4
+				// Maximum checkboxes checked: 4 / Minimum: 1
 				var maxChecked = $("#ccis-weather-d3-block :checkbox:checked").length >= 4; 
 				$("#ccis-weather-d3-block :checkbox").not(":checked").attr("disabled",maxChecked);
-				// Redraw the graph
+				var minChecked = $("#ccis-weather-d3-block :checkbox:checked").length <= 1;
+				$("#ccis-weather-d3-block :checkbox:checked").attr("disabled",minChecked);
+				// Redraw graph
 				redrawGraph();
 			});
 			
@@ -553,7 +592,7 @@ Drupal.behaviors.ccis = {
 					
 					if (item) {
 						var tooltipText="";
-						tooltipText="Date: <b>"+item.date.toDateString()+"</b>";
+						tooltipText="&nbsp;Date: <b>"+item.date.toDateString()+"</b>";
 						for (var i=0; i<temperatureShown.length; i++) {
 							tooltipText += "<br><div id='tooltipBox"+i+
 							"' style='height:10px; width:10px; outline:solid 1px black; background-color:"+temperatureShown[i][1]+"; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div>"+temperatureShown[i][2]+": "+item[temperatureShown[i][0]].toFixed(1);
@@ -569,18 +608,22 @@ Drupal.behaviors.ccis = {
 	
 						// Create tooltip
 						$("#d3GraphDiv").append("<div id='tooltip'</div>");				
-						d3.select("#tooltip")
+						d3.select("#tooltip")						
 							.style("position", "absolute")
 							.style("left", (mouseX-x+5)+"px")
 							.style("top", (height/2)+"px")
 							.style("width", "210px")
 							.style("height", "auto")
+							.style("border-radius", "8px 8px 8px 8px")				
 							.style("background-color", "white")
-							.style("border", "solid 1px black")
+							.style("border", "solid 1px #D1D1FF")		
+							.style("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+							.style("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+							.style("box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")			
 							.style("font-size","11px")
 							.style("font-family", "Arial")
 							.html(tooltipText);
-	
+
 						// Change direction of tooltip
 						if (mouseX+($("#tooltip").width()) > x+widthDiv-margin.right) {
 							d3.select("#tooltip")
@@ -621,9 +664,12 @@ Drupal.behaviors.ccis = {
 				
 				$(newWindow).ready(function(){
 			
-					// Get the Diagram
-					var html = d3.select("svg")
-				        .node().parentNode.innerHTML;
+					// Clone Diagram
+					var clone = $("#d3GraphDiv").clone();
+					// Remove background color and border
+					clone[0].firstChild.setAttribute("style", "background-color: ; outline: ;");
+					// Get html
+					var html = clone.html();
 					
 					// Get the name of the Station
 					var stationName = document.getElementById("ccis-station-info-block").getElementsByClassName("views-field views-field-title")[0].children[0].innerHTML;
