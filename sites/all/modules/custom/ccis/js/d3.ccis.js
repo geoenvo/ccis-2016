@@ -9,10 +9,11 @@ Drupal.behaviors.ccis = {
 	//var csvFilesystemYear = csvFilesystemBase + '/FILENAME.csv';
 	// Coding d3.time.format("%d-%b-%y").parse; ...
 	
-	var margin = {top: 20, right: 10, bottom: 25, left: 165, left_single: 55};
+	// *** Variables - START ***
+	var margin = {top: 20, right: 10, bottom: 25, left: 135, left_single: 45};
 	var widthDiv = $("#ccis-weather-d3-block").width();
 	var width = widthDiv - margin.left - margin.right;
-	var height = 250;
+	var height = width/2;
 	var axis_sum = 3;
 	var axis_selection;
 	var svg;
@@ -24,10 +25,10 @@ Drupal.behaviors.ccis = {
    	    ["avg_max_temp", "red", "Average max temperature"]
    	];
    	var precipitation = [
-   	    ["avg_prec", "blue", "Average precipitation amount"]
+   	    ["avg_prec", "#2c4563", "Average precipitation amount"]
    	];
    	var pressure = [
-   	    ["avg_press", "orchid", "Average sea level pressure"]
+   	    ["avg_press", "#33CCFF", "Average sea level pressure"]
    	];
    	
    	// Parameters parsed for the specific user
@@ -46,6 +47,10 @@ Drupal.behaviors.ccis = {
 	var temperature_selection;
 	var precipitation_selection;
 	var pressure_selection;
+	var temperatureHidden;
+	var precipitationHidden;
+	var pressureHidden;
+	// *** Variables - END ***
 	
 	// Parse the JSON
 	d3.json(settings.ccis.stations[0].path, function(json) {
@@ -125,16 +130,13 @@ Drupal.behaviors.ccis = {
 			
 			// Y Scales
 			var yScaleTemp = d3.scale.linear()
-				//.domain([minTempY, maxTempY])
-				.domain([30, maxTempY])	// Temporary - Wrong Temperature Data
+				.domain([minTempY, maxTempY])
 				.range([height, 0]);
 			var yScalePrec = d3.scale.linear()
-				//.domain([minPrecY, maxPrecY])
-				.domain([0, maxPrecY]) // Temporary - Wrong Precipitation Data
+				.domain([minPrecY, maxPrecY])
 				.range([height, 0]);
 			var yScalePress = d3.scale.linear()
-				//.domain([minPressY, maxPressY])
-				.domain([9800, maxPressY]) // Temporary - Wrong Pressure Data
+				.domain([minPressY, maxPressY])
 				.range([height, 0]);
 			
 			// Which and how many Y-Axes we need
@@ -204,16 +206,34 @@ Drupal.behaviors.ccis = {
 				  	.attr("id", "path"+graphType+"ID")
 					.attr("d", graphObj[graphType](data))
 					.attr("stroke", color)
-					.attr("stroke-width", "1")
+					.attr("stroke-width", "2")
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");		  
+			}
+			
+			// Precipitation Area Fill
+			function precAreaFill() {
+				var	area = d3.svg.area()
+					.interpolate("linear")
+				    .x(function(d) { return xScale(d.date); })
+				    .y0(height)
+				    .y1(function(d) { return yScalePrec(d.avg_prec); });
+				 svg.append("path")
+			        .datum(data)
+			        .attr("fill", "#2c4563")
+			        .attr("d", area);
+			}
+			
+			// Call Draw functions
+			if (precipitationShown.length>0) {
+				precAreaFill();
 			}
 			for (var i=0; i<temperatureShown.length; i++) {
 				graphDraw(temperatureShown[i][0], yScaleTemp, temperatureShown[i][1]);
 			}
-			for (var i=0; i<precipitationShown.length; i++) {
+			/*for (var i=0; i<precipitationShown.length; i++) {
 				graphDraw(precipitationShown[i][0], yScalePrec, precipitationShown[i][1]);
-			}
+			}*/
 			for (var i=0; i<pressureShown.length; i++) {
 				graphDraw(pressureShown[i][0], yScalePress, pressureShown[i][1]);
 			}
@@ -221,6 +241,19 @@ Drupal.behaviors.ccis = {
 			// Draw Y Axis
 			function yAxisDraw(axisType, scaleType, label, axisPosition) {
 				var yAxisObj = {};
+				var yAxisLabel;
+				var yAxisLabelOffset;
+				if (axisType==="yAxisTemp") {
+					yAxisLabel = "&#8451;" // Celsius
+					yAxisLabelOffset = -25;
+				} else if (axisType==="yAxisPrec") {
+					yAxisLabel = "mm"
+					yAxisLabelOffset = -35;
+				} else if (axisType==="yAxisPress") {
+					yAxisLabel = "hPa"
+					yAxisLabelOffset = -35;
+				}
+				
 				
 				// Grid only for the first y axis
 				if (axisPosition === 0) {
@@ -240,6 +273,7 @@ Drupal.behaviors.ccis = {
 				yAxisObj[axisType] = d3.svg.axis()
 					.scale(scaleType)
 					.orient("left")
+					.tickFormat(d3.format('.0f'))
 					.ticks(5);
 				svg.append("g")
 					.attr("id", axisType+"id")
@@ -250,11 +284,13 @@ Drupal.behaviors.ccis = {
 					.call(yAxisObj[axisType]);
 				d3.select("#"+axisType+"id")
 					.append("text")
-					.text(label)
+					//.text(label)
+					.html(yAxisLabel)
 					.style("font-size","12px")
 					.style("font-family", "Arial")
-					.attr("transform", "rotate (-90 ,90,125)");
+					.attr("transform", "translate ("+yAxisLabelOffset+")");
 			}
+			
 			for (var i=0; i<yAxisArray.length; i++) {
 				yAxisDraw(yAxisArray[i][0], yAxisArray[i][1], yAxisArray[i][2], i);
 			}
@@ -271,7 +307,7 @@ Drupal.behaviors.ccis = {
 					.style("font-size","10px")
 					.attr("transform", "translate(0," + height + ")")
 					.call(xAxis);
-			}
+			}	
 			xAxisDraw();
 		  
 			// Add CSS to the axes
@@ -289,7 +325,7 @@ Drupal.behaviors.ccis = {
 
 			// Create DIVs for the keys
 			if (temperatureUsed.length>0) {
-				$("#ccis-weather-d3-block").append("<div id='temperatureToggle'><b><span id='tempMinus' class='minus'>[-]</span> Temperature</b></div>");
+				$("#ccis-weather-d3-block").append("<div id='temperatureToggle' class='toggleClass'><b><span id='tempMinus' class='minus'>[-]</span> Temperature</b></div>");
 				$("#ccis-weather-d3-block").append("<div id='keysDivTemperature'></div>");
 				for (var i=0; i<temperatureUsed.length; i++) {
 					function findTempChecked() {
@@ -301,7 +337,7 @@ Drupal.behaviors.ccis = {
 					}
 					$("#keysDivTemperature").append("<div id='keysTemperature"+i+"'></div>");
 					$("#keysTemperature"+i).css("margin-left", "10px");
-					$("#keysTemperature"+i).append("<div id='keysTemperatureTick"+i+"' style='float:left'><input id='checkboxTemperature"+i+"' type='checkbox' value='"+i+"' "+findTempChecked()+"></div>");
+					$("#keysTemperature"+i).append("<div id='keysTemperatureTick"+i+"' style='clear:both; float:left;'><input id='checkboxTemperature"+i+"' type='checkbox' value='"+i+"' "+findTempChecked()+"></div>");
 					$("#keysTemperature"+i).append("<div id='keysTemperatureBox"+i+"' class='keysBox'></div>");
 					$("#keysTemperatureBox"+i).css("background-color", temperatureUsed[i][1]);
 					$("#keysTemperature"+i).append("<div id='keysTemperatureText"+i+"'></div>");
@@ -309,7 +345,7 @@ Drupal.behaviors.ccis = {
 				}		
 			}
 			if (precipitationUsed.length>0) {
-				$("#ccis-weather-d3-block").append("<div id='precipitationToggle'><b><span id='precMinus' class='minus'>[-]</span> Precipitation</b></div>");
+				$("#ccis-weather-d3-block").append("<div id='precipitationToggle' class='toggleClass'><b><span id='precMinus' class='minus'>[-]</span> Precipitation</b></div>");
 				$("#ccis-weather-d3-block").append("<div id='keysDivPrecipitation'></div>");
 				for (var i=0; i<precipitationUsed.length; i++) {
 					function findPrecChecked() {
@@ -321,7 +357,7 @@ Drupal.behaviors.ccis = {
 					}
 					$("#keysDivPrecipitation").append("<div id='keysPrecipitation"+i+"'></div>");
 					$("#keysPrecipitation"+i).css("margin-left", "10px");
-					$("#keysPrecipitation"+i).append("<div id='keysPrecipitationTick"+i+"' style='float:left'><input id='checkboxPrecipitation"+i+"' type='checkbox' value='"+i+"' "+findPrecChecked()+"></div>");
+					$("#keysPrecipitation"+i).append("<div id='keysPrecipitationTick"+i+"' style='clear:both; float:left;'><input id='checkboxPrecipitation"+i+"' type='checkbox' value='"+i+"' "+findPrecChecked()+"></div>");
 					$("#keysPrecipitation"+i).append("<div id='keysPrecipitationBox"+i+"' class='keysBox'></div>");
 					$("#keysPrecipitationBox"+i).css("background-color", precipitationUsed[i][1]);
 					$("#keysPrecipitation"+i).append("<div id='keysPrecipitationText"+i+"'></div>");
@@ -329,7 +365,7 @@ Drupal.behaviors.ccis = {
 				}
 			}
 			if (pressureUsed.length>0) {
-				$("#ccis-weather-d3-block").append("<div id='pressureToggle'><b><span id='pressMinus' class='minus'>[-]</span> Pressure</b></div>");	
+				$("#ccis-weather-d3-block").append("<div id='pressureToggle' class='toggleClass'><b><span id='pressMinus' class='minus'>[-]</span> Pressure</b></div>");
 				$("#ccis-weather-d3-block").append("<div id='keysDivPressure'></div>");
 				for (var i=0; i<pressureUsed.length; i++) {
 					function findPressChecked() {
@@ -341,7 +377,7 @@ Drupal.behaviors.ccis = {
 					}
 					$("#keysDivPressure").append("<div id='keysPressure"+i+"'></div>");
 					$("#keysPressure"+i).css("margin-left", "10px");
-					$("#keysPressure"+i).append("<div id='keysPressureTick"+i+"' style='float:left'><input id='checkboxPressure"+i+"' type='checkbox' value='"+i+"' "+findPressChecked()+"></div>");
+					$("#keysPressure"+i).append("<div id='keysPressureTick"+i+"' style='clear:both; float:left;'><input id='checkboxPressure"+i+"' type='checkbox' value='"+i+"' "+findPressChecked()+"></div>");
 					$("#keysPressure"+i).append("<div id='keysPressureBox"+i+"' class='keysBox'></div>");
 					$("#keysPressureBox"+i).css("background-color", pressureUsed[i][1]);
 					$("#keysPressure"+i).append("<div id='keysPressureText"+i+"'></div>");
@@ -359,13 +395,15 @@ Drupal.behaviors.ccis = {
 			  	.css("margin-right", "5px")
 			  	.css("margin-top", "5px");
 			
+			$(".toggleClass")
+				.css("clear", "both");		 
+			
 			// Maximum checkboxes checked: 4 / Minimum: 1
 			var maxChecked = $("#ccis-weather-d3-block :checkbox:checked").length >= 4; 
 			$("#ccis-weather-d3-block :checkbox").not(":checked").attr("disabled",maxChecked);
 			var minChecked = $("#ccis-weather-d3-block :checkbox:checked").length <= 1;
 			$("#ccis-weather-d3-block :checkbox:checked").attr("disabled",minChecked);
-			$("#keysDivTemperature").show();
-			
+								
 			// Change cursor on hover
 			$(".minus").hover(function() {
 				$(this).css("cursor","pointer");
@@ -373,25 +411,63 @@ Drupal.behaviors.ccis = {
 			
 			// Collapse
 			$("#tempMinus").click(function() {
-				$("#keysDivTemperature").toggle();
+				for (var i=0; i<temperatureUsed.length; i++) {
+					$("#keysTemperature"+i).toggle();
+				} 
 			}).toggle(function() {
+				temperatureHidden=true;
 				$(this).html("[+]");
+				for (var i=0; i<temperatureUsed.length; i++) {
+					if ($("#checkboxTemperature"+i).is(":checked")) {
+						$("#keysTemperature"+i).css("display", "");
+					}	
+				}
 			}, function() {
+				temperatureHidden=false;
 				$(this).html("[-]");
+				for (var i=0; i<temperatureUsed.length; i++) {			
+					$("#keysTemperature"+i).css("display", "");
+				}
 			});
+			
 			$("#precMinus").click(function() {
-				$("#keysDivPrecipitation").toggle();
+				for (var i=0; i<precipitationUsed.length; i++) {
+					$("#keysPrecipitation"+i).toggle();
+				}
 			}).toggle(function() {
+				precipitationHidden=true;
 				$(this).html("[+]");
+				for (var i=0; i<precipitationUsed.length; i++) {
+					if ($("#checkboxPrecipitation"+i).is(":checked")) {
+						$("#keysPrecipitation"+i).css("display", "");
+					}	
+				}
 			}, function() {
+				precipitationHidden=false;
 				$(this).html("[-]");
+				for (var i=0; i<precipitationUsed.length; i++) {			
+					$("#keysPrecipitation"+i).css("display", "");
+				}
 			});
+			
 			$("#pressMinus").click(function() {
-				$("#keysDivPressure").toggle();
+				for (var i=0; i<pressureUsed.length; i++) {
+					$("#keysPressure"+i).toggle();
+				}
 			}).toggle(function() {
+				pressureHidden=true;
 				$(this).html("[+]");
+				for (var i=0; i<pressureUsed.length; i++) {
+					if ($("#checkboxPressure"+i).is(":checked")) {
+						$("#keysPressure"+i).css("display", "");
+					}	
+				}
 			}, function() {
+				pressureHidden=false;
 				$(this).html("[-]");
+				for (var i=0; i<pressureUsed.length; i++) {			
+					$("#keysPressure"+i).css("display", "");
+				}
 			});
 			
 			// *** Redraw the Graph - START ***
@@ -445,6 +521,11 @@ Drupal.behaviors.ccis = {
 				// Update X range
 				xScale.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
 				
+				// Update Y range
+				yScaleTemp.range([height, 0]);
+				yScalePrec.range([height, 0]);
+				yScalePress.range([height, 0]);
+				
 				// Create again the svg
 				createSvg();
 				
@@ -458,8 +539,7 @@ Drupal.behaviors.ccis = {
 					}
 					minTempY = d3.min(minTempYArray);
 					maxTempY = d3.max(maxTempYArray);
-					//yScaleTemp.domain([minTempY, maxTempY]);
-					yScaleTemp.domain([30, maxTempY]); // Temporary - Wrong Temperature Data
+					yScaleTemp.domain([minTempY, maxTempY]);
 				}
 				minPrecYArray = [];
 				maxPrecYArray = [];
@@ -470,8 +550,7 @@ Drupal.behaviors.ccis = {
 					}
 					minPrecY = d3.min(minPrecYArray);
 					maxPrecY = d3.max(maxPrecYArray);
-					//yScalePrec.domain([minPrecY, maxPrecY])
-					yScalePrec.domain([0, maxPrecY]) // Temporary - Wrong Precipitation Data
+					yScalePrec.domain([minPrecY, maxPrecY])
 				}
 				minPressYArray = [];
 				maxPressYArray = [];
@@ -482,10 +561,23 @@ Drupal.behaviors.ccis = {
 					}
 					minPressY = d3.min(minPressYArray);
 					maxPressY = d3.max(maxPressYArray);
-					//yScalePress.domain([minPressY, maxPressY])
-					yScalePress.domain([9800, maxPressY]) // Temporary - Wrong Pressure Data
+					yScalePress.domain([minPressY, maxPressY])
 				}
-
+				
+				// Redraw Graphs
+				if (precipitationShown.length>0) {
+					precAreaFill();
+				}
+				for (var i=0; i<temperatureShown.length; i++) {
+					graphDraw(temperatureShown[i][0], yScaleTemp, temperatureShown[i][1]);
+				}
+				/*for (var i=0; i<precipitationShown.length; i++) {
+					graphDraw(precipitationShown[i][0], yScalePrec, precipitationShown[i][1]);
+				}*/
+				for (var i=0; i<pressureShown.length; i++) {
+					graphDraw(pressureShown[i][0], yScalePress, pressureShown[i][1]);
+				}
+				
 				// Redraw Y-Axes
 				for (var i=0; i<yAxisArray.length; i++) {
 					yAxisDraw(yAxisArray[i][0], yAxisArray[i][1], yAxisArray[i][2], i);
@@ -496,17 +588,6 @@ Drupal.behaviors.ccis = {
 				
 				// Add again CSS for the axes
 				addCss();
-				
-				// Redraw Graphs
-				for (var i=0; i<temperatureShown.length; i++) {
-					graphDraw(temperatureShown[i][0], yScaleTemp, temperatureShown[i][1]);
-				}
-				for (var i=0; i<precipitationShown.length; i++) {
-					graphDraw(precipitationShown[i][0], yScalePrec, precipitationShown[i][1]);
-				}
-				for (var i=0; i<pressureShown.length; i++) {
-					graphDraw(pressureShown[i][0], yScalePress, pressureShown[i][1]);
-				}
 				
 				// Call hover function
 				hover();
@@ -520,15 +601,44 @@ Drupal.behaviors.ccis = {
 				$("#ccis-weather-d3-block :checkbox").not(":checked").attr("disabled",maxChecked);
 				var minChecked = $("#ccis-weather-d3-block :checkbox:checked").length <= 1;
 				$("#ccis-weather-d3-block :checkbox:checked").attr("disabled",minChecked);
+				if (temperatureHidden===true) {
+					for (var i=0; i<temperatureUsed.length; i++) {
+						if ($("#checkboxTemperature"+i).is(":checked")) {
+							$("#keysTemperature"+i).css("display", "");
+						} else {
+							$("#keysTemperature"+i).css("display", "none");
+						}
+					}
+				}
+				if (precipitationHidden===true) {
+					for (var i=0; i<precipitationUsed.length; i++) {
+						if ($("#checkboxPrecipitation"+i).is(":checked")) {
+							$("#keysPrecipitation"+i).css("display", "");
+						} else {
+							$("#keysPrecipitation"+i).css("display", "none");
+						}
+					}
+				}
+				if (pressureHidden===true) {
+					for (var i=0; i<pressureUsed.length; i++) {
+						if ($("#checkboxPressure"+i).is(":checked")) {
+							$("#keysPressure"+i).css("display", "");
+						} else {
+							$("#keysPressure"+i).css("display", "none");
+						}
+					}
+				}
+				
 				// Redraw graph
 				redrawGraph();
 			});
 			
-			// Maximise-minimize Window	
+			// Maximize-minimize Window	
 			$(".portlet-maximize").click(function(){
 				// Get new width
 				widthDiv = $("#ccis-weather-d3-block").width();
 				width = widthDiv - margin.left - margin.right;
+				height = width/2;
 				// Redraw graph
 				redrawGraph();
 			});
