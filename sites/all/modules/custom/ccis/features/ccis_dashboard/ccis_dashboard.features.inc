@@ -18,7 +18,7 @@ function ccis_dashboard_homebox() {
   $homeboxes = array();
 
   $homeboxes['weather_dashboard'] = array (
-    'regions' => 5,
+    'regions' => 3,
     'cache' => 1,
     'color' => 0,
     'colors' => 
@@ -32,6 +32,30 @@ function ccis_dashboard_homebox() {
     ),
     'blocks' => 
     array (
+      'ccis_stationinfo' => 
+      array (
+        'module' => 'ccis',
+        'delta' => 'stationinfo',
+        'region' => 1,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -11,
+      ),
+      'ccis_stationmap' => 
+      array (
+        'module' => 'ccis',
+        'delta' => 'stationmap',
+        'region' => 3,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -11,
+      ),
       'ccis_d3' => 
       array (
         'module' => 'ccis',
@@ -48,7 +72,7 @@ function ccis_dashboard_homebox() {
       array (
         'module' => 'ccis',
         'delta' => 'datatables',
-        'region' => 5,
+        'region' => 2,
         'movable' => 1,
         'status' => 1,
         'open' => 1,
@@ -60,7 +84,7 @@ function ccis_dashboard_homebox() {
       array (
         'module' => 'ccis',
         'delta' => 'filter',
-        'region' => 3,
+        'region' => 1,
         'movable' => 1,
         'status' => 1,
         'open' => 1,
@@ -68,41 +92,15 @@ function ccis_dashboard_homebox() {
         'title' => '',
         'weight' => -11,
       ),
-      'ccis_stationinfo' => 
-      array (
-        'module' => 'ccis',
-        'delta' => 'stationinfo',
-        'region' => 1,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -13,
-      ),
-      'ccis_stationmap' => 
-      array (
-        'module' => 'ccis',
-        'delta' => 'stationmap',
-        'region' => 4,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -13,
-      ),
     ),
     'widths' => 
     array (
-      1 => 30,
-      2 => 70,
-      3 => 15,
-      4 => 15,
-      5 => 70,
+      1 => 25,
+      2 => 75,
+      3 => 100,
     ),
-    'title' => 'Weather',
-    'path' => 'start',
+    'title' => 'Dashboard',
+    'path' => 'dashboard',
     'menu' => 1,
     'enabled' => 1,
     'auto_save' => 1,
