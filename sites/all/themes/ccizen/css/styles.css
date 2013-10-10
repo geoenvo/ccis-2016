@@ -1,0 +1,135 @@
+/**
+ * @file
+ * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
+ *
+ * When you turn on CSS aggregation at admin/config/development/performance, all
+ * of these @include files will be combined into a single file.
+ */
+
+/* HTML element (SMACSS base) rules */
+@import "normalize.css";
+
+/* Layout rules */
+@import "layouts/fixed.css";
+
+/* Component (SMACSS module) rules */
+@import "components/misc.css";
+/* Optionally, add your own components here. */
+@import "print.css";
+
+/* SMACSS theme rules */
+/* @import "theme-A.css"; */
+/* @import "theme-B.css"; */
+
+/* To be transfered to SASS */
+
+/* fonts */
+
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Pathway+Gothic+One);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed);
+@import url(http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700);
+
+body {
+  font-family: 'Archivo Narrow', 'Arial Narrow', Arial, Helvetica, sans-serif;
+  }
+
+/* region + global box styling */
+
+body {
+  background-color: #f1f1f1;
+  }
+
+header,
+#navigation {
+  background-color: #e6e6e6;
+  }
+
+#logo {
+  margin: 10px;
+  }
+
+#navigation {
+  margin: 10px 30px;
+  }
+
+.box-default {
+  background-color: #cccccc;
+  }
+
+.box-contrast {
+  background-color: #2c4563;
+  }
+
+#page,
+#navigation,
+#homebox .homebox-portlet,
+.box-default,
+.box-contrast {
+  -moz-box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+  box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+  }
+
+
+
+/* homebox overrides */
+
+#homebox .homebox-column {
+  padding: 0;
+  }
+
+#homebox .homebox-portlet,
+#homebox .homebox-portlet .homebox-portlet-inner {
+  border-width: 0;
+  margin: 0;
+  }
+
+#homebox .homebox-portlet .portlet-header {
+  background: #e6e6e6;
+  border: 0 none;
+  color: #777777;
+  }
+
+#homebox .portlet-icon {
+  background-color: #fcce00;
+  }
+
+#homebox .homebox-column-wrapper-1 .homebox-portlet-inner {
+  background-color: #2c4563;
+  color: #f1f1f1;
+  }
+
+/* background images */
+
+h2.ocs {
+  background: url(img/headbg.png) no-repeat right top;
+  }
+
+
+/* navigation + menus */
+
+#navigation {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: .5em 0;
+  font-size: 1.5em;
+  line-height: 1em;
+  }
+
+#navigation li a {
+  padding: .25em 5px;
+  border-bottom: 4px solid transparent;
+  color: #000;
+  text-decoration: none;
+  }
+
+#navigation li.active a {
+  border-color: #fcce00;
+  background-color: #b3b3b3;
+  color: #54663c;
+  }
+
+
+
