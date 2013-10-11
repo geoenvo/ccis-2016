@@ -21,13 +21,13 @@
 /* @import "theme-A.css"; */
 /* @import "theme-B.css"; */
 
-/* To be transfered to SASS */
-
-/* fonts */
-
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 @import url(http://fonts.googleapis.com/css?family=Pathway+Gothic+One);
+
+/* font imports MUST remain first in file */
+
+/* CSS to be transfered to SASS */
 
 /* ------------- 
 COLORS
@@ -41,12 +41,15 @@ m'grey	#b3b3b3 (179,179,179)
 
 -------------- */
 
+
+
 body 
   {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   }
 h1, h2, h3, h4,
-#navigation
+#navigation,
+.events.teaser
   {
   font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
   }
@@ -56,7 +59,9 @@ label,
   font-family: 'Open Sans Condensed', 'Arial Narrow', sans-serif;
   }
 
-/* global text elements */
+
+
+/* +++++ Global text elements +++++ */
 
 a {
   color: #2c4563;
@@ -67,7 +72,22 @@ label {
   font-weight: normal;
   }
 
-/* region + global box styling */
+h2.block-title {
+  height: 48px;
+  background: url('../img/titel_background_left.png') no-repeat bottom left;
+  padding: 0 0 0 23px;
+  text-align: center;
+  clear: left;
+  }
+h2.block-title span {
+  display: block;
+  background: url('../img/titel_background_right.png') no-repeat bottom right;
+  padding: 0px 25px 0px 0;
+  }
+
+
+
+/* +++++ Region + global container styling +++++ */
 
 body {
   background-color: #f1f1f1;
@@ -77,6 +97,10 @@ header,
 #navigation {
   background-color: #e6e6e6;
   z-index: 10;
+  }
+
+#main {
+  background-color: #fff;
   }
 
 #logo {
@@ -139,14 +163,9 @@ header,
   color: #f1f1f1;
   }
 
-/* background images */
-
-h2.ocs {
-  background: url(img/headbg.png) no-repeat right top;
-  }
 
 
-/* navigation + menus */
+/* +++++ Navigation + menus +++++ */
 
 #navigation {
   width: 100%;
@@ -172,7 +191,27 @@ h2.ocs {
 
 
 
-/* slideshow */
+/* +++++ Various  +++++ */
+
+/* front page (maybe make more general?) */
+
+.front #main .block {
+  width: 33%;
+  float: left;
+  }
+.front #main .block-inner {
+  padding: 10px 20px 25px;
+  }
+
+
+
+/* +++++ Slideshow +++++ */
+
+/* reset .block-inner paddings */
+
+.front #main #block-views-slideshow-block .block-inner {
+  padding: 0;
+  }
 
 .slideshow {
   z-index: 30;
@@ -247,6 +286,57 @@ h2.ocs {
   background-color: #f15a24;
   }
 
+/* front page (maybe make more general?) */
+
+.front #main .block {
+  width: 33%;
+  float: left;
+  }
+.front #main .block-inner {
+  padding: 10px 10px 25px;
+  }
 
 /* events */
+
+.events.teaser .views-row {
+  clear: left;
+  border-bottom: 1px dotted #b3b3b3;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  }
+
+.evlogo {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin-right: 5px;
+  background: #fff;
+  }
+
+.evdate {
+  width: 100px;
+  margin-left: 105px; /* evlogo width + evlogo margin-right */
+  line-height: 100%;
+  text-align: center;
+  }
+.evdate.month {
+  font-size: 1.25em;
+  }
+.evdate.day {
+  font-size: 5.625em;
+  line-height: 80%;
+  color: #f15a24;
+  }
+.evdate.year {
+  font-size: 2.625em;
+  }
+
+.evplace {
+  display: block;
+  float: right;
+  width: 80px;
+  font-size: 1.25em;
+  margin: 0 0 0 0px;
+  color: #999999;
+  }
 
