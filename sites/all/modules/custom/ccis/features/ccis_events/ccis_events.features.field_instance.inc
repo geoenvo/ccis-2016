@@ -36,14 +36,15 @@ function ccis_events_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'label' => 'Description',
+    'required' => 1,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -83,7 +84,7 @@ function ccis_events_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_date',
     'label' => 'Date',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'default_value' => 'now',
       'default_value2' => 'same',
@@ -140,7 +141,7 @@ function ccis_events_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'alt_field' => 1,
-      'default_image' => 0,
+      'default_image' => 28,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -161,11 +162,52 @@ function ccis_events_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-event-field_location'
+  $field_instances['node-event-field_location'] = array(
+    'bundle' => 'event',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_location',
+    'label' => 'Location',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 4,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
-  t('Body');
   t('Date');
+  t('Description');
   t('Image');
+  t('Location');
 
   return $field_instances;
 }
