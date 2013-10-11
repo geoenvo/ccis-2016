@@ -47,6 +47,6 @@ features[variable][] = menu_parent_event
 features[variable][] = node_options_event
 features[variable][] = node_preview_event
 features[variable][] = node_submitted_event
-features[views_view][] = event_view
+features[views_view][] = events
 features_exclude[dependencies][ccis_ct_weather_data] = ccis_ct_weather_data
 project path = sites/all/modules/custom/ccis/features
