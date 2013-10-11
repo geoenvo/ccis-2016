@@ -42,21 +42,21 @@ function ccis_events_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_form_location_event';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['comment_form_location_event'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_event';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['comment_preview_event'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_subject_field_event';
-  $strongarm->value = 0;
+  $strongarm->value = 1;
   $export['comment_subject_field_event'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -90,7 +90,7 @@ function ccis_events_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
@@ -102,9 +102,7 @@ function ccis_events_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_event';
-  $strongarm->value = array(
-    0 => 'main-menu',
-  );
+  $strongarm->value = array();
   $export['menu_options_event'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -135,7 +133,7 @@ function ccis_events_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_event';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_event'] = $strongarm;
 
   return $export;

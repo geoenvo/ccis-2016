@@ -25,19 +25,46 @@
 
 /* fonts */
 
-@import url(http://fonts.googleapis.com/css?family=Titillium+Web:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 @import url(http://fonts.googleapis.com/css?family=Pathway+Gothic+One);
-@import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed);
-@import url(http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700);
 
-body {
-  font-family: 'Archivo Narrow', 'Arial Narrow', Arial, Helvetica, sans-serif;
+/* ------------- 
+COLORS
+yellow	#fcce00 (252,206,0)
+green	#54673c (84,103,60)
+blue	#2c4563 (44,69,99)
+orange	#f15a24 (241,90,36)
+beige	#c7b299 (199,179,153)
+l'grey	#e6e6e6 (230,230,230)
+m'grey	#b3b3b3 (179,179,179)
+
+-------------- */
+
+body 
+  {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  }
+h1, h2, h3, h4,
+#navigation
+  {
+  font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
+  }
+label,
+.slideshow p
+  {
+  font-family: 'Open Sans Condensed', 'Arial Narrow', sans-serif;
   }
 
 /* global text elements */
 
 a {
   color: #2c4563;
+  }
+
+h1, h2, h3, h4,
+label {
+  font-weight: normal;
   }
 
 /* region + global box styling */
@@ -49,7 +76,7 @@ body {
 header,
 #navigation {
   background-color: #e6e6e6;
-  z-index: 2;
+  z-index: 10;
   }
 
 #logo {
@@ -147,6 +174,10 @@ h2.ocs {
 
 /* slideshow */
 
+.slideshow {
+  z-index: 30;
+  }
+
 .front .view-slideshow {
   width: 960px;
   height: 245px;
@@ -157,24 +188,65 @@ h2.ocs {
   width: 33%;
   height: 225px;
   background-color: rgba(255,255,255,.5);
-  padding: 10px;
+  padding: 10px 10px 40px;
   color: #444;
+  z-index: 40;
+  font-size: 1.2em;
   }
 
-.view-slideshow h2 {
-  margin: 0;
+.slideshow h2 {
+  margin: .5em 0 0;
   line-height: 1em;
   }
-.view-slideshow h2 a {
+.slideshow h2 a {
+  margin-left: -10px;
+  padding: 0 30px 10px 10px;
   color: #444;
   text-decoration: none;
+  display: inline-block;
+  background: url('../img/stroke.png') repeat-x right bottom;
   }
 
-.view-slideshow p {
+.slideshow p {
   margin: 0 0 .5em;
   }
 
-.view-slideshow p.slshlink {
-  margin-top: -.5em;
+.slideshow p.slshlink {
+  margin-top: -0.5em;
   text-align: right;
   }
+.slshlink a {
+  text-decoration: none;
+  }
+
+.slideshow .widget_pager {
+  width: 33%;
+  height: 30px;
+  position: relative;
+  top: -45px;
+  z-index: 60;
+  margin: 0;
+  text-align: center;
+  }
+
+.views-slideshow-pager-field-item {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 2px 3px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  background-color: #2c4563;
+  z-index: 30;
+  color: transparent;
+  font-size: 5px;
+  line-height: 1px;
+  }
+.views_slideshow_active_pager_field_item {
+  background-color: #f15a24;
+  }
+
+
+/* events */
+
