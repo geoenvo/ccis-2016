@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Static Content feature.
+ */
+
+include_once 'ccis_static_content.features.inc';

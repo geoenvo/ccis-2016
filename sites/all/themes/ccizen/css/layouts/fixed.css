@@ -19,7 +19,7 @@
 .region-bottom {
   margin-left: auto;
   margin-right: auto;
-  width: 980px;
+  width: 960px;
 }
 
 /* Apply the shared properties of grid items in a single, efficient ruleset. */
