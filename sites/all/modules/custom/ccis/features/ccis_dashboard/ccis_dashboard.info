@@ -1,7 +1,7 @@
 name = CCIS Dashboard
 core = 7.x
 package = CCIS
-version = 7.x-1.0-alpha2
+version = 7.x-1.0-alpha3
 project = ccis_dashboard
 dependencies[] = ctools
 dependencies[] = homebox

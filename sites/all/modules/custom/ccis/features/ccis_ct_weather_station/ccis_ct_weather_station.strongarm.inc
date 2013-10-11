@@ -56,7 +56,7 @@ function ccis_ct_weather_station_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_weather_station';
-  $strongarm->value = '2';
+  $strongarm->value = '1';
   $export['comment_weather_station'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -95,7 +95,7 @@ function ccis_ct_weather_station_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_weather_station';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_weather_station'] = $strongarm;
 
   return $export;

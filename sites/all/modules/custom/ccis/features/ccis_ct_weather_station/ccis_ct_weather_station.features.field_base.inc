@@ -18,7 +18,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_address',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -82,7 +82,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_beginposition',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(),
     'indexes' => array(),
@@ -211,7 +211,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_ci_onlineresource',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -307,7 +307,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_city',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -339,7 +339,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_country',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -405,7 +405,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_datacodes',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -437,7 +437,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_dataquality',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -469,7 +469,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_dataseturi',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -501,7 +501,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_datatime',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -533,7 +533,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_dataunits',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -631,7 +631,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_datestamp',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(),
     'indexes' => array(),
@@ -696,7 +696,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_email',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -728,7 +728,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_endposition',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(),
     'indexes' => array(),
@@ -793,7 +793,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_fax',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -825,7 +825,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_fileidentifier',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -857,7 +857,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_instructions',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -889,7 +889,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_instrumentationtype',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -919,7 +919,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_itemsreplacement',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -983,7 +983,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_languagecode',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1015,7 +1015,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_md_charactersetcode',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1047,7 +1047,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_md_scopecode',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1079,7 +1079,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_mdmetadata',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1111,7 +1111,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_metadataconstraints',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1143,7 +1143,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_metadatamaintenance',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1175,7 +1175,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_metadatastandardname',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1207,7 +1207,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_metadatastandardversion',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1271,7 +1271,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_observedelements',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1301,7 +1301,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_observercorrections',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1333,7 +1333,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_observingtimes',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1429,7 +1429,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_phone',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1461,7 +1461,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_postcode',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1493,7 +1493,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_region',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1525,7 +1525,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_routinemaintenance',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1573,7 +1573,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationabstract',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1603,7 +1603,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationaccuracy',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1635,7 +1635,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationadditional',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'fid' => array(
@@ -1668,7 +1668,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationaddress',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1700,7 +1700,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationcity',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1764,7 +1764,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationcontact',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1796,7 +1796,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationcountry',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1892,7 +1892,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationemail',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1924,7 +1924,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationfax',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1956,7 +1956,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationlinks',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -1988,7 +1988,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationmaintenance',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -2020,7 +2020,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationphone',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -2052,7 +2052,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationpostcode',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -2084,7 +2084,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationprovince',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -2116,7 +2116,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationrelocation',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -2148,7 +2148,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_stationtopo',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -2241,7 +2241,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_traininglevel',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
@@ -2273,7 +2273,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_units',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'foreign keys' => array(
       'format' => array(
