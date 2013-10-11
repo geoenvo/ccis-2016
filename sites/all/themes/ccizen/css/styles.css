@@ -34,6 +34,12 @@ body {
   font-family: 'Archivo Narrow', 'Arial Narrow', Arial, Helvetica, sans-serif;
   }
 
+/* global text elements */
+
+a {
+  color: #2c4563;
+  }
+
 /* region + global box styling */
 
 body {
@@ -43,10 +49,16 @@ body {
 header,
 #navigation {
   background-color: #e6e6e6;
+  z-index: 2;
   }
 
 #logo {
   margin: 10px;
+  }
+
+.region-highlighted {
+  margin-left: -10px;
+  z-index: 1;
   }
 
 #navigation {
@@ -133,3 +145,36 @@ h2.ocs {
 
 
 
+/* slideshow */
+
+.front .view-slideshow {
+  width: 960px;
+  height: 245px;
+  overflow: hidden;
+  }
+
+.views-slideshow-xtra-overlay-row {
+  width: 33%;
+  height: 225px;
+  background-color: rgba(255,255,255,.5);
+  padding: 10px;
+  color: #444;
+  }
+
+.view-slideshow h2 {
+  margin: 0;
+  line-height: 1em;
+  }
+.view-slideshow h2 a {
+  color: #444;
+  text-decoration: none;
+  }
+
+.view-slideshow p {
+  margin: 0 0 .5em;
+  }
+
+.view-slideshow p.slshlink {
+  margin-top: -.5em;
+  text-align: right;
+  }
