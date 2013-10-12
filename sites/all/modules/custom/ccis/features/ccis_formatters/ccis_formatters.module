@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Formatters feature.
+ */
+
+include_once 'ccis_formatters.features.inc';
