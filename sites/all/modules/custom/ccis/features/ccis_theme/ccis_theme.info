@@ -1,0 +1,13 @@
+name = CCIS Theme
+description = provides settings for zen subtheme "ccizen"
+core = 7.x
+package = CCIS
+version = 7.x-1.0-alpha1
+project = ccis_theme
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = theme_ccizen_settings
+features[variable][] = theme_settings
+project path = sites/all/modules/custom/ccis/features

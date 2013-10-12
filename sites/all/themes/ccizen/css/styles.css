@@ -72,14 +72,16 @@ label {
   font-weight: normal;
   }
 
-h2.block-title {
+h1 {clear: both;}
+
+#main h2.block-title {
   height: 48px;
   background: url('../img/titel_background_left.png') no-repeat bottom left;
   padding: 0 0 0 23px;
   text-align: center;
   clear: left;
   }
-h2.block-title span {
+#main h2.block-title span {
   display: block;
   background: url('../img/titel_background_right.png') no-repeat bottom right;
   padding: 0px 25px 0px 0;
@@ -89,27 +91,42 @@ h2.block-title span {
 
 /* +++++ Region + global container styling +++++ */
 
+/* change zen's navbar concept to allow for header shadow */
+
+#main {padding-top: 0em; top: 0;}
+#navigation {top: -2em;}
+
 body {
   background-color: #f1f1f1;
   }
 
-header,
-#navigation {
+#page {
+  background-color: #fff;
+  z-index: 1;
+  }
+
+header {
+  padding-top: 10px;
+  padding-bottom: 4em;
   background-color: #e6e6e6;
-  z-index: 10;
+  z-index: 500!important;
+  }
+
+#navigation {
+  z-index: 520;
   }
 
 #main {
-  background-color: #fff;
+  z-index: 1 !important;
   }
 
 #logo {
-  margin: 10px;
+  margin: 0 20px 10px 0;
   }
 
 .region-highlighted {
   margin-left: -10px;
-  z-index: 1;
+  z-index: 2;
   }
 
 #navigation {
@@ -124,16 +141,23 @@ header,
   background-color: #2c4563;
   }
 
-#page,
-#navigation,
+header,
 #homebox .homebox-portlet,
 .box-default,
 .box-contrast {
-  -moz-box-shadow: 5px 5px 5px rgba(0,0,0,.5);
-  -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,.5);
-  box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+  -moz-box-shadow: 1px 3px 5px 1px rgba(0,0,0,.3);
+  -webkit-box-shadow: 1px 3px 5px 1px rgba(0,0,0,.3);
+  box-shadow: 1px 3px 5px 1px rgba(0,0,0,.3);
   }
 
+#utilities .block {
+  float: right;
+  margin-left: 20px;
+  }
+
+html body.admin-menu {
+  margin-top: 40px !important;
+  }
 
 
 /* homebox overrides */
@@ -168,10 +192,10 @@ header,
 /* +++++ Navigation + menus +++++ */
 
 #navigation {
-  width: 100%;
+  width: auto;
   height: auto;
   margin: 0;
-  padding: .5em 0;
+  padding: .5em 0 .5em 10px;
   font-size: 1.5em;
   line-height: 1em;
   }
@@ -181,6 +205,11 @@ header,
   border-bottom: 4px solid transparent;
   color: #000;
   text-decoration: none;
+  }
+
+#navigation a:hover,
+#havigation a:active {
+  background-color: #b3b3b3;
   }
 
 #navigation li.active a {
@@ -203,6 +232,21 @@ header,
   padding: 10px 20px 25px;
   }
 
+/* social media block */
+
+#socmed {
+  float: right;
+  clear: left;
+  }
+
+#socmed a {
+  display: block;
+  float: left;
+  width: 22px;
+  height: 22px;
+  margin: 0 10px 0 0px;
+  text-align: center; 
+  }
 
 
 /* +++++ Slideshow +++++ */
@@ -214,7 +258,7 @@ header,
   }
 
 .slideshow {
-  z-index: 30;
+  z-index: 5;
   }
 
 .front .view-slideshow {
@@ -229,7 +273,7 @@ header,
   background-color: rgba(255,255,255,.5);
   padding: 10px 10px 40px;
   color: #444;
-  z-index: 40;
+  z-index: 10;
   font-size: 1.2em;
   }
 
@@ -263,7 +307,7 @@ header,
   height: 30px;
   position: relative;
   top: -45px;
-  z-index: 60;
+  z-index: 200;
   margin: 0;
   text-align: center;
   }

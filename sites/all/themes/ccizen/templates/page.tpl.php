@@ -28,10 +28,10 @@
           <div class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></div>
         <?php endif; ?>
       </div>
-      <div class="header__utilities" id="utilities">
-        <?php print render($page['utilities']); ?>
-      </div>
     <?php endif; ?>
+    <div class="header__utilities" id="utilities">
+      <?php print render($page['utilities']); ?>
+    </div>
 
     <?php if ($secondary_menu): ?>
       <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
