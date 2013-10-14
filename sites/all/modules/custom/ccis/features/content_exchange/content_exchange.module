@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Content Exchange feature.
+ */
+
+include_once 'content_exchange.features.inc';

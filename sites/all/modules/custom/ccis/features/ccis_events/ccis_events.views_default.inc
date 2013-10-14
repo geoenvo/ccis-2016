@@ -216,6 +216,8 @@ function ccis_events_views_default_views() {
   $handler->display->display_options['fields']['field_country_event']['field'] = 'field_country_event';
   $handler->display->display_options['fields']['field_country_event']['label'] = '';
   $handler->display->display_options['fields']['field_country_event']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_country_event']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_country_event']['alter']['text'] = ', [field_country_event]';
   $handler->display->display_options['fields']['field_country_event']['element_label_colon'] = FALSE;
   /* Field: Place + Country (Custom) */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
@@ -223,7 +225,7 @@ function ccis_events_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['ui_name'] = 'Place + Country (Custom)';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_place_event], [field_country_event]';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_place_event][field_country_event]';
   $handler->display->display_options['fields']['nothing']['element_type'] = 'p';
   $handler->display->display_options['fields']['nothing']['element_class'] = 'evplace';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
