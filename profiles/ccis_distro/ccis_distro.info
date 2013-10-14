@@ -54,6 +54,11 @@ dependencies[] = mongodb
 dependencies[] = field_permissions
 dependencies[] = rules
 dependencies[] = field_group
+dependencies[] = ds
+dependencies[] = views_slideshow
+dependencies[] = views_slideshow_xtra
+dependencies[] = module_filter
+dependencies[] = link
 
 ; CCIS
 dependencies[] = ccis
@@ -63,5 +68,11 @@ dependencies[] = ccis_ct_weather_data
 dependencies[] = ccis_ct_weather_station
 dependencies[] = ccis_weather_station_importer
 dependencies[] = ccis_dashboard
-; dependencies[] = ccis_rules
 dependencies[] = ccis_openlayers
+dependencies[] = ccis_climate_change
+dependencies[] = ccis_events
+dependencies[] = ccis_formatters
+dependencies[] = ccis_news
+dependencies[] = ccis_slideshow
+dependencies[] = ccis_static_content
+dependencies[] = ccis_theme
