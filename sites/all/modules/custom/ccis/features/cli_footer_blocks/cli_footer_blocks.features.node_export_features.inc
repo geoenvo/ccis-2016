@@ -11,7 +11,7 @@ function cli_footer_blocks_node_export_features_default() {
   $node_export = array(
   'code_string' => 'array(
   (object) array(
-      \'vid\' => \'8\',
+      \'vid\' => \'25\',
       \'uid\' => \'1\',
       \'title\' => \'Legal notice\',
       \'log\' => \'\',
@@ -28,7 +28,7 @@ function cli_footer_blocks_node_export_features_default() {
       \'tnid\' => \'0\',
       \'translate\' => \'0\',
       \'uuid\' => \'7e9207c1-b85c-4b82-a44f-8a0076daf335\',
-      \'revision_timestamp\' => \'1381572447\',
+      \'revision_timestamp\' => \'1381774196\',
       \'revision_uid\' => \'1\',
       \'body\' => array(
         \'und\' => array(
@@ -123,7 +123,7 @@ function cli_footer_blocks_node_export_features_default() {
       \'node_export_drupal_version\' => \'7\',
     ),
   (object) array(
-      \'vid\' => \'9\',
+      \'vid\' => \'26\',
       \'uid\' => \'1\',
       \'title\' => \'Help\',
       \'log\' => \'\',
@@ -140,7 +140,7 @@ function cli_footer_blocks_node_export_features_default() {
       \'tnid\' => \'0\',
       \'translate\' => \'0\',
       \'uuid\' => \'b8930f45-8153-4f46-b07a-e891543c8243\',
-      \'revision_timestamp\' => \'1381572535\',
+      \'revision_timestamp\' => \'1381774196\',
       \'revision_uid\' => \'1\',
       \'body\' => array(
         \'und\' => array(
