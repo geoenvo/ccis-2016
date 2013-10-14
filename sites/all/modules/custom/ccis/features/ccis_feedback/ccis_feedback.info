@@ -1,0 +1,11 @@
+name = CCIS Feedback
+description = The feedback formular
+core = 7.x
+package = CCIS
+dependencies[] = contact
+dependencies[] = features
+dependencies[] = menu
+features[features_api][] = api:2
+features[menu_custom][] = menu-footer-menu
+features[menu_links][] = menu-footer-menu_feedback:contact
+project path = sites/all/modules/custom/ccis/features
