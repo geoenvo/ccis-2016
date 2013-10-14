@@ -22,12 +22,12 @@ function ccis_feedback_menu_default_menu_links() {
       ),
       'identifier' => 'menu-footer-menu_feedback:contact',
     ),
-    'module' => 'menu',
+    'module' => 'system',
     'hidden' => 0,
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
+    'weight' => -50,
     'customized' => 1,
   );
   // Translatables

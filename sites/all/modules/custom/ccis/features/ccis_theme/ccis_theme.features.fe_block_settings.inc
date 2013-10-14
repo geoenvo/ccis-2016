@@ -22,16 +22,16 @@ function ccis_theme_default_fe_block_settings() {
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'footer_thirdcolumn',
+        'status' => 1,
         'theme' => 'bartik',
-        'weight' => 0,
+        'weight' => -15,
       ),
       'ccizen' => array(
-        'region' => 'footer',
+        'region' => 'footer_thirdcolumn',
         'status' => 1,
         'theme' => 'ccizen',
-        'weight' => -12,
+        'weight' => -15,
       ),
       'seven' => array(
         'region' => '',
