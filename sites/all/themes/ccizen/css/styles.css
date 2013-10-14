@@ -105,7 +105,7 @@ body {
   z-index: 1;
   }
 
-header {
+#header {
   padding-top: 10px;
   padding-bottom: 4em;
   background-color: #e6e6e6;
@@ -141,7 +141,7 @@ header {
   background-color: #2c4563;
   }
 
-header,
+#header,
 #homebox .homebox-portlet,
 .box-default,
 .box-contrast {
