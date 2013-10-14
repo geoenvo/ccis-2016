@@ -76,3 +76,4 @@ dependencies[] = ccis_news
 dependencies[] = ccis_slideshow
 dependencies[] = ccis_static_content
 dependencies[] = ccis_theme
+dependencies[] = ccis_roles_permissions
