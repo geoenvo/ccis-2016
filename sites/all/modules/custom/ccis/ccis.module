@@ -868,3 +868,11 @@ function _ccis_get_to_round_fields() {
   }
   return $round;
 }
+
+/**
+ * Implements hook_js_alter().
+ */
+function ccis_js_alter(&$javascript) {
+  $javascript[drupal_get_path('module', 'openlayers') . '/plugins/behaviors/openlayers_behavior_cluster.js']['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_cluster.js';
+}
+
