@@ -15,6 +15,7 @@ function ccis_roles_permissions_user_default_permissions() {
     'name' => 'access administration menu',
     'roles' => array(
       'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
     ),
     'module' => 'admin_menu',
   );
@@ -24,6 +25,7 @@ function ccis_roles_permissions_user_default_permissions() {
     'name' => 'access user profiles',
     'roles' => array(
       'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
     ),
     'module' => 'user',
   );
@@ -33,6 +35,7 @@ function ccis_roles_permissions_user_default_permissions() {
     'name' => 'administer nodes',
     'roles' => array(
       'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
     ),
     'module' => 'node',
   );
@@ -42,6 +45,7 @@ function ccis_roles_permissions_user_default_permissions() {
     'name' => 'administer users',
     'roles' => array(
       'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
     ),
     'module' => 'user',
   );
@@ -574,11 +578,22 @@ function ccis_roles_permissions_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_walter_lieth_diagram'.
+  $permissions['edit field_walter_lieth_diagram'] = array(
+    'name' => 'edit field_walter_lieth_diagram',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'import weather_station feeds'.
   $permissions['import weather_station feeds'] = array(
     'name' => 'import weather_station feeds',
     'roles' => array(
       'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
     ),
     'module' => 'feeds',
   );
@@ -588,6 +603,8 @@ function ccis_roles_permissions_user_default_permissions() {
     'name' => 'search content',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
     ),
     'module' => 'search',
   );
@@ -615,7 +632,9 @@ function ccis_roles_permissions_user_default_permissions() {
   // Exported permission: 'use text format simple_html'.
   $permissions['use text format simple_html'] = array(
     'name' => 'use text format simple_html',
-    'roles' => array(),
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
     'module' => 'filter',
   );
 
@@ -1144,6 +1163,17 @@ function ccis_roles_permissions_user_default_permissions() {
   // Exported permission: 'view field_units'.
   $permissions['view field_units'] = array(
     'name' => 'view field_units',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_walter_lieth_diagram'.
+  $permissions['view field_walter_lieth_diagram'] = array(
+    'name' => 'view field_walter_lieth_diagram',
     'roles' => array(
       'administrator' => 'administrator',
       'climability editor' => 'climability editor',
