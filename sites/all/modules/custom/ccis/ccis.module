@@ -4,10 +4,25 @@
  * Implement hook_menu().
  */
 function ccis_menu() {
-  $items['ccis/import'] = array(
+  $path = 'admin/ccis';
+  $items[$path] = array(
+    'title' => 'CCIS',
+    'description' => 'CCIS related settings',
+    'page callback' => 'ccis_admin_overview',
+    'access arguments' => array('access_ccis_admin_overview'),
+    'position' => 'left',
+  );
+  $items[$path . '/import'] = array(
     'title' => 'CSV Import',
     'access arguments' => array('csv_import'),
     'page callback' => 'ccis_import_page',
+  );
+  $items[$path . '/search'] = array(
+    'title' => 'Search',
+    'access arguments' => array('access_ccis_search_settings'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ccis_search_settings'),
+    'file' => 'ccis.admin.inc',
   );
   $items['ccis/dataquery/%'] = array(
     'title' => 'Data query',
@@ -37,6 +52,12 @@ function ccis_permission() {
   $perms['delete_collections'] = array(
     'title' => t('Delete mongoDB collections'),
     'description' => t('Allows a user to delete a mongoDB collection via GUI.')
+  );
+  $perms['access_ccis_admin_overview'] = array(
+    'title' => t('Access CCIS admin overview'),
+  );
+  $perms['access_ccis_search_settings'] = array(
+     'title' => t('Access CCIS search settings')
   );
   return $perms;
 }
@@ -99,45 +120,16 @@ function ccis_block_view($delta) {
   return $block;
 }
 
-// /**
-//  * Implements hook_field_widget_info_alter().
-//  */
-// function ccis_field_widget_info_alter(&$info) {
-// #dpm($info);
-//   if (!empty($info['file_generic'])) {
-//     $info['file_generic']['settings']['save_as_mongodb'] = FALSE;
-//   }
-// }
-
-// /**
-//  * Implements hook_form_FORM_ID_alter().
-//  */
-// function ccis_form_field_ui_field_edit_form_alter(&$form, $form_state) {
-//   if (!isset($form['instance']) || !empty($form['#field']['locked'])) {
-//     return;
-//   }
-//   if ($form['#field']['type'] == 'file') {
-//     $form['instance']['settings']['save_as_mongodb'] = array(
-//       '#type' => 'checkbox',
-//       '#title' => t('Save as mongoDB collection'),
-//       '#description' => t('The uploaded file will be saved as mongodb collection.'),
-//       '#default_value' => $form['#instance']['settings']['save_as_mongodb']
-//     );
-//   }
-// }
-
-// /**
-//  * Implements hook_field_widget_form_alter().
-//  */
-// function ccis_field_widget_form_alter($field, $instance, $has_data) {
-//   dpm(func_get_args());
-// }
+function ccis_admin_overview() {
+  $system = drupal_get_path('module', 'system');
+  include_once $system . '/system.admin.inc';
+  return system_admin_menu_block_page();
+}
 
 /**
  * Implement hook_field_widget_WIDGET_TYPE_form_alter().
  */
 function ccis_field_widget_file_generic_form_alter(&$element, &$form_state, $context) {
-  // dpm($element);
   if (!empty($context['field']['field_name']) && $context['field']['field_name'] == 'field_csv_files') {
     foreach (element_children($element) as $delta) {
       $element[$delta]['#upload_validators']['ccis_csv_file_header_validate'] = array();
@@ -873,6 +865,9 @@ function _ccis_get_to_round_fields() {
  * Implements hook_js_alter().
  */
 function ccis_js_alter(&$javascript) {
-  $javascript[drupal_get_path('module', 'openlayers') . '/plugins/behaviors/openlayers_behavior_cluster.js']['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_cluster.js';
+  $js_file = drupal_get_path('module', 'openlayers') . '/plugins/behaviors/openlayers_behavior_cluster.js';
+  if (!empty($javascript[$js_file])) {
+    $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_cluster.js';
+  }
 }
 
