@@ -494,21 +494,30 @@ function _ccis_outputCSV($data) {
  * Block output for the filter.
  */
 function _ccis_block_filter($node) {
-  $form = drupal_get_form('_ccis_block_filter_form', $node);
+  $form = drupal_get_form('ccis_block_filter_form', $node);
   return drupal_render($form);
 }
 
 /**
  * Filter form.
  */
-function _ccis_block_filter_form($form, $form_state, $node = NULL) {
-  $form['input'] = array(
+function ccis_block_filter_form($form, $form_state, $node = NULL) {
+  $form['input1'] = array(
     '#title' => t('Search string'),
     '#type' => 'textfield',
     '#autocomplete_path' => 'ccis/autocomplete/station_search',
     '#title_display' => 'invisible',
     '#description' => t('Enter a station name, Station code etc.'),
     '#default_value' => isset($node->title) ? "$node->title ($node->nid)" : '',
+    '#field_prefix' => 1,
+  );
+  $form['input2'] = array(
+    '#title' => t('Search string'),
+    '#type' => 'textfield',
+    '#autocomplete_path' => 'ccis/autocomplete/station_search',
+    '#title_display' => 'invisible',
+    '#description' => t('Enter a station name, Station code to compare.'),
+    '#field_prefix' => 2,
   );
   $form['start'] = array(
     '#title' => t('From'),
@@ -527,7 +536,7 @@ function _ccis_block_filter_form($form, $form_state, $node = NULL) {
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Search'),
-    '#ajax' => array('callback' => '_ccis_block_filter_form_ajax_submit'),
+    '#ajax' => array('callback' => 'ccis_block_filter_form_ajax_submit'),
     '#attributes' => array('class' => array('use-ajax-submit')),
   );
   return $form;
@@ -537,22 +546,44 @@ function _ccis_block_filter_form($form, $form_state, $node = NULL) {
 /**
  * Submit handler for the form _ccis_block_filter_form().
  */
-function _ccis_block_filter_form_submit($form, &$form_state) {
+function ccis_block_filter_form_submit($form, &$form_state) {
   form_state_values_clean($form_state);
   $form_state['redirect'] = array(current_path(), array('query' => $form_state['values']));
 }
 
-function _ccis_block_filter_form_ajax_submit($form, &$form_state) {
+function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   form_state_values_clean($form_state);
-  $node = _ccis_get_station_node($form_state['values']);
+
+  $station_1 = _ccis_get_station_node($form_state['values']);
+  $station_2 = _ccis_get_station_node($form_state['values'], 'input2');
+  if (empty($station_1)) {
+    $station_1 = $station_2;
+    $station_2 = NULL;
+  }
 
   $range = _ccis_get_date_range($form_state['values']);
-  $list = _ccis_get_listname($node, $range);
-  $settings = _ccis_get_d3_settings($list, $form_state['values']);
-  $commands[] = ajax_command_settings($settings, TRUE);
-  $commands[] = ajax_command_replace('#ccis-weather-datatable-block', _ccis_block_datatables($list, $form_state['values']));
-  $commands[] = ajax_command_replace('#ccis-station-info-block', _ccis_block_stationinfo($node));
-  $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap($node));
+
+  $list1 = _ccis_get_listname($station_1, $range);
+  $settings = _ccis_get_d3_settings($list1, $form_state['values']);
+
+  $list2 = _ccis_get_listname($station_2, $range);
+  $settings2 = _ccis_get_d3_settings($list2, $form_state['values'], 2);
+
+  $commands[] = ajax_command_settings(array_merge_recursive($settings, $settings2), TRUE);
+
+  $commands[] = ajax_command_replace('#ccis-weather-datatable-content-1', _ccis_datatables_content($list1, $form_state['values'], 1));
+  if (!empty($station_2)) {
+    $commands[] = ajax_command_replace('#ccis-weather-datatable-content-2', _ccis_datatables_content($list2, $form_state['values'], 2));
+  }
+  $commands[] = ajax_command_replace('#ccis-station-info-content-1', _ccis_block_stationinfo_content($station_1));
+  if (!empty($station_2)) {
+    $commands[] = ajax_command_replace('#ccis-station-info-content-2', _ccis_block_stationinfo_content($station_2, 2));
+  }
+  else {
+    $commands[] = ajax_command_replace('#ccis-station-info-content-2', '<div id="ccis-station-info-content-2"></div>');
+  }
+
+  $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap(array($station_1, $station_2)));
 
   return array('#type' => 'ajax', '#commands' => $commands);
 
@@ -566,29 +597,43 @@ function _ccis_block_d3($list, $params) {
   drupal_add_js($d3. '/d3.v3.min.js');
   $path = drupal_get_path('module', 'ccis');
   drupal_add_js($path . '/js/d3.ccis.js', array('weight' => 5, 'type' => 'file'));
+  drupal_add_css($path . '/css/d3.ccis.css');
   drupal_add_js(_ccis_get_d3_settings($list, $params), 'setting');
-  return '<div id="ccis-weather-d3-block"></div>';
+
+  $output = '<div id="ccis-weather-d3-block">';
+  $output .= '<div id="ccis-weather-d3-content-1"></div>';
+  $output .= '<div id="ccis-weather-d3-content-2"></div>';
+  $output .= '</div>';
+  return $output;
 }
 
-function _ccis_get_d3_settings($list = 'unknown', $values) {
+function _ccis_get_d3_settings($list = 'unknown', $values, $id = 1) {
   $settings = array(
-      'ccis' => array(
-          'stations' => array(
-              array(
-                  'selector' => 'ccis-weather-d3-block',
-                  'path' => url("ccis/dataquery/$list/d3", array('query' => $values)),
-              ),
-          ),
-          'legends' => array_values(_ccis_get_weather_data_labels()),
+    'ccis' => array(
+      'stations' => array(
+        array(
+          'selector' => "ccis-weather-d3-content-$id",
+          'path' => url("ccis/dataquery/$list/d3", array('query' => $values)),
+        ),
       ),
+      'legends' => array_values(_ccis_get_weather_data_labels()),
+    ),
   );
   return $settings;
+}
+
+function _ccis_block_datatables($list = 'unknown', $values) {
+  $output = '<div id="ccis-weather-datatable-block">';
+  $output .= _ccis_datatables_content($list, $values);
+  $output .= '<div id="ccis-weather-datatable-content-2"></div>';
+  $output .= '</div>';
+  return $output;
 }
 
 /**
  * Block output for the datatables.
  */
-function _ccis_block_datatables($list = 'unknown', $values) {
+function _ccis_datatables_content($list = 'unknown', $values, $id = 1) {
   $labels = _ccis_get_weather_data_labels();
   $header = array();
   foreach ($labels as $label) {
@@ -599,27 +644,27 @@ function _ccis_block_datatables($list = 'unknown', $values) {
     'header' => $header,
     'rows' => $rows,
     'attributes' => array(
-      'id' => 'ccis_datatables',
+      'id' => 'ccis-datatables-' . $id,
       'datatable_options' => array(
         'bProcessing' => true,
         'sAjaxSource' => url("ccis/dataquery/$list/datatables", array('query' => $values)),
       ),
     ),
   );
-  $output = '<div id="ccis-weather-datatable-block">';
+  $output = "<div id=\"ccis-weather-datatable-content-$id\">";
   $output .= theme('datatable', $vars);
   $output .= '</div>';
   return $output;
 }
 
-function _ccis_get_station_node($values) {
+function _ccis_get_station_node($values, $key = 'input1') {
   $nid = NULL;
   if (isset($values['nid'])) {
     $nid = $values['nid'];
   }
-  elseif (isset($values['input'])) {
+  elseif (isset($values[$key])) {
     $pattern = "/(.+)\((\d+)\)/";
-    preg_match($pattern, $values['input'], $matches);
+    preg_match($pattern, $values[$key], $matches);
     $nid = isset($matches[2]) ? $matches[2] : NULL;
   }
   if (!empty($nid)) {
@@ -674,9 +719,20 @@ function _ccis_get_listname($node, $range) {
  * Block output for the Station info.
  */
 function _ccis_block_stationinfo($node = NULL) {
+  $output = '<div id="ccis-station-info-block">';
+  $output .= _ccis_block_stationinfo_content($node);
+  $output .= '<div id="ccis-station-info-content-2"></div>';
+  $output .= '</div>';
+  return $output;
+}
+
+/**
+ * Block output for the Station info.
+ */
+function _ccis_block_stationinfo_content($node = NULL, $id = 1) {
   $nid = empty($node) ? NULL : $node->nid;
   $view = views_embed_view('station_info', 'embed_1', $nid);
-  $output = '<div id="ccis-station-info-block">';
+  $output = '<div id="ccis-station-info-content-' . $id . '">';
   $output .= $view;
   $output .= '</div>';
   return $output;
@@ -685,11 +741,19 @@ function _ccis_block_stationinfo($node = NULL) {
 /**
  * Block output for the Station map.
  */
-function _ccis_block_stationmap($node = NULL) {
+function _ccis_block_stationmap($nodes = NULL) {
   openlayers_include();
-  $nid = empty($node) ? NULL : $node->nid;
-  $view = views_embed_view('station_map', 'embed_1', $nid);
-  $output = '<div id="ccis-station-map-block">';
+  $nids = array();
+  if (!is_array($nodes)) {
+    $nodes = array($nodes);
+  }
+  $nodes = array_filter($nodes);
+  foreach ($nodes as $node) {
+    $nids[] = $node->nid;
+  }
+  $nids = empty($nids) ? NULL : implode(',', $nids);
+  $view = views_embed_view('station_map', 'embed_1', $nids);
+  $output = '<div class="ccis-station-map-block" id="ccis-station-map-block">';
   $output .= $view;
   $output .= '</div>';
   return $output;
