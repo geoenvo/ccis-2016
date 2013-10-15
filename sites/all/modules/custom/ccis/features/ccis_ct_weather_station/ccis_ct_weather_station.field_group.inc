@@ -577,6 +577,7 @@ function ccis_ct_weather_station_field_group_info() {
       6 => 'field_stationmaintenance',
       7 => 'field_stationrelocation',
       8 => 'field_stationtopo',
+      9 => 'field_walter_lieth_diagram',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -612,6 +613,7 @@ function ccis_ct_weather_station_field_group_info() {
       6 => 'field_stationmaintenance',
       7 => 'field_stationrelocation',
       8 => 'field_stationtopo',
+      9 => 'field_walter_lieth_diagram',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

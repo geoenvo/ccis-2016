@@ -95,6 +95,10 @@ regions[help]           = Help
 regions[content]        = Content
 regions[sidebar_first]  = First sidebar
 regions[sidebar_second] = Second sidebar
+regions[footer_firstcolumn] = Footer 1st column
+regions[footer_secondcolumn] = Footer 2nd column
+regions[footer_thirdcolumn] = Footer 3rd column
+regions[footer_fourthcolumn] = Footer 4th column
 regions[footer]         = Footer
 regions[bottom]         = Page bottom
 

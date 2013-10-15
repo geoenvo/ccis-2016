@@ -142,6 +142,10 @@ function ccis_events_views_default_views() {
   $handler->display->display_options['fields']['field_url_event']['label'] = '';
   $handler->display->display_options['fields']['field_url_event']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_url_event']['click_sort_column'] = 'url';
+  /* Sort criterion: Content: Date (field_date_event) */
+  $handler->display->display_options['sorts']['field_date_event_value']['id'] = 'field_date_event_value';
+  $handler->display->display_options['sorts']['field_date_event_value']['table'] = 'field_data_field_date_event';
+  $handler->display->display_options['sorts']['field_date_event_value']['field'] = 'field_date_event_value';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -168,6 +172,13 @@ function ccis_events_views_default_views() {
   $handler = $view->new_display('block', 'Block', 'block_events');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'events teaser';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'Show full list';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
