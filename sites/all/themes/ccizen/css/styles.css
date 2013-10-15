@@ -50,7 +50,8 @@ body
 h1, h2, h3, h4,
 #navigation,
 input.form-submit, button,
-.events.teaser
+.events.teaser,
+.horizontal-tab-button
   {
   font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
   }
@@ -239,8 +240,16 @@ stakeholder.last {
   background-color: #fcce00;
   }
 
+/* not sustainable */
 #homebox .homebox-column-wrapper-1 .homebox-portlet-inner {
   background-color: #2c4563;
+  color: #f1f1f1;
+  }
+
+#homebox-block-ccis_stationinfo .portlet-inner,
+#homebox-block-ccis_stationinfo_2 .portlet-inner,
+#homebox-block-ccis_filter .portlet-inner {
+  background-color: 2c4563;
   color: #f1f1f1;
   }
 
@@ -302,6 +311,29 @@ button, input.form-submit {
 .compact-form-label {
   color: #2c4563;
   }
+
+/* throbber tweaks */
+html.js input.form-autocomplete {
+  background-image: url(../img/throbber_cli.gif);
+  background-position: 100% 0px;
+  background-repeat: no-repeat;
+  }
+html.js input.throbbing {
+  background-position: 100% -50px;
+  }
+
+.ajax-progress {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  }
+.ajax-progress .throbber {
+  background: transparent url(../img/throbber_cli.gif) no-repeat 0px 9px;
+  height: 20px;
+  width: 20px;
+  margin: 2px;
+  }
+
 
 /*
 input:focus,
@@ -473,6 +505,42 @@ textarea:focus {
   margin: 0 0 0 0px;
   color: #999999;
   }
+
+
+/* +++++ dashboard +++++ */
+
+.view-station-info .horizontal-tabs .ul-horizontal-tabs-list * {
+  }
+
+.view-station-info .horizontal-tabs,
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list, 
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li, 
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li a, 
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.selected a {
+  background-color: transparent;
+  border: 0 none;
+  color: #fff;
+  }
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.selected strong {
+  color: #fcce00;
+  }
+.view-station-info .horizontal-tabs strong {
+  font-weight: normal;
+  }
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #fff;
+  }
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li a {
+  padding: 2px;
+  }
+
+
+
 
 
 /* ++++++++++ Climability-specific ++++++++++ */
