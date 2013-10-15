@@ -833,7 +833,7 @@ Drupal.behaviors.ccis = {
 				$(newWindow).ready(function(){
 			
 					// Clone Diagram
-					clone = $("#d3_GraphDiv").clone();
+					var clone = $("#d3_GraphDiv").clone();
 					// Remove background color and border
 					clone[0].firstChild.setAttribute("style", "background-color: ; outline: ;");
 					
