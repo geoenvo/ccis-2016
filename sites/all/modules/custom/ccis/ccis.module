@@ -597,7 +597,7 @@ function _ccis_block_d3($list, $params) {
   drupal_add_js($d3. '/d3.v3.min.js');
   $path = drupal_get_path('module', 'ccis');
   drupal_add_js($path . '/js/d3.ccis.js', array('weight' => 5, 'type' => 'file'));
-  drupal_add_css($path . '/css/d3.ccis.css');
+  drupal_add_css($path . '/css/d3.css');
   drupal_add_js(_ccis_get_d3_settings($list, $params), 'setting');
 
   $output = '<div id="ccis-weather-d3-block">';
