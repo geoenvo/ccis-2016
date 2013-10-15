@@ -148,7 +148,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 73,
+      'weight' => 85,
     ),
   );
 
@@ -189,7 +189,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 75,
+      'weight' => 87,
     ),
   );
 
@@ -230,7 +230,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 63,
+      'weight' => 75,
     ),
   );
 
@@ -271,7 +271,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 62,
+      'weight' => 74,
     ),
   );
 
@@ -312,7 +312,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 72,
+      'weight' => 84,
     ),
   );
 
@@ -353,7 +353,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 60,
+      'weight' => 72,
     ),
   );
 
@@ -394,7 +394,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 65,
+      'weight' => 77,
     ),
   );
 
@@ -417,7 +417,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 37,
+        'weight' => 38,
       ),
     ),
     'entity_type' => 'node',
@@ -458,7 +458,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 39,
+        'weight' => 40,
       ),
     ),
     'entity_type' => 'node',
@@ -642,7 +642,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 69,
+      'weight' => 81,
     ),
   );
 
@@ -904,7 +904,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 66,
+      'weight' => 78,
     ),
   );
 
@@ -945,7 +945,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 64,
+      'weight' => 76,
     ),
   );
 
@@ -968,7 +968,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 42,
+        'weight' => 43,
       ),
     ),
     'entity_type' => 'node',
@@ -1046,7 +1046,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 74,
+      'weight' => 86,
     ),
   );
 
@@ -1087,7 +1087,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 77,
+      'weight' => 89,
     ),
   );
 
@@ -1110,7 +1110,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 41,
+        'weight' => 42,
       ),
     ),
     'entity_type' => 'node',
@@ -1169,7 +1169,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 56,
+      'weight' => 68,
     ),
   );
 
@@ -1192,7 +1192,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 15,
       ),
     ),
     'entity_type' => 'node',
@@ -1274,7 +1274,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 16,
+        'weight' => 17,
       ),
     ),
     'entity_type' => 'node',
@@ -1333,7 +1333,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 76,
+      'weight' => 88,
     ),
   );
 
@@ -1374,7 +1374,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 57,
+      'weight' => 69,
     ),
   );
 
@@ -1415,7 +1415,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 58,
+      'weight' => 70,
     ),
   );
 
@@ -1456,7 +1456,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 59,
+      'weight' => 71,
     ),
   );
 
@@ -1497,7 +1497,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 55,
+      'weight' => 67,
     ),
   );
 
@@ -1538,7 +1538,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 70,
+      'weight' => 82,
     ),
   );
 
@@ -1579,7 +1579,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 71,
+      'weight' => 83,
     ),
   );
 
@@ -1620,7 +1620,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 67,
+      'weight' => 79,
     ),
   );
 
@@ -1661,7 +1661,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 68,
+      'weight' => 80,
     ),
   );
 
@@ -1766,7 +1766,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 17,
+        'weight' => 18,
       ),
     ),
     'entity_type' => 'node',
@@ -1907,7 +1907,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 61,
+      'weight' => 73,
     ),
   );
 
@@ -1930,7 +1930,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 40,
+        'weight' => 41,
       ),
     ),
     'entity_type' => 'node',
@@ -2012,7 +2012,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 38,
+        'weight' => 39,
       ),
     ),
     'entity_type' => 'node',
@@ -2053,7 +2053,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 15,
+        'weight' => 16,
       ),
     ),
     'entity_type' => 'node',
@@ -2567,7 +2567,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 20,
+        'weight' => 21,
       ),
     ),
     'entity_type' => 'node',
@@ -3062,7 +3062,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 13,
+        'weight' => 14,
       ),
     ),
     'entity_type' => 'node',
@@ -3081,6 +3081,52 @@ function ccis_ct_weather_station_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 82,
+    ),
+  );
+
+  // Exported field_instance: 'node-weather_station-field_walter_lieth_diagram'
+  $field_instances['node-weather_station-field_walter_lieth_diagram'] = array(
+    'bundle' => 'weather_station',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 71,
+      ),
+      'teaser' => array(
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 19,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_walter_lieth_diagram',
+    'label' => 'walter-lieth-diagram',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 24,
     ),
   );
 
@@ -3211,6 +3257,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Units used');
   t('WMO Code');
   t('WMO Code or station number');
+  t('walter-lieth-diagram');
   t('when any of the location parameters are changed');
 
   return $field_instances;
