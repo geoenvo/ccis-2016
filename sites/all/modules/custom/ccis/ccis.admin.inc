@@ -12,6 +12,5 @@ function ccis_search_settings($form, $form_state) {
     '#options' => $search_fields,
     '#default_value' => variable_get('ccis_station_search_terms', array()),
   );
-  dsm($form);
   return system_settings_form($form);
 }
