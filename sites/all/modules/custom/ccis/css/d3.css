@@ -1,0 +1,127 @@
+
+/* Div of graph */
+#d3_GraphDiv {
+	position: relative;
+	float: left;
+}
+
+/* The SVG */
+.d3_svgElement {
+	background-color: #ffffff;
+	outline: solid 1px #D1D1FF;
+}
+
+/* Legend Div */
+#d3_legendDiv {
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	float: right;
+	background-color: #b3b3b3;
+}
+
+/* Temperature Legend */
+#d3_iconLegendTemp {
+	width: 20px;
+	margin: 2px 0px 0px 5px;
+	clear: both;
+	float: left;
+}
+
+/* Precipitation Legend */
+#d3_iconLegendPrec {
+	width: 20px;
+	margin: 1px 0px 0px 5px;
+	clear: both;
+	float: left;
+}
+
+/* Pressure Legend */
+#d3_iconLegendPress {
+	width: 20px;
+	margin: 1px 0px 0px 5px;
+	clear: both;
+	float: left;				
+}
+
+/* Title of each group in Legend */
+.d3_toggleClass {
+	float: left;
+	font-size: 12px;
+}
+
+/* Units in Legend */
+.d3_unitLegend {
+	font-size: 10px;
+}
+
+/* Keys in Legend */
+.d3_keys {
+	margin-left: 10px;
+}
+
+/* Checkboxes in Legend*/
+.d3_keysTick {
+	clear: both; 
+	float:left;
+}
+
+/* Box for Text and Icon Div in Legend (Hover) */
+.d3_keysBoxText {
+	position:relative; 
+	float:left;
+}
+	
+/* Icons in Legend */
+.d3_keysIcon {
+	float: left;
+	margin-left: 5px;
+}
+
+/* Text in Legend */
+.d3_keysText {
+	float: left;
+	width: auto;
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+/* Vertical line for the tooltip in diagram*/
+#d3_hoverLine {
+	stroke: black;
+}
+
+/* Tooltip in diagram */
+#d3_tooltip {		
+	position: absolute;
+	width: 150px;
+	height: auto;
+	border-radius: 8px 8px 8px 8px;	
+	background-color: white;
+	-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);		
+	font-size: 11px;
+}
+
+
+#printSelectWrapper {
+	position: relative;
+	float: right;
+	background-color: #b3b3b3;
+	border-top: 1px solid black;
+}
+
+#d3_SelectDiagramsText {
+	position:relative;
+	float:right;
+	right: 28px;
+	font-size:12px;
+}
+
+#d3_printPreviewId {
+	width: 120px;
+	position:relative; 
+	float:right;
+	right: 30px;
+}
