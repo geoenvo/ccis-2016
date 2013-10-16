@@ -63,6 +63,16 @@ function ccis_permission() {
 }
 
 /**
+ * Implement hook_help().
+ */
+function ccis_help($path, $arg) {
+  switch ($path) {
+    case 'admin/ccis/search':
+      return t('The selected fields of the weather station are searchable in the filter form of the weather station dashboard.');
+  }
+}
+
+/**
  * Implement hook_block_info().
  */
 function ccis_block_info() {
