@@ -36,7 +36,7 @@ function ccis_openlayers_openlayers_maps() {
     'behaviors' => array(
       'openlayers_behavior_cluster' => array(
         'clusterlayer' => array(
-          'ol_stations_openlayers_1' => 0,
+          'ol_stations_openlayers_1' => 'ol_stations_openlayers_1',
           'geofield_formatter' => 0,
         ),
         'distance' => '20',
