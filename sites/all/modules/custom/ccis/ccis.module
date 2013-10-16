@@ -510,8 +510,12 @@ function _ccis_block_filter($node) {
  * Filter form.
  */
 function ccis_block_filter_form($form, $form_state, $node = NULL) {
-  $form['input1'] = array(
-    '#title' => t('Search string'),
+  $form['station_input'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Stations'),
+  );
+  $form['station_input']['input1'] = array(
+    '#title' => t('Station 1'),
     '#type' => 'textfield',
     '#autocomplete_path' => 'ccis/autocomplete/station_search',
     '#title_display' => 'invisible',
@@ -519,25 +523,47 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#default_value' => isset($node->title) ? "$node->title ($node->nid)" : '',
     '#field_prefix' => 1,
   );
-  $form['input2'] = array(
-    '#title' => t('Search string'),
+  $form['station_input']['input2'] = array(
+    '#title' => t('Station 2'),
     '#type' => 'textfield',
     '#autocomplete_path' => 'ccis/autocomplete/station_search',
     '#title_display' => 'invisible',
     '#description' => t('Enter a station name, Station code to compare.'),
     '#field_prefix' => 2,
   );
-  $form['start'] = array(
+  $form['filter'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Filter'),
+  );
+  $form['filter']['searchterm'] = array(
+    '#title' => t('Search'),
+    '#type' => 'textfield',
+    '#description' => t('Enter metadata search term.'),
+    '#ajax' => array(
+      'callback' => 'ccis_block_filter_form_ajax_searchterms',
+      'wrapper' => 'ccis-station-search-result',
+    ),
+  );
+  $form['filter']['start'] = array(
     '#title' => t('From'),
     '#type' => 'date_popup',
     '#date_year_range' => '-100:0',
     '#date_format' => 'd.m.Y',
   );
-  $form['end'] = array(
+  $form['filter']['end'] = array(
     '#title' => t('To'),
     '#type' => 'date_popup',
     '#date_year_range' => '-100:0',
     '#date_format' => 'd.m.Y',
+  );
+  $search_result = '';
+  if (!empty($form_state['values']['searchterm'])) {
+    $search_result = ccis_search_terms_finder_list($form_state['values']['searchterm']);
+  }
+  $form['searchresult'] = array(
+    '#markup' => $search_result,
+    '#prefix' => '<div id="ccis-station-search-result">',
+    '#suffix' => '</div>',
   );
   $form['actions'] = array('#type' => 'actions');
 
@@ -559,6 +585,9 @@ function ccis_block_filter_form_submit($form, &$form_state) {
   $form_state['redirect'] = array(current_path(), array('query' => $form_state['values']));
 }
 
+/**
+ * Ajax submit handler for the form _ccis_block_filter_form().
+ */
 function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   form_state_values_clean($form_state);
 
@@ -587,14 +616,11 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   if (!empty($station_2)) {
     $commands[] = ajax_command_replace('#ccis-station-info-block-2', _ccis_block_stationinfo($station_2, 2));
   }
-  else {
-    $commands[] = ajax_command_replace('#ccis-station-info-block-2', '<div id="ccis-station-info-content-2"></div>');
-  }
 
   $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap(array($station_1, $station_2)));
 
+  $commands[] = ajax_command_prepend(NULL, theme('status_messages'));
   return array('#type' => 'ajax', '#commands' => $commands);
-
 }
 
 /**
@@ -614,12 +640,14 @@ function _ccis_block_d3($list, $params, $id = 1) {
 }
 
 function _ccis_get_d3_settings($list = 'unknown', $values, $id = 1) {
+  $node = _ccis_get_station_node($values, 'input'.$id);
   $settings = array(
     'ccis' => array(
       'stations' => array(
         array(
           'selector' => "ccis-weather-d3-block-$id",
           'path' => url("ccis/dataquery/$list/d3", array('query' => $values)),
+          'station_name' => isset($node->title) ? check_plain($node->title) : '',
         ),
       ),
       'legends' => array_values(_ccis_get_weather_data_labels()),
@@ -875,3 +903,77 @@ function ccis_js_alter(&$javascript) {
   }
 }
 
+/**
+ * Returns a table for the finder list in filter form.
+ *
+ * @param string $string
+ *   Search term
+ *
+ */
+function ccis_search_terms_finder_list($string) {
+  $search_fields = array_filter(variable_get('ccis_station_search_terms', array()));
+  $search_fields = array_keys($search_fields);
+  if (empty($search_fields)) {
+    return '';
+  }
+  // TODO Needs ajax support.
+  #$query = db_select('node', 'n')->extend('PagerDefault')->limit(2);
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_wmocode', 'f', 'n.nid = f.entity_id');
+
+  $query->fields('n', array('nid', 'title'));
+  $query->fields('f', array('field_wmocode_value'));
+
+  $db_or = db_or();
+  foreach ($search_fields as $index => $search_field) {
+    $query->leftJoin('field_data_' . $search_field, 'f' . $index, 'n.nid = f' . $index . '.entity_id');
+    $f_and = db_and()->condition("f$index.{$search_field}_value", db_like($string) . '%', 'LIKE');
+    $db_or = $db_or->condition($f_and);
+  }
+  $query->condition('n.type', 'weather_station')
+  ->condition($db_or)
+  ->addTag('node_access');
+  $header = array('station' => t('Station name'), 'wmo-code' => t('WMO-Code'), '1' => 1, '2' => 2);
+  $rows = array();
+  try{
+    $results = $query->execute();
+    $options = array();
+    foreach ($results as $result) {
+      $input =  $result->title . ' (' . $result->nid . ')';
+      $checkbox1 = array(
+        '#type' => 'radio',
+        '#name' => 'station[1]',
+        '#attributes' => array('data-station' => 1, 'data-station-input' => $input),
+      );
+      $checkbox2 = array(
+        '#type' => 'radio',
+        '#name' => 'station[2]',
+        '#attributes' => array('data-station' => 2, 'data-station-input' => $input),
+      );
+      $rows[] = array(
+          $result->title,
+          $result->field_wmocode_value,
+          array('data' => drupal_render($checkbox1)),
+          array('data' => drupal_render($checkbox2)),
+      );
+    }
+  }
+  catch (Exception $e) {
+    watchdog_exception('ccis', $e);
+  }
+  $vars = array('header' => $header, 'rows' => $rows, 'empty' => t('Did not found a station'));
+  $path = drupal_get_path('module', 'ccis');
+  drupal_add_js($path . '/js/base.ccis.js');
+  // TODO Needs Ajax support.
+  // return theme('table', $vars). theme('pager');
+  return theme('table', $vars);
+}
+
+/**
+ * Ajax callback for the search term.
+ *
+ * @see ccis_block_filter_form
+ */
+function ccis_block_filter_form_ajax_searchterms($form, $form_state) {
+  return $form['searchresult'];
+}
