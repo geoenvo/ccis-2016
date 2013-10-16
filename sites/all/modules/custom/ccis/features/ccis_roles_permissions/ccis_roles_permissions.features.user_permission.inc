@@ -30,6 +30,16 @@ function ccis_roles_permissions_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: 'administer newsletters'.
+  $permissions['administer newsletters'] = array(
+    'name' => 'administer newsletters',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'simplenews',
+  );
+
   // Exported permission: 'administer nodes'.
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
@@ -38,6 +48,25 @@ function ccis_roles_permissions_user_default_permissions() {
       'climability editor' => 'climability editor',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'administer simplenews settings'.
+  $permissions['administer simplenews settings'] = array(
+    'name' => 'administer simplenews settings',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'simplenews',
+  );
+
+  // Exported permission: 'administer simplenews subscriptions'.
+  $permissions['administer simplenews subscriptions'] = array(
+    'name' => 'administer simplenews subscriptions',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'simplenews',
   );
 
   // Exported permission: 'administer users'.
@@ -607,6 +636,28 @@ function ccis_roles_permissions_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'search',
+  );
+
+  // Exported permission: 'send newsletter'.
+  $permissions['send newsletter'] = array(
+    'name' => 'send newsletter',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'simplenews',
+  );
+
+  // Exported permission: 'subscribe to newsletters'.
+  $permissions['subscribe to newsletters'] = array(
+    'name' => 'subscribe to newsletters',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'simplenews',
   );
 
   // Exported permission: 'use text format filtered_html'.
