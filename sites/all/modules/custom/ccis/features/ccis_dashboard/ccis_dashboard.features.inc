@@ -32,30 +32,6 @@ function ccis_dashboard_homebox() {
     ),
     'blocks' => 
     array (
-      'ccis_stationinfo' => 
-      array (
-        'module' => 'ccis',
-        'delta' => 'stationinfo',
-        'region' => 1,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -11,
-      ),
-      'ccis_stationmap' => 
-      array (
-        'module' => 'ccis',
-        'delta' => 'stationmap',
-        'region' => 3,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -11,
-      ),
       'ccis_d3' => 
       array (
         'module' => 'ccis',
@@ -66,7 +42,43 @@ function ccis_dashboard_homebox() {
         'open' => 1,
         'closable' => 0,
         'title' => '',
-        'weight' => -11,
+        'weight' => -17,
+      ),
+      'ccis_filter' => 
+      array (
+        'module' => 'ccis',
+        'delta' => 'filter',
+        'region' => 1,
+        'movable' => 0,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 0,
+        'title' => '',
+        'weight' => -15,
+      ),
+      'ccis_d3_2' => 
+      array (
+        'module' => 'ccis',
+        'delta' => 'd3_2',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 0,
+        'title' => '',
+        'weight' => -16,
+      ),
+      'ccis_stationinfo' => 
+      array (
+        'module' => 'ccis',
+        'delta' => 'stationinfo',
+        'region' => 1,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 0,
+        'title' => '',
+        'weight' => -17,
       ),
       'ccis_datatables' => 
       array (
@@ -78,13 +90,25 @@ function ccis_dashboard_homebox() {
         'open' => 1,
         'closable' => 0,
         'title' => '',
-        'weight' => -11,
+        'weight' => -15,
       ),
-      'ccis_filter' => 
+      'ccis_stationinfo_2' => 
       array (
         'module' => 'ccis',
-        'delta' => 'filter',
+        'delta' => 'stationinfo_2',
         'region' => 1,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 0,
+        'title' => '',
+        'weight' => -16,
+      ),
+      'ccis_stationmap' => 
+      array (
+        'module' => 'ccis',
+        'delta' => 'stationmap',
+        'region' => 3,
         'movable' => 1,
         'status' => 1,
         'open' => 1,

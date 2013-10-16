@@ -18,22 +18,23 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Data ',
-    'weight' => '14',
+    'weight' => '82',
     'children' => array(
       0 => 'field_datacodes',
       1 => 'field_dataquality',
       2 => 'field_datatime',
       3 => 'field_dataunits',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-data field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -78,22 +79,23 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'teaser';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Data ',
-    'weight' => '14',
+    'weight' => '82',
     'children' => array(
       0 => 'field_datacodes',
       1 => 'field_dataquality',
       2 => 'field_datatime',
       3 => 'field_dataunits',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-data field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -107,10 +109,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Instrumentation',
-    'weight' => '11',
+    'weight' => '79',
     'children' => array(
       0 => 'field_instructions',
       1 => 'field_instrumentationtype',
@@ -122,12 +124,13 @@ function ccis_ct_weather_station_field_group_info() {
       7 => 'field_traininglevel',
       8 => 'field_units',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
         'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -177,10 +180,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'teaser';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Instrumentation',
-    'weight' => '11',
+    'weight' => '79',
     'children' => array(
       0 => 'field_instructions',
       1 => 'field_instrumentationtype',
@@ -192,12 +195,13 @@ function ccis_ct_weather_station_field_group_info() {
       7 => 'field_traininglevel',
       8 => 'field_units',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
         'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -211,10 +215,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Metadata Information',
-    'weight' => '19',
+    'weight' => '83',
     'children' => array(
       0 => 'field_beginposition',
       1 => 'field_category',
@@ -240,12 +244,13 @@ function ccis_ct_weather_station_field_group_info() {
       21 => 'field_metadatastandardversion',
       22 => 'field_organisationname',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-metadata-information field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -259,10 +264,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'teaser';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Metadata Information',
-    'weight' => '15',
+    'weight' => '83',
     'children' => array(
       0 => 'field_beginposition',
       1 => 'field_category',
@@ -288,16 +293,89 @@ function ccis_ct_weather_station_field_group_info() {
       21 => 'field_metadatastandardversion',
       22 => 'field_organisationname',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-metadata-information field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
   $export['group_metadata_information|node|weather_station|teaser'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_metadata_main|node|weather_station|default';
+  $field_group->group_name = 'group_metadata_main';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'weather_station';
+  $field_group->mode = 'default';
+  $field_group->parent_name = 'group_tabs_group';
+  $field_group->data = array(
+    'label' => 'Main',
+    'weight' => '77',
+    'children' => array(
+      0 => 'field_alias',
+      1 => 'field_csv_files',
+      2 => 'field_dateclosed',
+      3 => 'field_dateopen',
+      4 => 'field_mongodb_list_name',
+      5 => 'field_station_geodata',
+      6 => 'field_stationcode',
+      7 => 'field_stationtype',
+      8 => 'field_status',
+      9 => 'field_wmocode',
+    ),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-metadata-main field-group-htab',
+        'id' => '',
+      ),
+    ),
+  );
+  $export['group_metadata_main|node|weather_station|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_metadata_main|node|weather_station|teaser';
+  $field_group->group_name = 'group_metadata_main';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'weather_station';
+  $field_group->mode = 'teaser';
+  $field_group->parent_name = 'group_tabs_group';
+  $field_group->data = array(
+    'label' => 'Main',
+    'weight' => '77',
+    'children' => array(
+      0 => 'field_alias',
+      1 => 'field_csv_files',
+      2 => 'field_dateclosed',
+      3 => 'field_dateopen',
+      4 => 'field_mongodb_list_name',
+      5 => 'field_station_geodata',
+      6 => 'field_stationcode',
+      7 => 'field_stationtype',
+      8 => 'field_status',
+      9 => 'field_wmocode',
+    ),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-metadata-main field-group-htab',
+        'id' => '',
+      ),
+    ),
+  );
+  $export['group_metadata_main|node|weather_station|teaser'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -393,10 +471,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Responsible Organization',
-    'weight' => '10',
+    'weight' => '78',
     'children' => array(
       0 => 'field_address',
       1 => 'field_city',
@@ -408,12 +486,13 @@ function ccis_ct_weather_station_field_group_info() {
       7 => 'field_postcode',
       8 => 'field_region',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-responsible-organization field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -427,10 +506,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'teaser';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Responsible Organization',
-    'weight' => '10',
+    'weight' => '78',
     'children' => array(
       0 => 'field_address',
       1 => 'field_city',
@@ -442,12 +521,13 @@ function ccis_ct_weather_station_field_group_info() {
       7 => 'field_postcode',
       8 => 'field_region',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-responsible-organization field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -461,10 +541,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Station Contact',
-    'weight' => '12',
+    'weight' => '80',
     'children' => array(
       0 => 'field_stationaddress',
       1 => 'field_stationcity',
@@ -476,12 +556,13 @@ function ccis_ct_weather_station_field_group_info() {
       7 => 'field_stationpostcode',
       8 => 'field_stationprovince',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-station-contact field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -495,10 +576,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'teaser';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Station Contact',
-    'weight' => '12',
+    'weight' => '80',
     'children' => array(
       0 => 'field_stationaddress',
       1 => 'field_stationcity',
@@ -510,12 +591,13 @@ function ccis_ct_weather_station_field_group_info() {
       7 => 'field_stationpostcode',
       8 => 'field_stationprovince',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-station-contact field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -529,10 +611,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Station Description',
-    'weight' => '13',
+    'weight' => '81',
     'children' => array(
       0 => 'field_stationabstract',
       1 => 'field_stationaccuracy',
@@ -544,12 +626,13 @@ function ccis_ct_weather_station_field_group_info() {
       7 => 'field_stationrelocation',
       8 => 'field_stationtopo',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-station-description field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -599,10 +682,10 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'weather_station';
   $field_group->mode = 'teaser';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Station Description',
-    'weight' => '13',
+    'weight' => '81',
     'children' => array(
       0 => 'field_stationabstract',
       1 => 'field_stationaccuracy',
@@ -615,12 +698,13 @@ function ccis_ct_weather_station_field_group_info() {
       8 => 'field_stationtopo',
       9 => 'field_walter_lieth_diagram',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-station-description field-group-fieldset',
+        'classes' => '',
+        'id' => '',
       ),
     ),
   );
@@ -661,6 +745,68 @@ function ccis_ct_weather_station_field_group_info() {
     ),
   );
   $export['group_stationcontact|node|weather_station|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_tabs_group|node|weather_station|default';
+  $field_group->group_name = 'group_tabs_group';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'weather_station';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Information',
+    'weight' => '0',
+    'children' => array(
+      0 => 'group_data',
+      1 => 'group_instrumentation',
+      2 => 'group_metadata_information',
+      3 => 'group_responsible_organization',
+      4 => 'group_station_contact',
+      5 => 'group_station_description',
+      6 => 'group_metadata_main',
+    ),
+    'format_type' => 'htabs',
+    'format_settings' => array(
+      'formatter' => '',
+      'instance_settings' => array(
+        'classes' => 'group-tabs-group field-group-htabs',
+      ),
+    ),
+  );
+  $export['group_tabs_group|node|weather_station|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_tabs_group|node|weather_station|teaser';
+  $field_group->group_name = 'group_tabs_group';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'weather_station';
+  $field_group->mode = 'teaser';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Information',
+    'weight' => '0',
+    'children' => array(
+      0 => 'group_data',
+      1 => 'group_instrumentation',
+      2 => 'group_metadata_information',
+      3 => 'group_responsible_organization',
+      4 => 'group_station_contact',
+      5 => 'group_station_description',
+      6 => 'group_metadata_main',
+    ),
+    'format_type' => 'htabs',
+    'format_settings' => array(
+      'formatter' => '',
+      'instance_settings' => array(
+        'classes' => 'group-tabs-group field-group-htabs',
+      ),
+    ),
+  );
+  $export['group_tabs_group|node|weather_station|teaser'] = $field_group;
 
   return $export;
 }
