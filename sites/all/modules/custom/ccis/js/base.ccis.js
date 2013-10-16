@@ -9,7 +9,6 @@ Drupal.behaviors.ccis_search_terms = {
       var form = $('#edit-input' + station_number)
         .val(station_input)
         .closest('form');
-      console.log(form.find("[type=submit]"));
       form.find("[type=submit]").mousedown();
     });
   }
