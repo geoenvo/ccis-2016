@@ -45,7 +45,6 @@ function ccis_roles_permissions_user_default_permissions() {
     'name' => 'administer nodes',
     'roles' => array(
       'administrator' => 'administrator',
-      'climability editor' => 'climability editor',
     ),
     'module' => 'node',
   );
@@ -74,7 +73,6 @@ function ccis_roles_permissions_user_default_permissions() {
     'name' => 'administer users',
     'roles' => array(
       'administrator' => 'administrator',
-      'climability editor' => 'climability editor',
     ),
     'module' => 'user',
   );
@@ -84,6 +82,7 @@ function ccis_roles_permissions_user_default_permissions() {
     'name' => 'csv_import',
     'roles' => array(
       'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
     ),
     'module' => 'ccis',
   );
@@ -93,6 +92,7 @@ function ccis_roles_permissions_user_default_permissions() {
     'name' => 'delete_collections',
     'roles' => array(
       'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
     ),
     'module' => 'ccis',
   );
