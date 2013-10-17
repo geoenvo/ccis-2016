@@ -342,6 +342,75 @@ textarea:focus {
   }
 */
 
+/* +++++ Header styling  +++++ */
+
+/* search */
+
+#search-block-form {
+  
+  }
+
+#search-block-form .form-text {
+  background: url(../img/lupe.png) no-repeat right center;
+  background-color: transparent;
+  }
+
+#search-block-form input.form-text:focus,
+#search-block-form input.form-text:hover,
+#search-block-form input.form-text:active {
+  background-color: #fff;
+  }
+
+#search-block-form #edit-actions {
+  position: absolute;
+  left: -10000px;
+  }
+
+
+
+
+/* social media block */
+
+#socmed {
+  float: right;
+  clear: right;
+  }
+
+#socmed a {
+  display: block;
+  float: left;
+  width: 22px;
+  height: 22px;
+  overflow: hidden;
+  margin: 0 10px 0 0px;
+  background-image: url(../img/social.png);
+  background-repeat: no-repeat
+  background-position: left center;
+  }
+#socmed span {
+  padding-left: 26px;
+  }
+#socmed .fb {
+  background-image: url(../img/facebook.png);
+  }
+#socmed .tw {
+  background-image: url(../img/twitter.png);
+  }
+#socmed .gp {
+  background-image: url(../img/googleplus.png);
+  }
+#socmed .yt {
+  background-image: url(../img/youtube.png);
+  }
+#socmed .li {
+  background-image: url(../img/linkedin.png);
+  }
+#socmed .di {
+  background-image: url(../img/diaspora.png);
+  }
+
+
+
 /* +++++ Various  +++++ */
 
 /* front page (maybe make more general?) */
@@ -354,21 +423,6 @@ textarea:focus {
   padding: 10px 20px 25px;
   }
 
-/* social media block */
-
-#socmed {
-  float: right;
-  clear: left;
-  }
-
-#socmed a {
-  display: block;
-  float: left;
-  width: 22px;
-  height: 22px;
-  margin: 0 10px 0 0px;
-  text-align: center; 
-  }
 
 
 /* +++++ Slideshow +++++ */
@@ -540,7 +594,13 @@ textarea:focus {
   }
 
 
-
+.view-station-info fieldset {
+  font-size: .8em;
+  padding: 2px;
+  }
+.view-station-info fieldset .even {
+  background-color: rgba(255,255,255,.2);
+  }
 
 
 /* ++++++++++ Climability-specific ++++++++++ */

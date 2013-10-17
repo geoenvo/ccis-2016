@@ -104,7 +104,7 @@ function ccis_theme_default_fe_block_settings() {
         'weight' => -10,
       ),
     ),
-    'title' => 'block_searchform',
+    'title' => '<none>',
     'visibility' => 0,
   );
 
