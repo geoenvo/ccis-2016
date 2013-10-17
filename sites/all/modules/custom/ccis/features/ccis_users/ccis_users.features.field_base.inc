@@ -10,13 +10,13 @@
 function ccis_users_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_company'
-  $field_bases['field_company'] = array(
+  // Exported field_base: 'field_first_name'
+  $field_bases['field_first_name'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_company',
+    'field_name' => 'field_first_name',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -45,13 +45,13 @@ function ccis_users_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_company_address'
-  $field_bases['field_company_address'] = array(
+  // Exported field_base: 'field_institution'
+  $field_bases['field_institution'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_company_address',
+    'field_name' => 'field_institution',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -80,13 +80,13 @@ function ccis_users_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_company_city'
-  $field_bases['field_company_city'] = array(
+  // Exported field_base: 'field_surname'
+  $field_bases['field_surname'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_company_city',
+    'field_name' => 'field_surname',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -115,13 +115,13 @@ function ccis_users_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_company_email'
-  $field_bases['field_company_email'] = array(
+  // Exported field_base: 'field_user_address'
+  $field_bases['field_user_address'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_company_email',
+    'field_name' => 'field_user_address',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -150,13 +150,13 @@ function ccis_users_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_company_phone'
-  $field_bases['field_company_phone'] = array(
+  // Exported field_base: 'field_user_city'
+  $field_bases['field_user_city'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_company_phone',
+    'field_name' => 'field_user_city',
     'field_permissions' => array(
       'type' => 0,
     ),
@@ -185,13 +185,13 @@ function ccis_users_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_company_postcode'
-  $field_bases['field_company_postcode'] = array(
+  // Exported field_base: 'field_user_postcode'
+  $field_bases['field_user_postcode'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_company_postcode',
+    'field_name' => 'field_user_postcode',
     'field_permissions' => array(
       'type' => 0,
     ),
