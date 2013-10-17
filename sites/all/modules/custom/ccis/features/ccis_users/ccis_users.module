@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Users feature.
+ */
+
+include_once 'ccis_users.features.inc';
