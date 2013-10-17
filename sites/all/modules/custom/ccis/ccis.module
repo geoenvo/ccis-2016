@@ -530,6 +530,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#description' => t('Enter a station name, Station code etc.'),
     '#default_value' => isset($node->title) ? "$node->title ($node->nid)" : '',
     '#field_prefix' => 1,
+    '#attributes' => array('class' => array('form-autocomplete-mousedown')),
   );
   $form['station_input']['input2'] = array(
     '#title' => t('Station 2'),
@@ -538,6 +539,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#title_display' => 'invisible',
     '#description' => t('Enter a station name, Station code to compare.'),
     '#field_prefix' => 2,
+    '#attributes' => array('class' => array('form-autocomplete-mousedown')),
   );
   $form['filter'] = array(
     '#type' => 'fieldset',
@@ -547,6 +549,17 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#title' => t('Search'),
     '#type' => 'textfield',
     '#description' => t('Enter metadata search term.'),
+    '#ajax' => array(
+      'callback' => 'ccis_block_filter_form_ajax_searchterms',
+      'wrapper' => 'ccis-station-search-result',
+    ),
+  );
+  $form['filter']['region'] = array(
+    '#title' => t('Region'),
+    '#type' => 'select',
+    '#options' => _ccis_get_station_regions(),
+    '#empty_value' => '',
+    '#empty_option' => t('Select a region'),
     '#ajax' => array(
       'callback' => 'ccis_block_filter_form_ajax_searchterms',
       'wrapper' => 'ccis-station-search-result',
@@ -565,8 +578,8 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#date_format' => 'd.m.Y',
   );
   $search_result = '';
-  if (!empty($form_state['values']['searchterm'])) {
-    $search_result = ccis_search_terms_finder_list($form_state['values']['searchterm']);
+  if (!empty($form_state['values'])) {
+    $search_result = ccis_search_terms_finder_list($form_state['values']);
   }
   $form['searchresult'] = array(
     '#markup' => $search_result,
@@ -928,7 +941,12 @@ function ccis_js_alter(&$javascript) {
  *   Search term
  *
  */
-function ccis_search_terms_finder_list($string) {
+function ccis_search_terms_finder_list($values) {
+  $string = $values['searchterm'];
+  $region = $values['region'];
+  if (empty($string) && empty($region)) {
+    return '';
+  }
   $search_fields = array_filter(variable_get('ccis_station_search_terms', array()));
   $search_fields = array_keys($search_fields);
   if (empty($search_fields)) {
@@ -938,7 +956,10 @@ function ccis_search_terms_finder_list($string) {
   #$query = db_select('node', 'n')->extend('PagerDefault')->limit(2);
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_wmocode', 'f', 'n.nid = f.entity_id');
-
+  if (!empty($region)) {
+    $query->leftJoin('field_data_field_stationprovince', 'region', 'n.nid = region.entity_id');
+    $query->condition('region.field_stationprovince_value', $region);
+  }
   $query->fields('n', array('nid', 'title'));
   $query->fields('f', array('field_wmocode_value'));
 
@@ -992,4 +1013,23 @@ function ccis_search_terms_finder_list($string) {
  */
 function ccis_block_filter_form_ajax_searchterms($form, $form_state) {
   return $form['searchresult'];
+}
+
+/**
+ * Returns a array of stored regions of the weather stations.
+ *
+ * @return array
+ */
+function _ccis_get_station_regions() {
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_stationprovince', 'f', 'n.nid = f.entity_id');
+  $query->fields('f', array('field_stationprovince_value'));
+  $query->condition('n.status', NODE_PUBLISHED);
+  $query->addTag('node_access');
+  $results = $query->execute()->fetchCol();
+  $options = array();
+  foreach ($results as $result) {
+    $options[$result] = $result;
+  }
+  return $options;
 }

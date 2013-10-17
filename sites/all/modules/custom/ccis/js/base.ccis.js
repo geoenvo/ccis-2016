@@ -19,4 +19,11 @@ Drupal.behaviors.ccis_search_terms = {
     });
   }
 }
+Drupal.jsAC.prototype.select = function (node) {
+  this.input.value = $(node).data('autocompleteValue');
+  if (jQuery(this.input).hasClass('form-autocomplete-mousedown')) {
+    var form = $(this.input.form);
+    form.find("[type=submit]").mousedown();
+  }
+};
 })(jQuery);
