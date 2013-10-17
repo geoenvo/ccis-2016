@@ -875,7 +875,7 @@ Drupal.behaviors.ccis = {
 						var html = clone.html();
 						
 						// Get the name of the Station
-						var stationName = stations_test[0].station_name;
+						var stationName = settings.ccis.stations[0].station_name;
 							
 						var printKeys = "";
 						for (var i=0; i<temperatureShown.length; i++) {
@@ -1804,7 +1804,7 @@ Drupal.behaviors.ccis = {
 						var html = clone.html();
 						
 						// Get the name of the Station
-						var stationName = stations_test[1].station_name;
+						var stationName = settings.ccis.stations[1].station_name;
 						
 						var printKeys = "";
 						for (var i=0; i<temperatureShown.length; i++) {
