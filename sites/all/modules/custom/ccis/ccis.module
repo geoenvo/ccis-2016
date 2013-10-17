@@ -119,10 +119,8 @@ function ccis_block_view($delta) {
       $block['content'] = _ccis_block_d3($list, $params);
       break;
     case 'd3_2':
-      $range = _ccis_get_date_range($params);
-      $list = _ccis_get_listname($node, $range);
       $block['subject'] = '<none>';
-      $block['content'] = _ccis_block_d3($list, $params, 2);
+      $block['content'] = '<div id="ccis-weather-d3-block-2"></div>';
       break;
     case 'datatables':
       $range = _ccis_get_date_range($params);
@@ -136,7 +134,7 @@ function ccis_block_view($delta) {
       break;
     case 'stationinfo_2':
       $block['subject'] = '<none>';
-      $block['content'] = _ccis_block_stationinfo($node, 2);
+      $block['content'] = '<div id="ccis-station-info-block-2"></div>';
       break;
     case 'stationmap':
       $block['subject'] = '<none>';
@@ -532,6 +530,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#description' => t('Enter a station name, Station code etc.'),
     '#default_value' => isset($node->title) ? "$node->title ($node->nid)" : '',
     '#field_prefix' => 1,
+    '#attributes' => array('class' => array('form-autocomplete-mousedown')),
   );
   $form['station_input']['input2'] = array(
     '#title' => t('Station 2'),
@@ -540,6 +539,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#title_display' => 'invisible',
     '#description' => t('Enter a station name, Station code to compare.'),
     '#field_prefix' => 2,
+    '#attributes' => array('class' => array('form-autocomplete-mousedown')),
   );
   $form['filter'] = array(
     '#type' => 'fieldset',
@@ -549,6 +549,17 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#title' => t('Search'),
     '#type' => 'textfield',
     '#description' => t('Enter metadata search term.'),
+    '#ajax' => array(
+      'callback' => 'ccis_block_filter_form_ajax_searchterms',
+      'wrapper' => 'ccis-station-search-result',
+    ),
+  );
+  $form['filter']['region'] = array(
+    '#title' => t('Region'),
+    '#type' => 'select',
+    '#options' => _ccis_get_station_regions(),
+    '#empty_value' => '',
+    '#empty_option' => t('Select a region'),
     '#ajax' => array(
       'callback' => 'ccis_block_filter_form_ajax_searchterms',
       'wrapper' => 'ccis-station-search-result',
@@ -567,8 +578,8 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#date_format' => 'd.m.Y',
   );
   $search_result = '';
-  if (!empty($form_state['values']['searchterm'])) {
-    $search_result = ccis_search_terms_finder_list($form_state['values']['searchterm']);
+  if (!empty($form_state['values'])) {
+    $search_result = ccis_search_terms_finder_list($form_state['values']);
   }
   $form['searchresult'] = array(
     '#markup' => $search_result,
@@ -583,9 +594,9 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#ajax' => array('callback' => 'ccis_block_filter_form_ajax_submit'),
     '#attributes' => array('class' => array('use-ajax-submit')),
   );
+  $form['#attached']['js'] = array(drupal_get_path('module', 'ccis') . '/js/base.ccis.js');
   return $form;
 }
-
 
 /**
  * Submit handler for the form _ccis_block_filter_form().
@@ -622,13 +633,23 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   if (!empty($station_2)) {
     $commands[] = ajax_command_replace('#ccis-weather-datatable-content-2', _ccis_datatables_content($list2, $form_state['values'], 2));
   }
+  else{
+    // Reset the block with a empty div.
+    $commands[] = ajax_command_replace('#ccis-weather-datatable-content-2', '<div id="ccis-weather-datatable-content-2"></div>');
+  }
   $commands[] = ajax_command_replace('#ccis-station-info-block-1', _ccis_block_stationinfo($station_1));
   if (!empty($station_2)) {
     $commands[] = ajax_command_replace('#ccis-station-info-block-2', _ccis_block_stationinfo($station_2, 2));
   }
+  else{
+    // Reset the block with a empty div.
+    $commands[] = ajax_command_replace('#ccis-station-info-block-2', '<div id="ccis-station-info-block-2"></div>');
+  }
 
   $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap(array($station_1, $station_2)));
 
+  // TODO Empty also search result?
+  #$commands[] = ajax_command_replace('#ccis-station-search-result', '<div id="ccis-station-search-result"></div>');
   $commands[] = ajax_command_prepend(NULL, theme('status_messages'));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
@@ -920,7 +941,12 @@ function ccis_js_alter(&$javascript) {
  *   Search term
  *
  */
-function ccis_search_terms_finder_list($string) {
+function ccis_search_terms_finder_list($values) {
+  $string = $values['searchterm'];
+  $region = $values['region'];
+  if (empty($string) && empty($region)) {
+    return '';
+  }
   $search_fields = array_filter(variable_get('ccis_station_search_terms', array()));
   $search_fields = array_keys($search_fields);
   if (empty($search_fields)) {
@@ -930,7 +956,10 @@ function ccis_search_terms_finder_list($string) {
   #$query = db_select('node', 'n')->extend('PagerDefault')->limit(2);
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_wmocode', 'f', 'n.nid = f.entity_id');
-
+  if (!empty($region)) {
+    $query->leftJoin('field_data_field_stationprovince', 'region', 'n.nid = region.entity_id');
+    $query->condition('region.field_stationprovince_value', $region);
+  }
   $query->fields('n', array('nid', 'title'));
   $query->fields('f', array('field_wmocode_value'));
 
@@ -972,8 +1001,6 @@ function ccis_search_terms_finder_list($string) {
     watchdog_exception('ccis', $e);
   }
   $vars = array('header' => $header, 'rows' => $rows, 'empty' => t('Did not found a station'));
-  $path = drupal_get_path('module', 'ccis');
-  drupal_add_js($path . '/js/base.ccis.js');
   // TODO Needs Ajax support.
   // return theme('table', $vars). theme('pager');
   return theme('table', $vars);
@@ -986,4 +1013,23 @@ function ccis_search_terms_finder_list($string) {
  */
 function ccis_block_filter_form_ajax_searchterms($form, $form_state) {
   return $form['searchresult'];
+}
+
+/**
+ * Returns a array of stored regions of the weather stations.
+ *
+ * @return array
+ */
+function _ccis_get_station_regions() {
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_stationprovince', 'f', 'n.nid = f.entity_id');
+  $query->fields('f', array('field_stationprovince_value'));
+  $query->condition('n.status', NODE_PUBLISHED);
+  $query->addTag('node_access');
+  $results = $query->execute()->fetchCol();
+  $options = array();
+  foreach ($results as $result) {
+    $options[$result] = $result;
+  }
+  return $options;
 }
