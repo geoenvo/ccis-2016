@@ -1,6 +1,6 @@
 
 /* Div of graph */
-#d3_GraphDiv {
+.d3_GraphDivClass {
 	position: relative;
 	float: left;
 }
@@ -12,7 +12,7 @@
 }
 
 /* Legend Div */
-#d3_legendDiv {
+.d3_legendClass {
 	position: relative;
 	overflow-x: hidden;
 	overflow-y: scroll;
@@ -21,7 +21,7 @@
 }
 
 /* Temperature Legend */
-#d3_iconLegendTemp {
+.d3_iconLegendTempClass {
 	width: 20px;
 	margin: 2px 0px 0px 5px;
 	clear: both;
@@ -29,7 +29,7 @@
 }
 
 /* Precipitation Legend */
-#d3_iconLegendPrec {
+.d3_iconLegendPrecClass {
 	width: 20px;
 	margin: 1px 0px 0px 5px;
 	clear: both;
@@ -37,7 +37,7 @@
 }
 
 /* Pressure Legend */
-#d3_iconLegendPress {
+.d3_iconLegendPressClass {
 	width: 20px;
 	margin: 1px 0px 0px 5px;
 	clear: both;
@@ -87,12 +87,12 @@
 }
 
 /* Vertical line for the tooltip in diagram*/
-#d3_hoverLine {
+.d3_hoverLineClass {
 	stroke: black;
 }
 
 /* Tooltip in diagram */
-#d3_tooltip {		
+.d3_tooltipClass {		
 	position: absolute;
 	width: 150px;
 	height: auto;
@@ -105,21 +105,21 @@
 }
 
 
-#printSelectWrapper {
+.printSelectWrapperClass {
 	position: relative;
 	float: right;
 	background-color: #b3b3b3;
 	border-top: 1px solid black;
 }
 
-#d3_SelectDiagramsText {
+.d3_SelectDiagramsTextClass {
 	position:relative;
 	float:right;
 	right: 28px;
 	font-size:12px;
 }
 
-#d3_printPreviewId {
+.d3_printPreviewClass {
 	width: 120px;
 	position:relative; 
 	float:right;
