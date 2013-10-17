@@ -1,15 +1,21 @@
 (function($) {
 Drupal.behaviors.ccis_search_terms = {
   attach: function(d_context, settings) {
-    var list = $('#ccis-station-search-result');
-    list.find("[type=radio]").click( function(e) {
+    var $list = $('#ccis-station-search-result', d_context);
+    var $radios = $list.find("[type=radio]");
+    var checked, station_number, station_input, form;
+    $radios.click( function(e) {
       var _this = $(this);
-      var station_number = _this.data('station');
-      var station_input = _this.data('station-input');
-      var form = $('#edit-input' + station_number)
+      station_number = _this.data('station');
+      station_input = _this.data('station-input');
+      form = $('#edit-input' + station_number)
         .val(station_input)
         .closest('form');
-      form.find("[type=submit]").mousedown();
+      checked = $radios.filter(":checked");
+      // Submit only the form when both stations are clicked.
+      if (checked.length > 1) {
+        form.find("[type=submit]").mousedown();
+      }
     });
   }
 }

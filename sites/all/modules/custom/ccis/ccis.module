@@ -119,10 +119,8 @@ function ccis_block_view($delta) {
       $block['content'] = _ccis_block_d3($list, $params);
       break;
     case 'd3_2':
-      $range = _ccis_get_date_range($params);
-      $list = _ccis_get_listname($node, $range);
       $block['subject'] = '<none>';
-      $block['content'] = _ccis_block_d3($list, $params, 2);
+      $block['content'] = '<div id="ccis-weather-d3-block-2"></div>';
       break;
     case 'datatables':
       $range = _ccis_get_date_range($params);
@@ -136,7 +134,7 @@ function ccis_block_view($delta) {
       break;
     case 'stationinfo_2':
       $block['subject'] = '<none>';
-      $block['content'] = _ccis_block_stationinfo($node, 2);
+      $block['content'] = '<div id="ccis-station-info-block-2"></div>';
       break;
     case 'stationmap':
       $block['subject'] = '<none>';
@@ -583,9 +581,9 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#ajax' => array('callback' => 'ccis_block_filter_form_ajax_submit'),
     '#attributes' => array('class' => array('use-ajax-submit')),
   );
+  $form['#attached']['js'] = array(drupal_get_path('module', 'ccis') . '/js/base.ccis.js');
   return $form;
 }
-
 
 /**
  * Submit handler for the form _ccis_block_filter_form().
@@ -622,13 +620,23 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   if (!empty($station_2)) {
     $commands[] = ajax_command_replace('#ccis-weather-datatable-content-2', _ccis_datatables_content($list2, $form_state['values'], 2));
   }
+  else{
+    // Reset the block with a empty div.
+    $commands[] = ajax_command_replace('#ccis-weather-datatable-content-2', '<div id="ccis-weather-datatable-content-2"></div>');
+  }
   $commands[] = ajax_command_replace('#ccis-station-info-block-1', _ccis_block_stationinfo($station_1));
   if (!empty($station_2)) {
     $commands[] = ajax_command_replace('#ccis-station-info-block-2', _ccis_block_stationinfo($station_2, 2));
   }
+  else{
+    // Reset the block with a empty div.
+    $commands[] = ajax_command_replace('#ccis-station-info-block-2', '<div id="ccis-station-info-block-2"></div>');
+  }
 
   $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap(array($station_1, $station_2)));
 
+  // TODO Empty also search result?
+  #$commands[] = ajax_command_replace('#ccis-station-search-result', '<div id="ccis-station-search-result"></div>');
   $commands[] = ajax_command_prepend(NULL, theme('status_messages'));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
@@ -972,8 +980,6 @@ function ccis_search_terms_finder_list($string) {
     watchdog_exception('ccis', $e);
   }
   $vars = array('header' => $header, 'rows' => $rows, 'empty' => t('Did not found a station'));
-  $path = drupal_get_path('module', 'ccis');
-  drupal_add_js($path . '/js/base.ccis.js');
   // TODO Needs Ajax support.
   // return theme('table', $vars). theme('pager');
   return theme('table', $vars);
