@@ -32,6 +32,7 @@ function ccis_dashboard_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['view_mode'] = 'dashboard';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -94,6 +95,21 @@ function ccis_dashboard_views_default_views() {
 
   /* Display: Embed Display (Single) */
   $handler = $view->new_display('embed', 'Embed Display (Single)', 'embed_1');
+  $translatables['station_info'] = array(
+    t('Master'),
+    t('Station-Info'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Did not found any information.'),
+    t('WMO Code'),
+    t('Current Position'),
+    t('All'),
+    t('Embed Display (Single)'),
+  );
   $export['station_info'] = $view;
 
   $view = new view();
@@ -170,6 +186,19 @@ function ccis_dashboard_views_default_views() {
 
   /* Display: Embed Display (Single) */
   $handler = $view->new_display('embed', 'Embed Display (Single)', 'embed_1');
+  $translatables['station_map'] = array(
+    t('Master'),
+    t('Station-Info'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Did not found any information.'),
+    t('All'),
+    t('Embed Display (Single)'),
+  );
   $export['station_map'] = $view;
 
   return $export;
