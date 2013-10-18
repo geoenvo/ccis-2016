@@ -11,7 +11,7 @@ function rb_configuration_node_export_features_default() {
   $node_export = array(
   'code_string' => 'array(
   (object) array(
-      \'vid\' => \'59\',
+      \'vid\' => \'71\',
       \'uid\' => \'1\',
       \'title\' => \'Access denied\',
       \'log\' => \'\',
@@ -20,7 +20,7 @@ function rb_configuration_node_export_features_default() {
       \'promote\' => \'0\',
       \'sticky\' => \'0\',
       \'vuuid\' => \'be139c78-fcbb-46b1-9db6-7cf07f063707\',
-      \'nid\' => \'27\',
+      \'nid\' => \'35\',
       \'type\' => \'page\',
       \'language\' => \'und\',
       \'created\' => \'1382087828\',
@@ -28,7 +28,7 @@ function rb_configuration_node_export_features_default() {
       \'tnid\' => \'0\',
       \'translate\' => \'0\',
       \'uuid\' => \'5d3d9b60-64fb-4e0c-9585-0c8247b85d33\',
-      \'revision_timestamp\' => \'1382089311\',
+      \'revision_timestamp\' => \'1382091199\',
       \'revision_uid\' => \'1\',
       \'body\' => array(
         \'und\' => array(
@@ -100,12 +100,12 @@ function rb_configuration_node_export_features_default() {
       \'last_comment_name\' => NULL,
       \'last_comment_uid\' => \'1\',
       \'comment_count\' => \'0\',
-      \'name\' => \'admin\',
+      \'name\' => \'CCI-Adm\',
       \'picture\' => \'0\',
       \'data\' => \'b:0;\',
       \'path\' => array(
-        \'pid\' => \'10\',
-        \'source\' => \'node/27\',
+        \'pid\' => \'3\',
+        \'source\' => \'node/35\',
         \'alias\' => \'403\',
         \'language\' => \'und\',
       ),
@@ -113,7 +113,7 @@ function rb_configuration_node_export_features_default() {
       \'node_export_drupal_version\' => \'7\',
     ),
   (object) array(
-      \'vid\' => \'60\',
+      \'vid\' => \'72\',
       \'uid\' => \'1\',
       \'title\' => \'Page not found\',
       \'log\' => \'\',
@@ -122,7 +122,7 @@ function rb_configuration_node_export_features_default() {
       \'promote\' => \'0\',
       \'sticky\' => \'0\',
       \'vuuid\' => \'def2ac16-cca4-41dc-8e2f-c9da9e51afc7\',
-      \'nid\' => \'28\',
+      \'nid\' => \'34\',
       \'type\' => \'page\',
       \'language\' => \'und\',
       \'created\' => \'1382087694\',
@@ -130,7 +130,7 @@ function rb_configuration_node_export_features_default() {
       \'tnid\' => \'0\',
       \'translate\' => \'0\',
       \'uuid\' => \'71d2f4cb-4f08-4892-b160-13992aced583\',
-      \'revision_timestamp\' => \'1382089311\',
+      \'revision_timestamp\' => \'1382091199\',
       \'revision_uid\' => \'1\',
       \'body\' => array(
         \'und\' => array(
@@ -198,16 +198,16 @@ function rb_configuration_node_export_features_default() {
         ),
       ),
       \'cid\' => \'0\',
-      \'last_comment_timestamp\' => \'1382087842\',
+      \'last_comment_timestamp\' => \'1382087694\',
       \'last_comment_name\' => NULL,
       \'last_comment_uid\' => \'1\',
       \'comment_count\' => \'0\',
-      \'name\' => \'admin\',
+      \'name\' => \'CCI-Adm\',
       \'picture\' => \'0\',
       \'data\' => \'b:0;\',
       \'path\' => array(
-        \'pid\' => \'11\',
-        \'source\' => \'node/28\',
+        \'pid\' => \'4\',
+        \'source\' => \'node/34\',
         \'alias\' => \'404\',
         \'language\' => \'und\',
       ),
