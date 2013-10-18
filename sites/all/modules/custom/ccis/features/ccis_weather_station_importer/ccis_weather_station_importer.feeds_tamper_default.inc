@@ -18,8 +18,8 @@ function ccis_weather_station_importer_feeds_tamper_default() {
   $feeds_tamper->source = 'xpathparser:71';
   $feeds_tamper->plugin_id = 'implode';
   $feeds_tamper->settings = array(
-    'glue' => ',',
-    'real_glue' => ',',
+    'glue' => ', ',
+    'real_glue' => ', ',
   );
   $feeds_tamper->weight = 0;
   $feeds_tamper->description = 'Implode';
@@ -33,8 +33,8 @@ function ccis_weather_station_importer_feeds_tamper_default() {
   $feeds_tamper->source = 'xpathparser:72';
   $feeds_tamper->plugin_id = 'implode';
   $feeds_tamper->settings = array(
-    'glue' => ',',
-    'real_glue' => ',',
+    'glue' => ', ',
+    'real_glue' => ', ',
   );
   $feeds_tamper->weight = 0;
   $feeds_tamper->description = 'Implode';

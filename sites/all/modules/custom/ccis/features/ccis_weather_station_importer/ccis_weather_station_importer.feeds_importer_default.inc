@@ -20,11 +20,11 @@ function ccis_weather_station_importer_feeds_importer_default() {
     'fetcher' => array(
       'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
-        'allowed_extensions' => 'txt csv tsv xml opml html htm',
-        'direct' => FALSE,
+        'allowed_extensions' => 'xml',
+        'direct' => 1,
         'directory' => 'public://feeds',
         'allowed_schemes' => array(
-          0 => 'public',
+          'private' => 'private',
         ),
       ),
     ),
