@@ -13,11 +13,18 @@ function ccis_menu() {
     'position' => 'left',
   );
   $items[$path . '/csv-import'] = array(
-    'title' => 'CSV Import',
+    'title' => 'Weather data import',
     'access arguments' => array('csv_import'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ccis_import_files_form'),
     'file' => 'ccis.import.inc',
+  );
+  $items[$path . '/xml-import'] = array(
+      'title' => 'Weather station import',
+      'access arguments' => array('xml_import'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('ccis_xml_import_files_form'),
+      'file' => 'ccis.import.inc',
   );
   $items[$path . '/search'] = array(
     'title' => 'Search',
@@ -49,17 +56,17 @@ function ccis_menu() {
 function ccis_permission() {
   $perms['csv_import'] = array(
     'title' => t('CSV import'),
-    'description' => t('Allows a user to import the csv files from the csv_incoming directory inside the private file system.')
+    'description' => t('Allows a user to upload and import the csv files.')
   );
-  $perms['delete_collections'] = array(
-    'title' => t('Delete mongoDB collections'),
-    'description' => t('Allows a user to delete a mongoDB collection via GUI.')
+  $perms['xml_import'] = array(
+    'title' => t('XML import'),
+    'description' => t('Allows a user to upload and import the xml files.')
   );
   $perms['access_ccis_admin_overview'] = array(
     'title' => t('Access CCIS admin overview'),
   );
   $perms['access_ccis_search_settings'] = array(
-     'title' => t('Access CCIS search settings')
+    'title' => t('Access CCIS search settings'),
   );
   return $perms;
 }

@@ -62,20 +62,6 @@ function ccis_import_files_form_submit($form, &$form_state) {
  */
 function ccis_import_csv_file(stdClass $file, &$context) {
   $context['message'] = t('Importing @file', array('@file' => $file->filename));
-//   $errors = ccis_csv_file_header_validate($file);
-
-//   // Check for errors.
-//   if (!empty($errors)) {
-//     $message = t('The specified file %name could not be imported.', array('%name' => $file->filename));
-//     if (count($errors) > 1) {
-//       $message .= theme('item_list', array('items' => $errors));
-//     }
-//     else {
-//       $message .= ' ' . array_pop($errors);
-//     }
-//     form_set_error('', $message);
-//     return FALSE;
-//   }
   try{
     $row = 1;
     $header = $end_data = array();
@@ -185,4 +171,85 @@ function ccis_csv_file_name_validate(stdClass $file, $pattern) {
     return $errors;
   }
   return $errors;
+}
+
+/**
+ * Page callback to upload and import XML files.
+ */
+function ccis_xml_import_files_form($form, &$form_state) {
+  form_load_include($form_state, 'inc', 'feeds', 'feeds.pages');
+  $importer_id = 'weather_station';
+  $source = feeds_source($importer_id, 0);
+  $form['upload'] = array(
+    '#type' => 'plupload',
+    '#title' => t('Upload files'),
+    '#autoupload' => TRUE,
+    '#autosubmit' => TRUE,
+    '#submit_element' => '#edit-submit',
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('xml'),
+    ),
+    '#plupload_settings' => array(
+      'runtimes' => 'html5',
+      'chunk_size' => '1mb',
+    ),
+  );
+  $form['source_status'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Status'),
+    '#tree' => TRUE,
+    '#value' => feeds_source_status($source),
+  );
+  $source_form = $source->configForm($form_state);
+  if (!empty($source_form)) {
+    $form['feeds'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Import'),
+      '#tree' => TRUE,
+      '#access' => FALSE,
+    ) + $source_form;
+  }
+  $form['#importer_id'] = $importer_id;
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Import'),
+    '#submit' => array('ccis_xml_import_files_form_submit', 'feeds_import_form_submit'),
+  );
+  $progress = $source->progressImporting();
+  if ($progress !== FEEDS_BATCH_COMPLETE) {
+    $form['actions']['submit']['#disabled'] = TRUE;
+    $form['actions']['submit']['#value'] =
+    t('Importing (@progress %)', array('@progress' => number_format(100 * $progress, 0)));
+  }
+  return $form;
+}
+
+/**
+ * Validation handler for ccis_xml_import_files_form().
+ */
+function ccis_xml_import_files_form_validate($form, $form_state) {
+  feeds_source($form['#importer_id'])->configFormValidate($form_state['values']['feeds']);
+}
+
+/**
+ * Submit handler for ccis_xml_import_files_form().
+ */
+function ccis_xml_import_files_form_submit($form, &$form_state) {
+  $values = $form_state['values'];
+  if (!empty($values['upload'])) {
+    $operations = array();
+    foreach ($values['upload'] as $upload) {
+      if ($upload['status'] == 'done') {
+        $file = new stdClass();
+        $file->uri = $upload['tmppath'];
+        $file->filename = $upload['name'];
+        $file->name = pathinfo($file->filename, PATHINFO_FILENAME);
+        $dir = 'private://weatherstation';
+        file_prepare_directory($dir);
+        $destination = $dir . '/' . $file->filename;
+        file_unmanaged_move($file->uri, $destination, FILE_EXISTS_REPLACE);
+      }
+    }
+  }
 }
