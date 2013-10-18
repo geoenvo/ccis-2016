@@ -7,3 +7,4 @@ dependencies[] = views
 dependencies[] = datatables
 dependencies[] = entity
 dependencies[] = date_popup
+dependencies[] = plupload
