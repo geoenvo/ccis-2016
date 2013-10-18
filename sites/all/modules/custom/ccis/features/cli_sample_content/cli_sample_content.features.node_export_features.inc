@@ -11,6 +11,203 @@ function cli_sample_content_node_export_features_default() {
   $node_export = array(
   'code_string' => 'array(
   (object) array(
+      \'vid\' => \'7\',
+      \'uid\' => \'1\',
+      \'title\' => \'Welcome\',
+      \'log\' => \'\',
+      \'status\' => \'1\',
+      \'comment\' => \'1\',
+      \'promote\' => \'0\',
+      \'sticky\' => \'0\',
+      \'vuuid\' => \'2c09f13f-786f-4df8-8076-b20396312c5b\',
+      \'nid\' => \'7\',
+      \'type\' => \'page\',
+      \'language\' => \'und\',
+      \'created\' => \'1381508840\',
+      \'changed\' => \'1382085574\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'uuid\' => \'0dc9951a-04d5-48a0-8ba4-eb2046aeef29\',
+      \'revision_timestamp\' => \'1382085574\',
+      \'revision_uid\' => \'1\',
+      \'body\' => array(),
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'cid\' => \'0\',
+      \'last_comment_timestamp\' => \'1381508840\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_uid\' => \'1\',
+      \'comment_count\' => \'0\',
+      \'name\' => \'CCI-Adm\',
+      \'picture\' => \'0\',
+      \'data\' => \'b:0;\',
+      \'path\' => array(
+        \'pid\' => \'1\',
+        \'source\' => \'node/7\',
+        \'alias\' => \'start\',
+        \'language\' => \'und\',
+      ),
+      \'menu\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+    ),
+  (object) array(
+      \'vid\' => \'69\',
+      \'uid\' => \'1\',
+      \'title\' => \'Why is adaptation to climate change necessary?\',
+      \'log\' => \'\',
+      \'status\' => \'1\',
+      \'comment\' => \'2\',
+      \'promote\' => \'1\',
+      \'sticky\' => \'0\',
+      \'vuuid\' => \'d3652c76-6231-4e6c-9e42-29722d26c604\',
+      \'nid\' => \'37\',
+      \'type\' => \'blog_article\',
+      \'language\' => \'en\',
+      \'created\' => \'1382089284\',
+      \'changed\' => \'1382089284\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'uuid\' => \'2efaadcb-7a7f-4379-b6f1-ee723b909d44\',
+      \'revision_timestamp\' => \'1382089284\',
+      \'revision_uid\' => \'1\',
+      \'body\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => "For several decades, our global climate has been changing, with increasingly severe consequences. Global climate change causes gradual and longterm climatic shifts, such as an increase in average temperature and thus a rise in sea levels. Extreme weather events are also occurring with greater frequency and intensity.\\r\\n\\r\\nAs a result, many vital sectors – such as water resources, agricultural production, coastal zones, human settlements, as well as energy supply and the health sector – are under threat worldwide. However, the threats resulting from climate change cause highly disparate problems in the different regions of the world. Some regions will quite literally be deluged, while others will face water shortages. Some countries will experience more frequent and stronger floods and the permanent submersion of entire coastal areas.Yet in regions already prone to aridity, drought will occur with greater frequency and intensity. Other countries and regions – or, in a worst-case scenario, the same ones – are likely to suffer other extreme events, such as storms, mudslides and avalanches. Entire cities, road networks and economic regions are thus at risk.\\r\\n\\r\\nThe impacts of climate change have become more acute in recent decades, and we must assume that they are likely to intensify further. Identifying appropriate responses to climate change should therefore be a key element of the sustainable development strategies adopted by the affected countries. Yet at present, there is virtually no experience of how to manage this adaptation process.There are scarcely any systematic risk assessments predicting who will be affected, and when. What is certain, however, is that the impacts will be felt most acutely by those with least adaptive capacity due to their lack of financial and technical resources: the poor countries, and the poor in the developing countries. For this reason, the developing countries are calling for intensive support from the industrialized countries – which are primarily responsible for climate change – in planning and implementing adaptation measures.\\r\\n\\r\\n<h2>Visible effects of climate change</h2>\\r\\n<h3>Glaciers</h3>\\r\\nGlaciers are the world’s climate thermometers, casting an icy spotlight upon rising global mean temperatures.Throughout the world, glaciers are shrinking. In the Himalayas, for example, glacial waters are filling the centuries-old natural catch basins far too quickly, posing a risk to human life, ecosystems and infrastructure, such as hydro-electric plants. In East Africa, Mount Kilimanjaro’s ice cap is melting, while in Central Europe, glacial retreat may result in long-term problems with water supplies. The shrinking of the Alpine glaciers is scientifically proven and is further accelerated by extreme heat waves, as in summer 2003.\\r\\n\\r\\nTwo-thirds of Africa is already affected by aridity and drought, and desertification is advancing. Climate change is intensifying these trends.\\r\\nIn parts of the Indian subcontinent, on the other hand, precipitation is increasing significantly. In northern India and in Bangladesh, more and more houses are washed away during the monsoons and many lives are lost through drowning.Yet other provinces are reliant on consignments of water, delivered by train, after years of extreme drought.\\r\\nIslands in the Pacific Ocean are severely affected, and the impact of rising sea levels is felt acutely by local communities. Parts of these islands are already submerged, and if sea levels rise by a further 1 m, the Marshall Islands and Tuvalu will vanish into the sea.\\r\\n\\r\\n<em>[Source: www2.gtz.de/dokumente/bib-2011/giz2011-0159en-climate-change.pdf ]</em>",
+            \'summary\' => \'For several decades, our global climate has been changing, with increasingly severe consequences. Global climate change causes gradual and longterm climatic shifts, such as an increase in average temperature and thus a rise in sea levels. Extreme weather events are also occurring with greater frequency and intensity.\',
+            \'format\' => \'filtered_html\',
+            \'safe_value\' => "<p>For several decades, our global climate has been changing, with increasingly severe consequences. Global climate change causes gradual and longterm climatic shifts, such as an increase in average temperature and thus a rise in sea levels. Extreme weather events are also occurring with greater frequency and intensity.</p>\\n<p>As a result, many vital sectors – such as water resources, agricultural production, coastal zones, human settlements, as well as energy supply and the health sector – are under threat worldwide. However, the threats resulting from climate change cause highly disparate problems in the different regions of the world. Some regions will quite literally be deluged, while others will face water shortages. Some countries will experience more frequent and stronger floods and the permanent submersion of entire coastal areas.Yet in regions already prone to aridity, drought will occur with greater frequency and intensity. Other countries and regions – or, in a worst-case scenario, the same ones – are likely to suffer other extreme events, such as storms, mudslides and avalanches. Entire cities, road networks and economic regions are thus at risk.</p>\\n<p>The impacts of climate change have become more acute in recent decades, and we must assume that they are likely to intensify further. Identifying appropriate responses to climate change should therefore be a key element of the sustainable development strategies adopted by the affected countries. Yet at present, there is virtually no experience of how to manage this adaptation process.There are scarcely any systematic risk assessments predicting who will be affected, and when. What is certain, however, is that the impacts will be felt most acutely by those with least adaptive capacity due to their lack of financial and technical resources: the poor countries, and the poor in the developing countries. For this reason, the developing countries are calling for intensive support from the industrialized countries – which are primarily responsible for climate change – in planning and implementing adaptation measures.</p>\\n<h2>Visible effects of climate change</h2>\\n<h3>Glaciers</h3>\\n<p>Glaciers are the world’s climate thermometers, casting an icy spotlight upon rising global mean temperatures.Throughout the world, glaciers are shrinking. In the Himalayas, for example, glacial waters are filling the centuries-old natural catch basins far too quickly, posing a risk to human life, ecosystems and infrastructure, such as hydro-electric plants. In East Africa, Mount Kilimanjaro’s ice cap is melting, while in Central Europe, glacial retreat may result in long-term problems with water supplies. The shrinking of the Alpine glaciers is scientifically proven and is further accelerated by extreme heat waves, as in summer 2003.</p>\\n<p>Two-thirds of Africa is already affected by aridity and drought, and desertification is advancing. Climate change is intensifying these trends.<br />\\nIn parts of the Indian subcontinent, on the other hand, precipitation is increasing significantly. In northern India and in Bangladesh, more and more houses are washed away during the monsoons and many lives are lost through drowning.Yet other provinces are reliant on consignments of water, delivered by train, after years of extreme drought.<br />\\nIslands in the Pacific Ocean are severely affected, and the impact of rising sea levels is felt acutely by local communities. Parts of these islands are already submerged, and if sea levels rise by a further 1 m, the Marshall Islands and Tuvalu will vanish into the sea.</p>\\n<p><em>[Source: www2.gtz.de/dokumente/bib-2011/giz2011-0159en-climate-change.pdf ]</em></p>\\n",
+            \'safe_summary\' => "<p>For several decades, our global climate has been changing, with increasingly severe consequences. Global climate change causes gradual and longterm climatic shifts, such as an increase in average temperature and thus a rise in sea levels. Extreme weather events are also occurring with greater frequency and intensity.</p>\\n",
+          ),
+        ),
+      ),
+      \'field_blog_image\' => array(),
+      \'field_tags\' => array(),
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'cid\' => \'0\',
+      \'last_comment_timestamp\' => \'1382089284\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_uid\' => \'1\',
+      \'comment_count\' => \'0\',
+      \'name\' => \'CCI-Adm\',
+      \'picture\' => \'0\',
+      \'data\' => \'b:0;\',
+      \'path\' => array(
+        \'pid\' => \'6\',
+        \'source\' => \'node/37\',
+        \'alias\' => \'blog/why-adaptation-climate-change-necessary\',
+        \'language\' => \'en\',
+      ),
+      \'menu\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+    ),
+  (object) array(
       \'vid\' => \'57\',
       \'uid\' => \'1\',
       \'title\' => \'Climate Summit 2014\',
@@ -989,6 +1186,145 @@ function cli_sample_content_node_export_features_default() {
       \'node_export_drupal_version\' => \'7\',
     ),
   (object) array(
+      \'vid\' => \'68\',
+      \'uid\' => \'1\',
+      \'title\' => \'Adaptation to climate change – strategies of the Climate Protection Programme\',
+      \'log\' => \'\',
+      \'status\' => \'1\',
+      \'comment\' => \'2\',
+      \'promote\' => \'1\',
+      \'sticky\' => \'0\',
+      \'vuuid\' => \'8cf5e92e-0812-4da2-b0e6-c729fff194a4\',
+      \'nid\' => \'36\',
+      \'type\' => \'blog_article\',
+      \'language\' => \'en\',
+      \'created\' => \'1382089210\',
+      \'changed\' => \'1382089210\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'uuid\' => \'b171d5f1-8b78-4b83-bc60-a928269a0a36\',
+      \'revision_timestamp\' => \'1382089210\',
+      \'revision_uid\' => \'1\',
+      \'body\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => "The German Federal Government is committed to achieving the UN Millennium Development Goals and has adopted the \\"Programme of Action 2015\\" as Germany\'s contribution to their implementation. Together with the guiding vision of sustainable development, this Programme provides the framework for German development policy,with poverty alleviation being the key goal.The Climate Protection Programme for Developing Countries (CaPP) supports these endeavours.\\r\\n\\r\\n<h2>Millennium Development Goals (MDG)</h2>\\r\\nThe United Nations Millennium Summit in 2000 defined the most important challenges facing the UN in the 21st century and adopted them as the Millennium Development Goals (MDG).The overarching objective of these eight development goals is to achieve sustainable development and halve the proportion of people living in absolute poverty by 2015. However, the attainment of many of the goals – such as eradicating extreme hunger, ensuring environmental sustainability, combating diseases such as malaria, or achieving universal primary education – is directly or indirectly jeopardized by the impacts of climate change.\\r\\n\\r\\nBesides reducing greenhouse gas emissions, primarily through the Clean Development Mechanism (CDM)1, adaptation to climate change is a further focus of CaPP\'s work. Here, CaPP\'s strategy is to initiate an integration process which incorporates the various aspects of adaptation to climate change more fully:\\r\\n<ul><li>into German and international development cooperation, and</li>\\r\\n<li>into partner countries\' strategies and policies (mainstreaming).</li>\\r\\n<li>These two levels cannot be seen as separate, but are mutually reinforcing.</li>\\r\\n</ul>\\r\\nThe German Federal Ministry for Economic Cooperation and Development (BMZ) has responded to the developing countries\' increasingly vocal demands for support in implementing adaptation measures and has expanded CaPP\'s terms of reference.\\r\\n\\r\\n<h2>Integrating adaptation into development cooperation</h2>\\r\\nAwareness of the long-term risks associated with the impacts of climate change must be embedded in German development cooperation, and – more broadly – in the international donor community. Many development programmes and projects aim to achieve long-term improvements, but these could be reversed by the impacts of climate change. Here, CaPP provides practical support with the integration of adaptation measures into project activities.This is useful, for example, in projects aimed at disaster reduction, coastal zone and water management, the conservation of natural resources and ecosystems, or rural development.\\r\\n\\r\\n<em>[Source: www2.gtz.de/dokumente/bib-2011/giz2011-0159en-climate-change.pdf ]</em>\\r\\n",
+            \'summary\' => "The German Federal Government is committed to achieving the UN Millennium Development Goals and has adopted the \\"Programme of Action 2015\\" as Germany\'s contribution to their implementation.",
+            \'format\' => \'filtered_html\',
+            \'safe_value\' => "<p>The German Federal Government is committed to achieving the UN Millennium Development Goals and has adopted the \\"Programme of Action 2015\\" as Germany\'s contribution to their implementation. Together with the guiding vision of sustainable development, this Programme provides the framework for German development policy,with poverty alleviation being the key goal.The Climate Protection Programme for Developing Countries (CaPP) supports these endeavours.</p>\\n<h2>Millennium Development Goals (MDG)</h2>\\n<p>The United Nations Millennium Summit in 2000 defined the most important challenges facing the UN in the 21st century and adopted them as the Millennium Development Goals (MDG).The overarching objective of these eight development goals is to achieve sustainable development and halve the proportion of people living in absolute poverty by 2015. However, the attainment of many of the goals – such as eradicating extreme hunger, ensuring environmental sustainability, combating diseases such as malaria, or achieving universal primary education – is directly or indirectly jeopardized by the impacts of climate change.</p>\\n<p>Besides reducing greenhouse gas emissions, primarily through the Clean Development Mechanism (CDM)1, adaptation to climate change is a further focus of CaPP\'s work. Here, CaPP\'s strategy is to initiate an integration process which incorporates the various aspects of adaptation to climate change more fully:</p>\\n<ul><li>into German and international development cooperation, and</li>\\n<li>into partner countries\' strategies and policies (mainstreaming).</li>\\n<li>These two levels cannot be seen as separate, but are mutually reinforcing.</li>\\n</ul><p>The German Federal Ministry for Economic Cooperation and Development (BMZ) has responded to the developing countries\' increasingly vocal demands for support in implementing adaptation measures and has expanded CaPP\'s terms of reference.</p>\\n<h2>Integrating adaptation into development cooperation</h2>\\n<p>Awareness of the long-term risks associated with the impacts of climate change must be embedded in German development cooperation, and – more broadly – in the international donor community. Many development programmes and projects aim to achieve long-term improvements, but these could be reversed by the impacts of climate change. Here, CaPP provides practical support with the integration of adaptation measures into project activities.This is useful, for example, in projects aimed at disaster reduction, coastal zone and water management, the conservation of natural resources and ecosystems, or rural development.</p>\\n<p><em>[Source: www2.gtz.de/dokumente/bib-2011/giz2011-0159en-climate-change.pdf ]</em></p>\\n",
+            \'safe_summary\' => "<p>The German Federal Government is committed to achieving the UN Millennium Development Goals and has adopted the \\"Programme of Action 2015\\" as Germany\'s contribution to their implementation.</p>\\n",
+          ),
+        ),
+      ),
+      \'field_blog_image\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => \'20\',
+            \'alt\' => \'photo of a hurricane swirl, taken from above\',
+            \'title\' => \'The eye of a hurricane\',
+            \'width\' => \'960\',
+            \'height\' => \'249\',
+            \'uid\' => \'1\',
+            \'filename\' => \'hurricane.jpg\',
+            \'uri\' => \'public://blog/hurricane_0.jpg\',
+            \'filemime\' => \'image/jpeg\',
+            \'filesize\' => \'61249\',
+            \'status\' => \'1\',
+            \'timestamp\' => \'1382089210\',
+            \'uuid\' => \'abca40d3-ae24-46f4-af68-790e87751858\',
+            \'rdf_mapping\' => array(),
+          ),
+        ),
+      ),
+      \'field_tags\' => array(
+        \'und\' => array(
+          array(
+            \'tid\' => \'1\',
+            \'uuid\' => \'292105f6-30fd-40fa-af47-af22a340cf51\',
+          ),
+          array(
+            \'tid\' => \'2\',
+            \'uuid\' => \'c5c706bb-247f-47fe-b88b-318af8914ab9\',
+          ),
+          array(
+            \'tid\' => \'3\',
+            \'uuid\' => \'7adb174c-9e99-4660-a2dd-af6a63c7119e\',
+          ),
+        ),
+      ),
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'cid\' => \'0\',
+      \'last_comment_timestamp\' => \'1382089210\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_uid\' => \'1\',
+      \'comment_count\' => \'0\',
+      \'name\' => \'CCI-Adm\',
+      \'picture\' => \'0\',
+      \'data\' => \'b:0;\',
+      \'path\' => array(
+        \'pid\' => \'5\',
+        \'source\' => \'node/36\',
+        \'alias\' => \'blog/adaptation-climate-change-–-strategies-climate-protection-programme\',
+        \'language\' => \'en\',
+      ),
+      \'menu\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+    ),
+  (object) array(
       \'vid\' => \'64\',
       \'uid\' => \'1\',
       \'title\' => \'Help\',
@@ -1098,6 +1434,261 @@ function cli_sample_content_node_export_features_default() {
         \'description\' => \'\',
         \'enabled\' => 1,
       ),
+      \'node_export_drupal_version\' => \'7\',
+    ),
+  (object) array(
+      \'vid\' => \'1\',
+      \'uid\' => \'1\',
+      \'title\' => \'About CCIS\',
+      \'log\' => \'\',
+      \'status\' => \'1\',
+      \'comment\' => \'1\',
+      \'promote\' => \'0\',
+      \'sticky\' => \'0\',
+      \'vuuid\' => \'813b9cab-d0a6-4340-9f10-943d6614d67f\',
+      \'nid\' => \'1\',
+      \'type\' => \'page\',
+      \'language\' => \'en\',
+      \'created\' => \'1381411223\',
+      \'changed\' => \'1382085600\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'uuid\' => \'d83deba5-06f2-44a7-b9e6-a1abda3df055\',
+      \'revision_timestamp\' => \'1382085600\',
+      \'revision_uid\' => \'1\',
+      \'body\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'(to do)\',
+            \'summary\' => \'\',
+            \'format\' => \'filtered_html\',
+            \'safe_value\' => "<p>(to do)</p>\\n",
+            \'safe_summary\' => \'\',
+          ),
+        ),
+      ),
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'cid\' => \'0\',
+      \'last_comment_timestamp\' => \'1381411223\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_uid\' => \'1\',
+      \'comment_count\' => \'0\',
+      \'name\' => \'CCI-Adm\',
+      \'picture\' => \'0\',
+      \'data\' => \'b:0;\',
+      \'path\' => FALSE,
+      \'menu\' => array(
+        \'link_title\' => \'About\',
+        \'mlid\' => 0,
+        \'plid\' => \'0\',
+        \'menu_name\' => \'main-menu\',
+        \'weight\' => \'-47\',
+        \'options\' => array(),
+        \'module\' => \'menu\',
+        \'expanded\' => \'0\',
+        \'hidden\' => \'0\',
+        \'has_children\' => \'0\',
+        \'customized\' => 0,
+        \'parent_depth_limit\' => 8,
+        \'description\' => \'About CCIS\',
+        \'enabled\' => 1,
+      ),
+      \'node_export_drupal_version\' => \'7\',
+    ),
+  (object) array(
+      \'vid\' => \'70\',
+      \'uid\' => \'1\',
+      \'title\' => \'Developing countries are especially vulnerable\',
+      \'log\' => \'\',
+      \'status\' => \'1\',
+      \'comment\' => \'2\',
+      \'promote\' => \'1\',
+      \'sticky\' => \'0\',
+      \'vuuid\' => \'9d3d1177-b337-4a2f-92cd-f3da8d04f8cb\',
+      \'nid\' => \'38\',
+      \'type\' => \'blog_article\',
+      \'language\' => \'und\',
+      \'created\' => \'1382089362\',
+      \'changed\' => \'1382089362\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'uuid\' => \'f9888a18-a943-48d4-9293-5e11ddae7b79\',
+      \'revision_timestamp\' => \'1382089362\',
+      \'revision_uid\' => \'1\',
+      \'body\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => "This may as well be in bahasa indonesia: The vulnerability of people in a given area to the effects of climate change depends on two key factors:\\r\\n<ul>\\r\\n<li>the vulnerability of the surrounding natural landscape unit to weather extremes and climatic shifts, and</li>\\r\\n<li>the adaptive capacity of the local population.</ul>\\r\\n</ul>\\r\\nDeveloping countries are particularly vulnerable since they are often located in high-risk natural landscape areas and their adaptive capacity is undermined by poor socio-economic development. In principle, the situation is not new: populations in affected areas have always had to adapt to climatic changes. However, due to their speed and intensity, the changes predicted for the coming decades far exceed the adaptive capacities of societies and institutions.Traditional adaptation methods and mechanisms are no longer adequate, and the societies affected are likely to become even more vulnerable. This applies above all to poorer population groups in the developing countries.They suffer most from the impacts of climate change as they are often directly dependent on the natural environment and agriculture for their survival. Both will be severely impacted by the ongoing process of climate change.Yet due to extreme poverty and a lack of education and infrastructure, most people have virtually no chance of switching to alternative sources of income.The impacts of climate change will worsen the already grave conditions of life faced by the very poor – a vicious circle which will further entrench poverty.\\r\\n\\r\\n<h2>What action is being taken by the international community?</h2>\\r\\nThe inherent risk of global climate change is that it will further exacerbate poverty and social conflict worldwide. Combating the negative impacts of climate change is an important goal for the industrialized and developing countries alike. International donors are increasingly recognizing that successful current and future development in the African, Asian and Latin American countries is seriously jeopardized as a result of climate change. The obligation to support the developing countries in adapting to climate change is already agreed in the Climate Change Convention.These countries are now pushing more vigorously for this pledge to be honoured. Since 1995, various decisions have been adopted on ways of providing support to poor countries that lack the financial, technical and human resources to prepare appropriate adaptation measures. Since the 2002 session of the Conference of the Parties, at the latest, adaptation to climate change has become a key issue in the climate process.\\r\\n\\r\\nThe international community provides funding for adaptation via the Global Environment Facility (GEF) and the three designated Climate Funds which were established as part of the implementation of the Climate Change Convention and the Kyoto Protocol.\\r\\n\\r\\nVulnerability and Adaptation Resource Group (VARG) To assist the developing countries in adapting to the impacts of climate change, international organizations have set up various joint working groups such as the Vulnerability and Adaptation Resource Group (VARG). Based on shared learning and an exchange of experience, these groups develop strategies to integrate adaptation measures into national development programmes.The German Federal Ministry for Economic Cooperation and Development (BMZ), KfW Group (KfW Bankengruppe) and CaPP are involved in VARG, together with the World Bank, the United Nations Development Programme (UNDP), the Organisation for Economic Cooperation and Development (OECD) and other national and international organizations. Some members of VARG have produced a joint publication entitled \\"Poverty and Climate Change: Reducing the Vulnerability of the Poor through Adaptation\\", which examines adaptation to climate change from a poverty reduction perspective.\\r\\n\\r\\n<em>[Source: www2.gtz.de/dokumente/bib-2011/giz2011-0159en-climate-change.pdf ]</em>",
+            \'summary\' => \'This may as well be in bahasa indonesia: The vulnerability of people in a given area to the effects of climate change depends on two key factors.\',
+            \'format\' => \'filtered_html\',
+            \'safe_value\' => "<p>This may as well be in bahasa indonesia: The vulnerability of people in a given area to the effects of climate change depends on two key factors:</p>\\n<ul><li>the vulnerability of the surrounding natural landscape unit to weather extremes and climatic shifts, and</li>\\n<li>the adaptive capacity of the local population.</li></ul><p>Developing countries are particularly vulnerable since they are often located in high-risk natural landscape areas and their adaptive capacity is undermined by poor socio-economic development. In principle, the situation is not new: populations in affected areas have always had to adapt to climatic changes. However, due to their speed and intensity, the changes predicted for the coming decades far exceed the adaptive capacities of societies and institutions.Traditional adaptation methods and mechanisms are no longer adequate, and the societies affected are likely to become even more vulnerable. This applies above all to poorer population groups in the developing countries.They suffer most from the impacts of climate change as they are often directly dependent on the natural environment and agriculture for their survival. Both will be severely impacted by the ongoing process of climate change.Yet due to extreme poverty and a lack of education and infrastructure, most people have virtually no chance of switching to alternative sources of income.The impacts of climate change will worsen the already grave conditions of life faced by the very poor – a vicious circle which will further entrench poverty.</p>\\n<h2>What action is being taken by the international community?</h2>\\n<p>The inherent risk of global climate change is that it will further exacerbate poverty and social conflict worldwide. Combating the negative impacts of climate change is an important goal for the industrialized and developing countries alike. International donors are increasingly recognizing that successful current and future development in the African, Asian and Latin American countries is seriously jeopardized as a result of climate change. The obligation to support the developing countries in adapting to climate change is already agreed in the Climate Change Convention.These countries are now pushing more vigorously for this pledge to be honoured. Since 1995, various decisions have been adopted on ways of providing support to poor countries that lack the financial, technical and human resources to prepare appropriate adaptation measures. Since the 2002 session of the Conference of the Parties, at the latest, adaptation to climate change has become a key issue in the climate process.</p>\\n<p>The international community provides funding for adaptation via the Global Environment Facility (GEF) and the three designated Climate Funds which were established as part of the implementation of the Climate Change Convention and the Kyoto Protocol.</p>\\n<p>Vulnerability and Adaptation Resource Group (VARG) To assist the developing countries in adapting to the impacts of climate change, international organizations have set up various joint working groups such as the Vulnerability and Adaptation Resource Group (VARG). Based on shared learning and an exchange of experience, these groups develop strategies to integrate adaptation measures into national development programmes.The German Federal Ministry for Economic Cooperation and Development (BMZ), KfW Group (KfW Bankengruppe) and CaPP are involved in VARG, together with the World Bank, the United Nations Development Programme (UNDP), the Organisation for Economic Cooperation and Development (OECD) and other national and international organizations. Some members of VARG have produced a joint publication entitled \\"Poverty and Climate Change: Reducing the Vulnerability of the Poor through Adaptation\\", which examines adaptation to climate change from a poverty reduction perspective.</p>\\n<p><em>[Source: www2.gtz.de/dokumente/bib-2011/giz2011-0159en-climate-change.pdf ]</em></p>\\n",
+            \'safe_summary\' => "<p>This may as well be in bahasa indonesia: The vulnerability of people in a given area to the effects of climate change depends on two key factors.</p>\\n",
+          ),
+        ),
+      ),
+      \'field_blog_image\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => \'21\',
+            \'alt\' => \'dog and person carrying water over a totally dried clay ground\',
+            \'title\' => \'Blaming developing countries is a poor excuse for climate complacency\',
+            \'width\' => \'600\',
+            \'height\' => \'471\',
+            \'uid\' => \'1\',
+            \'filename\' => \'climate-change-and-poverty.jpg\',
+            \'uri\' => \'public://blog/climate-change-and-poverty_0.jpg\',
+            \'filemime\' => \'image/jpeg\',
+            \'filesize\' => \'129832\',
+            \'status\' => \'1\',
+            \'timestamp\' => \'1382089362\',
+            \'uuid\' => \'bf1b8815-5e31-4208-a4f5-30ae69984eb4\',
+            \'rdf_mapping\' => array(),
+          ),
+        ),
+      ),
+      \'field_tags\' => array(
+        \'und\' => array(
+          array(
+            \'tid\' => \'1\',
+            \'uuid\' => \'292105f6-30fd-40fa-af47-af22a340cf51\',
+          ),
+          array(
+            \'tid\' => \'2\',
+            \'uuid\' => \'c5c706bb-247f-47fe-b88b-318af8914ab9\',
+          ),
+          array(
+            \'tid\' => \'4\',
+            \'uuid\' => \'dd127d99-5766-45ea-8cdc-a638f63c4cf5\',
+          ),
+          array(
+            \'tid\' => \'5\',
+            \'uuid\' => \'5cdefc26-53cf-4102-bb84-1b700bee6d3c\',
+          ),
+        ),
+      ),
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'cid\' => \'0\',
+      \'last_comment_timestamp\' => \'1382089362\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_uid\' => \'1\',
+      \'comment_count\' => \'0\',
+      \'name\' => \'CCI-Adm\',
+      \'picture\' => \'0\',
+      \'data\' => \'b:0;\',
+      \'path\' => array(
+        \'pid\' => \'7\',
+        \'source\' => \'node/38\',
+        \'alias\' => \'blog/developing-countries-are-especially-vulnerable\',
+        \'language\' => \'und\',
+      ),
+      \'menu\' => NULL,
       \'node_export_drupal_version\' => \'7\',
     ),
 )',
