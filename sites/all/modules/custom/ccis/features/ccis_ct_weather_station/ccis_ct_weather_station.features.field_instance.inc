@@ -15,7 +15,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Adress (Street + No.) - Organization',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -41,7 +41,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_address',
-    'label' => 'Adress (Street + No.) - Organization',
+    'label' => 'Adress',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -116,7 +116,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -472,7 +472,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'City - Organization',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -498,7 +498,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_city',
-    'label' => 'City - Organization',
+    'label' => 'City',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -520,7 +520,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Country - Organization',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -546,7 +546,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_country',
-    'label' => 'Country - Organization',
+    'label' => 'Country',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -861,7 +861,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -934,7 +934,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -1007,7 +1007,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -1123,7 +1123,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'E-Mail - Organization',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -1149,7 +1149,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_email',
-    'label' => 'E-Mail - Organization',
+    'label' => 'E-Mail',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1176,7 +1176,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'short',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
@@ -1292,7 +1292,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Fax - Organization',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -1318,7 +1318,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_fax',
-    'label' => 'Fax - Organization',
+    'label' => 'Fax',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1439,7 +1439,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'dashboard' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -1535,7 +1535,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'dashboard' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -2013,7 +2013,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'dashboard' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -2157,7 +2157,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'description' => 'Station operator or responsible organization name',
     'display' => array(
       'dashboard' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -2250,7 +2250,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Phone - Organization',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -2276,7 +2276,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_phone',
-    'label' => 'Phone - Organization',
+    'label' => 'Phone',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2298,7 +2298,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Postcode - Organization',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -2324,7 +2324,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_postcode',
-    'label' => 'Postcode - Organization',
+    'label' => 'Postcode',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2346,7 +2346,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Province / Region  - Organization',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -2372,7 +2372,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_region',
-    'label' => 'Province / Region  - Organization',
+    'label' => 'Region',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2506,7 +2506,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'description' => 'Description, abstract',
     'display' => array(
       'dashboard' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -2663,7 +2663,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Adress (Street + No.)',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -2689,7 +2689,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationaddress',
-    'label' => 'Adress (Street + No.)',
+    'label' => 'Adress',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -3287,7 +3287,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'bundle' => 'weather_station',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Province / Region',
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
@@ -3313,7 +3313,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationprovince',
-    'label' => 'Province / Region',
+    'label' => 'Region',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -3386,7 +3386,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'description' => '(Local land use/land cover, obstacles, ground cover)',
     'display' => array(
       'dashboard' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -3658,7 +3658,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_walter_lieth_diagram',
-    'label' => 'walter-lieth-diagram',
+    'label' => 'Walter-Lieth-Diagram',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -3731,6 +3731,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('(above Mean Sea Level, NN, barometric, pressure, QNH, QFE, QFF etc.)');
   t('Active or Closed Station');
   t('Additional Documents: Links, Publications etc.');
+  t('Adress');
   t('Adress (Street + No.)');
   t('Adress (Street + No.) - Organization');
   t('Alias');
@@ -3788,6 +3789,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Province / Region');
   t('Province / Region  - Organization');
   t('Quality control (accomplished tests etc.)');
+  t('Region');
   t('Relocations');
   t('Responsible Organization');
   t('Role of Metadata Contact (pointOfContact etc.)');
@@ -3810,7 +3812,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Units used');
   t('WMO Code');
   t('WMO Code or station number');
-  t('walter-lieth-diagram');
+  t('Walter-Lieth-Diagram');
   t('when any of the location parameters are changed');
 
   return $field_instances;
