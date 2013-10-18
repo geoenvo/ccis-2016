@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cli Sponsor Logos feature.
+ */
+
+include_once 'cli_sponsor_logos.features.inc';

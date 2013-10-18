@@ -44,38 +44,6 @@ function cli_footer_blocks_default_fe_block_settings() {
     'visibility' => 0,
   );
 
-  $export['block-block_stakeholders'] = array(
-    'cache' => -1,
-    'custom' => 0,
-    'machine_name' => 'block_stakeholders',
-    'module' => 'block',
-    'node_types' => array(),
-    'pages' => '',
-    'roles' => array(),
-    'themes' => array(
-      'bartik' => array(
-        'region' => 'footer_firstcolumn',
-        'status' => 1,
-        'theme' => 'bartik',
-        'weight' => -15,
-      ),
-      'ccizen' => array(
-        'region' => 'footer_firstcolumn',
-        'status' => 1,
-        'theme' => 'ccizen',
-        'weight' => -15,
-      ),
-      'seven' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'seven',
-        'weight' => 0,
-      ),
-    ),
-    'title' => '<none>',
-    'visibility' => 0,
-  );
-
   $export['simplenews-6'] = array(
     'cache' => -1,
     'custom' => 0,

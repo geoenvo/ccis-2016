@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Sponsor Logos feature.
+ */
+
+include_once 'ccis_sponsor_logos.features.inc';
