@@ -1475,8 +1475,9 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
-      'views_base_table' => FALSE,
+      'views_base_table' => 0,
     ),
     'translatable' => 0,
     'type' => 'text',
