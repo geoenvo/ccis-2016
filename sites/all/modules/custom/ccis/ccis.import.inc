@@ -8,12 +8,12 @@ function ccis_import_files_form($form, $form_state) {
     '#type' => 'plupload',
     '#title' => t('Upload files'),
     '#autoupload' => TRUE,
-    '#autosubmit' => FALSE,
+    '#autosubmit' => TRUE,
     '#submit_element' => '#edit-submit',
     '#upload_validators' => array(
       'file_validate_extensions' => array('csv'),
       'ccis_csv_file_header_validate' => array(),
-      'ccis_csv_file_name_validate' => array('yearly monthly daily 10-day'),
+      'ccis_csv_file_name_validate' => array('yearly monthly daily 10_days'),
     ),
     '#plupload_settings' => array(
       'runtimes' => 'html5',
@@ -179,9 +179,8 @@ function ccis_csv_file_header_validate(stdClass $file) {
 function ccis_csv_file_name_validate(stdClass $file, $pattern) {
   $errors = array();
   $pattern = preg_replace('/ +/', '|', preg_quote($pattern));
-  preg_match_all('/(\w+)_(' . $pattern . ')\.csv/', $file->filename, $matches);
-  $matches = array_filter($matches);
-  if (empty($matches)) {
+  $regex = '/(' . $pattern . ').csv$/i';
+  if (!preg_match($regex, $file->filename)) {
     $errors[] = t('The filename must be in this pattern <em>stationname_@pattern.csv', array('@pattern' => $pattern));
     return $errors;
   }
