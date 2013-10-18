@@ -94,7 +94,7 @@
 /* Tooltip in diagram */
 .d3_tooltipClass {		
 	position: absolute;
-	width: 150px;
+	width: 120px;
 	height: auto;
 	border-radius: 8px 8px 8px 8px;	
 	background-color: white;

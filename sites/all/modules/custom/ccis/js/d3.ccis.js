@@ -15,7 +15,7 @@ Drupal.behaviors.ccis = {
 	var pressure = [
 	    ["avg_press", "#33CCFF", "PP", "Average sea level pressure", "symbol_legende_pp.png"]
 	];
-
+	
 	// ***************************************
 	// ********** DIAGRAM 1 - START **********
 	// ***************************************
@@ -54,6 +54,10 @@ Drupal.behaviors.ccis = {
 		var temperature_selection;
 		var precipitation_selection;
 		var pressure_selection;
+		var legendCategoriesOpen = "Open categories";
+		var legendCategoriesClose = "Close categories";
+		var plus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/plus.png' width='7' height='7'>"
+		var minus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/minus.png' width='7' height='7'>"
 		// *** Variables - END ***
 
 		// Parse the JSON with the data
@@ -78,7 +82,7 @@ Drupal.behaviors.ccis = {
 					return obj;
 	  
 				});
-				
+
 				// Create an array per group with the parameters used, the colors, the legend keywords and the legend hover names
 				for (var i=2; i<dataKeysArray.length; i++) {
 					for (var k=0; k<temperature.length; k++) {
@@ -340,6 +344,23 @@ Drupal.behaviors.ccis = {
 						.css("font-size","12px")
 						.html(text);
 				}
+				function hoverLegendCategories(topPosition, text) {			
+					$("#d3_tooltipLegendCategories"+block)
+						.css("position", "absolute")
+						.css("right", (legendWidth+5)+"px")
+						.css("top", (topPosition+30)+"px")
+						.css("width", "auto")
+						.css("clear", "both")
+						.css("float", "left")
+						.css("background-color", "#fcce00")
+						.css("border", "solid 1px #D1D1FF")
+						.css("border-radius", "8px 8px 8px 8px")
+						.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+						.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+						.css("box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+						.css("font-size","12px")
+						.html(text);
+				}
 				
 				// Add div for the legend
 				$("#"+blockID).append("<div id='d3_legendDiv"+block+"' class='d3_legendClass'></div>");
@@ -352,7 +373,19 @@ Drupal.behaviors.ccis = {
 				// Temperature
 				if (temperatureUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_temperatureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_tempMinus"+block+"' class='d3_minus'>[+]</span> Temperature <span class='d3_unitLegend'>[&#8451;]</span></b></div>");
+					$("#d3_legendDiv"+block).append("<div id='d3_temperatureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_tempMinus"+block+"' class='d3_minus'>"+plus+"</span> Temperature <span class='d3_unitLegend'>[&#8451;]</span></b></div>");
+					$("#d3_temperatureToggle"+block).hover(function() {
+						$(this).css("cursor","pointer");
+						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
+						var topPosition = $("#d3_temperatureToggle"+block).position().top;
+						var legendText;
+						if (temperatureHidden===true) {
+							legendText = legendCategoriesOpen;
+						} else if (temperatureHidden===false) {
+							legendText = legendCategoriesClose;
+						}
+						hoverLegendCategories(topPosition, legendText);
+					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivTemperature"+block+"'></div>");
 					for (var i=0; i<temperatureUsed.length; i++) {
 						function findTempChecked() {
@@ -383,7 +416,19 @@ Drupal.behaviors.ccis = {
 				// Precipitation
 				if (precipitationUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_precipitationToggle"+block+"' class='d3_toggleClass'><b><span id='d3_precMinus"+block+"' class='d3_minus'>[+]</span> Precipitation <span class='d3_unitLegend'>[mm]</span></b></div>");
+					$("#d3_legendDiv"+block).append("<div id='d3_precipitationToggle"+block+"' class='d3_toggleClass'><b><span id='d3_precMinus"+block+"' class='d3_minus'>"+plus+"</span> Precipitation <span class='d3_unitLegend'>[mm]</span></b></div>");
+					$("#d3_precipitationToggle"+block).hover(function() {
+						$(this).css("cursor","pointer");
+						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
+						var topPosition = $("#d3_precipitationToggle"+block).position().top;
+						var legendText;
+						if (precipitationHidden===true) {
+							legendText = legendCategoriesOpen;
+						} else if (precipitationHidden===false) {
+							legendText = legendCategoriesClose;
+						}
+						hoverLegendCategories(topPosition, legendText);
+					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivPrecipitation"+block+"'></div>");
 					for (var i=0; i<precipitationUsed.length; i++) {
 						function findPrecChecked() {
@@ -415,7 +460,19 @@ Drupal.behaviors.ccis = {
 				// Pressure
 				if (pressureUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendPress"+block+"' class='d3_iconLegendPressClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png' width='19' height='16'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_pressureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_pressMinus"+block+"' class='d3_minus'>[+]</span> Pressure <span class='d3_unitLegend'>[hPa]</span></b></div>");
+					$("#d3_legendDiv"+block).append("<div id='d3_pressureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_pressMinus"+block+"' class='d3_minus'>"+plus+"</span> Pressure <span class='d3_unitLegend'>[hPa]</span></b></div>");
+					$("#d3_pressureToggle"+block).hover(function() {
+						$(this).css("cursor","pointer");
+						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
+						var topPosition = $("#d3_pressureToggle"+block).position().top;
+						var legendText;
+						if (pressureHidden===true) {
+							legendText = legendCategoriesOpen;
+						} else if (pressureHidden===false) {
+							legendText = legendCategoriesClose;
+						}
+						hoverLegendCategories(topPosition, legendText);
+					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivPressure"+block+"'></div>");
 					for (var i=0; i<pressureUsed.length; i++) {
 						function findPressChecked() {
@@ -449,11 +506,6 @@ Drupal.behaviors.ccis = {
 				$("#"+blockID+" :checkbox").not(":checked").attr("disabled",maxChecked);
 				var minChecked = $("#"+blockID+" :checkbox:checked").length <= 1;
 				$("#"+blockID+" :checkbox:checked").attr("disabled",minChecked);
-									
-				// Change cursor on hover
-				$(".d3_minus").hover(function() {
-					$(this).css("cursor","pointer");
-				});
 				
 				// By default is the dropdown hidden
 				for (var i=0; i<temperatureUsed.length; i++) {
@@ -479,15 +531,16 @@ Drupal.behaviors.ccis = {
 				pressureHidden=true;
 				
 				// Collapse	
-				$("#d3_tempMinus"+block).click(function() {
+				$("#d3_temperatureToggle"+block).click(function() {
 					if (temperatureHidden===true) {
-						$(this).html("[-]");
+						$("#d3_tempMinus"+block).html(minus);
 						for (var i=0; i<temperatureUsed.length; i++) {			
 							$("#d3_keysTemperature"+i+block).show();
 						}
 						temperatureHidden=false;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
 					} else if (temperatureHidden===false) {
-						$(this).html("[+]");
+						$("#d3_tempMinus"+block).html(plus);
 						for (var i=0; i<temperatureUsed.length; i++) {
 							$("#d3_keysTemperature"+i+block).hide();
 							if ($("#d3_checkboxTemperature"+i+block).is(":checked")) {
@@ -495,17 +548,19 @@ Drupal.behaviors.ccis = {
 							}	
 						}
 						temperatureHidden=true;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
 					}
 				});
-				$("#d3_precMinus"+block).click(function() {
+				$("#d3_precipitationToggle"+block).click(function() {
 					if (precipitationHidden===true) {
-						$(this).html("[-]");
+						$("#d3_precMinus"+block).html(minus);
 						for (var i=0; i<precipitationUsed.length; i++) {			
 							$("#d3_keysPrecipitation"+i+block).show();
 						}
 						precipitationHidden=false;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
 					} else if (precipitationHidden===false) {
-						$(this).html("[+]");
+						$("#d3_precMinus"+block).html(plus);
 						for (var i=0; i<precipitationUsed.length; i++) {
 							$("#d3_keysPrecipitation"+i+block).hide();
 							if ($("#d3_checkboxPrecipitation"+i+block).is(":checked")) {
@@ -513,17 +568,19 @@ Drupal.behaviors.ccis = {
 							}	
 						}
 						precipitationHidden=true;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
 					}
 				});
-				$("#d3_pressMinus"+block).click(function() {
+				$("#d3_pressureToggle"+block).click(function() {
 					if (pressureHidden===true) {
-						$(this).html("[-]");
+						$("#d3_pressMinus"+block).html(minus);
 						for (var i=0; i<pressureUsed.length; i++) {			
 							$("#d3_keysPressure"+i+block).show();
 						}
 						pressureHidden=false;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
 					} else if (pressureHidden===false) {
-						$(this).html("[+]");
+						$("#d3_pressMinus"+block).html(plus);
 						for (var i=0; i<pressureUsed.length; i++) {
 							$("#d3_keysPressure"+i+block).hide();
 							if ($("#d3_checkboxPressure"+i+block).is(":checked")) {
@@ -531,6 +588,7 @@ Drupal.behaviors.ccis = {
 							}	
 						}
 						pressureHidden=true;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
 					}
 				});
 				
@@ -706,13 +764,13 @@ Drupal.behaviors.ccis = {
 		
 					// Hide dropdowns with delay
 					if (temperatureHidden===false) {
-						setTimeout(function(){$("#d3_tempMinus"+block).click();}, 2000);
+						setTimeout(function(){$("#d3_temperatureToggle"+block).click();}, 2000);
 					}
 					if (precipitationHidden===false) {
-						setTimeout(function(){$("#d3_precMinus"+block).click();}, 2000); 
+						setTimeout(function(){$("#d3_precipitationToggle"+block).click();}, 2000); 
 					}
 					if (pressureHidden===false) {
-						setTimeout(function(){$("#d3_pressMinus"+block).click();}, 2000); 
+						setTimeout(function(){$("#d3_pressureToggle"+block).click();}, 2000); 
 					}
 					
 					// Redraw graph
@@ -787,15 +845,20 @@ Drupal.behaviors.ccis = {
 						var bisect = d3.bisector(function(d) { return d.date; }).left;
 						var item = data[bisect(data, xValue)];
 						
-						// Create content for tooltips
 						if (item) {
+							// Format the date
+							var dateParse = d3.time.format("%a %b %d %Y").parse(item.date.toDateString());
+							var formatter = d3.time.format("%Y-%m-%d");
+							var date = formatter(dateParse);
+							
+							// Create content for tooltips
 							var tooltipText="";
 							tooltipText = "<table style='margin:0px;'>";
 								
 								tooltipText += "<tr>";
 									tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_infobereich_clock.png' width='11' height='12'></td>";
 									tooltipText += "<td>&nbsp;Date: </td>";
-									tooltipText += "<td><b>"+item.date.toDateString()+"</b></td>";
+									tooltipText += "<td><b>"+date+"</b></td>";
 								tooltipText += "</tr>";				
 								if (temperatureShown.length>0) {
 									for (var i=0; i<temperatureShown.length; i++) {									
@@ -976,6 +1039,10 @@ Drupal.behaviors.ccis = {
 		var temperature_selection;
 		var precipitation_selection;
 		var pressure_selection;
+		var legendCategoriesOpen = "Open categories";
+		var legendCategoriesClose = "Close categories";
+		var plus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/plus.png' width='7' height='7'>"
+		var minus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/minus.png' width='7' height='7'>"	
 		// *** Variables - END ***
 
 		// Parse the JSON
@@ -1263,6 +1330,24 @@ Drupal.behaviors.ccis = {
 						.html(text);
 				}
 				
+				function hoverLegendCategories(topPosition, text) {			
+					$("#d3_tooltipLegendCategories"+block)
+						.css("position", "absolute")
+						.css("right", (legendWidth+5)+"px")
+						.css("top", (topPosition+topOffset)+"px")
+						.css("width", "auto")
+						.css("clear", "both")
+						.css("float", "left")
+						.css("background-color", "#fcce00")
+						.css("border", "solid 1px #D1D1FF")
+						.css("border-radius", "8px 8px 8px 8px")
+						.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+						.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+						.css("box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+						.css("font-size","12px")
+						.html(text);
+				}
+				
 				// Add div for the legend
 				$("#"+blockID).append("<div id='d3_legendDiv"+block+"' class='d3_legendClass'></div>");
 				
@@ -1274,7 +1359,19 @@ Drupal.behaviors.ccis = {
 				// Temperature
 				if (temperatureUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_temperatureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_tempMinus"+block+"' class='d3_minus'>[+]</span> Temperature <span class='d3_unitLegend'>[&#8451;]</span></b></div>");
+					$("#d3_legendDiv"+block).append("<div id='d3_temperatureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_tempMinus"+block+"' class='d3_minus'>"+plus+"</span> Temperature <span class='d3_unitLegend'>[&#8451;]</span></b></div>");
+					$("#d3_temperatureToggle"+block).hover(function() {
+						$(this).css("cursor","pointer");
+						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
+						var topPosition = $("#d3_temperatureToggle"+block).position().top;
+						var legendText;
+						if (temperatureHidden===true) {
+							legendText = legendCategoriesOpen;
+						} else if (temperatureHidden===false) {
+							legendText = legendCategoriesClose;
+						}
+						hoverLegendCategories(topPosition, legendText);
+					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivTemperature"+block+"'></div>");
 					for (var i=0; i<temperatureUsed.length; i++) {
 						function findTempChecked() {
@@ -1306,7 +1403,19 @@ Drupal.behaviors.ccis = {
 				// Precipitation
 				if (precipitationUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_precipitationToggle"+block+"' class='d3_toggleClass'><b><span id='d3_precMinus"+block+"' class='d3_minus'>[+]</span> Precipitation <span class='d3_unitLegend'>[mm]</span></b></div>");
+					$("#d3_legendDiv"+block).append("<div id='d3_precipitationToggle"+block+"' class='d3_toggleClass'><b><span id='d3_precMinus"+block+"' class='d3_minus'>"+plus+"</span> Precipitation <span class='d3_unitLegend'>[mm]</span></b></div>");
+					$("#d3_precipitationToggle"+block).hover(function() {
+						$(this).css("cursor","pointer");
+						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
+						var topPosition = $("#d3_precipitationToggle"+block).position().top;
+						var legendText;
+						if (precipitationHidden===true) {
+							legendText = legendCategoriesOpen;
+						} else if (precipitationHidden===false) {
+							legendText = legendCategoriesClose;
+						}
+						hoverLegendCategories(topPosition, legendText);
+					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivPrecipitation"+block+"'></div>");
 					for (var i=0; i<precipitationUsed.length; i++) {
 						function findPrecChecked() {
@@ -1338,7 +1447,19 @@ Drupal.behaviors.ccis = {
 				// Pressure
 				if (pressureUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendPress"+block+"' class='d3_iconLegendPressClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png' width='19' height='16'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_pressureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_pressMinus"+block+"' class='d3_minus'>[+]</span> Pressure <span class='d3_unitLegend'>[hPa]</span></b></div>");
+					$("#d3_legendDiv"+block).append("<div id='d3_pressureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_pressMinus"+block+"' class='d3_minus'>"+plus+"</span> Pressure <span class='d3_unitLegend'>[hPa]</span></b></div>");
+					$("#d3_pressureToggle"+block).hover(function() {
+						$(this).css("cursor","pointer");
+						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
+						var topPosition = $("#d3_pressureToggle"+block).position().top;
+						var legendText;
+						if (pressureHidden===true) {
+							legendText = legendCategoriesOpen;
+						} else if (pressureHidden===false) {
+							legendText = legendCategoriesClose;
+						}
+						hoverLegendCategories(topPosition, legendText);
+					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivPressure"+block+"'></div>");
 					for (var i=0; i<pressureUsed.length; i++) {
 						function findPressChecked() {
@@ -1372,11 +1493,6 @@ Drupal.behaviors.ccis = {
 				$("#"+blockID+" :checkbox").not(":checked").attr("disabled",maxChecked);
 				var minChecked = $("#"+blockID+" :checkbox:checked").length <= 1;
 				$("#"+blockID+" :checkbox:checked").attr("disabled",minChecked);
-									
-				// Change cursor on hover
-				$(".d3_minus").hover(function() {
-					$(this).css("cursor","pointer");
-				});
 				
 				// By default is the dropdown hidden
 				for (var i=0; i<temperatureUsed.length; i++) {
@@ -1402,15 +1518,16 @@ Drupal.behaviors.ccis = {
 				pressureHidden=true;
 				
 				// Collapse	
-				$("#d3_tempMinus"+block).click(function() {
+				$("#d3_temperatureToggle"+block).click(function() {
 					if (temperatureHidden===true) {
-						$(this).html("[-]");
+						$("#d3_tempMinus"+block).html(minus);
 						for (var i=0; i<temperatureUsed.length; i++) {			
 							$("#d3_keysTemperature"+i+block).show();
 						}
 						temperatureHidden=false;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
 					} else if (temperatureHidden===false) {
-						$(this).html("[+]");
+						$("#d3_tempMinus"+block).html(plus);
 						for (var i=0; i<temperatureUsed.length; i++) {
 							$("#d3_keysTemperature"+i+block).hide();
 							if ($("#d3_checkboxTemperature"+i+block).is(":checked")) {
@@ -1418,17 +1535,19 @@ Drupal.behaviors.ccis = {
 							}	
 						}
 						temperatureHidden=true;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
 					}
 				});
-				$("#d3_precMinus"+block).click(function() {
+				$("#d3_precipitationToggle"+block).click(function() {
 					if (precipitationHidden===true) {
-						$(this).html("[-]");
+						$("#d3_precMinus"+block).html(minus);
 						for (var i=0; i<precipitationUsed.length; i++) {			
 							$("#d3_keysPrecipitation"+i+block).show();
 						}
 						precipitationHidden=false;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
 					} else if (precipitationHidden===false) {
-						$(this).html("[+]");
+						$("#d3_precMinus"+block).html(plus);
 						for (var i=0; i<precipitationUsed.length; i++) {
 							$("#d3_keysPrecipitation"+i+block).hide();
 							if ($("#d3_checkboxPrecipitation"+i+block).is(":checked")) {
@@ -1436,17 +1555,19 @@ Drupal.behaviors.ccis = {
 							}	
 						}
 						precipitationHidden=true;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
 					}
 				});
-				$("#d3_pressMinus"+block).click(function() {
+				$("#d3_pressureToggle"+block).click(function() {
 					if (pressureHidden===true) {
-						$(this).html("[-]");
+						$("#d3_pressMinus"+block).html(minus);
 						for (var i=0; i<pressureUsed.length; i++) {			
 							$("#d3_keysPressure"+i+block).show();
 						}
 						pressureHidden=false;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
 					} else if (pressureHidden===false) {
-						$(this).html("[+]");
+						$("#d3_pressMinus"+block).html(plus);
 						for (var i=0; i<pressureUsed.length; i++) {
 							$("#d3_keysPressure"+i+block).hide();
 							if ($("#d3_checkboxPressure"+i+block).is(":checked")) {
@@ -1454,6 +1575,7 @@ Drupal.behaviors.ccis = {
 							}	
 						}
 						pressureHidden=true;
+						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
 					}
 				});
 				
@@ -1629,13 +1751,13 @@ Drupal.behaviors.ccis = {
 					
 					// Hide dropdowns with delay
 					if (temperatureHidden===false) {
-						setTimeout(function(){$("#d3_tempMinus"+block).click();}, 2000);
+						setTimeout(function(){$("#d3_temperatureToggle"+block).click();}, 2000);
 					}
 					if (precipitationHidden===false) {
-						setTimeout(function(){$("#d3_precMinus"+block).click();}, 2000); 
+						setTimeout(function(){$("#d3_precipitationToggle"+block).click();}, 2000); 
 					}
 					if (pressureHidden===false) {
-						setTimeout(function(){$("#d3_pressMinus"+block).click();}, 2000); 
+						setTimeout(function(){$("#d3_pressureToggle"+block).click();}, 2000); 
 					}
 					
 					// Redraw graph
@@ -1716,15 +1838,20 @@ Drupal.behaviors.ccis = {
 						var bisect = d3.bisector(function(d) { return d.date; }).left;
 						var item = data[bisect(data, xValue)];
 						
-						// Create content for tooltips
-						if (item) {
+						if (item) {				
+							// Format the date
+							var dateParse = d3.time.format("%a %b %d %Y").parse(item.date.toDateString());
+							var formatter = d3.time.format("%Y-%m-%d");
+							var date = formatter(dateParse);
+							
+							// Create content for tooltips
 							var tooltipText="";
 							tooltipText = "<table style='margin:0px;'>";
 								
 								tooltipText += "<tr>";
 									tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_infobereich_clock.png' width='11' height='12'></td>";
 									tooltipText += "<td>&nbsp;Date: </td>";
-									tooltipText += "<td><b>"+item.date.toDateString()+"</b></td>";
+									tooltipText += "<td><b>"+date+"</b></td>";
 								tooltipText += "</tr>";				
 								if (temperatureShown.length>0) {
 									for (var i=0; i<temperatureShown.length; i++) {									
