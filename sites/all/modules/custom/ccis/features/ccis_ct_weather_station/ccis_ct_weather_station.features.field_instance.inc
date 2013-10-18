@@ -2157,7 +2157,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'description' => 'Station operator or responsible organization name',
     'display' => array(
       'dashboard' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -2180,7 +2180,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_organisation',
-    'label' => 'Responsible Organization',
+    'label' => 'Name',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -3774,6 +3774,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Metadata Standard Version');
   t('Metadata Unique resource identifier');
   t('MongoDB List Suffix');
+  t('Name');
   t('Name of Contact Person');
   t('National station number or code');
   t('Observation instructions');
@@ -3791,7 +3792,6 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Quality control (accomplished tests etc.)');
   t('Region');
   t('Relocations');
-  t('Responsible Organization');
   t('Role of Metadata Contact (pointOfContact etc.)');
   t('Routine maintenance operations');
   t('Special Codes (Missing data values etc.)');
