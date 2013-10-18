@@ -98,6 +98,9 @@ function ccis_ct_weather_station_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'dashboard' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(),
