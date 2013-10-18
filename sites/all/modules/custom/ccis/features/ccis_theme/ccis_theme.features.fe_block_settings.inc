@@ -31,7 +31,7 @@ function ccis_theme_default_fe_block_settings() {
         'region' => 'utilities',
         'status' => 1,
         'theme' => 'ccizen',
-        'weight' => -13,
+        'weight' => -16,
       ),
       'seven' => array(
         'region' => '',
@@ -95,7 +95,7 @@ function ccis_theme_default_fe_block_settings() {
         'region' => 'utilities',
         'status' => 1,
         'theme' => 'ccizen',
-        'weight' => -12,
+        'weight' => -15,
       ),
       'seven' => array(
         'region' => 'dashboard_sidebar',
@@ -223,7 +223,7 @@ function ccis_theme_default_fe_block_settings() {
         'region' => 'utilities',
         'status' => 1,
         'theme' => 'ccizen',
-        'weight' => -10,
+        'weight' => -13,
       ),
       'seven' => array(
         'region' => '',
@@ -255,7 +255,7 @@ function ccis_theme_default_fe_block_settings() {
         'region' => 'utilities',
         'status' => 1,
         'theme' => 'ccizen',
-        'weight' => -11,
+        'weight' => -14,
       ),
       'seven' => array(
         'region' => 'content',

@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the Rb Configuration feature.
  */
+
+include_once 'rb_configuration.features.inc';

@@ -160,6 +160,14 @@ function ccis_events_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'event' => 'event',
   );
+  /* Filter criterion: Content: Language */
+  $handler->display->display_options['filters']['language']['id'] = 'language';
+  $handler->display->display_options['filters']['language']['table'] = 'node';
+  $handler->display->display_options['filters']['language']['field'] = 'language';
+  $handler->display->display_options['filters']['language']['value'] = array(
+    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+    'und' => 'und',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_events');
@@ -294,6 +302,30 @@ function ccis_events_views_default_views() {
     'multiple_number' => '',
     'multiple_from' => '',
     'multiple_to' => '',
+  );
+  $translatables['events'] = array(
+    t('Master'),
+    t('Upcoming events'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('[field_place_event], [field_country_event]'),
+    t('Page'),
+    t('Block'),
+    t('Show full list'),
+    t('[title]'),
+    t(', [field_country_event]'),
+    t('[field_place_event][field_country_event]'),
   );
   $export['events'] = $view;
 
