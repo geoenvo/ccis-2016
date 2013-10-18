@@ -495,7 +495,7 @@ function _ccis_get_date_range($values) {
   if ($years < 15) {
     $range = 'monthly';
     if ($years < 5 && $years > 1) {
-      $range = 'monthly'; // TODO
+      $range = '10-day';
     }
     if ($years < 1) {
       $range = 'daily';
@@ -572,11 +572,9 @@ function ccis_autocomplete_response($type, $string) {
 
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_wmocode', 'f', 'n.nid = f.entity_id');
-    #$query->leftJoin('field_data_field_address_data', 'f2', 'n.nid = f2.entity_id');
 
     $n_and = db_and()->condition('n.title', db_like($string) . '%', 'LIKE');
     $f_and = db_and()->condition('f.field_wmocode_value', db_like($string) . '%', 'LIKE');
-  #  $f2_and = db_and()->condition('f2.field_address_data_value', '%' . db_like($string) . '%', 'LIKE');
 
     $query->fields('n', array('nid', 'title'))
       ->fields('f', array('field_wmocode_value'))
