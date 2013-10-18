@@ -13,7 +13,7 @@ function ccis_import_files_form($form, $form_state) {
     '#upload_validators' => array(
       'file_validate_extensions' => array('csv'),
       'ccis_csv_file_header_validate' => array(),
-      'ccis_csv_file_name_validate' => array('yearly monthly daily'),
+      'ccis_csv_file_name_validate' => array('yearly monthly daily 10-day'),
     ),
     '#plupload_settings' => array(
       'runtimes' => 'html5',
