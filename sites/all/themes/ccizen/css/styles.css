@@ -610,15 +610,24 @@ textarea:focus {
   color: #fff;
   }
 
+.view-station-info h3,
+.view-station-info h3 a {
+  color: #fcce00;
+  }
+
+.view-station-info h3 {
+  margin: .5em 0 .25em;
+  font-size: 1em;
+  }
+
 .view-station-info .horizontal-tabs .ul-horizontal-tabs-list * {
   margin: 0;
   padding: 0;
   }
 
-.view-station-info .horizontal-tabs fieldset.horizontal-tabs-pane {
+.view-station-info .field {
   font-size: .75em;
-  line-height: .9em;
-  padding: 0;
+  line-height: 100%;
   }
 
 .view-station-info .horizontal-tabs,
@@ -648,34 +657,41 @@ textarea:focus {
   padding: 2px;
   }
 
-.view-station-info fieldset .fieldset-wrapper {
+.view-station-info fieldset .fieldset-wrapper,
+.view-station-info .field-group-format-wrapper {
   display: table;
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   }
-.view-station-info fieldset .fieldset-wrapper .field {
+.view-station-info .field {
   display: table-row;
   min-height: 1em;
   margin: 0;
   padding: 0;
   }
-.view-station-info fieldset .fieldset-wrapper .field-label {
+.view-station-info .field.clearfix {
+  width: 100%;
+  }
+.view-station-info .field.clearfix:after {
+  display: none;
+  }
+.view-station-info .field-label {
   display: table-cell;
-  width: 40%;
+  width: 44%;
   min-height: 1em;
-  padding: 4px 1% 0;
+  margin: 0;
+  padding: 4px 1%;
   font-weight: normal;
   }
-.view-station-info fieldset .fieldset-wrapper .field-items {
+.view-station-info .field-items {
   display: table-cell;
-  width: 56%;
+  width: 52%;
   min-height: 1em;
-  padding: 4px 1% 0;
+  margin: 0;
+  padding: 4px 1%;
   }
-
-.view-station-info fieldset .field:nth-child(even) .field-label,
-.view-station-info fieldset .field:nth-child(even) .field-items {
+.view-station-info .field:nth-child(even) {
   background-color: rgba(255,255,255,.2);
   }
 
