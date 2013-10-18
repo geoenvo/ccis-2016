@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Blog feature.
+ */
+
+include_once 'ccis_blog.features.inc';
