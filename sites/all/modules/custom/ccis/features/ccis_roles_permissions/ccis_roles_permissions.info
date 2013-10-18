@@ -1,7 +1,7 @@
 name = CCIS roles + permissions
 core = 7.x
 package = CCIS
-version = 7.x-1.0-alpha7
+version = 7.x-1.0-alpha8
 project = ccis_roles_permissions
 dependencies[] = admin_menu
 dependencies[] = ccis
@@ -24,7 +24,6 @@ features[user_permission][] = administer simplenews settings
 features[user_permission][] = administer simplenews subscriptions
 features[user_permission][] = administer users
 features[user_permission][] = csv_import
-features[user_permission][] = delete_collections
 features[user_permission][] = edit field_address
 features[user_permission][] = edit field_beginposition
 features[user_permission][] = edit field_ci_onlineresource

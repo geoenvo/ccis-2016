@@ -87,16 +87,6 @@ function ccis_roles_permissions_user_default_permissions() {
     'module' => 'ccis',
   );
 
-  // Exported permission: 'delete_collections'.
-  $permissions['delete_collections'] = array(
-    'name' => 'delete_collections',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'climability editor' => 'climability editor',
-    ),
-    'module' => 'ccis',
-  );
-
   // Exported permission: 'edit field_address'.
   $permissions['edit field_address'] = array(
     'name' => 'edit field_address',
