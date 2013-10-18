@@ -17,6 +17,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 44,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -58,6 +65,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Station Alias Name',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 94,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -98,6 +112,19 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 61,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'date',
@@ -159,6 +186,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 63,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -200,6 +234,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 51,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -241,6 +282,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 50,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -282,6 +330,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 60,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -323,6 +378,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 48,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -364,6 +426,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 53,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -405,6 +474,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 46,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -446,6 +522,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 48,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -486,6 +569,12 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'The filename must be in this pattern <em>stationname_(daily|monthly|yearly).csv</em>. Note: It is not possible at the moment to replace a file here.',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'file',
@@ -529,6 +618,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 32,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -570,6 +666,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 33,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -611,6 +714,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 56,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -652,6 +762,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 34,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -693,6 +810,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '(Celsius, Kelvin, Fahrenheit etc.)',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 31,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -733,6 +857,19 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 23,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'date',
@@ -793,6 +930,19 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 24,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'date',
@@ -853,6 +1003,19 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 54,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'date',
@@ -914,6 +1077,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 52,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -955,6 +1125,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 51,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -995,6 +1172,19 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 62,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'date',
@@ -1056,6 +1246,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 65,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1097,6 +1294,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 50,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1138,6 +1342,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 44,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1179,6 +1390,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 51,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1220,6 +1438,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 46,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1261,6 +1486,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 53,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1302,6 +1534,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 64,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1343,6 +1582,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 45,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1384,6 +1630,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 46,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1425,6 +1678,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 47,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1466,6 +1726,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 43,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1507,6 +1774,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 57,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1548,6 +1822,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 58,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1589,6 +1870,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 55,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1630,6 +1918,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 59,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1671,6 +1966,12 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'In case the station title is not equal with csv file name suffix, enter here the right suffix. Example: Station title is <em>München</em>, File name is <em>munich_yearly.csv</em> then enter <em>munich</em>.',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1711,6 +2012,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 48,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1752,6 +2060,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 54,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1793,6 +2108,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 49,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1834,6 +2156,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Station operator or responsible organization name',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 43,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1875,6 +2204,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 49,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1916,6 +2252,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 49,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1957,6 +2300,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 45,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -1998,6 +2348,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 47,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2039,6 +2396,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 52,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2080,6 +2444,17 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'geofield',
+        'settings' => array(
+          'data' => 'full',
+          'format' => 'decimal_degrees',
+          'labels' => 1,
+        ),
+        'type' => 'geofield_latlon',
+        'weight' => 97,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'geofield',
@@ -2130,6 +2505,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Description, abstract',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 95,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2171,6 +2553,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 101,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2211,6 +2600,16 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 96,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'image',
@@ -2266,6 +2665,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 50,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2307,6 +2713,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 52,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2348,6 +2761,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'National station number or code',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2389,6 +2809,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 49,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2430,6 +2857,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 54,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2471,6 +2905,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 98,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2512,6 +2953,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '(above Mean Sea Level, NN, barometric, pressure, QNH, QFE, QFF etc.)',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 99,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2553,6 +3001,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 57,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2594,6 +3049,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 56,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2635,6 +3097,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 23,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2676,6 +3145,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 102,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2717,6 +3193,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 55,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2758,6 +3241,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 51,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2799,6 +3289,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 53,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2840,6 +3337,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'when any of the location parameters are changed',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 100,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2881,6 +3385,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '(Local land use/land cover, obstacles, ground cover)',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 103,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2922,6 +3433,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -2967,6 +3485,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Active or Closed Station',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 21,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'list',
@@ -3007,6 +3532,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 47,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -3048,6 +3580,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 50,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
@@ -3089,6 +3628,15 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 24,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -3135,6 +3683,13 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'WMO Code or station number',
     'display' => array(
+      'dashboard' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
       'default' => array(
         'label' => 'inline',
         'module' => 'text',
