@@ -495,7 +495,7 @@ function _ccis_get_date_range($values) {
   if ($years < 15) {
     $range = 'monthly';
     if ($years < 5 && $years > 1) {
-      $range = '10-day';
+      $range = '10_days';
     }
     if ($years < 1) {
       $range = 'daily';
