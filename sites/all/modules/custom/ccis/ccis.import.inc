@@ -127,19 +127,11 @@ function ccis_import_csv_file_finished($success, $results, $operations) {
 function ccis_csv_file_header_validate(stdClass $file) {
   $errors = array();
   $row = 1;
-  $header = $end_data = array();
-  $header_count = 0;
   $expected_fields = _ccis_get_weather_data_labels(FALSE);
   if (($handle = fopen($file->uri, "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
       if ($row == 1) {
         $data = array_map('drupal_strtolower', $data);
-        $header = $data;
-        $header_count = count($header);
-        $expected_fields_count = count($expected_fields);
-        if ($header_count !== $expected_fields_count) {
-          $errors[] = t('Missing data in @file', array('@file' => $file->filename));
-        }
         foreach ($data as $header_name) {
           if (!isset($expected_fields['field_' . $header_name])) {
             $errors[] = t('Unknown data %col in @file', array('@file' => $file->filename, '%col' => $header_name));
@@ -200,6 +192,7 @@ function ccis_xml_import_files_form($form, &$form_state) {
     '#tree' => TRUE,
     '#value' => feeds_source_status($source),
   );
+  $form['#xmldir'] = 'private://weatherstation';
   $source_form = $source->configForm($form_state);
   if (!empty($source_form)) {
     $form['feeds'] = array(
@@ -208,8 +201,9 @@ function ccis_xml_import_files_form($form, &$form_state) {
       '#tree' => TRUE,
       '#access' => FALSE,
     ) + $source_form;
-    $form['feeds']['FeedsFileFetcher']['#default_value'] = 'private://weatherstation';
+    $form['feeds']['FeedsFileFetcher']['source']['#value'] = $form['#xmldir'];
   }
+  file_prepare_directory($form['#xmldir'], FILE_CREATE_DIRECTORY);
   $form['#importer_id'] = $importer_id;
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
@@ -246,9 +240,7 @@ function ccis_xml_import_files_form_submit($form, &$form_state) {
         $file->uri = $upload['tmppath'];
         $file->filename = $upload['name'];
         $file->name = pathinfo($file->filename, PATHINFO_FILENAME);
-        $dir = 'private://weatherstation';
-        file_prepare_directory($dir);
-        $destination = $dir . '/' . $file->filename;
+        $destination = $form['#xmldir'] . '/' . $file->filename;
         file_unmanaged_move($file->uri, $destination, FILE_EXISTS_REPLACE);
       }
     }
