@@ -101,6 +101,7 @@ h3 {
 
 #main h2.block-title {
   height: 48px;
+  margin-bottom: .5em;
   background: url('../img/titel_background_left.png') no-repeat bottom left;
   padding: 0 0 0 23px;
   font-size: 1.5em;
@@ -143,7 +144,7 @@ body {
 
 #header {
   padding-top: 10px;
-  padding-bottom: 4em;
+  padding-bottom: 0 /*4em*/;
   background-color: #e6e6e6;
   z-index: 500;
  }
@@ -186,9 +187,18 @@ body {
   box-shadow: 1px 3px 5px 1px rgba(0,0,0,.3);
   }
 
+#region_user {
+  clear: both;
+  float: right;
+  }
+
 #utilities .block {
   float: right;
   margin-left: 20px;
+  }
+
+#block-search-form {
+  clear: right;
   }
 
 html body.admin-menu {

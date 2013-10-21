@@ -47,10 +47,10 @@
           ),
         )); ?>
       </nav>
-      <div class="header__user" id="region_user">
-        <?php print render($page['user']); ?>
-      </div>
     <?php endif; ?>
+    <div class="header__user" id="region_user">
+      <?php print render($page['user']); ?>
+    </div>
 
     <?php print render($page['header']); ?>
 
