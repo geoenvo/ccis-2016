@@ -28,8 +28,8 @@ function ccis_theme_default_fe_block_settings() {
         'weight' => 0,
       ),
       'ccizen' => array(
-        'region' => 'utilities',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'ccizen',
         'weight' => -16,
       ),
@@ -60,8 +60,8 @@ function ccis_theme_default_fe_block_settings() {
         'weight' => -15,
       ),
       'ccizen' => array(
-        'region' => 'footer_thirdcolumn',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'ccizen',
         'weight' => -15,
       ),
@@ -92,8 +92,8 @@ function ccis_theme_default_fe_block_settings() {
         'weight' => -1,
       ),
       'ccizen' => array(
-        'region' => 'utilities',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'ccizen',
         'weight' => -15,
       ),
@@ -105,6 +105,70 @@ function ccis_theme_default_fe_block_settings() {
       ),
     ),
     'title' => '<none>',
+    'visibility' => 0,
+  );
+
+  $export['system-help'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'help',
+    'module' => 'system',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => 'help',
+        'status' => 1,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'ccizen' => array(
+        'region' => 'help',
+        'status' => 1,
+        'theme' => 'ccizen',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => 'help',
+        'status' => 1,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
+    'visibility' => 0,
+  );
+
+  $export['system-main'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'main',
+    'module' => 'system',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'ccizen' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'ccizen',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '',
     'visibility' => 0,
   );
 
@@ -156,8 +220,8 @@ function ccis_theme_default_fe_block_settings() {
         'weight' => 0,
       ),
       'ccizen' => array(
-        'region' => 'bottom',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'ccizen',
         'weight' => -12,
       ),
@@ -220,8 +284,8 @@ function ccis_theme_default_fe_block_settings() {
         'weight' => 0,
       ),
       'ccizen' => array(
-        'region' => 'utilities',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'ccizen',
         'weight' => -13,
       ),
@@ -252,8 +316,8 @@ function ccis_theme_default_fe_block_settings() {
         'weight' => 0,
       ),
       'ccizen' => array(
-        'region' => 'utilities',
-        'status' => 1,
+        'region' => '',
+        'status' => 0,
         'theme' => 'ccizen',
         'weight' => -14,
       ),

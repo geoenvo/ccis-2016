@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cli Sample Content/Block Positioning feature.
+ */
+
+include_once 'cli_sample_positioning.features.inc';
