@@ -1,0 +1,16 @@
+name = CCIS Basic Page
+description = default basic page for static ccontent
+core = 7.x
+package = CCIS
+version = 7.x-1.0-alpha1
+project = ccis_basic_page
+dependencies[] = ccis_formatters
+dependencies[] = ccis_multilanguage
+dependencies[] = text
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[field_instance][] = node-page-body
+features[node][] = page
+features_exclude[dependencies][cli_sample_content] = cli_sample_content
+features_exclude[dependencies][features] = features
+project path = sites/all/modules/custom/ccis/features
