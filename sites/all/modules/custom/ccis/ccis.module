@@ -20,11 +20,11 @@ function ccis_menu() {
     'file' => 'ccis.import.inc',
   );
   $items[$path . '/xml-import'] = array(
-      'title' => 'Weather station import',
-      'access arguments' => array('xml_import'),
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('ccis_xml_import_files_form'),
-      'file' => 'ccis.import.inc',
+    'title' => 'Weather station import',
+    'access arguments' => array('xml_import'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ccis_xml_import_files_form'),
+    'file' => 'ccis.import.inc',
   );
   $items[$path . '/search'] = array(
     'title' => 'Search',
@@ -789,7 +789,13 @@ function _ccis_get_station_regions() {
   $query->fields('f', array('field_stationprovince_value'));
   $query->condition('n.status', NODE_PUBLISHED);
   $query->addTag('node_access');
-  $results = $query->execute()->fetchCol();
+  try{
+    $results = $query->execute()->fetchCol();
+  }
+  catch (Exception $e) {
+    $results = array();
+    watchdog_exception('ccis', $e);
+  }
   $options = array();
   foreach ($results as $result) {
     $options[$result] = $result;
