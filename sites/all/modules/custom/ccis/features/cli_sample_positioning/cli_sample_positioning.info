@@ -1,0 +1,13 @@
+name = Cli Sample Content/Block Positioning
+description = places sample content in layout
+core = 7.x
+package = Climability Content
+version = 7.x-1.0-alpha1
+project = cli_sample_positioning
+dependencies[] = context
+dependencies[] = ctools
+dependencies[] = views
+features[context][] = home_page_content
+features[ctools][] = context:context:3
+features[features_api][] = api:2
+project path = sites/all/modules/custom/ccis/features
