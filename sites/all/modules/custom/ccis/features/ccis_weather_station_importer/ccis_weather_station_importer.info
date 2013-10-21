@@ -4,6 +4,7 @@ core = 7.x
 package = CCIS
 version = 7.x-1.0-beta2
 project = ccis_weather_station_importer
+dependencies[] = ccis_ct_weather_station
 dependencies[] = ctools
 dependencies[] = feeds
 dependencies[] = feeds_tamper
