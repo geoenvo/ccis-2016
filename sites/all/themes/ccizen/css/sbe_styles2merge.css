@@ -1,0 +1,42 @@
+#header {
+    padding-bottom: 0em;
+}
+
+.header__logo {
+
+}
+
+#utilities {
+float:right;
+}
+
+#utilities .region-utilities {
+float:right;
+}
+
+#utilities .region-utilities #block-search-form {
+text-align: right;
+margin-right: 10px;
+margin-top:40px;
+}
+
+#utilities .region-utilities #block-user-login {
+text-align: right;
+margin-right: 8px;
+margin-top:10px;
+margin-bottom: 10px;
+}
+
+#block-user-login .item-list {
+   display:none;
+}
+
+#block-user-login .form-item {
+   display:inline;
+   margin-right:10px; 
+}
+
+#block-user-login .form-actions {
+   float:right;
+}
+
