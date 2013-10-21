@@ -208,6 +208,7 @@ function ccis_xml_import_files_form($form, &$form_state) {
       '#tree' => TRUE,
       '#access' => FALSE,
     ) + $source_form;
+    $form['feeds']['FeedsFileFetcher']['#default_value'] = 'private://weatherstation';
   }
   $form['#importer_id'] = $importer_id;
   $form['actions'] = array('#type' => 'actions');
