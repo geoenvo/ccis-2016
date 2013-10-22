@@ -64,7 +64,7 @@ function ccis_sponsor_logos_node_info() {
       'description' => t('Used to show sponsors/stakeholders in footer block'),
       'has_title' => '1',
       'title_label' => t('Title'),
-      'help' => t('Title is used for editorial purposes only.'),
+      'help' => t('Title is used for editorial purposes only. View will be sorted by title, so you might want to enumerate.'),
     ),
   );
   return $items;

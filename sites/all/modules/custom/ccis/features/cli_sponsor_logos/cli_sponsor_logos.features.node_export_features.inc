@@ -13,7 +13,7 @@ function cli_sponsor_logos_node_export_features_default() {
   (object) array(
       \'vid\' => \'82\',
       \'uid\' => \'1\',
-      \'title\' => \'GIZ\',
+      \'title\' => \'1. GIZ\',
       \'log\' => \'\',
       \'status\' => \'1\',
       \'comment\' => \'1\',
@@ -24,18 +24,18 @@ function cli_sponsor_logos_node_export_features_default() {
       \'type\' => \'sponsor_logo\',
       \'language\' => \'und\',
       \'created\' => \'1382357547\',
-      \'changed\' => \'1382357547\',
+      \'changed\' => \'1382462078\',
       \'tnid\' => \'0\',
       \'translate\' => \'0\',
       \'uuid\' => \'026c7629-fed2-4fd4-8b0c-1df3d85f9a5f\',
-      \'revision_timestamp\' => \'1382357547\',
+      \'revision_timestamp\' => \'1382462078\',
       \'revision_uid\' => \'1\',
       \'field_images_sponsorlogo\' => array(
         \'und\' => array(
           array(
             \'fid\' => NULL,
-            \'alt\' => NULL,
-            \'title\' => NULL,
+            \'alt\' => \'\',
+            \'title\' => \'\',
             \'width\' => \'223\',
             \'height\' => \'68\',
             \'uid\' => \'1\',
@@ -127,7 +127,7 @@ function cli_sponsor_logos_node_export_features_default() {
       \'path\' => array(
         \'pid\' => \'10\',
         \'source\' => \'node/39\',
-        \'alias\' => \'stakeholder/giz\',
+        \'alias\' => \'stakeholder/1-giz\',
         \'language\' => \'und\',
       ),
       \'menu\' => NULL,
@@ -136,7 +136,7 @@ function cli_sponsor_logos_node_export_features_default() {
   (object) array(
       \'vid\' => \'83\',
       \'uid\' => \'1\',
-      \'title\' => \'BMU\',
+      \'title\' => \'3. BMU\',
       \'log\' => \'\',
       \'status\' => \'1\',
       \'comment\' => \'1\',
@@ -147,18 +147,18 @@ function cli_sponsor_logos_node_export_features_default() {
       \'type\' => \'sponsor_logo\',
       \'language\' => \'und\',
       \'created\' => \'1382357547\',
-      \'changed\' => \'1382357547\',
+      \'changed\' => \'1382462064\',
       \'tnid\' => \'0\',
       \'translate\' => \'0\',
       \'uuid\' => \'b389b496-3295-4e86-bb19-c0f078c0e09b\',
-      \'revision_timestamp\' => \'1382357547\',
+      \'revision_timestamp\' => \'1382462064\',
       \'revision_uid\' => \'1\',
       \'field_images_sponsorlogo\' => array(
         \'und\' => array(
           array(
             \'fid\' => NULL,
-            \'alt\' => NULL,
-            \'title\' => NULL,
+            \'alt\' => \'\',
+            \'title\' => \'\',
             \'width\' => \'183\',
             \'height\' => \'68\',
             \'uid\' => \'1\',
@@ -258,7 +258,7 @@ function cli_sponsor_logos_node_export_features_default() {
       \'path\' => array(
         \'pid\' => \'12\',
         \'source\' => \'node/41\',
-        \'alias\' => \'stakeholder/bmu\',
+        \'alias\' => \'stakeholder/3-bmu\',
         \'language\' => \'und\',
       ),
       \'menu\' => NULL,
@@ -267,7 +267,7 @@ function cli_sponsor_logos_node_export_features_default() {
   (object) array(
       \'vid\' => \'84\',
       \'uid\' => \'1\',
-      \'title\' => \'BMKG\',
+      \'title\' => \'2. BMKG\',
       \'log\' => \'\',
       \'status\' => \'1\',
       \'comment\' => \'1\',
@@ -278,18 +278,18 @@ function cli_sponsor_logos_node_export_features_default() {
       \'type\' => \'sponsor_logo\',
       \'language\' => \'und\',
       \'created\' => \'1382357547\',
-      \'changed\' => \'1382357547\',
+      \'changed\' => \'1382462071\',
       \'tnid\' => \'0\',
       \'translate\' => \'0\',
       \'uuid\' => \'c2c566d9-3d6d-4937-b913-0e168adc63cc\',
-      \'revision_timestamp\' => \'1382357547\',
+      \'revision_timestamp\' => \'1382462071\',
       \'revision_uid\' => \'1\',
       \'field_images_sponsorlogo\' => array(
         \'und\' => array(
           array(
             \'fid\' => NULL,
-            \'alt\' => NULL,
-            \'title\' => NULL,
+            \'alt\' => \'\',
+            \'title\' => \'\',
             \'width\' => \'85\',
             \'height\' => \'68\',
             \'uid\' => \'1\',
@@ -381,7 +381,7 @@ function cli_sponsor_logos_node_export_features_default() {
       \'path\' => array(
         \'pid\' => \'11\',
         \'source\' => \'node/40\',
-        \'alias\' => \'stakeholder/bmkg\',
+        \'alias\' => \'stakeholder/2-bmkg\',
         \'language\' => \'und\',
       ),
       \'menu\' => NULL,

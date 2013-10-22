@@ -22,7 +22,6 @@ function ccis_sponsor_logos_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Sponsor logos';
   $handler->display->display_options['css_class'] = 'stakeholder';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -63,10 +62,10 @@ function ccis_sponsor_logos_views_default_views() {
   $handler->display->display_options['fields']['field_caption_bottom']['label'] = '';
   $handler->display->display_options['fields']['field_caption_bottom']['element_type'] = 'p';
   $handler->display->display_options['fields']['field_caption_bottom']['element_label_colon'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -86,7 +85,6 @@ function ccis_sponsor_logos_views_default_views() {
   $handler = $view->new_display('block', 'Block', 'block_sponsors');
   $translatables['sponsor_logos'] = array(
     t('Master'),
-    t('Sponsor logos'),
     t('more'),
     t('Apply'),
     t('Reset'),
