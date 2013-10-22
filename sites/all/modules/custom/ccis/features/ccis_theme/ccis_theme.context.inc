@@ -32,9 +32,9 @@ function ccis_theme_context_default_contexts() {
           'region' => 'utilities',
           'weight' => '-10',
         ),
-        'block-1' => array(
+        'block-2' => array(
           'module' => 'block',
-          'delta' => '1',
+          'delta' => '2',
           'region' => 'utilities',
           'weight' => '-9',
         ),
@@ -62,9 +62,9 @@ function ccis_theme_context_default_contexts() {
           'region' => 'footer_firstcolumn',
           'weight' => '-10',
         ),
-        'block-3' => array(
+        'block-1' => array(
           'module' => 'block',
-          'delta' => '3',
+          'delta' => '1',
           'region' => 'footer_secondcolumn',
           'weight' => '-10',
         ),
@@ -74,9 +74,9 @@ function ccis_theme_context_default_contexts() {
           'region' => 'footer_thirdcolumn',
           'weight' => '-10',
         ),
-        'simplenews-6' => array(
+        'simplenews-1' => array(
           'module' => 'simplenews',
-          'delta' => '6',
+          'delta' => '1',
           'region' => 'footer_thirdcolumn',
           'weight' => '-9',
         ),
