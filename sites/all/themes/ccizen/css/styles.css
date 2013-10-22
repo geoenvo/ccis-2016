@@ -927,6 +927,7 @@ tr.odd td.sorting_1 {
 .view-station-info h3,
 .view-station-info h3 a {
   color: #fcce00;
+  text-align: center;
   }
 
 .view-station-info h3 {
@@ -1048,6 +1049,10 @@ tr.odd td.sorting_1 {
 .view-station-info .field-label-above .field-label,
 .view-station-info .field-label-above .field-items {
   display: table-row;
+  }
+.view-station-info .field-label-above .field-label {
+  min-height: 1.25em;
+  left: 1%;
   }
 
 .view-station-info .field-label-inline .field-label {

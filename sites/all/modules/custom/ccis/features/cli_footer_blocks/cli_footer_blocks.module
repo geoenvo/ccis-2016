@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Cli Footer Blocks feature.
- */
-
-include_once 'cli_footer_blocks.features.inc';
