@@ -198,9 +198,11 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
     }
     $docs = $col->find($query, $fields)->limit($limit);
     $output = $header = array();
+    $row = 1;
     if ($docs->hasNext()) {
       foreach ($docs as $doc) {
         unset($doc['_id']);
+        $header = array_keys($doc);
         if ($source == 'datatables') {
           $output[] = array_values($doc);
         }
@@ -210,7 +212,7 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
       }
       if ($format == 'json') {
         if ($source == 'datatables') {
-          echo drupal_json_output(array('aaData' => $output));
+          echo drupal_json_output(array('aaData' => $output, 'fields' => $header));
         }
         else{
           echo drupal_json_output($output);
@@ -375,16 +377,12 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   $list2 = _ccis_get_listname($station_2, $range);
   $settings = _ccis_get_d3_settings($list2, $form_state['values'], 2);
 
+  $settings = _ccis_get_datatables_settings($list1, $form_state['values']);
+  $settings = _ccis_get_datatables_settings($list2, $form_state['values'], 2);
   $commands[] = ajax_command_settings($settings, TRUE);
 
-  $commands[] = ajax_command_replace('#ccis-weather-datatable-content-1', _ccis_datatables_content($list1, $form_state['values'], 1));
-  if (!empty($station_2)) {
-    $commands[] = ajax_command_replace('#ccis-weather-datatable-content-2', _ccis_datatables_content($list2, $form_state['values'], 2));
-  }
-  else{
-    // Reset the block with a empty div.
-    $commands[] = ajax_command_replace('#ccis-weather-datatable-content-2', '<div id="ccis-weather-datatable-content-2"></div>');
-  }
+  $commands[] = ajax_command_data('#ccis-weather-datatable-block', 'refresh', "1");
+
   $commands[] = ajax_command_replace('#ccis-station-info-block-1', _ccis_block_stationinfo($station_1));
   if (!empty($station_2)) {
     $commands[] = ajax_command_replace('#ccis-station-info-block-2', _ccis_block_stationinfo($station_2, 2));
@@ -437,42 +435,39 @@ function _ccis_get_d3_settings($list = 'unknown', $values, $id = 1) {
 }
 
 function _ccis_block_datatables($list = 'unknown', $values) {
-  $output = '<div id="ccis-weather-datatable-block">';
-  $output .= _ccis_datatables_content($list, $values);
-  $output .= '<div id="ccis-weather-datatable-content-2"></div>';
+  $path = libraries_get_path('datatables');
+  drupal_add_js($path . '/media/js/jquery.dataTables.js');
+
+  drupal_add_css($path . '/media/css/demo_table.css');
+
+  $path = drupal_get_path('module', 'ccis');
+  drupal_add_js($path . '/js/datatables.ccis.js');
+  if ($list !== 'unknown') {
+    drupal_add_js(_ccis_get_datatables_settings($list, $values, 1), 'setting');
+  }
+  else{
+    drupal_add_js(array('ccis_dt' => array('stations' => array())), 'setting');
+  }
+  $output = '<div id="ccis-weather-datatable-block" data-refresh=1>';
   $output .= '</div>';
   return $output;
 }
 
-/**
- * Block output for the datatables.
- */
-function _ccis_datatables_content($list = 'unknown', $values, $id = 1) {
-  $labels = _ccis_get_weather_data_labels();
-  $header = array();
-  foreach ($labels as $label) {
-    $header[] = array('data' => $label);
-  }
+function _ccis_get_datatables_settings($list = 'unknown', $values, $id = 1) {
+  static $stations;
   $range = _ccis_get_date_range($values);
-  $range_label = _ccis_get_range_label($range);
-  $rows = array(array());
-  $vars = array(
-    'caption' => t('Data') . ': ' . $range_label,
-    'header' => $header,
-    'rows' => $rows,
-    'attributes' => array(
-      'id' => 'ccis-datatables-' . $id,
-      'datatable_options' => array(
-        'bProcessing' => true,
-        'sAjaxSource' => url("ccis/dataquery/$list/datatables", array('query' => $values)),
-      ),
-    ),
+  $settings = array();
+  $settings['ccis_dt'] = array(
+    'legends' => _ccis_get_weather_data_labels(),
+    'range' => _ccis_get_range_label($range),
   );
-
-  $output = "<div id=\"ccis-weather-datatable-content-$id\">";
-  $output .= theme('datatable', $vars);
-  $output .= '</div>';
-  return $output;
+  $node = _ccis_get_station_node($values, 'input'.$id);
+  $stations[] = array(
+    'path' => url("ccis/dataquery/$list/datatables", array('query' => $values)),
+    'station_name' => isset($node->title) ? check_plain($node->title) : '',
+  );
+  $settings['ccis_dt']['stations'] = $stations;
+  return $settings;
 }
 
 function _ccis_get_station_node($values, $key = 'input1') {
