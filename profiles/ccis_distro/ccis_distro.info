@@ -61,14 +61,16 @@ dependencies[] = views_slideshow_xtra
 dependencies[] = module_filter
 dependencies[] = link
 dependencies[] = context
+dependencies[] = feeds_xpathparser
 
 ; CCIS
 dependencies[] = ccis
 
 ; Features
+dependencies[] = ccis_ct_weather_station
+dependencies[] = ccis_weather_station_importer
+dependencies[] = rb_configuration
 ;dependencies[] = ccis_ct_weather_data
-;dependencies[] = ccis_ct_weather_station
-;dependencies[] = ccis_weather_station_importer
 ;dependencies[] = ccis_dashboard
 ;dependencies[] = ccis_openlayers
 ;dependencies[] = ccis_climate_change
