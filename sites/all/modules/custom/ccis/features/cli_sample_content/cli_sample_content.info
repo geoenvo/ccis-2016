@@ -35,7 +35,6 @@ features[variable][] = comment_subject_field_page
 features[variable][] = field_bundle_settings_node__page
 features[variable][] = menu_options_page
 features[variable][] = menu_parent_page
-features[variable][] = node_export_existing
 features[variable][] = node_options_page
 features[variable][] = node_preview_page
 features[variable][] = node_submitted_page
