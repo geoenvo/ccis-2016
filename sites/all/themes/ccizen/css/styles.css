@@ -982,17 +982,17 @@ tr.odd td.sorting_1 {
   background-color: rgba(255,255,255,.2);
   background-image: url(../img/sprites_tab_icons.png);
   background-repeat: no-repeat;
-  background-position: 3px -10px;
+  background-position: 3px -6px;
   }
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list .horizontal-tab-button.selected a { 
   background-color: rgba(255,255,255,0);
   }
 
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-0 a {
-  background-position: 3px -10px;
+  background-position: 3px -6px;
   }
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-0.selected a {
-  background-position: 3px -60px;
+  background-position: 3px -54px;
   }
 
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-1 a {
@@ -1023,6 +1023,11 @@ tr.odd td.sorting_1 {
   border-collapse: collapse;
   border-spacing: 0;
   }
+/* + restore collapsibility + */
+.view-station-info .collapsed .field-group-format-wrapper {
+  display: none !important;
+  }
+
 .view-station-info .field {
   display: table-row;
   width: 100%;
@@ -1066,6 +1071,7 @@ tr.odd td.sorting_1 {
 .view-station-info .field:nth-child(even) {
   background-color: rgba(255,255,255,.2);
   }
+
 
 /* + station info maximized + */
 
