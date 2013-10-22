@@ -47,12 +47,20 @@ Drupal.behaviors.ccis_datatables = {
     var $div = $('#ccis-weather-datatable-content-' + index);
     $div.html(table(index));
     var _tableId = '#ccis-datatable-' + index;
-    $(_tableId).dataTable(_datatable.data);
+    var options = {
+        "sScrollY": "300px",
+        "sScrollX": "100%",
+        "bScrollCollapse": true,
+        "bPaginate": false,
+    };
+    options = $.extend(true, _datatable.data, options);
+    var oTable = $(_tableId).dataTable(options);
+    oTable.fnSort( [ [1,'asc'] ] );
     _datatable.homebox.show();
   }
 }
 
 function table(id) {
-  return '<table width="100%" cellpadding="0" cellspacing="0" border="0" id="ccis-datatable-' + id + '"></table>';
+  return '<table cellpadding="0" class="display" cellspacing="0" border="0" id="ccis-datatable-' + id + '"></table>';
 }
 })(jQuery);
