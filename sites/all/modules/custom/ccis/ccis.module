@@ -270,7 +270,9 @@ function _ccis_block_filter($node) {
 function ccis_block_filter_form($form, $form_state, $node = NULL) {
   $form['station_input'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Stations'),
+  );
+  $form['station_input']['headline'] = array(
+    '#markup' => '<h3>' . t('Stations') . '</h3>',
   );
   $form['station_input']['input1'] = array(
     '#title' => t('Station 1'),
@@ -293,7 +295,9 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
   );
   $form['filter'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Filter'),
+  );
+  $form['filter']['headline'] = array(
+    '#markup' => '<h3>' . t('Filter') . '</h3>',
   );
   $form['filter']['searchterm'] = array(
     '#title' => t('Search'),
