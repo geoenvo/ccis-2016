@@ -36,16 +36,29 @@
 	float: left;
 }
 
-/* Pressure Legend */
-.d3_iconLegendPressClass {
+/* Wind Legend */
+.d3_iconLegendWindClass {
 	width: 20px;
 	margin: 1px 0px 0px 5px;
 	clear: both;
-	float: left;				
+	float: left;
+}
+
+/* Other Legend */
+.d3_iconLegendOtherClass {
+	width: 20px;
+	margin: 1px 0px 0px 5px;
+	clear: both;
+	float: left;
 }
 
 /* Title of each group in Legend */
 .d3_toggleClass {
+	float: left;
+	font-size: 12px;
+}
+.d3_toggleSubClass {
+	clear:both;
 	float: left;
 	font-size: 12px;
 }
@@ -64,6 +77,9 @@
 .d3_keysTick {
 	clear: both; 
 	float:left;
+}
+.d3_keysSubTick {
+	margin: 0px 0px 0px 20px;
 }
 
 /* Box for Text and Icon Div in Legend (Hover) */
