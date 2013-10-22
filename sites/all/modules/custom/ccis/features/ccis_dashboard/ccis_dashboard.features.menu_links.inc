@@ -27,7 +27,7 @@ function ccis_dashboard_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -48,
+    'weight' => -10,
     'customized' => 1,
   );
   // Translatables
