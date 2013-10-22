@@ -153,6 +153,34 @@ function ccis_block_view($delta) {
   return $block;
 }
 
+/**
+ * Implement hook_date_format_types().
+ */
+function ccis_date_format_types() {
+  // Define the core date format types.
+  return array(
+    'datatable' => t('Datatable'),
+  );
+}
+
+/**
+ * Implement hook_date_formats().
+ */
+function ccis_date_formats() {
+  return array(
+    array(
+      'type' => 'datatable',
+      'format' => 'd.m.Y',
+      'locales' => array('de-de'),
+    ),
+    array(
+      'type' => 'datatable',
+      'format' => 'Y-m-d',
+      'locales' => array('en', 'en-us', 'fr-fr', 'id-id', 'es-es'),
+    ),
+  );
+}
+
 function ccis_admin_overview() {
   $system = drupal_get_path('module', 'system');
   include_once $system . '/system.admin.inc';
@@ -204,6 +232,7 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
         unset($doc['_id']);
         $header = array_keys($doc);
         if ($source == 'datatables') {
+          $doc['date'] = format_date(strtotime($doc['date']), 'datatable');
           $output[] = array_values($doc);
         }
         else{
@@ -323,13 +352,13 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#title' => t('From'),
     '#type' => 'date_popup',
     '#date_year_range' => '-100:0',
-    '#date_format' => 'd.m.Y',
+    '#date_format' => variable_get('date_format_datatable', 'Y-m-d'),
   );
   $form['filter']['end'] = array(
     '#title' => t('To'),
     '#type' => 'date_popup',
     '#date_year_range' => '-100:0',
-    '#date_format' => 'd.m.Y',
+    '#date_format' => variable_get('date_format_datatable', 'Y-m-d'),
   );
   $search_result = '';
   if (!empty($form_state['values'])) {
