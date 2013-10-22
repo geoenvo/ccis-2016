@@ -44,5 +44,37 @@ function cli_sample_positioning_default_fe_block_settings() {
     'visibility' => 0,
   );
 
+  $export['block-block_socialmedia'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'machine_name' => 'block_socialmedia',
+    'module' => 'block',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'bartik' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'bartik',
+        'weight' => 0,
+      ),
+      'ccizen' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ccizen',
+        'weight' => -16,
+      ),
+      'seven' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '<none>',
+    'visibility' => 0,
+  );
+
   return $export;
 }
