@@ -53,6 +53,6 @@ Drupal.behaviors.ccis_datatables = {
 }
 
 function table(id) {
-  return '<table cellpadding="0" cellspacing="0" border="0" id="ccis-datatable-' + id + '"></table>';
+  return '<table width="100%" cellpadding="0" cellspacing="0" border="0" id="ccis-datatable-' + id + '"></table>';
 }
 })(jQuery);
