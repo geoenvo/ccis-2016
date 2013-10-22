@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CCIS Content Exchanger feature.
+ */
+
+include_once 'ccis_content_exchanger.features.inc';

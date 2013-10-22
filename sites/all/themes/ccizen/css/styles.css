@@ -259,6 +259,10 @@ html body.admin-menu {
 
 /* +++ footer styling +++ */
 
+#footer-columns {
+  padding-top: 5px;
+  }
+
 #footer-columns .region {
   float: left;
   width: 25%;
@@ -292,7 +296,7 @@ html body.admin-menu {
 
 #footer-columns h3 {
   color: #c7b299;
-  margin: .5em 0 .25em;
+  margin: .5em 0 .15em;
   font-size: 1.25em;
   }
 #footer-columns h3:first-child {
@@ -935,6 +939,11 @@ tr.odd td.sorting_1 {
   padding: 0;
   }
 
+.view-station-info fieldset.horizontal-tabs-pane {
+  margin: 0;
+  padding: 0;
+  }
+
 .view-station-info .field {
   line-height: 100%;
   }
@@ -954,16 +963,56 @@ tr.odd td.sorting_1 {
 .view-station-info .horizontal-tabs strong {
   font-weight: normal;
   }
-d:nth-child(even).view-station-info .horizontal-tabs ul.horizontal-tabs-list li {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
+
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li {
+  width: 24%;
+  height: 30px;
+  min-width: 50px;
   padding: 0;
+  white-space: nowrap;
   overflow: hidden;
-  border: 1px solid #fff;
+  box-sizing: border-box;
+  border: 1px solid transparent;
   }
-.view-station-info .horizontal-tabs ul.horizontal-tabs-list li a {
-  padding: 2px;
+
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list .horizontal-tab-button a { 
+  height: 100%;
+  padding: 2px 0 2px 100px;
+  background-color: rgba(255,255,255,.2);
+  background-image: url(../img/sprites_tab_icons.png);
+  background-repeat: no-repeat;
+  background-position: 3px -10px;
+  }
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list .horizontal-tab-button.selected a { 
+  background-color: rgba(255,255,255,0);
+  }
+
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-0 a {
+  background-position: 3px -10px;
+  }
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-0.selected a {
+  background-position: 3px -60px;
+  }
+
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-1 a {
+  background-position: 3px -110px;
+  }
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-1.selected a {
+  background-position: 3px -160px;
+  }
+
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-2 a {
+  background-position: 3px -210px;
+  }
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-2.selected a {
+  background-position: 3px -260px;
+  }
+
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-3 a {
+  background-position: 3px -310px;
+  }
+.view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-3.selected a {
+  background-position: 3px -360px;
   }
 
 .view-station-info fieldset .fieldset-wrapper,
@@ -975,6 +1024,7 @@ d:nth-child(even).view-station-info .horizontal-tabs ul.horizontal-tabs-list li 
   }
 .view-station-info .field {
   display: table-row;
+  width: 100%;
   min-height: 1em;
   margin: 0;
   padding: 0;
@@ -985,21 +1035,29 @@ d:nth-child(even).view-station-info .horizontal-tabs ul.horizontal-tabs-list li 
 .view-station-info .field.clearfix:after {
   display: none;
   }
-.view-station-info .field-label {
+.view-station-info .field .field-label,
+.view-station-info .field .field-items,
+.view-station-info .field-label-above div {
   display: table-cell;
-  width: 44%;
   min-height: 1em;
   margin: 0;
   padding: 4px 1%;
   font-weight: normal;
   }
-.view-station-info .field-items {
-  display: table-cell;
-  width: 52%;
-  min-height: 1em;
-  margin: 0;
-  padding: 4px 1%;
+
+.view-station-info .field-label-above .field-label,
+.view-station-info .field-label-above .field-items {
+  display: table-row;
   }
+
+.view-station-info .field-label-inline .field-label {
+  width: 44%;
+  }
+
+.view-station-info .field-label-inline .field-items {
+  width: 52%;
+  }
+
 .view-station-info .field:nth-child(even) {
   background-color: rgba(255,255,255,.2);
   }
@@ -1108,8 +1166,8 @@ d:nth-child(even).view-station-info .horizontal-tabs ul.horizontal-tabs-list li 
 .view-station-info .field.field-name-title,
 .view-station-info .field.field-name-title .field-items,
 .view-station-info .field.field-name-field-wmo-code,
-.view-station-info .field.field-name-field-wmo-code .field-items,
-.view-station-info .field.field-name-field-wmo-code .field-label,
+.view-station-info .field.field-name-field-wmocode .field-items,
+.view-station-info .field.field-name-field-wmocode .field-label,
 .view-station-info .field.field-name-field-stationcode,
 .view-station-info .field.field-name-field-stationcode .field-items, 
 .view-station-info .field.field-name-field-stationcode .field-label {
@@ -1117,15 +1175,35 @@ d:nth-child(even).view-station-info .horizontal-tabs ul.horizontal-tabs-list li 
   background-color: transparent;
   }
 
-.views-station-info .field.field-name-field-wmo-code,
-.views-station-info .field.field-name-field-stationcode {
-  float: left;
+.view-station-info .field.field-name-field-wmocode,
+.view-station-info .field.field-name-field-stationcode {
+  position: absolute; top: 0; left: auto; right: 0;
   width: 50px;
+  padding: 0px 3px;
+  background-color: rgba(255,255,255,.2);
+  font-size: .75em;
+  text-align: center;
+  }
+.view-station-info .field.field-name-field-wmocode {
+  right: 56px;
   }
 
-.views-station-info .field.field-name-title {
-  float: left;
-  margin-right: 100px;
+.view-station-info .field.field-name-field-wmocode .field-label,
+.view-station-info .field.field-name-field-stationcode .field-label,
+.view-station-info .field.field-name-field-wmocode .field-items,
+.view-station-info .field.field-name-field-stationcode .field-items {
+  float: none;
+  width: 100%;
+  padding: 0;
+  }
+
+.view-station-info .field.field-name-title {
+  margin-right: 112px;
+  min-height: 2em;
+  }
+
+.view-station-info .field.field-name-title .field-items {
+  width: 100%;
   }
 
 
