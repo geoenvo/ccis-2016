@@ -33,12 +33,18 @@
 COLORS
 yellow	#fcce00 (252,206,0)
 green	#54673c (84,103,60)
-blue	#2c4563 (44,69,99)
+blue1	#2c4563 (44,69,99)
+blue2   #566982 (86,105,130)
+blue3   #405672 (64,86,114)
+blue3   #78879b (102,135,155)
 orange	#f15a24 (241,90,36)
 beige	#c7b299 (199,179,153)
 l'grey	#e6e6e6 (230,230,230)
 m'grey	#b3b3b3 (179,179,179)
-
+l'grey2 #cccccc (204,204,204)
+l'grey3 #f2f2f2 (242,242,242)
+black   #000000
+white   #ffffff
 -------------- */
 
 
@@ -62,7 +68,8 @@ input.form-submit, button,
 .events.teaser,
 .horizontal-tab-button,
 .menu li a,
-#footer-columns .block-simplenews
+#footer-columns .block-simplenews,
+table.dataTable
   {
   font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
   }
@@ -187,23 +194,68 @@ body {
   box-shadow: 1px 3px 5px 1px rgba(0,0,0,.3);
   }
 
+html body.admin-menu {
+  margin-top: 40px !important;
+  }
+
+  
+/* +++ header blocks styling +++ */
+  
 #region_user {
   clear: both;
   float: right;
   }
 
+#utilities {
+  float:right;
+  }
+
 #utilities .block {
   float: right;
   margin-left: 20px;
+  margin-bottom: 10px;
   }
 
 #block-search-form {
+  margin-right: 10px;
   clear: right;
   }
-
-html body.admin-menu {
-  margin-top: 40px !important;
+  
+#block-user-login {
+  margin-right: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: right;
   }
+  
+#block-system-user-menu {
+  margin-bottom: 10px;
+  }
+
+#header .form-item {
+  margin: 0 0 5px;
+  }
+  
+/* CHECK */
+#block-user-login .item-list {
+  display: none;
+  }
+
+#block-user-login .form-item {
+  display: inline;
+  margin-right: 10px; 
+  }
+
+#block-user-login input.form-text {
+  width: 8em;
+  }
+
+#block-user-login .form-actions {
+  float: right;
+  }
+
+
+
 
 /* +++ footer styling +++ */
 
@@ -307,6 +359,17 @@ html body.admin-menu {
   margin-top: .5em;
   }
 
+.block-simplenews .form-item {
+  margin: 5px 0;
+  }
+
+.block-simplenews .compact-form-label {
+  top: 8px;
+  }
+
+.block-simplenews .compact-form input.form-text {
+  }
+
 
 /* +++++ homebox overrides +++++ */
 
@@ -327,24 +390,39 @@ html body.admin-menu {
   box-shadow: 2px 2px 2px rgba(0,0,0,.3);
   }
 
-
 #homebox .portlet-icon {
   background-color: #fcce00;
   }
 
-/* not sustainable */
-#homebox .homebox-column-wrapper-1 .homebox-portlet-inner {
+#homebox .portlet-content {
+  padding: 0;
+  }
+
+#homebox .portlet-content > div:first-child,
+#homebox .portlet-content > form {
+  padding: 4px;
+  }
+
+#homebox .homebox-portlet {
+  background-color: transparent;
+  }
+
+#homebox #homebox-block-ccis_stationinfo,
+#homebox #homebox-block-ccis_stationinfo_2,
+#homebox #homebox-block-ccis_filter {
   background-color: #2c4563;
   color: #f1f1f1;
   }
 
-#homebox-block-ccis_stationinfo .portlet-inner,
-#homebox-block-ccis_stationinfo_2 .portlet-inner,
-#homebox-block-ccis_filter .portlet-inner {
-  background-color: 2c4563;
-  color: #f1f1f1;
+#homebox #homebox-block-ccis_d3,
+#homebox #homebox-block-ccis_d3_2,
+#homebox #homebox-block-ccis_datatables {
+  background: #e6e6e6;
   }
 
+#homebox-column-wrapper-3 {
+  clear: both;
+  }
 
 
 /* +++++ Navigation + menus +++++ */
@@ -749,6 +827,11 @@ textarea:focus {
   font-size: 16px;
   }
 
+#homebox h2 {
+  margin: 0;
+  line-height: 100%
+  }
+
 #homebox .description {
   margin: 2px 0 0;
   color: rgba(255,255,255,.6);
@@ -763,6 +846,71 @@ textarea:focus {
 #homebox .form-item {
   margin: .5em 0;
   }
+
+
+
+/* ++ data table ++ */
+
+#ccis-weather-datatable-block {
+  background-color: #e6e6e6;
+  }
+
+#ccis-weather-datatable-block .description {
+  color: #c7b299;
+  }
+
+.dataTables_empty {
+  padding: 1em 0;
+  }
+
+table {
+  width: 100%;
+  clear: both;
+  }
+
+#ccis-weather-datatable-block table {
+  margin-bottom: .25em;
+  font-size: 1.25em;
+  }
+
+#ccis-weather-datatable-block caption {
+  text-align: left;
+  color: #c7b299;
+  font-size: 1em;
+  }
+
+th {
+  color: #2c4563;
+  font-weight: normal;
+  }
+  
+form th {
+  border: 0 none;
+  }
+
+tbody tr.even, 
+tbody tr.odd {
+  background-color: #f2f2f2;
+  border-bottom: 0 none;
+  }
+
+tbody tr.odd {
+  background-color: #cccccc;
+  }
+
+tbody td {
+  border-left: 1px solid #fff;
+  text-align: center;
+  }
+tbody td:first-child {
+  border-left-width: 0;
+  }
+
+tr.even td.sorting_1,
+tr.odd td.sorting_1 {
+  background-color: transparent;
+  }
+
 
 /* ++ station info ++ */
 
@@ -932,15 +1080,26 @@ d:nth-child(even).view-station-info .horizontal-tabs ul.horizontal-tabs-list li 
   margin: 0;
   }
 
-/* ++ data table ++ */
 
-#ccis-weather-datatable-block table {
-  width: 100%;
-  clear: both;
-  margin-bottom: 2em;
+/* ++ filter search results ++ */
+
+#ccis-station-search-result,
+#ccis-station-search-result table {
+  background-color: #566982;
   }
-
-
+  
+#ccis-station-search-result tr.odd,
+#ccis-station-search-result tr.even {
+  background-color: #78879b;
+  }
+#ccis-station-search-result tr.odd {
+  background-color: #566982;
+  }
+  
+#ccis-station-search-result th,
+#ccis-station-search-result td {
+  color: #f2f2f2;
+  }
 
 
 
