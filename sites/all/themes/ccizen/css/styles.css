@@ -1062,6 +1062,25 @@ tr.odd td.sorting_1 {
   background-color: rgba(255,255,255,.2);
   }
 
+/* + station info maximized + */
+
+.homebox-block-ccis_stationinfo.portlet-maximized fieldset.horizontal-tabs-pane {
+  width: 100%;
+  }
+
+.homebox-block-ccis_stationinfo.portlet-maximized fieldset.horizontal-tabs-pane {
+  width: 25%;
+  }
+
+.homebox-block-ccis_stationinfo.portlet-maximized fieldset.horizontal-tabs-pane .element-invisible {
+  width: auto;
+  height: auto;
+  position: relative;
+  clip: auto;
+  overflow: visible;
+  }
+
+
 /* ++ station filter ++ */
 
 #ccis-block-filter-form {
