@@ -376,6 +376,7 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
 
   $list2 = _ccis_get_listname($station_2, $range);
   $settings = _ccis_get_d3_settings($list2, $form_state['values'], 2);
+  $commands[] = ajax_command_settings($settings, TRUE);
 
   $settings = _ccis_get_datatables_settings($list1, $form_state['values']);
   $settings = _ccis_get_datatables_settings($list2, $form_state['values'], 2);
