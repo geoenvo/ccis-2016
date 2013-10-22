@@ -1,5 +1,5 @@
 (function($) {
-Drupal.behaviors.ccis_search_terms = {
+Drupal.behaviors.ccis_base = {
   attach: function(d_context, settings) {
     var $list = $('#ccis-station-search-result', d_context);
     var $radios = $list.find("[type=radio]");
@@ -17,6 +17,21 @@ Drupal.behaviors.ccis_search_terms = {
         form.find("[type=submit]").mousedown();
       }
     });
+    var $homeboxcontent = $(".portlet-content");
+    if ($homeboxcontent.length < 1) {
+      return;
+    }
+    $homeboxcontent.closest(".homebox-portlet").show();
+    for (var i = 0; i < $homeboxcontent.length; i++) {
+      var _this = $($homeboxcontent[i]);
+      var id = _this.children().attr("id");
+      if (id.indexOf("d3") > -1) {
+        continue;
+      }
+      if (_this.children().html() == "") {
+        _this.closest(".homebox-portlet").hide();
+      }
+    }
   }
 }
 Drupal.jsAC.prototype.select = function (node) {
