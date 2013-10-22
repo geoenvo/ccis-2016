@@ -2785,7 +2785,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationcode',
-    'label' => 'Station Number',
+    'label' => 'Station No.',
     'required' => 1,
     'settings' => array(
       'text_processing' => 0,
@@ -3098,7 +3098,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'dashboard' => array(
-        'label' => 'inline',
+        'label' => 'above',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -3797,7 +3797,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Special Codes (Missing data values etc.)');
   t('Station Alias Name');
   t('Station Description');
-  t('Station Number');
+  t('Station No.');
   t('Station Status');
   t('Station Type');
   t('Station operator or responsible organization name');

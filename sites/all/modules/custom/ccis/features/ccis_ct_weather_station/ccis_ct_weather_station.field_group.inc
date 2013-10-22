@@ -1272,10 +1272,10 @@ function ccis_ct_weather_station_field_group_info() {
     'label' => 'Information',
     'weight' => '3',
     'children' => array(
-      0 => 'group_metadata_information',
+      0 => 'group_attachments',
       1 => 'group_contact',
-      2 => 'group_station',
-      3 => 'group_attachments',
+      2 => 'group_metadata_information',
+      3 => 'group_station',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(
