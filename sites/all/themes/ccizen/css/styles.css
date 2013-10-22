@@ -829,7 +829,8 @@ textarea:focus {
 
 #homebox h2 {
   margin: 0;
-  line-height: 100%
+  line-height: 100%;
+  font-size: 1.25em;
   }
 
 #homebox .description {
@@ -1099,6 +1100,32 @@ d:nth-child(even).view-station-info .horizontal-tabs ul.horizontal-tabs-list li 
 #ccis-station-search-result th,
 #ccis-station-search-result td {
   color: #f2f2f2;
+  }
+
+
+/* ++ station top info ++ */
+
+.view-station-info .field.field-name-title,
+.view-station-info .field.field-name-title .field-items,
+.view-station-info .field.field-name-field-wmo-code,
+.view-station-info .field.field-name-field-wmo-code .field-items,
+.view-station-info .field.field-name-field-wmo-code .field-label,
+.view-station-info .field.field-name-field-stationcode,
+.view-station-info .field.field-name-field-stationcode .field-items, 
+.view-station-info .field.field-name-field-stationcode .field-label {
+  display: block;
+  background-color: transparent;
+  }
+
+.views-station-info .field.field-name-field-wmo-code,
+.views-station-info .field.field-name-field-stationcode {
+  float: left;
+  width: 50px;
+  }
+
+.views-station-info .field.field-name-title {
+  float: left;
+  margin-right: 100px;
   }
 
 
