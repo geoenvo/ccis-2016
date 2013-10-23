@@ -145,12 +145,12 @@ body {
   }
 
 #page {
-  background-color: #fff;
   z-index: 1;
   }
 
 #header {
-  padding-top: 10px;
+  padding-top: 0;
+  padding-left: 0;
   padding-bottom: 0 /*4em*/;
   background-color: #e6e6e6;
   z-index: 500;
@@ -158,6 +158,11 @@ body {
 
 #navigation {
   z-index: 520;
+  }
+
+#content {
+  background-color: #fff;
+  padding-bottom: 20px;
   }
 
 #main {
@@ -260,6 +265,8 @@ html body.admin-menu {
 /* +++ footer styling +++ */
 
 #footer-columns {
+  position: relative;
+  top: -12px;
   padding-top: 5px;
   }
 
@@ -691,14 +698,22 @@ textarea:focus {
 
 /* +++++ Slideshow +++++ */
 
-/* reset .block-inner paddings */
+.region-highlighted {
+  height: 245px;
+  position: relative;
+  }
 
+#block-views-slideshow-block {
+  position: absolute;
+  z-index: 1;
+  }
+
+/* reset .block-inner paddings */
 .front #main #block-views-slideshow-block .block-inner {
   padding: 0;
   }
 
 .slideshow {
-  z-index: 5;
   }
 
 .front .view-slideshow {
@@ -1240,6 +1255,13 @@ tr.odd td.sorting_1 {
 
 /* ++++++++++ Climability-specific ++++++++++ */
 
+/* +++ hide certain page titles +++ */
+
+.page-dashboard #page-title,
+.front #page-title 
+  {
+  display: none;
+  }
 
 
 #footer-wrapper .stakeholder .views-row-3 p {

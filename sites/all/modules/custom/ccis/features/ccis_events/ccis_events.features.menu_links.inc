@@ -10,14 +10,14 @@
 function ccis_events_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: main-menu_events:events
-  $menu_links['main-menu_events:events'] = array(
+  // Exported menu link: main-menu_events--news:events
+  $menu_links['main-menu_events--news:events'] = array(
     'menu_name' => 'main-menu',
     'link_path' => 'events',
     'router_path' => 'events',
-    'link_title' => 'Events',
+    'link_title' => 'Events & News',
     'options' => array(
-      'identifier' => 'main-menu_events:events',
+      'identifier' => 'main-menu_events--news:events',
     ),
     'module' => 'system',
     'hidden' => 0,
@@ -29,7 +29,7 @@ function ccis_events_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t('Events');
+  t('Events & News');
 
 
   return $menu_links;
