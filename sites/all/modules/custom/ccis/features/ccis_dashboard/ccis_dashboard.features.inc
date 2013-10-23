@@ -131,8 +131,11 @@ function ccis_dashboard_homebox() {
     'full' => 1,
     'roles' => 
     array (
-      0 => 'anonymous user',
-      1 => 'authenticated user',
+      0 => 'administrator',
+      1 => 'anonymous user',
+      2 => 'authenticated user',
+      3 => 'climability editor',
+      4 => 'special user',
     ),
   );
 
