@@ -83,9 +83,9 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Header';
-  $handler->display->display_options['header']['area']['content'] = '<h2>Latest news</h2>
+  $handler->display->display_options['header']['area']['content'] = '<h1>Latest news</h1>
 <p>Newsfeed from relevant sources</p>';
-  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['attachment_position'] = 'after';
   $handler->display->display_options['inherit_pager'] = TRUE;
 
@@ -163,7 +163,7 @@ function ccis_news_views_default_views() {
     t('Source'),
     t('Attachment Newsfeed'),
     t('Header'),
-    t('<h2>Latest news</h2>
+    t('<h1>Latest news</h1>
 <p>Newsfeed from relevant sources</p>'),
     t('Block Newsfeed'),
     t('more'),
