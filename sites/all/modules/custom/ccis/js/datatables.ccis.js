@@ -35,8 +35,8 @@ Drupal.behaviors.ccis_datatables = {
         $cols[key] = {"sTitle" : datatable.legends['field_' + value]};
       });
       datatable.data = {
-          "aaData": json['aaData'],
-          "aoColumns": $cols
+        "aaData": json['aaData'],
+        "aoColumns": $cols
       };
       datatable.drawTable(index);
     });
@@ -45,13 +45,14 @@ Drupal.behaviors.ccis_datatables = {
     var _datatable = this;
     _datatable.container.append("<div id='ccis-weather-datatable-content-" + index + "'></div>");
     var $div = $('#ccis-weather-datatable-content-' + index);
-    $div.html(table(index));
+    $div.append("<div class='ccis-datatable-station-number'>" + (index + 1)  +"</div>");
+    $div.append(table(index));
     var _tableId = '#ccis-datatable-' + index;
     var options = {
-        "sScrollY": "300px",
-        "sScrollX": "100%",
-        "bScrollCollapse": true,
-        "bPaginate": false,
+      "sScrollY": "300px",
+      "sScrollX": "100%",
+      "bScrollCollapse": true,
+      "bPaginate": false,
     };
     options = $.extend(true, _datatable.data, options);
     var oTable = $(_tableId).dataTable(options);

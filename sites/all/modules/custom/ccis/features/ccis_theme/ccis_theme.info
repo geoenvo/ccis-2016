@@ -35,5 +35,4 @@ features[menu_custom][] = user-menu
 features[variable][] = theme_ccizen_settings
 features[variable][] = theme_default
 features[variable][] = theme_settings
-features_exclude[fe_block_boxes][block_socialmedia] = block_socialmedia
 project path = sites/all/modules/custom/ccis/features
