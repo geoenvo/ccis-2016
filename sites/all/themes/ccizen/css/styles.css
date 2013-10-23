@@ -167,6 +167,7 @@ body {
   }
 
 #content {
+  min-height: 400px;
   background-color: #fff;
   padding-bottom: 20px;
   }
@@ -391,6 +392,7 @@ html body.admin-menu {
 /* +++++ homebox overrides +++++ */
 
 #homebox .homebox-column {
+  margin: 0;
   padding: 0;
   }
 
@@ -869,6 +871,11 @@ textarea:focus {
 
 /* +++++ dashboard +++++ */
 
+.page-dashboard #content {
+  padding: 0; 
+  background-color: transparent;
+  }
+
 #homebox {
   font-size: 16px;
   }
@@ -1008,12 +1015,13 @@ tr.odd td.sorting_1 {
   }
 
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li {
-  width: 24%;
+  width: 25%;
   height: 30px;
   min-width: 50px;
   padding: 0;
   white-space: nowrap;
   overflow: hidden;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   border: 1px solid transparent;
   }
@@ -1034,7 +1042,7 @@ tr.odd td.sorting_1 {
   background-position: 3px -6px;
   }
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-0.selected a {
-  background-position: 3px -54px;
+  background-position: 3px -56px;
   }
 
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-1 a {
@@ -1117,20 +1125,61 @@ tr.odd td.sorting_1 {
 
 /* + station info maximized + */
 
-.homebox-block-ccis_stationinfo.portlet-maximized fieldset.horizontal-tabs-pane {
+#homebox .portlet-maximized h2 {
+  font-size: 2em;
+  }
+
+.portlet-maximized .view-station-info .field.field-name-field-wmocode, 
+.portlet-maximized .view-station-info .field.field-name-field-stationcode {
+  width: 70px;
+  font-size: 1em;
+  }
+.portlet-maximized .view-station-info .field.field-name-field-wmocode {
+  right: 76px;
+  }
+
+.portlet-maximized .view-station-info .horizontal-tabs-panes {
   width: 100%;
   }
 
-.homebox-block-ccis_stationinfo.portlet-maximized fieldset.horizontal-tabs-pane {
+.portlet-maximized .view-station-info fieldset.horizontal-tabs-pane {
   width: 25%;
+  float: left;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 20px 4px;
+  border: 1px solid #78879b;
+  border-width: 0 1px;
+  margin-left: -1px;
   }
 
-.homebox-block-ccis_stationinfo.portlet-maximized fieldset.horizontal-tabs-pane .element-invisible {
+.portlet-maximized .view-station-info fieldset.horizontal-tabs-pane:first-child {
+  border-left-width: 0;
+  margin-left: 0;
+  }
+.portlet-maximized .view-station-info fieldset.horizontal-tabs-pane:last-child {
+  border-right-width: 0;
+  }
+
+.portlet-maximized .view-station-info fieldset.horizontal-tab-hidden {
+  position: relative;
+  top: 0;
+  }
+
+.portlet-maximized .view-station-info fieldset.horizontal-tabs-pane .element-invisible {
   width: auto;
   height: auto;
   position: relative;
   clip: auto;
   overflow: visible;
+  }
+
+.portlet-maximized .view-station-info .horizontal-tabs ul.horizontal-tabs-list li strong {
+  color: #fcce00;
+  }
+
+.portlet-maximized .view-station-info .horizontal-tabs ul.horizontal-tabs-list .horizontal-tab-button.selected a {
+  background-color: rgba(255,255,255,.2);
   }
 
 
