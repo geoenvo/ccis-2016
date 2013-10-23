@@ -112,7 +112,8 @@ h3 {
   margin: 1em 0 .5em;
   }
 
-#main h2.block-title {
+#main h2.block-title,
+#homebox h3.dashboard-title {
   height: 48px;
   margin-bottom: .5em;
   background: url('../img/titel_background_left.png') no-repeat bottom left;
@@ -122,10 +123,21 @@ h3 {
   clear: left;
   color: #2c4563;
   }
-#main h2.block-title span {
+#main h2.block-title span,
+#homebox h3.dashboard-title span {
   display: block;
   background: url('../img/titel_background_right.png') no-repeat bottom right;
-  padding: 0px 25px 0px 0;
+  padding: 0 23px 0 0;
+  height: 48px;
+  }
+
+#homebox h3.dashboard-title {
+  margin: .5em 0 0;
+  height: 38px;
+  }
+
+#homebox h3.dashboard-title span {
+  height: 38px;
   }
 
 p, pre {
@@ -909,6 +921,11 @@ textarea:focus {
   background-color: #e6e6e6;
   }
 
+.dataTables_wrapper {
+  margin-bottom: 20px;
+  clear: none;
+  }
+
 #ccis-weather-datatable-block .description {
   color: #c7b299;
   }
@@ -922,9 +939,14 @@ table {
   clear: both;
   }
 
+#ccis-weather-datatable-block .ccis-datatable-station-number {
+  /*float: none;*/
+  }
+
 #ccis-weather-datatable-block table {
   margin-bottom: .25em;
   font-size: 1.25em;
+  width: 100%;
   }
 
 #ccis-weather-datatable-block caption {
@@ -963,6 +985,11 @@ tbody td:first-child {
 tr.even td.sorting_1,
 tr.odd td.sorting_1 {
   background-color: transparent;
+  }
+
+.dataTables_info {
+  float: none;
+  width: auto;
   }
 
 
@@ -1053,17 +1080,17 @@ tr.odd td.sorting_1 {
   }
 
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-2 a {
-  background-position: 3px -210px;
+  background-position: 3px -310px;
   }
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-2.selected a {
-  background-position: 3px -260px;
+  background-position: 3px -360px;
   }
 
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-3 a {
-  background-position: 3px -310px;
+  background-position: 3px -210px;
   }
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li.horizontal-tab-button-3.selected a {
-  background-position: 3px -360px;
+  background-position: 3px -260px;
   }
 
 .view-station-info fieldset .fieldset-wrapper,
@@ -1155,10 +1182,11 @@ tr.odd td.sorting_1 {
 
 .portlet-maximized .view-station-info fieldset.horizontal-tabs-pane:first-child {
   border-left-width: 0;
-  margin-left: 0;
+  margin-left: 1px;
   }
 .portlet-maximized .view-station-info fieldset.horizontal-tabs-pane:last-child {
   border-right-width: 0;
+  margin-right: 0px;
   }
 
 .portlet-maximized .view-station-info fieldset.horizontal-tab-hidden {
@@ -1199,7 +1227,9 @@ tr.odd td.sorting_1 {
   margin: .25em 0;
   }
 
-#edit-station-input .field-prefix {
+#edit-station-input .field-prefix,
+.ccis-datatable-station-number,
+#ccis-station-search-result th.col {
   display: block;
   float: left;
   width: 16px;
@@ -1263,22 +1293,43 @@ tr.odd td.sorting_1 {
 
 /* ++ filter search results ++ */
 
-#ccis-station-search-result,
 #ccis-station-search-result table {
   background-color: #566982;
+  border: 0 none;
   }
   
 #ccis-station-search-result tr.odd,
 #ccis-station-search-result tr.even {
   background-color: #78879b;
   }
-#ccis-station-search-result tr.odd {
+#ccis-station-search-result tr.even {
   background-color: #566982;
   }
   
 #ccis-station-search-result th,
 #ccis-station-search-result td {
-  color: #f2f2f2;
+  color: #ffffff;
+  border: 0 none;
+  text-align: left;
+  }
+
+#ccis-station-search-result th {
+  color: #fcce00;
+  }
+
+#ccis-station-search-result .form-type-radio {
+  text-align: center;
+  width: 2em;
+  margin: 4px 0;
+  }
+
+#ccis-station-search-result th.col {
+  float: none;
+  display: table-cell;
+  font-size: 1em;
+  }
+#ccis-station-search-result th.col-2 {
+  border-right: 1px solid #566982;
   }
 
 

@@ -174,15 +174,16 @@ function ccis_ct_weather_station_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Data ',
       'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
         'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'blind',
+        'speed' => 'fast',
       ),
+      'formatter' => 'collapsed',
     ),
   );
   $export['group_data|node|weather_station|dashboard'] = $field_group;
@@ -306,15 +307,16 @@ function ccis_ct_weather_station_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Instrumentation',
       'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
         'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'blind',
+        'speed' => 'fast',
       ),
+      'formatter' => 'collapsed',
     ),
   );
   $export['group_instrumentation|node|weather_station|dashboard'] = $field_group;
@@ -439,7 +441,7 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Metadata Information',
-    'weight' => '12',
+    'weight' => '10',
     'children' => array(
       0 => 'field_beginposition',
       1 => 'field_category',
@@ -750,15 +752,16 @@ function ccis_ct_weather_station_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Responsible Organization',
       'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
         'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'blind',
+        'speed' => 'fast',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $export['group_responsible_organization|node|weather_station|dashboard'] = $field_group;
@@ -861,15 +864,16 @@ function ccis_ct_weather_station_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Station Contact',
       'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
         'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'blind',
+        'speed' => 'fast',
       ),
+      'formatter' => 'collapsed',
     ),
   );
   $export['group_station_contact|node|weather_station|dashboard'] = $field_group;
@@ -972,15 +976,16 @@ function ccis_ct_weather_station_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Station Description',
       'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
         'classes' => '',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'blind',
+        'speed' => 'fast',
       ),
+      'formatter' => 'collapsible',
     ),
   );
   $export['group_station_description|node|weather_station|dashboard'] = $field_group;
@@ -1141,7 +1146,7 @@ function ccis_ct_weather_station_field_group_info() {
   $field_group->parent_name = 'group_tabs_group';
   $field_group->data = array(
     'label' => 'Station',
-    'weight' => '10',
+    'weight' => '9',
     'children' => array(
       0 => 'field_alias',
       1 => 'group_data',
@@ -1218,10 +1223,10 @@ function ccis_ct_weather_station_field_group_info() {
         'description' => '',
         'show_label' => '1',
         'label_element' => 'h3',
-        'effect' => 'none',
+        'effect' => 'blind',
         'speed' => 'fast',
       ),
-      'formatter' => 'collapsible',
+      'formatter' => 'collapsed',
     ),
   );
   $export['group_status|node|weather_station|dashboard'] = $field_group;
