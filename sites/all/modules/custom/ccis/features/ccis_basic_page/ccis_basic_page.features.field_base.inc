@@ -19,6 +19,9 @@ function ccis_basic_page_field_default_field_bases() {
       0 => 'node',
     ),
     'field_name' => 'body',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'foreign keys' => array(
       'format' => array(
         'columns' => array(
