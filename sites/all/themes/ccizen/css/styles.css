@@ -69,7 +69,8 @@ input.form-submit, button,
 .horizontal-tab-button,
 .menu li a,
 #footer-columns .block-simplenews,
-table.dataTable
+table.dataTable,
+.bean-image-teaser .field-name-field-title-visible
   {
   font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
   }
@@ -1380,6 +1381,33 @@ tr.odd td.sorting_1 {
 
 .view-station-info .field.field-name-title .field-items {
   width: 100%;
+  }
+
+
+/* +++++ spacial teasers +++++ */
+
+/* not sustainable - module patch necessary? */
+#main .block-bean h2.block-title {
+  display: none;
+  }
+
+.bean-image-teaser {
+  margin: 10px 10px 0 5px;
+  border: 1px solid #2c4563;
+  -moz-box-shadow: 1px 3px 2px rgba(0,0,0,.3);
+  -webkit-shadow: 1px 3px 2px rgba(0,0,0,.3);
+  box-shadow: 1px 3px 2px rgba(0,0,0,.3);
+  }
+
+.bean-image-teaser img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  }
+
+.bean-image-teaser .field-name-field-title-visible {
+  font-size: 1.75em;
+  padding: 5px 5px 10px;
   }
 
 
