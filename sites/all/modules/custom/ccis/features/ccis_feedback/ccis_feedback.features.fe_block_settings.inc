@@ -12,26 +12,26 @@ function ccis_feedback_default_fe_block_settings() {
 
   $export['version'] = '2.0';
 
-  $export['simplenews-0'] = array(
-    'cache' => 1,
+  $export['simplenews-6'] = array(
+    'cache' => -1,
     'custom' => 0,
-    'delta' => 0,
+    'delta' => 6,
     'module' => 'simplenews',
     'node_types' => array(),
     'pages' => '',
     'roles' => array(),
     'themes' => array(
       'bartik' => array(
-        'region' => '',
-        'status' => 0,
+        'region' => 'footer_thirdcolumn',
+        'status' => 1,
         'theme' => 'bartik',
-        'weight' => 0,
+        'weight' => -14,
       ),
       'ccizen' => array(
         'region' => '',
         'status' => 0,
         'theme' => 'ccizen',
-        'weight' => 0,
+        'weight' => -14,
       ),
       'seven' => array(
         'region' => '',
@@ -40,7 +40,7 @@ function ccis_feedback_default_fe_block_settings() {
         'weight' => 0,
       ),
     ),
-    'title' => '',
+    'title' => '<none>',
     'visibility' => 0,
   );
 

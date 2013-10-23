@@ -65,7 +65,7 @@ label,
 h1, h2, h3, h4,
 #navigation,
 input.form-submit, button,
-.events.teaser,
+.events .evdate, .events .evplace,
 .horizontal-tab-button,
 .menu li a,
 #footer-columns .block-simplenews,
@@ -95,6 +95,12 @@ label {
 h1 {
   clear: both;
   font-size: 3em;
+  line-height: 1.2em;
+  }
+
+h1#page-title {
+  margin-bottom: .75em;
+  padding-top: .5em;
   }
 
 h2 {
@@ -797,7 +803,7 @@ textarea:focus {
 
 /* events */
 
-.events.teaser .views-row {
+.events .views-row {
   clear: left;
   border-bottom: 1px dotted #b3b3b3;
   padding: 10px 0;
@@ -812,9 +818,14 @@ textarea:focus {
   background: #fff;
   }
 
+.evdatebox {
+  float: left;
+  width: auto;
+  }
+
 .evdate {
   width: 100px;
-  margin-left: 105px; /* evlogo width + evlogo margin-right */
+  margin-left: 0px;
   line-height: 100%;
   text-align: center;
   }
@@ -830,13 +841,29 @@ textarea:focus {
   font-size: 2.625em;
   }
 
+.front .teaser .evdatebox {
+  width: ;
+  }
+
 .evplace {
   display: block;
-  float: right;
-  width: 80px;
   font-size: 1.25em;
   margin: 0 0 0 0px;
   color: #999999;
+  }
+
+.front .teaser .evplace {
+  float: left;
+  position: relative;
+  top: -2px;
+  width: 80px;
+  margin: 0 0 0 5px;
+  }
+
+.evbody {
+  margin-left: 220px;
+  position: relative;
+  top: -2px;
   }
 
 
