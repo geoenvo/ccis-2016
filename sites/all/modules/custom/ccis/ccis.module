@@ -559,17 +559,21 @@ function _ccis_get_date_range($values) {
   return $range;
 }
 
+/**
+ * Builds the name of a mongodb collection.
+ *
+ * @param object $node
+ * @param string $range
+ *
+ * @return string
+ */
 function _ccis_get_listname($node, $range) {
   $list = 'unknown';
   if (!empty($node)) {
-    $items = field_get_items('node', $node, 'field_mongodb_list_name');
+    $items = field_get_items('node', $node, 'field_stationcode');
     if (!empty($items)) {
       $item = reset($items);
       $list = $item['safe_value'];
-    }
-    else{
-      $list = drupal_strtolower($node->title);
-      $list = str_replace(' ', '', $list);
     }
     $list = $list . '_' . $range;
   }
