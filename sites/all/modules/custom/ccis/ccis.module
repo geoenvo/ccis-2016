@@ -787,11 +787,11 @@ function ccis_search_terms_finder_list($values) {
   ->condition($db_or)
   ->addTag('node_access');
   $header = array();
-  $header_labels = array(t('Station name'), t('WMO-Code'), 1, 2);
+  $header_labels = array(t('Station name'), t('WMO Code'), 1, 2);
   foreach ($header_labels as $i => $label) {
     $header[] = array(
       'data' => $label,
-      'class' => 'col-' . $i,
+      'class' => 'col col-' . $i,
     );
   }
   $rows = array();
