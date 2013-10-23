@@ -153,6 +153,34 @@ function ccis_block_view($delta) {
   return $block;
 }
 
+/**
+ * Implement hook_date_format_types().
+ */
+function ccis_date_format_types() {
+  // Define the core date format types.
+  return array(
+    'datatable' => t('Datatable'),
+  );
+}
+
+/**
+ * Implement hook_date_formats().
+ */
+function ccis_date_formats() {
+  return array(
+    array(
+      'type' => 'datatable',
+      'format' => 'd.m.Y',
+      'locales' => array('de-de'),
+    ),
+    array(
+      'type' => 'datatable',
+      'format' => 'Y-m-d',
+      'locales' => array('en', 'en-us', 'fr-fr', 'id-id', 'es-es'),
+    ),
+  );
+}
+
 function ccis_admin_overview() {
   $system = drupal_get_path('module', 'system');
   include_once $system . '/system.admin.inc';
@@ -204,6 +232,7 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
         unset($doc['_id']);
         $header = array_keys($doc);
         if ($source == 'datatables') {
+          $doc['date'] = format_date(strtotime($doc['date']), 'datatable');
           $output[] = array_values($doc);
         }
         else{
@@ -270,7 +299,9 @@ function _ccis_block_filter($node) {
 function ccis_block_filter_form($form, $form_state, $node = NULL) {
   $form['station_input'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Stations'),
+  );
+  $form['station_input']['headline'] = array(
+    '#markup' => '<h3>' . t('Stations') . '</h3>',
   );
   $form['station_input']['input1'] = array(
     '#title' => t('Station 1'),
@@ -293,7 +324,9 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
   );
   $form['filter'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Filter'),
+  );
+  $form['filter']['headline'] = array(
+    '#markup' => '<h3>' . t('Filter') . '</h3>',
   );
   $form['filter']['searchterm'] = array(
     '#title' => t('Search'),
@@ -319,13 +352,13 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#title' => t('From'),
     '#type' => 'date_popup',
     '#date_year_range' => '-100:0',
-    '#date_format' => 'd.m.Y',
+    '#date_format' => variable_get('date_format_datatable', 'Y-m-d'),
   );
   $form['filter']['end'] = array(
     '#title' => t('To'),
     '#type' => 'date_popup',
     '#date_year_range' => '-100:0',
-    '#date_format' => 'd.m.Y',
+    '#date_format' => variable_get('date_format_datatable', 'Y-m-d'),
   );
   $search_result = '';
   if (!empty($form_state['values'])) {
@@ -656,31 +689,48 @@ function _ccis_get_weather_data_labels($check = TRUE) {
  * @return number
  */
 function _ccis_round(&$value, $key) {
-  $fields = _ccis_get_to_round_fields();
-  if (!empty($fields[$key])) {
+  $fields = _ccis_get_fields_for_fieldtype('number_decimal');
+  $value = trim($value);
+  if (!empty($fields[$key]) && $value != 'NA') {
     $value = round($value, $fields[$key]);
   }
 }
 
 /**
- * Helper function to get all fields for the weather data which are decimal.
+ * Helper function to fix a interger before we import it to mongodb.
+ *
+ * @return number
+ */
+function _ccis_fix_interger(&$value, $key) {
+  $fields = _ccis_get_fields_for_fieldtype('number_integer');
+  $value = trim($value);
+  if (!empty($fields[$key]) && $value != 'NA') {
+    $value = (int)$value;
+  }
+}
+
+/**
+ * Helper function to get all fields for the weather data which are certain fieldtype.
  *
  * @return array
  *  The key is the header name of csv data and the value the scale number.
  */
-function _ccis_get_to_round_fields() {
-  $round = &drupal_static(__FUNCTION__, array());
-  if (empty($round)) {
+function _ccis_get_fields_for_fieldtype($type) {
+  $values = &drupal_static(__FUNCTION__, array());
+  if (empty($values)) {
     $field_infos = field_info_instances('node', 'weather_data');
     foreach ($field_infos as $field_name => $info) {
       $field = field_info_field($field_name);
+      $key = str_replace('field_', '', $field_name);
       if ($field['type'] == 'number_decimal') {
-        $key = str_replace('field_', '', $field_name);
-        $round[$key] = $field['settings']['scale'];
+        $values['number_decimal'][$key] = $field['settings']['scale'];
+      }
+      elseif ($field['type'] == 'number_integer') {
+        $values['number_integer'][$key] = 1;
       }
     }
   }
-  return $round;
+  return !empty($values[$type]) ? $values[$type] : array();
 }
 
 /**
