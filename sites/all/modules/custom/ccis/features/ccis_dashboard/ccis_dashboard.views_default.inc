@@ -38,7 +38,7 @@ function ccis_dashboard_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Did not found any information.';
+  $handler->display->display_options['empty']['area']['content'] = 'No information found.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -104,7 +104,7 @@ function ccis_dashboard_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Did not found any information.'),
+    t('No information found.'),
     t('WMO Code'),
     t('Current Position'),
     t('All'),
