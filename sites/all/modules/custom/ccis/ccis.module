@@ -366,18 +366,17 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
   if (!empty($form_state['values'])) {
     $search_result = ccis_search_terms_finder_list($form_state['values']);
   }
-  $form['searchresult'] = array(
-    '#markup' => $search_result,
-    '#prefix' => '<div id="ccis-station-search-result">',
-    '#suffix' => '</div>',
-  );
   $form['actions'] = array('#type' => 'actions');
-
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Search'),
     '#ajax' => array('callback' => 'ccis_block_filter_form_ajax_submit'),
     '#attributes' => array('class' => array('use-ajax-submit')),
+  );
+  $form['searchresult'] = array(
+    '#markup' => $search_result,
+    '#prefix' => '<div id="ccis-station-search-result">',
+    '#suffix' => '</div>',
   );
   $form['#attached']['js'] = array(drupal_get_path('module', 'ccis') . '/js/base.ccis.js');
   return $form;
@@ -787,7 +786,14 @@ function ccis_search_terms_finder_list($values) {
   $query->condition('n.type', 'weather_station')
   ->condition($db_or)
   ->addTag('node_access');
-  $header = array('station' => t('Station name'), 'wmo-code' => t('WMO-Code'), '1' => 1, '2' => 2);
+  $header = array();
+  $header_labels = array(t('Station name'), t('WMO-Code'), 1, 2);
+  foreach ($header_labels as $i => $label) {
+    $header[] = array(
+      'data' => $label,
+      'class' => 'col-' . $i,
+    );
+  }
   $rows = array();
   try{
     $results = $query->execute();
