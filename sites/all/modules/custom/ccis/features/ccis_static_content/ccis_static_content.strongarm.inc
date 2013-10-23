@@ -136,5 +136,12 @@ function ccis_static_content_strongarm() {
   $strongarm->value = 0;
   $export['node_submitted_article_climatechange'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_article_climatechange_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_article_climatechange_pattern'] = $strongarm;
+
   return $export;
 }

@@ -1,11 +1,10 @@
 name = CCIS Climate Change
-description = Articles relating to climate change
+description = No longer in use
 core = 7.x
 package = CCIS
-dependencies[] = views
-dependencies[] = views_content
+version = 7.x-1.0-deprecated
+project = ccis_climate_change
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
-features[views_view][] = climate_change
 features_exclude[dependencies][ctools] = ctools
 project path = sites/all/modules/custom/ccis/features

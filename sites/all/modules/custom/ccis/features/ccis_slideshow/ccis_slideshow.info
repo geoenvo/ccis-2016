@@ -1,8 +1,8 @@
 name = CCIS Slideshow
-description = Slideshow using static content pages
+description = Slideshow using static content pages of type 'climate change'
 core = 7.x
 package = CCIS
-version = 7.x-1.0-alpha6
+version = 7.x-1.0-alpha7
 project = ccis_slideshow
 dependencies[] = block
 dependencies[] = ccis_static_content
