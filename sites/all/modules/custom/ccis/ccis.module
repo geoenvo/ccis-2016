@@ -366,7 +366,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
   if (!empty($form_state['values'])) {
     $search_result = ccis_search_terms_finder_list($form_state['values']);
   }
-  $form['actions'] = array('#type' => 'actions');
+  $form['actions'] = array('#type' => 'actions', '#weight' => 1);
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Search'),
@@ -377,6 +377,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#markup' => $search_result,
     '#prefix' => '<div id="ccis-station-search-result">',
     '#suffix' => '</div>',
+    '#weight' => 2,
   );
   $form['#attached']['js'] = array(drupal_get_path('module', 'ccis') . '/js/base.ccis.js');
   return $form;
