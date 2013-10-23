@@ -8,46 +8,46 @@ Drupal.behaviors.ccis = {
 	// Position 1: Color
 	// Position 2: Legend Keyword
 	// Position 3: Legend Hover Name
-	// Position 4: Icon
+	// Position 4: Icon (in case we do not want to use the built-in svg icon)
 	// Position 5: Units
 	var temperatureGroup = [
-		["tx", "#FF0000", "TX", "Daily maximum temperature (&#8451;)", "symbol_legende_tg.png", "celsius"],
-		["tn", "#FCB205", "TN", "Daily minimum temperature (&#8451;)", "symbol_legende_tn.png", "celsius"],
-		["tg", "#FF8000", "TG", "Daily mean temperature (&#8451;)", "symbol_legende_tx.png", "celsius"],
-		["dtr", "#FF8400", "DTR", "Daily temperature range (&#8451;)", "symbol_legende_rr.png", "celsius"]
+		["tx", "#FF0000", "TX", "Daily maximum temperature (&#8451;)", "icon.png", "celsius"],
+		["tn", "#FCB205", "TN", "Daily minimum temperature (&#8451;)", "icon.png", "celsius"],
+		["tg", "#FF8000", "TG", "Daily mean temperature (&#8451;)", "icon.png", "celsius"],
+		["dtr", "#FF8400", "DTR", "Daily temperature range (&#8451;)", "icon.png", "celsius"]
 	];
 	var warmExtremesGroup = [
-		["su", "#FB6A4A", "SU", "Number of summer days (days)", "symbol_legende_tg.png", "days"],
-		["tr", "#EF3B2C", "TR", "Number of tropical nights (days)", "symbol_legende_tg.png", "days"],
-		["txx", "#99000D", "Txx", "Monthly maximum value of TX (&#8451;)", "symbol_legende_tg.png", "celsius"],
-		["tnx", "#CB181D", "Tnx", "Monthly maximum value of TN (&#8451;)", "symbol_legende_tg.png", "celsius"],
-		["tn90p", "#FC9272", "TN90p", "Percentage of days when TN > 90th percentile (%)", "symbol_legende_tg.png", "percent"],
-		["tx90p", "#D4B9DA", "TX90p", "Percentage of days when TX > 90th percentile (%)", "symbol_legende_tg.png", "percent"],
-		["wsdi", "#DF65B0C", "WSDI", "Warm speel duration index (days)", "symbol_legende_tg.png", "days"]
+		["su", "#FB6A4A", "SU", "Number of summer days (days)", "icon.png", "days"],
+		["tr", "#EF3B2C", "TR", "Number of tropical nights (days)", "icon.png", "days"],
+		["txx", "#99000D", "Txx", "Monthly maximum value of TX (&#8451;)", "icon.png", "celsius"],
+		["tnx", "#CB181D", "Tnx", "Monthly maximum value of TN (&#8451;)", "icon.png", "celsius"],
+		["tn90p", "#FC9272", "TN90p", "Percentage of days when TN > 90th percentile (%)", "icon.png", "percent"],
+		["tx90p", "#D4B9DA", "TX90p", "Percentage of days when TX > 90th percentile (%)", "icon.png", "percent"],
+		["wsdi", "#DF65B0C", "WSDI", "Warm speel duration index (days)", "icon.png", "days"]
 	];
 	var coldExtremesGroup = [
-		["fd", "#5100FF", "FD", "Number of frost days (days)", "symbol_legende_tn.png", "days"],
-		["id", "#7A3EFA", "ID", "Number of icing days (days)", "symbol_legende_tn.png", "days"],
-		["txn", "#5E56F0", "Txn", "Monthly minimum value of TX (&#8451;)", "symbol_legende_tn.png", "celsius"],
-		["tnn", "#5C72ED", "Tnn", "Monthly minimum value of TN (&#8451;)", "symbol_legende_tn.png", "celsius"],
-		["tn10p", "#6B91E3", "TN10p", "Percentage of days when TN < 10th percentile (%)", "symbol_legende_tn.png", "percent"],
-		["tx10p", "#6BA7E3", "TX10p", "Percentage of days when TX < 10th percentile (%)", "symbol_legende_tn.png", "percent"],
-		["csdi", "#7FBED4", "CSDI", "Cold speel duration index (days)", "symbol_legende_tn.png", "days"]
+		["fd", "#5100FF", "FD", "Number of frost days (days)", "icon.png", "days"],
+		["id", "#7A3EFA", "ID", "Number of icing days (days)", "icon.png", "days"],
+		["txn", "#5E56F0", "Txn", "Monthly minimum value of TX (&#8451;)", "icon.png", "celsius"],
+		["tnn", "#5C72ED", "Tnn", "Monthly minimum value of TN (&#8451;)", "icon.png", "celsius"],
+		["tn10p", "#6B91E3", "TN10p", "Percentage of days when TN < 10th percentile (%)", "icon.png", "percent"],
+		["tx10p", "#6BA7E3", "TX10p", "Percentage of days when TX < 10th percentile (%)", "icon.png", "percent"],
+		["csdi", "#7FBED4", "CSDI", "Cold speel duration index (days)", "icon.png", "days"]
 	];
 	var precipitationGroup = [
-		["rr", "#9900FF", "RR", "Daily precipitation amount (mm)", "symbol_legende_rr.png", "milimeter"],
-		["cwd", "#B87EDE", "CWD", "Maximum length of wet spell (days with RR = 1mm) (days)", "symbol_legende_rr.png", "days"],
-		["prcptot", "#B897DB", "PRCPTOT", "Annual total precipitation in wet days (mm)", "symbol_legende_rr.png", "milimeter"]
+		["rr", "#9900FF", "RR", "Daily precipitation amount (mm)", "icon.png", "milimeter"],
+		["cwd", "#B87EDE", "CWD", "Maximum length of wet spell (days with RR = 1mm) (days)", "icon.png", "days"],
+		["prcptot", "#B897DB", "PRCPTOT", "Annual total precipitation in wet days (mm)", "icon.png", "milimeter"]
 	];
 	var extremePrecipitationGroup = [
-		["rx1day", "#00FFB3", "Rx1day", "Monthly maximum 1-day precipitation (mm)", "symbol_legende_rr.png", "milimeter"],
-		["rx5day", "#00FF77", "Rx5day", "Monthly maximum consecutive 5-day precipitation (mm)", "symbol_legende_rr.png", "milimeter"],
-		["sdii", "#1BCF45", "SDII", "Simple pricipitation intensity index (mm)", "symbol_legende_rr.png", "milimeter"],
-		["r10mm", "#15B33A", "R10mm", "Annual count of days when PRCP= 10mm (days)", "symbol_legende_rr.png", "days"],
-		["r20mm", "#96C98D", "R20mm", "Annual count of days when PRCP= 20mm (days)", "symbol_legende_rr.png", "days"],
-		["rnnmm", "#A3C482", "Rnnmm", "Annual count of days when PRCP= nnmm (days)", "symbol_legende_rr.png", "days"],
-		["r95ptot", "#91A86A", "R95pTOT", "Annual total PRCP when RR > 95p (mm)", "symbol_legende_rr.png", "milimeter"],
-		["r99ptot", "#8B9C6E", "R99pTOT", "Annual total PRCP when RR > 99p (mm)", "symbol_legende_rr.png", "milimeter"]
+		["rx1day", "#00FFB3", "Rx1day", "Monthly maximum 1-day precipitation (mm)", "icon.png", "milimeter"],
+		["rx5day", "#00FF77", "Rx5day", "Monthly maximum consecutive 5-day precipitation (mm)", "icon.png", "milimeter"],
+		["sdii", "#1BCF45", "SDII", "Simple pricipitation intensity index (mm)", "icon.png", "milimeter"],
+		["r10mm", "#15B33A", "R10mm", "Annual count of days when PRCP= 10mm (days)", "icon.png", "days"],
+		["r20mm", "#96C98D", "R20mm", "Annual count of days when PRCP= 20mm (days)", "icon.png", "days"],
+		["rnnmm", "#A3C482", "Rnnmm", "Annual count of days when PRCP= nnmm (days)", "icon.png", "days"],
+		["r95ptot", "#91A86A", "R95pTOT", "Annual total PRCP when RR > 95p (mm)", "icon.png", "milimeter"],
+		["r99ptot", "#8B9C6E", "R99pTOT", "Annual total PRCP when RR > 99p (mm)", "icon.png", "milimeter"]
 	];
 	var windGroup = [
 		["fg", "#00BBC4", "FG", "Daily mean wind speed (m/s)", "symbol_legende_rr.png", "meterPerSecond"],
@@ -173,6 +173,10 @@ Drupal.behaviors.ccis = {
 		var degrees_selection;
 		var octas_selection;
 		
+		// SVG legend icons
+		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path id='path5598' style='fill:none;stroke:";
+		var partOfSVGLine2 = ";stroke-width:1.96201527;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none' d='m 1.3394886,1047.4364 9.3823584,-6.3952 3.619918,9.4078 4.692159,-5.6505 5.34355,0'/></g></svg>";
+	
 		var legendCategoriesOpen = "Open categories";
 		var legendCategoriesClose = "Close categories";
 		var plus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/plus.png' width='7' height='7'>"
@@ -259,7 +263,12 @@ Drupal.behaviors.ccis = {
 				var otherGroupShown = [];
 				
 				// Choose initial parameters to show
-				temperatureGroupShown = [temperatureGroupUsed[0]];
+				// Try to find TX10p
+				for (var i=0; i<coldExtremesGroupUsed.length; i++) {
+					if (coldExtremesGroupUsed[i][0] === "tx10p") {
+						coldExtremesGroupShown = [coldExtremesGroupUsed[i]];
+					} 
+				}
 				
 				// Fill the unit groups arrays
 				function fillUnitGroups() {
@@ -734,8 +743,8 @@ Drupal.behaviors.ccis = {
 					var iconWidth;
 					var iconHeight;
 					if (axisType==="yAxisCelsius") {
-						yAxisLabel = "&#8451;" // Celsius
-						yAxisLabelOffset = -20;
+						yAxisLabel = "Celsius"
+						yAxisLabelOffset = -30;
 						yAxisTickFormat = ".1f";
 						iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
 						iconWidth = "7px";
@@ -780,7 +789,7 @@ Drupal.behaviors.ccis = {
 						iconHeight = "21px";
 					} else if (axisType==="yAxisDegrees") {
 						yAxisLabel = "degrees"
-						yAxisLabelOffset = -20;
+						yAxisLabelOffset = -30;
 						yAxisTickFormat = ".0f";
 						iconLink = "";
 						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png";
@@ -824,7 +833,7 @@ Drupal.behaviors.ccis = {
 						.call(yAxisObj[axisType]);
 					d3.select("#"+axisType+"id"+block)
 						.append("text")
-						.html(yAxisLabel)
+						.text(yAxisLabel)
 						.attr("class", "d3_yAxisText")
 						.style("font-size","12px")
 						.attr("transform", "translate ("+yAxisLabelOffset+", -5)");
@@ -911,7 +920,7 @@ Drupal.behaviors.ccis = {
 				$("#d3_legendDiv"+block)
 					.css("width", legendWidth-1)
 					.css("height", height + margin.top + margin.bottom - heightPrintSelect);
-					
+				
 				// Create DIVs for the keys
 				// Temperature group
 				if (temperatureGroupUsed.length>0 || warmExtremesGroupUsed.length>0 || coldExtremesGroupUsed.length>0) {
@@ -945,7 +954,9 @@ Drupal.behaviors.ccis = {
 							$("#d3_keysTemperature"+i+block).append("<div id='d3_keysTemperatureBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysTemperatureText"+i+block).append(temperatureGroupUsed[i][2]);
-							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+temperatureGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+temperatureGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+temperatureGroupUsed[i][1]+partOfSVGLine2+"</div>");
+
 							(function(i) {
 								$("#d3_keysTemperatureBoxText"+i+block)
 									.hover(function(){
@@ -987,7 +998,9 @@ Drupal.behaviors.ccis = {
 							$("#d3_keysWarmExtremes"+i+block).append("<div id='d3_keysWarmExtremesBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysWarmExtremesText"+i+block).append(warmExtremesGroupUsed[i][2]);
-							$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+warmExtremesGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+warmExtremesGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+warmExtremesGroupUsed[i][1]+partOfSVGLine2+"</div>");
+
 							(function(i) {
 								$("#d3_keysWarmExtremesBoxText"+i+block)
 									.hover(function(){
@@ -1029,7 +1042,8 @@ Drupal.behaviors.ccis = {
 							$("#d3_keysColdExtremes"+i+block).append("<div id='d3_keysColdExtremesBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysColdExtremesText"+i+block).append(coldExtremesGroupUsed[i][2]);
-							$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+coldExtremesGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+coldExtremesGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+coldExtremesGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
 								$("#d3_keysColdExtremesBoxText"+i+block)
 									.hover(function(){
@@ -1076,7 +1090,8 @@ Drupal.behaviors.ccis = {
 							
 							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationText"+i+block+"' class='d3_keysText'></div>");
 							$("#d3_keysPrecipitationText"+i+block).append(precipitationGroupUsed[i][2]);
-							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+precipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
 								$("#d3_keysPrecipitationBoxText"+i+block)
 									.hover(function(){
@@ -1119,7 +1134,8 @@ Drupal.behaviors.ccis = {
 							
 							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationnText"+i+block+"' class='d3_keysText'></div>");
 							$("#d3_keysExtremePrecipitationnText"+i+block).append(extremePrecipitationGroupUsed[i][2]);
-							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+extremePrecipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+extremePrecipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+extremePrecipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
 								$("#d3_keysExtremePrecipitationBoxText"+i+block)
 									.hover(function(){
@@ -1164,7 +1180,8 @@ Drupal.behaviors.ccis = {
 						
 						$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindText"+i+block+"' class='d3_keysText'></div>");
 						$("#d3_keysWindText"+i+block).append(windGroupUsed[i][2]);
-						$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+windGroupUsed[i][4]+"' width='17' height='13'></div>");
+						//$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+windGroupUsed[i][4]+"' width='17' height='13'></div>");
+						$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+windGroupUsed[i][1]+partOfSVGLine2+"</div>");
 						(function(i) {
 							$("#d3_keysWindBoxText"+i+block)
 								.hover(function(){
@@ -1208,7 +1225,8 @@ Drupal.behaviors.ccis = {
 						
 						$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherText"+i+block+"' class='d3_keysText'></div>");
 						$("#d3_keysOtherText"+i+block).append(otherGroupUsed[i][2]);
-						$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+otherGroupUsed[i][4]+"' width='25' height='15'></div>");
+						//$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+otherGroupUsed[i][4]+"' width='25' height='15'></div>");
+						$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+otherGroupUsed[i][1]+partOfSVGLine2+"</div>");
 						(function(i) {
 							$("#d3_keysOtherBoxText"+i+block)
 								.hover(function(){
@@ -1547,10 +1565,6 @@ Drupal.behaviors.ccis = {
 					yScaleMeterPerSecond.range([height, 0]);
 					yScaleDegrees.range([height, 0]);
 					yScaleOctas.range([height, 0]);
-					
-					/*yScaleTemp.range([height, 0]);
-					yScalePrec.range([height, 0]);
-					yScalePress.range([height, 0]);*/
 					
 					// Create again the svg
 					createSvg();
@@ -2140,6 +2154,10 @@ Drupal.behaviors.ccis = {
 		var degrees_selection;
 		var octas_selection;
 		
+		// SVG legend icons
+		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path id='path5598' style='fill:none;stroke:";
+		var partOfSVGLine2 = ";stroke-width:1.96201527;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none' d='m 1.3394886,1047.4364 9.3823584,-6.3952 3.619918,9.4078 4.692159,-5.6505 5.34355,0'/></g></svg>";
+
 		var legendCategoriesOpen = "Open categories";
 		var legendCategoriesClose = "Close categories";
 		var plus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/plus.png' width='7' height='7'>"
@@ -2227,7 +2245,12 @@ Drupal.behaviors.ccis = {
 				var otherGroupShown = [];
 				
 				// Choose initial parameters to show
-				temperatureGroupShown = [temperatureGroupUsed[0]];
+				// Try to find TX10p
+				for (var i=0; i<coldExtremesGroupUsed.length; i++) {
+					if (coldExtremesGroupUsed[i][0] === "tx10p") {
+						coldExtremesGroupShown = [coldExtremesGroupUsed[i]];
+					} 
+				}
 				
 				// Fill the unit groups arrays
 				function fillUnitGroups() {
@@ -2702,8 +2725,8 @@ Drupal.behaviors.ccis = {
 					var iconWidth;
 					var iconHeight;
 					if (axisType==="yAxisCelsius") {
-						yAxisLabel = "&#8451;" // Celsius
-						yAxisLabelOffset = -20;
+						yAxisLabel = "Celsius"
+						yAxisLabelOffset = -30;
 						yAxisTickFormat = ".1f";
 						iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
 						iconWidth = "7px";
@@ -2748,7 +2771,7 @@ Drupal.behaviors.ccis = {
 						iconHeight = "21px";
 					} else if (axisType==="yAxisDegrees") {
 						yAxisLabel = "degrees"
-						yAxisLabelOffset = -20;
+						yAxisLabelOffset = -30;
 						yAxisTickFormat = ".0f";
 						iconLink = "";
 						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png";
@@ -2792,7 +2815,7 @@ Drupal.behaviors.ccis = {
 						.call(yAxisObj[axisType]);
 					d3.select("#"+axisType+"id"+block)
 						.append("text")
-						.html(yAxisLabel)
+						.text(yAxisLabel)
 						.attr("class", "d3_yAxisText")
 						.style("font-size","12px")
 						.attr("transform", "translate ("+yAxisLabelOffset+", -5)");
@@ -2913,7 +2936,8 @@ Drupal.behaviors.ccis = {
 							$("#d3_keysTemperature"+i+block).append("<div id='d3_keysTemperatureBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysTemperatureText"+i+block).append(temperatureGroupUsed[i][2]);
-							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+temperatureGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+temperatureGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+temperatureGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
 								$("#d3_keysTemperatureBoxText"+i+block)
 									.hover(function(){
@@ -2955,7 +2979,8 @@ Drupal.behaviors.ccis = {
 							$("#d3_keysWarmExtremes"+i+block).append("<div id='d3_keysWarmExtremesBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysWarmExtremesText"+i+block).append(warmExtremesGroupUsed[i][2]);
-							$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+warmExtremesGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+warmExtremesGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+warmExtremesGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
 								$("#d3_keysWarmExtremesBoxText"+i+block)
 									.hover(function(){
@@ -2997,7 +3022,8 @@ Drupal.behaviors.ccis = {
 							$("#d3_keysColdExtremes"+i+block).append("<div id='d3_keysColdExtremesBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysColdExtremesText"+i+block).append(coldExtremesGroupUsed[i][2]);
-							$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+coldExtremesGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+coldExtremesGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+coldExtremesGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
 								$("#d3_keysColdExtremesBoxText"+i+block)
 									.hover(function(){
@@ -3044,7 +3070,8 @@ Drupal.behaviors.ccis = {
 							
 							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationText"+i+block+"' class='d3_keysText'></div>");
 							$("#d3_keysPrecipitationText"+i+block).append(precipitationGroupUsed[i][2]);
-							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+precipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
 								$("#d3_keysPrecipitationBoxText"+i+block)
 									.hover(function(){
@@ -3087,7 +3114,8 @@ Drupal.behaviors.ccis = {
 							
 							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationnText"+i+block+"' class='d3_keysText'></div>");
 							$("#d3_keysExtremePrecipitationnText"+i+block).append(extremePrecipitationGroupUsed[i][2]);
-							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+extremePrecipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
+							//$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+extremePrecipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
+							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+extremePrecipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
 								$("#d3_keysExtremePrecipitationBoxText"+i+block)
 									.hover(function(){
@@ -3132,7 +3160,8 @@ Drupal.behaviors.ccis = {
 						
 						$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindText"+i+block+"' class='d3_keysText'></div>");
 						$("#d3_keysWindText"+i+block).append(windGroupUsed[i][2]);
-						$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+windGroupUsed[i][4]+"' width='17' height='13'></div>");
+						//$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+windGroupUsed[i][4]+"' width='17' height='13'></div>");
+						$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+windGroupUsed[i][1]+partOfSVGLine2+"</div>");
 						(function(i) {
 							$("#d3_keysWindBoxText"+i+block)
 								.hover(function(){
@@ -3176,7 +3205,8 @@ Drupal.behaviors.ccis = {
 						
 						$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherText"+i+block+"' class='d3_keysText'></div>");
 						$("#d3_keysOtherText"+i+block).append(otherGroupUsed[i][2]);
-						$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+otherGroupUsed[i][4]+"' width='25' height='15'></div>");
+						//$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+otherGroupUsed[i][4]+"' width='25' height='15'></div>");
+						$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+otherGroupUsed[i][1]+partOfSVGLine2+"</div>");
 						(function(i) {
 							$("#d3_keysOtherBoxText"+i+block)
 								.hover(function(){
@@ -3515,10 +3545,6 @@ Drupal.behaviors.ccis = {
 					yScaleMeterPerSecond.range([height, 0]);
 					yScaleDegrees.range([height, 0]);
 					yScaleOctas.range([height, 0]);
-					
-					/*yScaleTemp.range([height, 0]);
-					yScalePrec.range([height, 0]);
-					yScalePress.range([height, 0]);*/
 					
 					// Create again the svg
 					createSvg();
