@@ -32,9 +32,9 @@ function ccis_theme_context_default_contexts() {
           'region' => 'utilities',
           'weight' => '-10',
         ),
-        'block-2' => array(
-          'module' => 'block',
-          'delta' => '2',
+        'boxes-socialmedia' => array(
+          'module' => 'boxes',
+          'delta' => 'socialmedia',
           'region' => 'utilities',
           'weight' => '-9',
         ),
@@ -62,9 +62,9 @@ function ccis_theme_context_default_contexts() {
           'region' => 'footer_firstcolumn',
           'weight' => '-10',
         ),
-        'block-1' => array(
-          'module' => 'block',
-          'delta' => '1',
+        'boxes-contactinfo' => array(
+          'module' => 'boxes',
+          'delta' => 'contactinfo',
           'region' => 'footer_secondcolumn',
           'weight' => '-10',
         ),
