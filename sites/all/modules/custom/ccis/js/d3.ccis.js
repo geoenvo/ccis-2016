@@ -199,7 +199,6 @@ Drupal.behaviors.ccis = {
 						obj[dataKeysArray[i]] = parseFloat(d[dataKeysArray[i]]);
 					}
 					return obj;
-	  
 				});
 				
 				// Parameter groups parsed for the specific user
@@ -687,7 +686,8 @@ Drupal.behaviors.ccis = {
 					graphObj[graphType] = d3.svg.line()
 						.interpolate("linear")
 						.x(function(d){return xScale(d.date)})
-						.y(function(d){return yScaleType(d[graphType])});
+						.y(function(d){return yScaleType(d[graphType])})
+						.defined(function(d) {return !isNaN(d[graphType]);});	// do not show NaN
 	
 					d3.select("#svg"+block)
 						.append("path")
@@ -2654,7 +2654,8 @@ Drupal.behaviors.ccis = {
 					graphObj[graphType] = d3.svg.line()
 						.interpolate("linear")
 						.x(function(d){return xScale(d.date)})
-						.y(function(d){return yScaleType(d[graphType])});
+						.y(function(d){return yScaleType(d[graphType])})
+						.defined(function(d) {return !isNaN(d[graphType]);});	// do not show NaN
 	
 					d3.select("#svg"+block)
 						.append("path")
