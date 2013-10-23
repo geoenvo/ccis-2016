@@ -689,31 +689,48 @@ function _ccis_get_weather_data_labels($check = TRUE) {
  * @return number
  */
 function _ccis_round(&$value, $key) {
-  $fields = _ccis_get_to_round_fields();
-  if (!empty($fields[$key])) {
+  $fields = _ccis_get_fields_for_fieldtype('number_decimal');
+  $value = trim($value);
+  if (!empty($fields[$key]) && $value != 'NA') {
     $value = round($value, $fields[$key]);
   }
 }
 
 /**
- * Helper function to get all fields for the weather data which are decimal.
+ * Helper function to fix a interger before we import it to mongodb.
+ *
+ * @return number
+ */
+function _ccis_fix_interger(&$value, $key) {
+  $fields = _ccis_get_fields_for_fieldtype('number_integer');
+  $value = trim($value);
+  if (!empty($fields[$key]) && $value != 'NA') {
+    $value = (int)$value;
+  }
+}
+
+/**
+ * Helper function to get all fields for the weather data which are certain fieldtype.
  *
  * @return array
  *  The key is the header name of csv data and the value the scale number.
  */
-function _ccis_get_to_round_fields() {
-  $round = &drupal_static(__FUNCTION__, array());
-  if (empty($round)) {
+function _ccis_get_fields_for_fieldtype($type) {
+  $values = &drupal_static(__FUNCTION__, array());
+  if (empty($values)) {
     $field_infos = field_info_instances('node', 'weather_data');
     foreach ($field_infos as $field_name => $info) {
       $field = field_info_field($field_name);
+      $key = str_replace('field_', '', $field_name);
       if ($field['type'] == 'number_decimal') {
-        $key = str_replace('field_', '', $field_name);
-        $round[$key] = $field['settings']['scale'];
+        $values['number_decimal'][$key] = $field['settings']['scale'];
+      }
+      elseif ($field['type'] == 'number_integer') {
+        $values['number_integer'][$key] = 1;
       }
     }
   }
-  return $round;
+  return !empty($values[$type]) ? $values[$type] : array();
 }
 
 /**

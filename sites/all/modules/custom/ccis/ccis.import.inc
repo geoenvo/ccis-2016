@@ -82,6 +82,7 @@ function ccis_import_csv_file(stdClass $file, &$context) {
           }
           $data = array_combine($header, $data);
           array_walk($data, '_ccis_round');
+          array_walk($data, '_ccis_fix_interger');
           $end_data[] = $data;
         }
         $row++;
