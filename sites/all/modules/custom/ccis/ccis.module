@@ -789,10 +789,12 @@ function ccis_search_terms_finder_list($values) {
   $header = array();
   $header_labels = array(t('Station name'), t('WMO Code'), 1, 2);
   foreach ($header_labels as $i => $label) {
-    $header[] = array(
+    $header[$i] = array(
       'data' => $label,
-      'class' => 'col col-' . $i,
     );
+    if (is_int($label)) {
+      $header[$i]['class'] = 'col col-' . $i;
+    }
   }
   $rows = array();
   try{
