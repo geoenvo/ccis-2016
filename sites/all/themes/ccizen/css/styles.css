@@ -1149,6 +1149,11 @@ tr.odd td.sorting_1 {
   background-color: rgba(255,255,255,.2);
   }
 
+.view-station-info .field-item img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  }
 
 /* + station info maximized + */
 
@@ -1209,7 +1214,6 @@ tr.odd td.sorting_1 {
 .portlet-maximized .view-station-info .horizontal-tabs ul.horizontal-tabs-list .horizontal-tab-button.selected a {
   background-color: rgba(255,255,255,.2);
   }
-
 
 /* ++ station filter ++ */
 

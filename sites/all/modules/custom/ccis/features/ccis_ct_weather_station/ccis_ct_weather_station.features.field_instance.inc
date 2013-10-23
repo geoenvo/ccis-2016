@@ -2602,12 +2602,9 @@ function ccis_ct_weather_station_field_default_field_instances() {
     'display' => array(
       'dashboard' => array(
         'label' => 'inline',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
+        'module' => 'lightbox2',
+        'settings' => array(),
+        'type' => 'lightbox2__lightbox__medium__original',
         'weight' => 96,
       ),
       'default' => array(
