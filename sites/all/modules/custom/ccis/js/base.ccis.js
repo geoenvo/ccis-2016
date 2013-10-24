@@ -18,18 +18,16 @@ Drupal.behaviors.ccis_base = {
       }
     });
     var $homeboxcontent = $(".portlet-content");
-    if ($homeboxcontent.length < 1) {
-      return;
-    }
-    $homeboxcontent.closest(".homebox-portlet").show();
-    for (var i = 0; i < $homeboxcontent.length; i++) {
-      var _this = $($homeboxcontent[i]);
-      var id = _this.children().attr("id");
-      if (id.indexOf("d3") > -1) {
-        continue;
-      }
-      if (_this.children().html() == "") {
-        _this.closest(".homebox-portlet").hide();
+    if ($homeboxcontent.length > 0) {
+      for (var i = 0; i < $homeboxcontent.length; i++) {
+        var _this = $($homeboxcontent[i]);
+        var child = _this.children();
+        if (child.data("hide-portlet") == "1") {
+          _this.closest(".homebox-portlet").hide();
+        }
+        else if (child.data("hide-portlet") == "0") {
+          _this.closest(".homebox-portlet").show();
+        }
       }
     }
   }

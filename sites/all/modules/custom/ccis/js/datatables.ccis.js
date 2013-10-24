@@ -1,10 +1,10 @@
 (function($) {
 Drupal.behaviors.ccis_datatables = {
-  attach: function(d_context, settings) {
+  attach: function(context, settings) {
     var datatable = this;
     datatable.homebox = $("#homebox-block-ccis_datatables");
     datatable.container = $('#ccis-weather-datatable-block');
-    datatable.settings = settings;
+    datatable.range = settings.ccis_dt.range;
     datatable.legends = settings.ccis_dt.legends;
     var $stations = settings.ccis_dt.stations;
     if ($stations.length > 0) {
@@ -26,27 +26,35 @@ Drupal.behaviors.ccis_datatables = {
   },
   fetchData: function(index) {
     var datatable = this;
-    $.getJSON(datatable.current_station.path, function(json) {
-      if (json['aaData'].length < 1) {
-        return;
-      }
-      var $cols = [];
-      $(json['fields']).each(function(key, value) {
-        $cols[key] = {"sTitle" : datatable.legends['field_' + value]};
-      });
-      datatable.data = {
-        "aaData": json['aaData'],
-        "aoColumns": $cols
-      };
-      datatable.drawTable(index);
+    $.ajax({
+      dataType: "json",
+      url: datatable.current_station.path,
+      type: 'GET',
+      async: false,
+      success: function(json, status) {
+        if (json['aaData'].length < 1) {
+          return;
+        }
+        var $cols = [];
+        $(json['fields']).each(function(key, value) {
+          $cols[key] = {"sTitle" : datatable.legends['field_' + value]};
+        });
+        datatable.data = {
+          "aaData": json['aaData'],
+          "aoColumns": $cols
+        };
+        datatable.drawTable(index);
+      },
     });
   },
   drawTable : function(index) {
     var _datatable = this;
-    _datatable.container.append("<div id='ccis-weather-datatable-content-" + index + "'></div>");
-    var $div = $('#ccis-weather-datatable-content-' + index);
-    $div.append("<div class='ccis-datatable-station-number'>" + (index + 1)  +"</div>");
+    var dt_c = "<div id='ccis-weather-datatable-content-" + index + "'></div>";
+    var $div = $(dt_c);
+    $div.append("<div class='ccis-datatable-station-number'>" + (index + 1) + "</div>");
+    $div.append("<div class='ccis-datatable-station-range'>" + Drupal.t("Data: ") + _datatable.range + "</div>");
     $div.append(table(index));
+    _datatable.container.append($div);
     var _tableId = '#ccis-datatable-' + index;
     var options = {
       "sScrollY": "300px",
