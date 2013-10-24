@@ -68,6 +68,22 @@ function ccis_permission() {
   $perms['access_ccis_search_settings'] = array(
     'title' => t('Access CCIS search settings'),
   );
+  $perms['access_ccis_all_weather_data'] = array(
+    'title' => t('Access to all weather data'),
+  );
+  $fields = _ccis_get_weather_data_labels(FALSE);
+  $ranges = _ccis_get_range_label(TRUE);
+  foreach ($fields as $fieldname => $fieldlabel) {
+    foreach ($ranges as $range => $label) {
+      $perm_key = "access_ccis_{$fieldname}_{$range}";
+      $perms[$perm_key] = array(
+        'title' => t('View data of %field in %range', array(
+          '%field' => $fieldlabel,
+          '%range' => $label,
+        )),
+      );
+    }
+  }
   return $perms;
 }
 
@@ -228,21 +244,25 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
       $query = array('date' => array('$gte' => $params['start'], '$lt' => $params['end']));
     }
     $limit = variable_get('ccis_default_displayed_data_limit', 180);
-    $labels = _ccis_get_weather_data_labels();
+    $labels = _ccis_get_weather_data_labels($list);
     $fields = array();
     foreach ($labels as $key => $label) {
       $_key = str_replace('field_', '', $key);
       $fields[$_key] = TRUE;
     }
-    $docs = $col->find($query, $fields)->limit($limit);
     $output = $header = array();
-    $row = 1;
-    if ($docs->hasNext()) {
+    if (!empty($fields)) {
+      $docs = $col->find($query, $fields)->limit($limit);
+      $row = 1;
+    }
+    if (!empty($fields) && $docs->hasNext()) {
       foreach ($docs as $doc) {
         unset($doc['_id']);
         $header = array_keys($doc);
         if ($source == 'datatables') {
-          $doc['date'] = format_date(strtotime($doc['date']), 'datatable');
+          if (!empty($doc['date'])) {
+            $doc['date'] = format_date(strtotime($doc['date']), 'datatable');
+          }
           $output[] = array_values($doc);
         }
         else{
@@ -675,23 +695,30 @@ function ccis_autocomplete_response($type, $string) {
  * @return array
  *   An array of field labels keyed by field names.
  */
-function _ccis_get_weather_data_labels($check = TRUE) {
+function _ccis_get_weather_data_labels($list = NULL) {
   $labels = &drupal_static(__FUNCTION__, array());
   if (empty($labels)) {
     $tmp = array();
     $field_infos = field_info_instances('node', 'weather_data');
     foreach ($field_infos as $field_name => $info) {
       $tmp[$field_name] = array('label' => $info['label'], 'weight' => $info['widget']['weight']);
-      if ($check) {
-        $field = field_info_field($field_name);
-        if (!field_access('view', $field, 'node')) {
-          unset($tmp[$field_name]);
-        }
-      }
     }
     uasort($tmp, 'drupal_sort_weight');
     foreach ($tmp as $key => $value) {
       $labels[$key] = t($value['label']);
+    }
+  }
+  if ($list && !user_access('access_ccis_all_weather_data')) {
+    $ranges = _ccis_get_range_label(TRUE);
+    foreach ($labels as $fieldname => $label) {
+      foreach ($ranges as $range => $label) {
+        if (strpos($list, $range) !== FALSE) {
+          $perm_key = "access_ccis_{$fieldname}_{$range}";
+          if (!user_access($perm_key)) {
+            unset($labels[$fieldname]);
+          }
+        }
+      }
     }
   }
   return $labels;
@@ -881,12 +908,12 @@ function _ccis_get_station_regions() {
  * @return string
  *    The translated range label.
  */
-function _ccis_get_range_label($range) {
+function _ccis_get_range_label($range = NULL) {
   $ranges = array(
     'yearly' => t('Yearly'),
     'monthly' => t('Monthly'),
     'daily' => t('Daily'),
     '10_days' => t('10 Days'),
   );
-  return isset($ranges[$range]) ? $ranges[$range] : t('Unknown');
+  return (isset($ranges[$range])) ? $ranges[$range] : (!is_null($range) ? $ranges : t('Unknown'));
 }
