@@ -598,6 +598,8 @@ function _ccis_block_stationinfo($node = NULL, $id = 1) {
  */
 function _ccis_block_stationmap($nodes = NULL) {
   openlayers_include();
+  $path = drupal_get_path('module', 'ccis');
+  drupal_add_js($path . '/libs/OpenLayers.Popup.Popover/Popover.js');
   $nids = array();
   if (!is_array($nodes)) {
     $nodes = array($nodes);
