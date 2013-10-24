@@ -20,6 +20,37 @@ function ccis_roles_permissions_user_default_permissions() {
     'module' => 'admin_menu',
   );
 
+  // Exported permission: 'access news feeds'.
+  $permissions['access news feeds'] = array(
+    'name' => 'access news feeds',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'aggregator',
+  );
+
+  // Exported permission: 'access site-wide contact form'.
+  $permissions['access site-wide contact form'] = array(
+    'name' => 'access site-wide contact form',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'contact',
+  );
+
+  // Exported permission: 'access user contact forms'.
+  $permissions['access user contact forms'] = array(
+    'name' => 'access user contact forms',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'contact',
+  );
+
   // Exported permission: 'access user profiles'.
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
@@ -28,6 +59,716 @@ function ccis_roles_permissions_user_default_permissions() {
       'climability editor' => 'climability editor',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'access_ccis_admin_overview'.
+  $permissions['access_ccis_admin_overview'] = array(
+    'name' => 'access_ccis_admin_overview',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_all_weather_data'.
+  $permissions['access_ccis_all_weather_data'] = array(
+    'name' => 'access_ccis_all_weather_data',
+    'roles' => array(),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_cc_10_days'.
+  $permissions['access_ccis_field_cc_10_days'] = array(
+    'name' => 'access_ccis_field_cc_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_cc_daily'.
+  $permissions['access_ccis_field_cc_daily'] = array(
+    'name' => 'access_ccis_field_cc_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_cc_monthly'.
+  $permissions['access_ccis_field_cc_monthly'] = array(
+    'name' => 'access_ccis_field_cc_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_cc_yearly'.
+  $permissions['access_ccis_field_cc_yearly'] = array(
+    'name' => 'access_ccis_field_cc_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_cdd'.
+  $permissions['access_ccis_field_cdd'] = array(
+    'name' => 'access_ccis_field_cdd',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_csdi'.
+  $permissions['access_ccis_field_csdi'] = array(
+    'name' => 'access_ccis_field_csdi',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_cwd'.
+  $permissions['access_ccis_field_cwd'] = array(
+    'name' => 'access_ccis_field_cwd',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_date'.
+  $permissions['access_ccis_field_date'] = array(
+    'name' => 'access_ccis_field_date',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_dd_10_days'.
+  $permissions['access_ccis_field_dd_10_days'] = array(
+    'name' => 'access_ccis_field_dd_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_dd_daily'.
+  $permissions['access_ccis_field_dd_daily'] = array(
+    'name' => 'access_ccis_field_dd_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_dd_monthly'.
+  $permissions['access_ccis_field_dd_monthly'] = array(
+    'name' => 'access_ccis_field_dd_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_dd_yearly'.
+  $permissions['access_ccis_field_dd_yearly'] = array(
+    'name' => 'access_ccis_field_dd_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_dtr'.
+  $permissions['access_ccis_field_dtr'] = array(
+    'name' => 'access_ccis_field_dtr',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_fd'.
+  $permissions['access_ccis_field_fd'] = array(
+    'name' => 'access_ccis_field_fd',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_fg_10_days'.
+  $permissions['access_ccis_field_fg_10_days'] = array(
+    'name' => 'access_ccis_field_fg_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_fg_daily'.
+  $permissions['access_ccis_field_fg_daily'] = array(
+    'name' => 'access_ccis_field_fg_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_fg_monthly'.
+  $permissions['access_ccis_field_fg_monthly'] = array(
+    'name' => 'access_ccis_field_fg_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_fg_yearly'.
+  $permissions['access_ccis_field_fg_yearly'] = array(
+    'name' => 'access_ccis_field_fg_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_fx_10_days'.
+  $permissions['access_ccis_field_fx_10_days'] = array(
+    'name' => 'access_ccis_field_fx_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_fx_daily'.
+  $permissions['access_ccis_field_fx_daily'] = array(
+    'name' => 'access_ccis_field_fx_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_fx_monthly'.
+  $permissions['access_ccis_field_fx_monthly'] = array(
+    'name' => 'access_ccis_field_fx_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_fx_yearly'.
+  $permissions['access_ccis_field_fx_yearly'] = array(
+    'name' => 'access_ccis_field_fx_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_gsl'.
+  $permissions['access_ccis_field_gsl'] = array(
+    'name' => 'access_ccis_field_gsl',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_hu_10_days'.
+  $permissions['access_ccis_field_hu_10_days'] = array(
+    'name' => 'access_ccis_field_hu_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_hu_daily'.
+  $permissions['access_ccis_field_hu_daily'] = array(
+    'name' => 'access_ccis_field_hu_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_hu_monthly'.
+  $permissions['access_ccis_field_hu_monthly'] = array(
+    'name' => 'access_ccis_field_hu_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_hu_yearly'.
+  $permissions['access_ccis_field_hu_yearly'] = array(
+    'name' => 'access_ccis_field_hu_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_id'.
+  $permissions['access_ccis_field_id'] = array(
+    'name' => 'access_ccis_field_id',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_pp_10_days'.
+  $permissions['access_ccis_field_pp_10_days'] = array(
+    'name' => 'access_ccis_field_pp_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_pp_daily'.
+  $permissions['access_ccis_field_pp_daily'] = array(
+    'name' => 'access_ccis_field_pp_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_pp_monthly'.
+  $permissions['access_ccis_field_pp_monthly'] = array(
+    'name' => 'access_ccis_field_pp_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_pp_yearly'.
+  $permissions['access_ccis_field_pp_yearly'] = array(
+    'name' => 'access_ccis_field_pp_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_prcptot'.
+  $permissions['access_ccis_field_prcptot'] = array(
+    'name' => 'access_ccis_field_prcptot',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_r10mm'.
+  $permissions['access_ccis_field_r10mm'] = array(
+    'name' => 'access_ccis_field_r10mm',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_r20mm'.
+  $permissions['access_ccis_field_r20mm'] = array(
+    'name' => 'access_ccis_field_r20mm',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_r95ptot'.
+  $permissions['access_ccis_field_r95ptot'] = array(
+    'name' => 'access_ccis_field_r95ptot',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_r99ptot'.
+  $permissions['access_ccis_field_r99ptot'] = array(
+    'name' => 'access_ccis_field_r99ptot',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_rnnmm'.
+  $permissions['access_ccis_field_rnnmm'] = array(
+    'name' => 'access_ccis_field_rnnmm',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_rr_10_days'.
+  $permissions['access_ccis_field_rr_10_days'] = array(
+    'name' => 'access_ccis_field_rr_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_rr_daily'.
+  $permissions['access_ccis_field_rr_daily'] = array(
+    'name' => 'access_ccis_field_rr_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_rr_monthly'.
+  $permissions['access_ccis_field_rr_monthly'] = array(
+    'name' => 'access_ccis_field_rr_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_rr_yearly'.
+  $permissions['access_ccis_field_rr_yearly'] = array(
+    'name' => 'access_ccis_field_rr_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_rx1day'.
+  $permissions['access_ccis_field_rx1day'] = array(
+    'name' => 'access_ccis_field_rx1day',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_rx5day'.
+  $permissions['access_ccis_field_rx5day'] = array(
+    'name' => 'access_ccis_field_rx5day',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_sdii'.
+  $permissions['access_ccis_field_sdii'] = array(
+    'name' => 'access_ccis_field_sdii',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_station'.
+  $permissions['access_ccis_field_station'] = array(
+    'name' => 'access_ccis_field_station',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_su'.
+  $permissions['access_ccis_field_su'] = array(
+    'name' => 'access_ccis_field_su',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tg_10_days'.
+  $permissions['access_ccis_field_tg_10_days'] = array(
+    'name' => 'access_ccis_field_tg_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tg_daily'.
+  $permissions['access_ccis_field_tg_daily'] = array(
+    'name' => 'access_ccis_field_tg_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tg_monthly'.
+  $permissions['access_ccis_field_tg_monthly'] = array(
+    'name' => 'access_ccis_field_tg_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tg_yearly'.
+  $permissions['access_ccis_field_tg_yearly'] = array(
+    'name' => 'access_ccis_field_tg_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tn10p'.
+  $permissions['access_ccis_field_tn10p'] = array(
+    'name' => 'access_ccis_field_tn10p',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tn90p'.
+  $permissions['access_ccis_field_tn90p'] = array(
+    'name' => 'access_ccis_field_tn90p',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tn_10_days'.
+  $permissions['access_ccis_field_tn_10_days'] = array(
+    'name' => 'access_ccis_field_tn_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tn_daily'.
+  $permissions['access_ccis_field_tn_daily'] = array(
+    'name' => 'access_ccis_field_tn_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tn_monthly'.
+  $permissions['access_ccis_field_tn_monthly'] = array(
+    'name' => 'access_ccis_field_tn_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tn_yearly'.
+  $permissions['access_ccis_field_tn_yearly'] = array(
+    'name' => 'access_ccis_field_tn_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tnn'.
+  $permissions['access_ccis_field_tnn'] = array(
+    'name' => 'access_ccis_field_tnn',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tnx'.
+  $permissions['access_ccis_field_tnx'] = array(
+    'name' => 'access_ccis_field_tnx',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tr'.
+  $permissions['access_ccis_field_tr'] = array(
+    'name' => 'access_ccis_field_tr',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tx10p'.
+  $permissions['access_ccis_field_tx10p'] = array(
+    'name' => 'access_ccis_field_tx10p',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tx90p'.
+  $permissions['access_ccis_field_tx90p'] = array(
+    'name' => 'access_ccis_field_tx90p',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tx_10_days'.
+  $permissions['access_ccis_field_tx_10_days'] = array(
+    'name' => 'access_ccis_field_tx_10_days',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tx_daily'.
+  $permissions['access_ccis_field_tx_daily'] = array(
+    'name' => 'access_ccis_field_tx_daily',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+      'special user' => 'special user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tx_monthly'.
+  $permissions['access_ccis_field_tx_monthly'] = array(
+    'name' => 'access_ccis_field_tx_monthly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_tx_yearly'.
+  $permissions['access_ccis_field_tx_yearly'] = array(
+    'name' => 'access_ccis_field_tx_yearly',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_txn'.
+  $permissions['access_ccis_field_txn'] = array(
+    'name' => 'access_ccis_field_txn',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_txx'.
+  $permissions['access_ccis_field_txx'] = array(
+    'name' => 'access_ccis_field_txx',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_field_wsdi'.
+  $permissions['access_ccis_field_wsdi'] = array(
+    'name' => 'access_ccis_field_wsdi',
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_ccis_search_settings'.
+  $permissions['access_ccis_search_settings'] = array(
+    'name' => 'access_ccis_search_settings',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'access_weather_data_perms'.
+  $permissions['access_weather_data_perms'] = array(
+    'name' => 'access_weather_data_perms',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'ccis',
+  );
+
+  // Exported permission: 'administer news feeds'.
+  $permissions['administer news feeds'] = array(
+    'name' => 'administer news feeds',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'aggregator',
   );
 
   // Exported permission: 'administer newsletters'.
@@ -85,6 +826,15 @@ function ccis_roles_permissions_user_default_permissions() {
       'climability editor' => 'climability editor',
     ),
     'module' => 'ccis',
+  );
+
+  // Exported permission: 'edit any main profile'.
+  $permissions['edit any main profile'] = array(
+    'name' => 'edit any main profile',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'profile2',
   );
 
   // Exported permission: 'edit field_address'.
@@ -190,6 +940,16 @@ function ccis_roles_permissions_user_default_permissions() {
   // Exported permission: 'edit field_datestamp'.
   $permissions['edit field_datestamp'] = array(
     'name' => 'edit field_datestamp',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'edit field_diagram_picture'.
+  $permissions['edit field_diagram_picture'] = array(
+    'name' => 'edit field_diagram_picture',
     'roles' => array(
       'administrator' => 'administrator',
       'climability editor' => 'climability editor',
@@ -417,6 +1177,15 @@ function ccis_roles_permissions_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_statement'.
+  $permissions['edit field_statement'] = array(
+    'name' => 'edit field_statement',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'edit field_stationabstract'.
   $permissions['edit field_stationabstract'] = array(
     'name' => 'edit field_stationabstract',
@@ -607,6 +1376,16 @@ function ccis_roles_permissions_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'edit field_weather_station'.
+  $permissions['edit field_weather_station'] = array(
+    'name' => 'edit field_weather_station',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'import weather_station feeds'.
   $permissions['import weather_station feeds'] = array(
     'name' => 'import weather_station feeds',
@@ -677,6 +1456,15 @@ function ccis_roles_permissions_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'filter',
+  );
+
+  // Exported permission: 'view any main profile'.
+  $permissions['view any main profile'] = array(
+    'name' => 'view any main profile',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'profile2',
   );
 
   // Exported permission: 'view field_address'.
@@ -787,6 +1575,16 @@ function ccis_roles_permissions_user_default_permissions() {
       'administrator' => 'administrator',
       'climability editor' => 'climability editor',
       'special user' => 'special user',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_diagram_picture'.
+  $permissions['view field_diagram_picture'] = array(
+    'name' => 'view field_diagram_picture',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
     ),
     'module' => 'field_permissions',
   );
@@ -1020,6 +1818,16 @@ function ccis_roles_permissions_user_default_permissions() {
     'module' => 'field_permissions',
   );
 
+  // Exported permission: 'view field_statement'.
+  $permissions['view field_statement'] = array(
+    'name' => 'view field_statement',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'field_permissions',
+  );
+
   // Exported permission: 'view field_stationabstract'.
   $permissions['view field_stationabstract'] = array(
     'name' => 'view field_stationabstract',
@@ -1221,6 +2029,26 @@ function ccis_roles_permissions_user_default_permissions() {
       'special user' => 'special user',
     ),
     'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'view field_weather_station'.
+  $permissions['view field_weather_station'] = array(
+    'name' => 'view field_weather_station',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'field_permissions',
+  );
+
+  // Exported permission: 'xml_import'.
+  $permissions['xml_import'] = array(
+    'name' => 'xml_import',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'climability editor' => 'climability editor',
+    ),
+    'module' => 'ccis',
   );
 
   return $permissions;
