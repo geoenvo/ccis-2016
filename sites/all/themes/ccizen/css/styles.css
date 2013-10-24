@@ -114,6 +114,10 @@ h3 {
   margin: 1em 0 .5em;
   }
 
+h2.teasertitle {
+  margin: 0;
+  }
+
 #main h2.block-title,
 #homebox h3.dashboard-title {
   height: 48px;
@@ -870,6 +874,19 @@ textarea:focus {
   border-bottom: 1px dotted #b3b3b3;
   padding: 10px 0;
   margin-bottom: 10px;
+  }
+
+h2.teasertitle {
+  margin: 0;
+  }
+
+.evtitle {
+  margin-left: 220px;
+  }
+
+.teaser-page .evlogo, 
+.teaser-page .evdatebox {
+  margin-top: 26px;
   }
 
 .evlogo {
