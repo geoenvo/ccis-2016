@@ -427,6 +427,11 @@ html body.admin-menu {
   background-color: #fcce00;
   }
 
+.portlet-header .portlet-minus,
+.portlet-header .portlet-plus {
+  display: none;
+  }
+
 #homebox .portlet-content {
   padding: 0;
   }
