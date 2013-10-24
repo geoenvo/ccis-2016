@@ -181,6 +181,14 @@ function ccis_date_formats() {
 }
 
 /**
+ * Implement hook_openlayers_map_alter().
+ */
+function ccis_openlayers_map_alter(&$map = array()) {
+  $path = drupal_get_path('module', 'ccis');
+  drupal_add_js($path . '/libs/OpenLayers.Popup.Popover/Popover.js');
+}
+
+/**
  * Page callback for all ccis admin pages.
  */
 function ccis_admin_overview() {
@@ -598,8 +606,6 @@ function _ccis_block_stationinfo($node = NULL, $id = 1) {
  */
 function _ccis_block_stationmap($nodes = NULL) {
   openlayers_include();
-  $path = drupal_get_path('module', 'ccis');
-  drupal_add_js($path . '/libs/OpenLayers.Popup.Popover/Popover.js');
   $nids = array();
   if (!is_array($nodes)) {
     $nodes = array($nodes);
