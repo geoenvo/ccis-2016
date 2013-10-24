@@ -33,6 +33,13 @@ function ccis_menu() {
     'page arguments' => array('ccis_search_settings'),
     'file' => 'ccis.admin.inc',
   );
+  $items[$path . '/permissions'] = array(
+    'title' => 'Weather data permissions',
+    'access arguments' => array('access_weather_data_perms'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ccis_weather_data_permissions'),
+    'file' => 'ccis.admin.inc',
+  );
   $items['ccis/dataquery/%'] = array(
     'title' => 'Data query',
     'access callback' => TRUE,
@@ -68,18 +75,32 @@ function ccis_permission() {
   $perms['access_ccis_search_settings'] = array(
     'title' => t('Access CCIS search settings'),
   );
+  $perms['access_weather_data_perms'] = array(
+    'title' => t('Access CCIS weather data permission settings'),
+  );
   $perms['access_ccis_all_weather_data'] = array(
     'title' => t('Access to all weather data'),
   );
   $fields = _ccis_get_weather_data_labels(FALSE);
+  $fields_per_range = variable_get('ccis_weather_data_perms_range', array());
+  $fields_per_range = array_filter($fields_per_range);
   $ranges = _ccis_get_range_label(TRUE);
   foreach ($fields as $fieldname => $fieldlabel) {
-    foreach ($ranges as $range => $label) {
-      $perm_key = "access_ccis_{$fieldname}_{$range}";
-      $perms[$perm_key] = array(
-        'title' => t('View data of %field in %range', array(
+    if (!empty($fields_per_range[$fieldname])) {
+      foreach ($ranges as $range => $label) {
+        $perm_key = "access_ccis_{$fieldname}_{$range}";
+        $perms[$perm_key] = array(
+          'title' => t('View data of %field in %range', array(
+            '%field' => $fieldlabel,
+            '%range' => $label,
+          )),
+        );
+      }
+    }
+    else{
+      $perms["access_ccis_{$fieldname}"] = array(
+        'title' => t('View data of %field', array(
           '%field' => $fieldlabel,
-          '%range' => $label,
         )),
       );
     }
@@ -94,6 +115,10 @@ function ccis_help($path, $arg) {
   switch ($path) {
     case 'admin/ccis/search':
       return t('The selected fields of the weather station are searchable in the filter form of the weather station dashboard.');
+      break;
+    case 'admin/ccis/permissions':
+      return t('For all selected fields of the weather data you get new view permissions per date range (daily, monthly) etc. .');
+
   }
 }
 
@@ -710,13 +735,22 @@ function _ccis_get_weather_data_labels($list = NULL) {
   }
   if ($list && !user_access('access_ccis_all_weather_data')) {
     $ranges = _ccis_get_range_label(TRUE);
+    $fields_per_range = variable_get('ccis_weather_data_perms_range', array());
+    $fields_per_range = array_filter($fields_per_range);
     foreach ($labels as $fieldname => $label) {
-      foreach ($ranges as $range => $label) {
-        if (strpos($list, $range) !== FALSE) {
-          $perm_key = "access_ccis_{$fieldname}_{$range}";
-          if (!user_access($perm_key)) {
-            unset($labels[$fieldname]);
+      if (!empty($fields_per_range[$fieldname])) {
+        foreach ($ranges as $range => $label) {
+          if (strpos($list, $range) !== FALSE) {
+            $perm_key = "access_ccis_{$fieldname}_{$range}";
+            if (!user_access($perm_key)) {
+              unset($labels[$fieldname]);
+            }
           }
+        }
+      }
+      else {
+        if (!user_access("access_ccis_{$fieldname}")) {
+          unset($labels[$fieldname]);
         }
       }
     }
