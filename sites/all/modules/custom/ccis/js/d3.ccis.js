@@ -23,7 +23,7 @@ Drupal.behaviors.ccis = {
 		["tnx", "#CB181D", "Tnx", "Monthly maximum value of TN (&#8451;)", "icon.png", "celsius"],
 		["tn90p", "#FC9272", "TN90p", "Percentage of days when TN > 90th percentile (%)", "icon.png", "percent"],
 		["tx90p", "#D4B9DA", "TX90p", "Percentage of days when TX > 90th percentile (%)", "icon.png", "percent"],
-		["wsdi", "#DF65B0C", "WSDI", "Warm speel duration index (days)", "icon.png", "days"]
+		["wsdi", "#CC6699", "WSDI", "Warm speel duration index (days)", "icon.png", "days"]
 	];
 	var coldExtremesGroup = [
 		["fd", "#5100FF", "FD", "Number of frost days (days)", "icon.png", "days"],
@@ -174,7 +174,7 @@ Drupal.behaviors.ccis = {
 		var octas_selection;
 		
 		// SVG legend icons
-		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path id='path5598' style='fill:none;stroke:";
+		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path style='fill:none;stroke:";
 		var partOfSVGLine2 = ";stroke-width:1.96201527;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none' d='m 1.3394886,1047.4364 9.3823584,-6.3952 3.619918,9.4078 4.692159,-5.6505 5.34355,0'/></g></svg>";
 	
 		var legendCategoriesOpen = "Open categories";
@@ -836,7 +836,7 @@ Drupal.behaviors.ccis = {
 						.text(yAxisLabel)
 						.attr("class", "d3_yAxisText")
 						.style("font-size","12px")
-						.attr("transform", "translate ("+yAxisLabelOffset+", -5)");
+						.attr("transform", "translate ("+yAxisLabelOffset+", -7)");
 					
 					d3.select("#"+axisType+"id"+block)
 						.append("image")
@@ -883,7 +883,7 @@ Drupal.behaviors.ccis = {
 					$("#d3_tooltipLegend"+keyPlace+block)
 						.css("position", "absolute")
 						.css("right", (legendWidth-3)+"px")
-						.css("top", (topPosition+30)+"px")
+						.css("top", (topPosition+27)+"px")
 						.css("width", "auto")
 						.css("clear", "both")
 						.css("float", "left")
@@ -900,7 +900,7 @@ Drupal.behaviors.ccis = {
 					$("#d3_tooltipLegendCategories"+block)
 						.css("position", "absolute")
 						.css("right", (legendWidth+5)+"px")
-						.css("top", (topPosition+30)+"px")
+						.css("top", (topPosition+27)+"px")
 						.css("width", "auto")
 						.css("clear", "both")
 						.css("float", "left")
@@ -913,14 +913,14 @@ Drupal.behaviors.ccis = {
 						.css("font-size","12px")
 						.html(text);
 				}
-				
+
 				// Add div for the legend
 				$("#"+blockID).append("<div id='d3_legendDiv"+block+"' class='d3_legendClass'></div>");
 				
 				$("#d3_legendDiv"+block)
 					.css("width", legendWidth-1)
 					.css("height", height + margin.top + margin.bottom - heightPrintSelect);
-				
+	
 				// Create DIVs for the keys
 				// Temperature group
 				if (temperatureGroupUsed.length>0 || warmExtremesGroupUsed.length>0 || coldExtremesGroupUsed.length>0) {
@@ -1438,13 +1438,14 @@ Drupal.behaviors.ccis = {
 						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
 					}
 				});
-				
+
 				// Print preview button
 				$("#"+blockID).append("<div id='printSelectWrapper"+block+"' class='printSelectWrapperClass'></div>");
 				$("#printSelectWrapper"+block)
 					.css("width", legendWidth)
 					.css("height", heightPrintSelect);
-				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'><i>Select up to 4 indices</i></div>");
+
+				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'><i>Select up to 4 indices</i></div>");		
 				$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><b><span style='font-size:14px;'>&nbsp;Print Preview</span></b></div>");
 				$("#d3_printPreviewId"+block).hover(function() {
 					$(this).css("cursor","pointer");
@@ -1452,7 +1453,7 @@ Drupal.behaviors.ccis = {
 				$("#d3_printPreviewId"+block).click(function() {
 					printPreview();
 				});
-				
+
 				// *** Redraw the Graph - START ***
 				function redrawGraph() {
 
@@ -2056,7 +2057,7 @@ Drupal.behaviors.ccis = {
 		var width = widthDiv - margin.left - margin.right - legendWidth;
 		var height = width/2;
 		var widthTemp = width;
-		var topOffset = 290;
+		var topOffset = 298;
 		var heightPrintSelect = 50;
 		var axis_sum = 4;	// MAX: 4
 		var axis_selection;
@@ -2155,7 +2156,7 @@ Drupal.behaviors.ccis = {
 		var octas_selection;
 		
 		// SVG legend icons
-		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path id='path5598' style='fill:none;stroke:";
+		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path style='fill:none;stroke:";
 		var partOfSVGLine2 = ";stroke-width:1.96201527;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none' d='m 1.3394886,1047.4364 9.3823584,-6.3952 3.619918,9.4078 4.692159,-5.6505 5.34355,0'/></g></svg>";
 
 		var legendCategoriesOpen = "Open categories";
@@ -2818,7 +2819,7 @@ Drupal.behaviors.ccis = {
 						.text(yAxisLabel)
 						.attr("class", "d3_yAxisText")
 						.style("font-size","12px")
-						.attr("transform", "translate ("+yAxisLabelOffset+", -5)");
+						.attr("transform", "translate ("+yAxisLabelOffset+", -7)");
 					
 					d3.select("#"+axisType+"id"+block)
 						.append("image")
@@ -3689,7 +3690,7 @@ Drupal.behaviors.ccis = {
 					if (width>widthTemp) {
 						topOffset = 25;
 					} else {
-						topOffset = 290;
+						topOffset = 298;
 					}
 					$("#d3_legendDiv"+block).css("height", height + margin.top + margin.bottom - heightPrintSelect);
 					// Redraw graph
