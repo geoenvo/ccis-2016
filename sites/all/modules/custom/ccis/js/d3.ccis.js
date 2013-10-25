@@ -50,16 +50,18 @@ Drupal.behaviors.ccis = {
 		["r99ptot", "#8B9C6E", "R99pTOT", "Annual total PRCP when RR > 99p (mm)", "icon.png", "milimeter"]
 	];
 	var windGroup = [
-		["fg", "#00BBC4", "FG", "Daily mean wind speed (m/s)", "symbol_legende_rr.png", "meterPerSecond"],
-		["fx", "#8DC6C9", "FX", "Daily maximum wind gust (m/s)", "symbol_legende_rr.png", "meterPerSecond"],
-		["dd", "#45ABB0", "DD", "Daily wind direction (degrees)", "symbol_legende_rr.png", "degrees"]
+		["fg", "#00BBC4", "FG", "Daily mean wind speed (m/s)", "icon.png", "meterPerSecond"],
+		["fx", "#8DC6C9", "FX", "Daily maximum wind gust (m/s)", "icon.png", "meterPerSecond"],
+		["dd", "#45ABB0", "DD", "Daily wind direction (degrees)", "icon.png", "degrees"]
 	];
 	var otherGroup = [
-		["gsl", "#FF9900", "GSL", "Growing season length (days)", "symbol_legende_rr.png", "days"],
-		["cc", "#00FF00", "CC", "Daily cloud cover (octas)", "symbol_legende_rr.png", "octas"],
-		["hu", "#33CCFF", "HU", "Daily humidity (%)", "symbol_legende_rr.png", "percent"],
-		["pp", "#009900", "PP", "Daily mean sea level pressure (hPa)", "symbol_legende_rr.png", "pascal"],
-		["cdd", "#996600", "CDD", "Maximum length of dry spell with RR < 1mm (days)", "symbol_legende_rr.png", "days"]
+		["gsl", "#FF9900", "GSL", "Growing season length (days)", "icon.png", "days"],
+		["cc", "#00FF00", "CC", "Daily cloud cover (octas)", "icon.png", "octas"],
+		["hu", "#33CCFF", "HU", "Daily humidity (%)", "icon.png", "percent"],
+		["pp", "#009900", "PP", "Daily mean sea level pressure (hPa)", "icon.png", "pascal"],
+		["cdd", "#996600", "CDD", "Maximum length of dry spell with RR < 1mm (days)", "icon.png", "days"],
+		["sd", "#AD886F", "SD", "Daily snow depth (cm)", "icon.png", "centimeter"],
+		["ss", "#CCBC08", "SS", "Daily sunshine duration (hours)", "icon.png", "hours"]
 	];
 	
 	// ***************************************
@@ -101,6 +103,8 @@ Drupal.behaviors.ccis = {
 		var meterPerSecondGroupShown;
 		var degreesGroupShown;
 		var octasGroupShown;
+		var centimeterGroupShown;
+		var hoursGroupShown;
 		
 		// Y-Scales
 		var yScaleCelsius;
@@ -111,6 +115,8 @@ Drupal.behaviors.ccis = {
 		var yScaleMeterPerSecond;
 		var yScaleDegrees;
 		var yScaleOctas;
+		var yScaleCentimeter;
+		var yScaleHours;
 		
 		// Max-Min Values for Y Scales
 		// Celsius values
@@ -153,6 +159,16 @@ Drupal.behaviors.ccis = {
 		var maxOctasYArray;
 		var minOctasY;
 		var maxOctasY;
+		// Centimeter values
+		var minCentimeterYArray;
+		var maxCentimeterYArray;
+		var minCentimeterY;
+		var maxCentimeterY;
+		// Hours values
+		var minHoursYArray;
+		var maxHoursYArray;
+		var minHoursY;
+		var maxHoursY;
 		
 		// Arrays for the checkboxes
 		var findTicksArrayTemperature = [];
@@ -172,6 +188,9 @@ Drupal.behaviors.ccis = {
 		var meterPerSecond_selection;
 		var degrees_selection;
 		var octas_selection;
+		var centimeter_selection;
+		var hours_selection;
+		
 		
 		// SVG legend icons
 		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path style='fill:none;stroke:";
@@ -281,6 +300,8 @@ Drupal.behaviors.ccis = {
 					meterPerSecondGroupShown = [];
 					degreesGroupShown = [];
 					octasGroupShown = [];
+					centimeterGroupShown = [];
+					hoursGroupShown = [];
 					
 
 					for (var i=0; i<temperatureGroupShown.length; i++) {
@@ -308,6 +329,12 @@ Drupal.behaviors.ccis = {
 								break;
 							case "octas":
 								octasGroupShown.push(temperatureGroupShown[i][0]);
+								break;
+							case "centimeter":
+								centimeterGroupShown.push(temperatureGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(temperatureGroupShown[i][0]);
 								break;
 						}
 					}
@@ -337,6 +364,12 @@ Drupal.behaviors.ccis = {
 							case "octas":
 								octasGroupShown.push(warmExtremesGroupShown[i][0]);
 								break;
+							case "centimeter":
+								centimeterGroupShown.push(warmExtremesGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(warmExtremesGroupShown[i][0]);
+								break;
 						}
 					}
 					for (var i=0; i<coldExtremesGroupShown.length; i++) {
@@ -364,6 +397,12 @@ Drupal.behaviors.ccis = {
 								break;
 							case "octas":
 								octasGroupShown.push(coldExtremesGroupShown[i][0]);
+								break;
+							case "centimeter":
+								centimeterGroupShown.push(coldExtremesGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(coldExtremesGroupShown[i][0]);
 								break;
 						}
 					}
@@ -393,6 +432,12 @@ Drupal.behaviors.ccis = {
 							case "octas":
 								octasGroupShown.push(precipitationGroupShown[i][0]);
 								break;
+							case "centimeter":
+								centimeterGroupShown.push(precipitationGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(precipitationGroupShown[i][0]);
+								break;
 						}
 					}			
 					for (var i=0; i<extremePrecipitationGroupShown.length; i++) {
@@ -420,6 +465,12 @@ Drupal.behaviors.ccis = {
 								break;
 							case "octas":
 								octasGroupShown.push(extremePrecipitationGroupShown[i][0]);
+								break;
+							case "centimeter":
+								centimeterGroupShown.push(extremePrecipitationGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(extremePrecipitationGroupShown[i][0]);
 								break;
 						}
 					}
@@ -449,6 +500,12 @@ Drupal.behaviors.ccis = {
 							case "octas":
 								octasGroupShown.push(windGroupShown[i][0]);
 								break;
+							case "centimeter":
+								centimeterGroupShown.push(windGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(windGroupShown[i][0]);
+								break;
 						}
 					}
 					for (var i=0; i<otherGroupShown.length; i++) {
@@ -476,6 +533,12 @@ Drupal.behaviors.ccis = {
 								break;
 							case "octas":
 								octasGroupShown.push(otherGroupShown[i][0]);
+								break;
+							case "centimeter":
+								centimeterGroupShown.push(otherGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(otherGroupShown[i][0]);
 								break;
 						}
 					}
@@ -556,6 +619,24 @@ Drupal.behaviors.ccis = {
 					}
 					minOctasY = d3.min(minOctasYArray);
 					maxOctasY = d3.max(maxOctasYArray);
+					// Centimeter values
+					minCentimeterYArray = [];
+					maxCentimeterYArray = [];
+					for (var i=0; i<centimeterGroupShown.length; i++) {
+						minCentimeterYArray.push(d3.min(data, function(d) { return Math.min(d[centimeterGroupShown[i]]); }) );
+						maxCentimeterYArray.push(d3.max(data, function(d) { return Math.max(d[centimeterGroupShown[i]]); }) );  
+					}
+					minCentimeterY = d3.min(minCentimeterYArray);
+					maxCentimeterY = d3.max(maxCentimeterYArray);
+					// Hours values
+					minHoursYArray = [];
+					maxHoursYArray = [];
+					for (var i=0; i<hoursGroupShown.length; i++) {
+						minHoursYArray.push(d3.min(data, function(d) { return Math.min(d[hoursGroupShown[i]]); }) );
+						maxHoursYArray.push(d3.max(data, function(d) { return Math.max(d[hoursGroupShown[i]]); }) );  
+					}
+					minHoursY = d3.min(minHoursYArray);
+					maxHoursY = d3.max(maxHoursYArray);
 				}
 				findMaxMin();
 				
@@ -574,8 +655,7 @@ Drupal.behaviors.ccis = {
 					.range([height, 0]);
 				yScalePascal = d3.scale.linear()
 					.domain([minPascalY, maxPascalY])
-					.range([height, 0]);
-					
+					.range([height, 0]);	
 				yScaleMeterPerSecond = d3.scale.linear()
 					.domain([minMeterPerSecondY, maxMeterPerSecondY])
 					.range([height, 0]);
@@ -584,6 +664,12 @@ Drupal.behaviors.ccis = {
 					.range([height, 0]);
 				yScaleOctas = d3.scale.linear()
 					.domain([minOctasY, maxOctasY])
+					.range([height, 0]);
+				yScaleCentimeter = d3.scale.linear()
+					.domain([minCentimeterY, maxCentimeterY])
+					.range([height, 0]);
+				yScaleHours = d3.scale.linear()
+					.domain([minHoursY, maxHoursY])
 					.range([height, 0]);
 				
 				// Which and how many Y-Axes we need
@@ -638,6 +724,16 @@ Drupal.behaviors.ccis = {
 						yAxisArray.push(["yAxisOctas", yScaleOctas, "Octas"]);
 						axis_selection=axis_selection+1;
 					}
+					if (centimeterGroupShown.length>0) {
+						centimeter_selection = true;
+						yAxisArray.push(["yAxisCentimeter", yScaleCentimeter, "Centimeter"]);
+						axis_selection=axis_selection+1;
+					}
+					if (hoursGroupShown.length>0) {
+						hours_selection = true;
+						yAxisArray.push(["yAxisHours", yScaleHours, "Hours"]);
+						axis_selection=axis_selection+1;
+					}
 				}
 				findAxis();
 							
@@ -687,7 +783,13 @@ Drupal.behaviors.ccis = {
 							break;
 						case "octas":
 							yScaleType=yScaleOctas;
-							break;								
+							break;
+						case "centimeter":
+							yScaleType=yScaleCentimeter;
+							break;
+						case "hours":
+							yScaleType=yScaleHours;
+							break;							
 					}
 					
 					var graphObj = {};
@@ -797,6 +899,22 @@ Drupal.behaviors.ccis = {
 						iconHeight = "17px";
 					} else if (axisType==="yAxisOctas") {
 						yAxisLabel = "octas"
+						yAxisLabelOffset = -20;
+						yAxisTickFormat = ".1f";
+						iconLink = "";
+						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
+						iconWidth = "19px";
+						iconHeight = "16px";
+					} else if (axisType==="yAxisCentimeter") {
+						yAxisLabel = "cm"
+						yAxisLabelOffset = -20;
+						yAxisTickFormat = ".1f";
+						iconLink = "";
+						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
+						iconWidth = "19px";
+						iconHeight = "16px";
+					} else if (axisType==="yAxisHours") {
+						yAxisLabel = "hours"
 						yAxisLabelOffset = -20;
 						yAxisTickFormat = ".1f";
 						iconLink = "";
@@ -1566,6 +1684,8 @@ Drupal.behaviors.ccis = {
 					yScaleMeterPerSecond.range([height, 0]);
 					yScaleDegrees.range([height, 0]);
 					yScaleOctas.range([height, 0]);
+					yScaleCentimeter.range([height, 0]);
+					yScaleHours.range([height, 0]);
 					
 					// Create again the svg
 					createSvg();
@@ -1582,6 +1702,8 @@ Drupal.behaviors.ccis = {
 					yScaleMeterPerSecond.domain([minMeterPerSecondY, maxMeterPerSecondY]);
 					yScaleDegrees.domain([minDegreesY, maxDegreesY]);
 					yScaleOctas.domain([minOctasY, maxOctasY]);
+					yScaleCentimeter.domain([minCentimeterY, maxCentimeterY]);
+					yScaleHours.domain([minHoursY, maxHoursY]);
 										
 					// Redraw Graphs
 					drawGraphs();
@@ -1794,6 +1916,12 @@ Drupal.behaviors.ccis = {
 									break;
 								case "octas":
 									return "octas";
+									break;
+								case "centimeter":
+									return "cm";
+									break;
+								case "hours":
+									return "hours";
 									break;
 							}
 						}
@@ -2083,6 +2211,8 @@ Drupal.behaviors.ccis = {
 		var meterPerSecondGroupShown;
 		var degreesGroupShown;
 		var octasGroupShown;
+		var centimeterGroupShown;
+		var hoursGroupShown;
 		
 		// Y-Scales
 		var yScaleCelsius;
@@ -2093,6 +2223,8 @@ Drupal.behaviors.ccis = {
 		var yScaleMeterPerSecond;
 		var yScaleDegrees;
 		var yScaleOctas;
+		var yScaleCentimeter;
+		var yScaleHours;
 		
 		// Max-Min Values for Y Scales
 		// Celsius values
@@ -2135,6 +2267,16 @@ Drupal.behaviors.ccis = {
 		var maxOctasYArray;
 		var minOctasY;
 		var maxOctasY;
+		// Centimeter values
+		var minCentimeterYArray;
+		var maxCentimeterYArray;
+		var minCentimeterY;
+		var maxCentimeterY;
+		// Hours values
+		var minHoursYArray;
+		var maxHoursYArray;
+		var minHoursY;
+		var maxHoursY;
 		
 		// Arrays for the checkboxes
 		var findTicksArrayTemperature = [];
@@ -2154,6 +2296,8 @@ Drupal.behaviors.ccis = {
 		var meterPerSecond_selection;
 		var degrees_selection;
 		var octas_selection;
+		var centimeter_selection;
+		var hours_selection;
 		
 		// SVG legend icons
 		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path style='fill:none;stroke:";
@@ -2264,6 +2408,8 @@ Drupal.behaviors.ccis = {
 					meterPerSecondGroupShown = [];
 					degreesGroupShown = [];
 					octasGroupShown = [];
+					centimeterGroupShown = [];
+					hoursGroupShown = [];
 					
 
 					for (var i=0; i<temperatureGroupShown.length; i++) {
@@ -2291,6 +2437,12 @@ Drupal.behaviors.ccis = {
 								break;
 							case "octas":
 								octasGroupShown.push(temperatureGroupShown[i][0]);
+								break;
+							case "centimeter":
+								centimeterGroupShown.push(temperatureGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(temperatureGroupShown[i][0]);
 								break;
 						}
 					}
@@ -2320,6 +2472,12 @@ Drupal.behaviors.ccis = {
 							case "octas":
 								octasGroupShown.push(warmExtremesGroupShown[i][0]);
 								break;
+							case "centimeter":
+								centimeterGroupShown.push(warmExtremesGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(warmExtremesGroupShown[i][0]);
+								break;
 						}
 					}
 					for (var i=0; i<coldExtremesGroupShown.length; i++) {
@@ -2347,6 +2505,12 @@ Drupal.behaviors.ccis = {
 								break;
 							case "octas":
 								octasGroupShown.push(coldExtremesGroupShown[i][0]);
+								break;
+							case "centimeter":
+								centimeterGroupShown.push(coldExtremesGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(coldExtremesGroupShown[i][0]);
 								break;
 						}
 					}
@@ -2376,6 +2540,12 @@ Drupal.behaviors.ccis = {
 							case "octas":
 								octasGroupShown.push(precipitationGroupShown[i][0]);
 								break;
+							case "centimeter":
+								centimeterGroupShown.push(precipitationGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(precipitationGroupShown[i][0]);
+								break;
 						}
 					}			
 					for (var i=0; i<extremePrecipitationGroupShown.length; i++) {
@@ -2403,6 +2573,12 @@ Drupal.behaviors.ccis = {
 								break;
 							case "octas":
 								octasGroupShown.push(extremePrecipitationGroupShown[i][0]);
+								break;
+							case "centimeter":
+								centimeterGroupShown.push(extremePrecipitationGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(extremePrecipitationGroupShown[i][0]);
 								break;
 						}
 					}
@@ -2432,6 +2608,12 @@ Drupal.behaviors.ccis = {
 							case "octas":
 								octasGroupShown.push(windGroupShown[i][0]);
 								break;
+							case "centimeter":
+								centimeterGroupShown.push(windGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(windGroupShown[i][0]);
+								break;
 						}
 					}
 					for (var i=0; i<otherGroupShown.length; i++) {
@@ -2459,6 +2641,12 @@ Drupal.behaviors.ccis = {
 								break;
 							case "octas":
 								octasGroupShown.push(otherGroupShown[i][0]);
+								break;
+							case "centimeter":
+								centimeterGroupShown.push(otherGroupShown[i][0]);
+								break;
+							case "hours":
+								hoursGroupShown.push(otherGroupShown[i][0]);
 								break;
 						}
 					}
@@ -2539,6 +2727,24 @@ Drupal.behaviors.ccis = {
 					}
 					minOctasY = d3.min(minOctasYArray);
 					maxOctasY = d3.max(maxOctasYArray);
+					// Centimeter values
+					minCentimeterYArray = [];
+					maxCentimeterYArray = [];
+					for (var i=0; i<centimeterGroupShown.length; i++) {
+						minCentimeterYArray.push(d3.min(data, function(d) { return Math.min(d[centimeterGroupShown[i]]); }) );
+						maxCentimeterYArray.push(d3.max(data, function(d) { return Math.max(d[centimeterGroupShown[i]]); }) );  
+					}
+					minCentimeterY = d3.min(minCentimeterYArray);
+					maxCentimeterY = d3.max(maxCentimeterYArray);
+					// Hours values
+					minHoursYArray = [];
+					maxHoursYArray = [];
+					for (var i=0; i<hoursGroupShown.length; i++) {
+						minHoursYArray.push(d3.min(data, function(d) { return Math.min(d[hoursGroupShown[i]]); }) );
+						maxHoursYArray.push(d3.max(data, function(d) { return Math.max(d[hoursGroupShown[i]]); }) );  
+					}
+					minHoursY = d3.min(minHoursYArray);
+					maxHoursY = d3.max(maxHoursYArray);
 				}
 				findMaxMin();
 				
@@ -2557,8 +2763,7 @@ Drupal.behaviors.ccis = {
 					.range([height, 0]);
 				yScalePascal = d3.scale.linear()
 					.domain([minPascalY, maxPascalY])
-					.range([height, 0]);
-					
+					.range([height, 0]);	
 				yScaleMeterPerSecond = d3.scale.linear()
 					.domain([minMeterPerSecondY, maxMeterPerSecondY])
 					.range([height, 0]);
@@ -2567,6 +2772,12 @@ Drupal.behaviors.ccis = {
 					.range([height, 0]);
 				yScaleOctas = d3.scale.linear()
 					.domain([minOctasY, maxOctasY])
+					.range([height, 0]);
+				yScaleCentimeter = d3.scale.linear()
+					.domain([minCentimeterY, maxCentimeterY])
+					.range([height, 0]);
+				yScaleHours = d3.scale.linear()
+					.domain([minHoursY, maxHoursY])
 					.range([height, 0]);
 				
 				// Which and how many Y-Axes we need
@@ -2621,6 +2832,16 @@ Drupal.behaviors.ccis = {
 						yAxisArray.push(["yAxisOctas", yScaleOctas, "Octas"]);
 						axis_selection=axis_selection+1;
 					}
+					if (centimeterGroupShown.length>0) {
+						centimeter_selection = true;
+						yAxisArray.push(["yAxisCentimeter", yScaleCentimeter, "Centimeter"]);
+						axis_selection=axis_selection+1;
+					}
+					if (hoursGroupShown.length>0) {
+						hours_selection = true;
+						yAxisArray.push(["yAxisHours", yScaleHours, "Hours"]);
+						axis_selection=axis_selection+1;
+					}
 				}
 				findAxis();
 							
@@ -2670,7 +2891,13 @@ Drupal.behaviors.ccis = {
 							break;
 						case "octas":
 							yScaleType=yScaleOctas;
-							break;								
+							break;	
+						case "centimeter":
+							yScaleType=yScaleCentimeter;
+							break;
+						case "hours":
+							yScaleType=yScaleHours;
+							break;	
 					}
 					
 					var graphObj = {};
@@ -2780,6 +3007,22 @@ Drupal.behaviors.ccis = {
 						iconHeight = "17px";
 					} else if (axisType==="yAxisOctas") {
 						yAxisLabel = "octas"
+						yAxisLabelOffset = -20;
+						yAxisTickFormat = ".1f";
+						iconLink = "";
+						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
+						iconWidth = "19px";
+						iconHeight = "16px";
+					} else if (axisType==="yAxisCentimeter") {
+						yAxisLabel = "cm"
+						yAxisLabelOffset = -20;
+						yAxisTickFormat = ".1f";
+						iconLink = "";
+						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
+						iconWidth = "19px";
+						iconHeight = "16px";
+					} else if (axisType==="yAxisHours") {
+						yAxisLabel = "hours"
 						yAxisLabelOffset = -20;
 						yAxisTickFormat = ".1f";
 						iconLink = "";
@@ -3546,6 +3789,8 @@ Drupal.behaviors.ccis = {
 					yScaleMeterPerSecond.range([height, 0]);
 					yScaleDegrees.range([height, 0]);
 					yScaleOctas.range([height, 0]);
+					yScaleCentimeter.range([height, 0]);
+					yScaleHours.range([height, 0]);
 					
 					// Create again the svg
 					createSvg();
@@ -3562,6 +3807,8 @@ Drupal.behaviors.ccis = {
 					yScaleMeterPerSecond.domain([minMeterPerSecondY, maxMeterPerSecondY]);
 					yScaleDegrees.domain([minDegreesY, maxDegreesY]);
 					yScaleOctas.domain([minOctasY, maxOctasY]);
+					yScaleCentimeter.domain([minCentimeterY, maxCentimeterY]);
+					yScaleHours.domain([minHoursY, maxHoursY]);
 										
 					// Redraw Graphs
 					drawGraphs();
@@ -3780,6 +4027,12 @@ Drupal.behaviors.ccis = {
 									break;
 								case "octas":
 									return "octas";
+									break;
+								case "centimeter":
+									return "cm";
+									break;
+								case "hours":
+									return "hours";
 									break;
 							}
 						}
