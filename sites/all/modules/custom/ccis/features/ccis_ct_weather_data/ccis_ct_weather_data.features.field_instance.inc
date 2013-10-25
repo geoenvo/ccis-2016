@@ -1305,6 +1305,52 @@ function ccis_ct_weather_data_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-weather_data-field_sd'
+  $field_instances['node-weather_data-field_sd'] = array(
+    'bundle' => 'weather_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Daily snow depth',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 51,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_sd',
+    'label' => 'SD',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '[cm]',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 45,
+    ),
+  );
+
   // Exported field_instance: 'node-weather_data-field_sdii'
   $field_instances['node-weather_data-field_sdii'] = array(
     'bundle' => 'weather_data',
@@ -1348,6 +1394,52 @@ function ccis_ct_weather_data_field_default_field_instances() {
       'settings' => array(),
       'type' => 'number',
       'weight' => 31,
+    ),
+  );
+
+  // Exported field_instance: 'node-weather_data-field_ss'
+  $field_instances['node-weather_data-field_ss'] = array(
+    'bundle' => 'weather_data',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Daily sunshine duration',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 52,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ss',
+    'label' => 'SS',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '[h]',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 46,
     ),
   );
 
@@ -2064,6 +2156,8 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('Daily mean wind speed');
   t('Daily minimum temperature (°C)');
   t('Daily precipitation amount (mm)');
+  t('Daily snow depth');
+  t('Daily sunshine duration');
   t('Daily temperature range (°C)');
   t('Daily wind direction');
   t('Date');
@@ -2100,7 +2194,9 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('Rnnmm');
   t('Rx1day');
   t('Rx5day');
+  t('SD');
   t('SDII');
+  t('SS');
   t('SU');
   t('Simple pricipitation intensity index');
   t('Station');

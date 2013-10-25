@@ -659,6 +659,30 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'type' => 'number_decimal',
   );
 
+  // Exported field_base: 'field_sd'
+  $field_bases['field_sd'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_sd',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'decimal_separator' => '.',
+      'precision' => 13,
+      'profile2_private' => FALSE,
+      'scale' => 2,
+    ),
+    'translatable' => 0,
+    'type' => 'number_decimal',
+  );
+
   // Exported field_base: 'field_sdii'
   $field_bases['field_sdii'] = array(
     'active' => 1,
@@ -666,6 +690,30 @@ function ccis_ct_weather_data_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_sdii',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'decimal_separator' => '.',
+      'precision' => 13,
+      'profile2_private' => FALSE,
+      'scale' => 2,
+    ),
+    'translatable' => 0,
+    'type' => 'number_decimal',
+  );
+
+  // Exported field_base: 'field_ss'
+  $field_bases['field_ss'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_ss',
     'field_permissions' => array(
       'type' => 0,
     ),
