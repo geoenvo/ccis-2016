@@ -21,7 +21,7 @@ function ccis_static_content_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_article_climatechange';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['comment_article_climatechange'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -86,14 +86,39 @@ function ccis_static_content_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'email_plain' => array(
+        'custom_settings' => FALSE,
+      ),
+      'email_html' => array(
+        'custom_settings' => FALSE,
+      ),
+      'email_textalt' => array(
+        'custom_settings' => FALSE,
+      ),
+      'dashboard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'revision' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'title' => array(
+          'weight' => '1',
+        ),
+        'path' => array(
           'weight' => '0',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'language' => array(
+          'default' => array(
+            'weight' => '2',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__article_climatechange'] = $strongarm;
