@@ -33,7 +33,7 @@ function ccis_blog_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'teaser';
   $ds_fieldsetting->settings = array(
     'title' => array(
-      'weight' => '0',
+      'weight' => '1',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -41,6 +41,11 @@ function ccis_blog_ds_field_settings_info() {
         'wrapper' => 'h3',
         'class' => '',
       ),
+    ),
+    'post_date' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'ds_post_date_compact',
     ),
   );
   $export['node|blog_article|teaser'] = $ds_fieldsetting;
@@ -99,11 +104,13 @@ function ccis_blog_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'title',
-        1 => 'body',
+        0 => 'post_date',
+        1 => 'title',
+        2 => 'body',
       ),
     ),
     'fields' => array(
+      'post_date' => 'ds_content',
       'title' => 'ds_content',
       'body' => 'ds_content',
     ),

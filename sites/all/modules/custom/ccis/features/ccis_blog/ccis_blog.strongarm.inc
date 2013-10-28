@@ -21,7 +21,7 @@ function ccis_blog_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_blog_article';
-  $strongarm->value = '2';
+  $strongarm->value = '0';
   $export['comment_blog_article'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -102,13 +102,20 @@ function ccis_blog_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
+          'weight' => '1',
         ),
         'path' => array(
-          'weight' => '4',
+          'weight' => '0',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'language' => array(
+          'teaser' => array(
+            'weight' => '8',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__blog_article'] = $strongarm;

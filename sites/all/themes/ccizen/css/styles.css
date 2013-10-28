@@ -50,7 +50,9 @@ white   #ffffff
 
 
 body,
-dd_after
+dd_after,
+.compact h3
+
   {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   }
@@ -775,7 +777,6 @@ textarea:focus {
   }
 
 
-
 /* +++++ Slideshow +++++ */
 
 .region-highlighted {
@@ -864,15 +865,7 @@ textarea:focus {
   background-color: #f15a24;
   }
 
-/* front page (maybe make more general?) */
 
-.front #main .block {
-  width: 33%;
-  float: left;
-  }
-.front #main .block-inner {
-  padding: 10px 10px 25px;
-  }
 
 /* events */
 
@@ -950,6 +943,34 @@ h2.teasertitle {
   margin-left: 220px;
   position: relative;
   top: -2px;
+  }
+
+/* blog + news blocks */
+
+.compact {
+  font-size: 14px;
+  line-height: 1.4em;
+  }
+
+.compact .views-row {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 2px dotted #ccc;
+  }
+
+.compact h3 {
+  font-size: 1em;
+  margin: 0;
+  font-weight: bold; 
+  }
+
+.compact h3 a {
+  color: #2c4563;
+  text-decoration: none;
+  }
+
+.compact .field-name-post-date {
+  
   }
 
 
