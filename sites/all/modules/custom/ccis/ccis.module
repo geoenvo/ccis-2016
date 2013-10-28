@@ -757,7 +757,7 @@ function _ccis_get_weather_data_labels($list = NULL) {
     }
     uasort($tmp, 'drupal_sort_weight');
     foreach ($tmp as $key => $value) {
-      $labels[$key] = t($value['label']);
+      $labels[$key] = $value['label'];
     }
   }
   if ($list && !user_access('access_ccis_all_weather_data')) {
