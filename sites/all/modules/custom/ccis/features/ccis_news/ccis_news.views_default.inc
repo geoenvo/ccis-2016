@@ -96,18 +96,13 @@ function ccis_news_views_default_views() {
 
   /* Display: Block Newsfeed */
   $handler = $view->new_display('block', 'Block Newsfeed', 'block_newsfeed');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'news compact';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Aggregator: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'aggregator_item';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h3';
   /* Field: Aggregator: Timestamp */
   $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
   $handler->display->display_options['fields']['timestamp']['table'] = 'aggregator_item';
@@ -116,25 +111,37 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['fields']['timestamp']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['timestamp']['date_format'] = 'custom';
   $handler->display->display_options['fields']['timestamp']['custom_date_format'] = 'D, d M Y';
-  /* Field: Aggregator: Body */
-  $handler->display->display_options['fields']['description']['id'] = 'description';
-  $handler->display->display_options['fields']['description']['table'] = 'aggregator_item';
-  $handler->display->display_options['fields']['description']['field'] = 'description';
-  $handler->display->display_options['fields']['description']['label'] = '';
-  $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
+  /* Field: Aggregator: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'aggregator_item';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h3';
   /* Field: Aggregator: Link */
   $handler->display->display_options['fields']['link']['id'] = 'link';
   $handler->display->display_options['fields']['link']['table'] = 'aggregator_item';
   $handler->display->display_options['fields']['link']['field'] = 'link';
   $handler->display->display_options['fields']['link']['label'] = '';
+  $handler->display->display_options['fields']['link']['exclude'] = TRUE;
   $handler->display->display_options['fields']['link']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['link']['alter']['text'] = 'Read more ...';
+  $handler->display->display_options['fields']['link']['element_type'] = 'span';
+  $handler->display->display_options['fields']['link']['element_class'] = 'more-link';
   $handler->display->display_options['fields']['link']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['link']['element_default_classes'] = FALSE;
+  /* Field: Aggregator: Body */
+  $handler->display->display_options['fields']['description']['id'] = 'description';
+  $handler->display->display_options['fields']['description']['table'] = 'aggregator_item';
+  $handler->display->display_options['fields']['description']['field'] = 'description';
+  $handler->display->display_options['fields']['description']['label'] = '';
+  $handler->display->display_options['fields']['description']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['description']['alter']['text'] = '[description]  [link]';
+  $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   $handler->display->display_options['block_description'] = 'Newsfeed';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['path'] = 'news';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'News';
@@ -174,6 +181,7 @@ function ccis_news_views_default_views() {
     t('Block Newsfeed'),
     t('more'),
     t('Read more ...'),
+    t('[description]  [link]'),
     t('Newsfeed'),
     t('Page'),
     t('Content pane'),

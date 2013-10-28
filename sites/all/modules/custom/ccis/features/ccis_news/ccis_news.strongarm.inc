@@ -42,7 +42,7 @@ function ccis_news_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'aggregator_teaser_length';
-  $strongarm->value = '400';
+  $strongarm->value = '200';
   $export['aggregator_teaser_length'] = $strongarm;
 
   return $export;
