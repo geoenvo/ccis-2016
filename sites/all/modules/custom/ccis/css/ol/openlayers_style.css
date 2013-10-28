@@ -530,12 +530,12 @@ a.olControlZoomOut {
     display: none;
 } 
 
-.popupName {
+/* .popupName {
     margin-top: -5px; 
     padding-left: 5px;
-}
+} */
 
-.popup_wmo {
+.popupAttr {
     background-color: #FFFFFF;
     color: black;	
     margin-top: -5px;
@@ -548,7 +548,7 @@ a.popupName:link {
     text-decoration: none;
 }
 
-.popup_list {
+.popup_list p {
     padding:0px;
     margin: 0px;
 }	

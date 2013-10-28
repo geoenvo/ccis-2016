@@ -845,7 +845,7 @@ function _ccis_get_fields_for_fieldtype($type) {
 }
 
 /**
- * Replace custom OpenLayers functions
+ * Implements hook_js_alter().
  */
 function ccis_js_alter(&$javascript) {
   $js_file = drupal_get_path('module', 'openlayers') . '/plugins/behaviors/openlayers_behavior_cluster.js';
@@ -853,9 +853,9 @@ function ccis_js_alter(&$javascript) {
     $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_cluster.js';
   }
 
-  $js_file2 = drupal_get_path('module', 'openlayers') . '/plugins/behaviors/openlayers_behavior_popup.js';
-  if (!empty($javascript[$js_file2])) {
-    $javascript[$js_file2]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_popup.js';
+  $js_file = drupal_get_path('module', 'openlayers') . '/plugins/behaviors/openlayers_behavior_popup.js';
+  if (!empty($javascript[$js_file])) {
+    $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_popup.js';
   }
 
 }
