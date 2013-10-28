@@ -574,7 +574,7 @@ function _ccis_get_datatables_settings($list = 'unknown', $values, $id = 1) {
   $range = _ccis_get_date_range($values);
   $settings = array();
   $settings['ccis_dt'] = array(
-    'legends' => _ccis_get_weather_data_labels(),
+    'legends' => _ccis_get_weather_data_labels(NULL),
     'range' => _ccis_get_range_label($range),
   );
   $node = _ccis_get_station_node($values, 'input'.$id);
@@ -753,11 +753,20 @@ function _ccis_get_weather_data_labels($list = NULL) {
     $tmp = array();
     $field_infos = field_info_instances('node', 'weather_data');
     foreach ($field_infos as $field_name => $info) {
-      $tmp[$field_name] = array('label' => $info['label'], 'weight' => $info['widget']['weight']);
-    }
-    uasort($tmp, 'drupal_sort_weight');
-    foreach ($tmp as $key => $value) {
-      $labels[$key] = $value['label'];
+      $label = ' <span class="ccis-datatable-title" title="' . check_plain($info['description']) . '">';
+      $label .= check_plain($info['label']);
+      $label .= '</span>';
+      if (!empty($info['settings']['suffix'])) {
+        $label .= ' <span class="ccis-datatable-unit">' . check_plain($info['settings']['suffix']) . '</span>';
+      }
+      $tmp[$field_name] = array(
+        'label' => $label,
+        'weight' => $info['widget']['weight']
+      );
+      uasort($tmp, 'drupal_sort_weight');
+      foreach ($tmp as $key => $value) {
+        $labels[$key] = $value['label'];
+      }
     }
   }
   if ($list && !user_access('access_ccis_all_weather_data')) {
