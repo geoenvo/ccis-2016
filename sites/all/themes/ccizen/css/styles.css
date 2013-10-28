@@ -1012,6 +1012,7 @@ table {
 .ccis-datatable-station-range {
   margin: .05em 0 0 2em;
   font-size: 1.25em;
+  float: left;
   }
 
 #ccis-weather-datatable-block table {
