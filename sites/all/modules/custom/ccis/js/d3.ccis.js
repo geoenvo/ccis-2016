@@ -282,11 +282,19 @@ Drupal.behaviors.ccis = {
 				var otherGroupShown = [];
 				
 				// Choose initial parameters to show
-				// Try to find TX10p
+				// Try to find indonesian Data (parameter TX10p)
 				for (var i=0; i<coldExtremesGroupUsed.length; i++) {
 					if (coldExtremesGroupUsed[i][0] === "tx10p") {
 						coldExtremesGroupShown = [coldExtremesGroupUsed[i]];
 					} 
+				}
+				// If this parameter doesn't exist, try to find TX (also in the german data)
+				if (coldExtremesGroupShown.length===0) {
+					for (var i=0; i<temperatureGroupUsed.length; i++) {
+						if (temperatureGroupUsed[i][0] === "tx") {
+							temperatureGroupShown = [temperatureGroupUsed[i]];
+						} 
+					}
 				}
 				
 				// Fill the unit groups arrays
@@ -2390,11 +2398,19 @@ Drupal.behaviors.ccis = {
 				var otherGroupShown = [];
 				
 				// Choose initial parameters to show
-				// Try to find TX10p
+				// Try to find indonesian Data (parameter TX10p)
 				for (var i=0; i<coldExtremesGroupUsed.length; i++) {
 					if (coldExtremesGroupUsed[i][0] === "tx10p") {
 						coldExtremesGroupShown = [coldExtremesGroupUsed[i]];
 					} 
+				}
+				// If this parameter doesn't exist, try to find TX (also in the german data)
+				if (coldExtremesGroupShown.length===0) {
+					for (var i=0; i<temperatureGroupUsed.length; i++) {
+						if (temperatureGroupUsed[i][0] === "tx") {
+							temperatureGroupShown = [temperatureGroupUsed[i]];
+						} 
+					}
 				}
 				
 				// Fill the unit groups arrays
