@@ -16,6 +16,8 @@ function ccis_feedback_default_fe_block_settings() {
     'cache' => -1,
     'custom' => 0,
     'delta' => 6,
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
     'module' => 'simplenews',
     'node_types' => array(),
     'pages' => '',
