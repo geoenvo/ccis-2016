@@ -71,7 +71,8 @@ input.form-submit, button,
 .menu li a,
 #footer-columns .block-simplenews,
 table.dataTable,
-.bean-image-teaser .field-name-field-title-visible
+.bean-image-teaser .field-name-field-title-visible,
+.ccis-datatable-station-range
   {
   font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
   }
@@ -1008,6 +1009,11 @@ table {
   /*float: none;*/
   }
 
+.ccis-datatable-station-range {
+  margin: .05em 0 0 2em;
+  font-size: 1.25em;
+  }
+
 #ccis-weather-datatable-block table {
   margin-bottom: .25em;
   font-size: 1.25em;
@@ -1020,7 +1026,8 @@ table {
   font-size: 1em;
   }
 
-th {
+th,
+table.display thead th {
   color: #2c4563;
   font-weight: normal;
   }
