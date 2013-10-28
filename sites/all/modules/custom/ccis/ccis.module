@@ -230,6 +230,33 @@ function ccis_openlayers_map_alter(&$map = array()) {
 }
 
 /**
+ * Implements hook_features_pipe_COMPONENT_alter().
+ */
+function ccis_features_pipe_variable_alter(&$pipe, $data, $export) {
+  if (!empty($data)) {
+    foreach ($data as $variable) {
+      if (strpos($variable, 'ccis_') === 0) {
+        $pipe['dependencies'][] = 'ccis';
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_features_pipe_COMPONENT_alter().
+ */
+function ccis_features_pipe_user_permission_alter(&$pipe, $data, $export) {
+  if (!empty($data)) {
+    foreach ($data as $permission) {
+      if (strpos($permission, 'access_ccis_field_') === 0) {
+        $pipe['variable']['ccis_weather_data_perms_range'] = 'ccis_weather_data_perms_range';
+        break;
+      }
+    }
+  }
+}
+
+/**
  * Page callback for all ccis admin pages.
  */
 function ccis_admin_overview() {

@@ -31,5 +31,59 @@ function ccis_ct_weather_data_strongarm() {
   $strongarm->value = 0;
   $export['auto_entitylabel_php_node_weather_data'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'ccis_weather_data_perms_range';
+  $strongarm->value = array(
+    'field_tx' => 'field_tx',
+    'field_tn' => 'field_tn',
+    'field_tg' => 'field_tg',
+    'field_rr' => 'field_rr',
+    'field_fg' => 'field_fg',
+    'field_fx' => 'field_fx',
+    'field_dd' => 'field_dd',
+    'field_cc' => 'field_cc',
+    'field_hu' => 'field_hu',
+    'field_pp' => 'field_pp',
+    'field_station' => 0,
+    'field_date' => 0,
+    'field_avg_temp' => 0,
+    'field_avg_prec' => 0,
+    'field_avg_press' => 0,
+    'field_avg_min_temp' => 0,
+    'field_avg_max_temp' => 0,
+    'field_dtr' => 0,
+    'field_su' => 0,
+    'field_tr' => 0,
+    'field_txx' => 0,
+    'field_tnx' => 0,
+    'field_tn90p' => 0,
+    'field_tx90p' => 0,
+    'field_wsdi' => 0,
+    'field_fd' => 0,
+    'field_id' => 0,
+    'field_txn' => 0,
+    'field_tnn' => 0,
+    'field_tn10p' => 0,
+    'field_tx10p' => 0,
+    'field_csdi' => 0,
+    'field_cwd' => 0,
+    'field_prcptot' => 0,
+    'field_rx1day' => 0,
+    'field_rx5day' => 0,
+    'field_sdii' => 0,
+    'field_r10mm' => 0,
+    'field_r20mm' => 0,
+    'field_rnnmm' => 0,
+    'field_r95ptot' => 0,
+    'field_r99ptot' => 0,
+    'field_gsl' => 0,
+    'field_cdd' => 0,
+    'field_sd' => 0,
+    'field_ss' => 0,
+  );
+  $export['ccis_weather_data_perms_range'] = $strongarm;
+
   return $export;
 }
