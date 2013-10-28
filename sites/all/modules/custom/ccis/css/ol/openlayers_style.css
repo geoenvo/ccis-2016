@@ -130,9 +130,20 @@ div.olControlMousePosition {
     float:left;font-size:1.2em;
 }
 
+.olPopup {
+  color: white;	
+  font-size:12px;
+  font-family: "Pathway Gothic One Regular",Arial,Helvetica,sans-serif;
+}
+
 .olPopupContent {
     padding:5px;
     overflow: auto;
+}
+
+.olFramedCloudPopupContent {
+
+    background-color: #2C4563;
 }
 
 /* See #1978462 */
@@ -276,6 +287,7 @@ div.olControlSaveFeaturesItemInactive {
 .olPopupCloseBox {
   background: url("img/close.gif") no-repeat;
   cursor: pointer;
+
 }
 
 .olFramedCloudPopupContent {
@@ -518,14 +530,28 @@ a.olControlZoomOut {
     display: none;
 } 
 
+.popupName {
+    margin-top: -5px; 
+    padding-left: 5px;
+}
 
+.popup_wmo {
+    background-color: #FFFFFF;
+    color: black;	
+    margin-top: -5px;
+    padding-left: 5px;
+}
 
+a.popupName:link {
+    margin-top: -5px; 
+    color: white !important;
+    text-decoration: none;
+}
 
-
-
-
-
-
+.popup_list {
+    padding:0px;
+    margin: 0px;
+}	
 
 .block-openlayers_plus-blocktoggle .openlayers-blocktoggle-a {
   background: url('img/satellite.png') 5px 50% no-repeat !important;
@@ -582,3 +608,10 @@ a.olControlZoomOut {
   top: 70px !important;	
 }
 
+
+
+.popover-title span {
+	display:block;
+	float: left;
+	width: 236px; 
+}
