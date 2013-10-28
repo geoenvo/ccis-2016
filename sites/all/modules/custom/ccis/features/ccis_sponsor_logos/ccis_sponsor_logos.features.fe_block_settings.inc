@@ -16,6 +16,8 @@ function ccis_sponsor_logos_default_fe_block_settings() {
     'cache' => -1,
     'custom' => 0,
     'delta' => 'sponsor_logos-block_sponsors',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
     'pages' => '',

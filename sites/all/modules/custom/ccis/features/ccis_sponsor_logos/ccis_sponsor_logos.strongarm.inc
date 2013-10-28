@@ -49,7 +49,7 @@ function ccis_sponsor_logos_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_sponsor_logo';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['comment_sponsor_logo'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -98,6 +98,9 @@ function ccis_sponsor_logos_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'dashboard' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -108,7 +111,14 @@ function ccis_sponsor_logos_strongarm() {
           'weight' => '4',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'language' => array(
+          'default' => array(
+            'weight' => '3',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__sponsor_logo'] = $strongarm;
