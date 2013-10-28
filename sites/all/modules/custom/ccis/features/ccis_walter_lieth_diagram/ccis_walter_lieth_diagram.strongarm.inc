@@ -77,7 +77,7 @@ function ccis_walter_lieth_diagram_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_walter_lieth_diagram';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['comment_walter_lieth_diagram'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -110,17 +110,49 @@ function ccis_walter_lieth_diagram_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'email_plain' => array(
+        'custom_settings' => FALSE,
+      ),
+      'email_html' => array(
+        'custom_settings' => FALSE,
+      ),
+      'email_textalt' => array(
+        'custom_settings' => FALSE,
+      ),
+      'dashboard' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '-5',
+          'weight' => '1',
+        ),
+        'language' => array(
+          'weight' => '0',
+        ),
+        'path' => array(
+          'weight' => '5',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'language' => array(
+          'default' => array(
+            'weight' => '3',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_node__walter_lieth_diagram'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'language_content_type_walter_lieth_diagram';
+  $strongarm->value = '2';
+  $export['language_content_type_walter_lieth_diagram'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

@@ -1,7 +1,7 @@
 name = CCIS Walter-Lieth-Diagram
 core = 7.x
 package = CCIS
-version = 7.x-1.0-alpha1
+version = 7.x-1.0-alpha2
 project = ccis_walter_lieth_diagram
 dependencies[] = cer
 dependencies[] = ctools
@@ -32,6 +32,7 @@ features[variable][] = comment_preview_walter_lieth_diagram
 features[variable][] = comment_subject_field_walter_lieth_diagram
 features[variable][] = comment_walter_lieth_diagram
 features[variable][] = field_bundle_settings_node__walter_lieth_diagram
+features[variable][] = language_content_type_walter_lieth_diagram
 features[variable][] = menu_options_walter_lieth_diagram
 features[variable][] = menu_parent_walter_lieth_diagram
 features[variable][] = node_options_walter_lieth_diagram
