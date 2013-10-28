@@ -1,4 +1,5 @@
 name = CCIS Openlayers
+description = CCIS OpenLayers module. 2 Maps for the weather stations in a page and in the dashboard
 core = 7.x
 package = CCIS
 dependencies[] = ccis_theme
