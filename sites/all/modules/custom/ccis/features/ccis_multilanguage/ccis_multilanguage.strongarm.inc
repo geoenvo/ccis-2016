@@ -77,7 +77,7 @@ function ccis_multilanguage_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'language_count';
-  $strongarm->value = 5;
+  $strongarm->value = 2;
   $export['language_count'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -88,13 +88,13 @@ function ccis_multilanguage_strongarm() {
     'language' => 'en',
     'name' => 'English',
     'native' => 'English',
-    'direction' => 0,
+    'direction' => '0',
     'enabled' => 1,
-    'plurals' => 0,
+    'plurals' => '0',
     'formula' => '',
     'domain' => '',
     'prefix' => '',
-    'weight' => 0,
+    'weight' => '0',
     'javascript' => '',
   );
   $export['language_default'] = $strongarm;
@@ -119,6 +119,19 @@ function ccis_multilanguage_strongarm() {
         'url_rewrite' => 'locale_language_url_rewrite_session',
       ),
       'file' => 'includes/locale.inc',
+    ),
+    'locale-user' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_user',
+      ),
+      'file' => 'includes/locale.inc',
+    ),
+    'locale-browser' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_browser',
+      ),
+      'file' => 'includes/locale.inc',
+      'cache' => 0,
     ),
     'language-default' => array(
       'callbacks' => array(

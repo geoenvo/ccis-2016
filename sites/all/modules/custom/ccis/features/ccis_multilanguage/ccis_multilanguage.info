@@ -1,7 +1,7 @@
 name = CCIS Multilanguage
 core = 7.x
 package = CCIS
-version = 7.x-1.0-alpha4
+version = 7.x-1.0-alpha5
 project = ccis_multilanguage
 dependencies[] = ctools
 dependencies[] = fe_block
@@ -19,8 +19,6 @@ features[fe_block_settings][] = lang_dropdown-language
 features[features_api][] = api:2
 features[language][] = de
 features[language][] = en
-features[language][] = es
-features[language][] = fr
 features[language][] = id
 features[variable][] = l10n_update_check_disabled
 features[variable][] = l10n_update_check_frequency

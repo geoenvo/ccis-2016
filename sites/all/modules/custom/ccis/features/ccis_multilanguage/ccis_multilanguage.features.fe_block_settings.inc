@@ -16,6 +16,8 @@ function ccis_multilanguage_default_fe_block_settings() {
     'cache' => -1,
     'custom' => 0,
     'delta' => 'language',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 0,
     'module' => 'lang_dropdown',
     'node_types' => array(),
     'pages' => '',

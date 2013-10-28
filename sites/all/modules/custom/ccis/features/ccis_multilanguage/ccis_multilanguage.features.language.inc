@@ -16,7 +16,7 @@ function ccis_multilanguage_locale_default_languages() {
     'name' => 'German',
     'native' => 'Deutsch',
     'direction' => 0,
-    'enabled' => 1,
+    'enabled' => 0,
     'plurals' => 2,
     'formula' => '($n!=1)',
     'domain' => '',
@@ -34,32 +34,6 @@ function ccis_multilanguage_locale_default_languages() {
     'formula' => '',
     'domain' => '',
     'prefix' => '',
-    'weight' => 0,
-  );
-  // Exported language: es.
-  $languages['es'] = array(
-    'language' => 'es',
-    'name' => 'Spanish',
-    'native' => 'Español',
-    'direction' => 0,
-    'enabled' => 1,
-    'plurals' => 2,
-    'formula' => '($n!=1)',
-    'domain' => '',
-    'prefix' => 'es',
-    'weight' => 0,
-  );
-  // Exported language: fr.
-  $languages['fr'] = array(
-    'language' => 'fr',
-    'name' => 'French',
-    'native' => 'Français',
-    'direction' => 0,
-    'enabled' => 1,
-    'plurals' => 2,
-    'formula' => '($n>1)',
-    'domain' => '',
-    'prefix' => 'fr',
     'weight' => 0,
   );
   // Exported language: id.
