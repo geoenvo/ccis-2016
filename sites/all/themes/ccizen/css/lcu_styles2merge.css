@@ -2,21 +2,16 @@
 * Events 
 ************/
 
-/* styles.css Zeile 66 ff */
+/* font definiert in styles.css Zeile 66 ff */
 .node-event.view-mode-full .field-name-field-date-event,
 .node-event.view-mode-full .field-name-field-place-event,
-.node-event.view-mode-full .field-name-field-country-event {
+.node-event.view-mode-full .field-name-field-country-event,
+.node-blog-article .field-name-post-date,
+.node-blog-article .field-name-title {
 	font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
 }
 
-/* styles.css Zeile 871 ff */
-.node-event.view-mode-full.ds-2col > .group-left {
-	width: 70%;
-}
-.node-event.view-mode-full.ds-2col > .group-right {
-	width: 25%;
-	float: right;
-}
+/* events definiert in styles.css Zeile 871 ff */
 .node-event.view-mode-full .field-name-field-image-event-logo {
 	margin-top: 0.5em;
 }
@@ -25,12 +20,6 @@
 	color: #999999;
 	font-size: 1.6em;
 	margin-bottom: 0.5em;
-}
-.node-event.view-mode-full .field-name-field-date-event {
-	color: #F15A24;
-	font-size: 2.6em;
-	line-height: 80%;
-	margin: 0.5em 0 0.2em 0;
 }
 .node-event.view-mode-full .field-name-field-place-event {
 	border-right: 1px solid;
@@ -41,6 +30,12 @@
 	padding-left: 5px;
 	display: inline;
 }
+.node-event.view-mode-full .field-name-field-date-event {
+	color: #F15A24;
+	font-size: 2.6em;
+	line-height: 80%;
+	margin: 0.5em 0 0.2em 0;
+}
 .node-event.view-mode-full .field-name-field-url-event {
 	background-image: url("../img/www_16.png");
   background-position: 0 3px;
@@ -49,7 +44,23 @@
   margin-top: 0.5em;
   padding-left: 20px;
 }
-.node-event.view-mode-full blockquote {
+
+/***************
+* Zusammengefasst 
+****************/
+
+.node-event.view-mode-full.ds-2col > .group-left,
+.node-blog-article.view-mode-full.ds-2col > .group-left {
+	width: 70%;
+}
+.node-event.view-mode-full.ds-2col > .group-right,
+.node-blog-article.view-mode-full.ds-2col > .group-right {
+	width: 25%;
+	float: right;
+}
+
+.node-event.view-mode-full blockquote,
+.node-blog-article.view-mode-full blockquote {
 	color: #B3B3B3;
   font-style: italic;
   font-weight: bold;
@@ -57,6 +68,21 @@
   margin: 1.5em 40px;
   text-align: justify;
 }
+
+/* schon definiert in styles.css Zeile 873 ff */
+.view-ClimateChange .views-row,
+.view-blog .views-row {
+	clear: left;
+  border-bottom: 1px dotted #b3b3b3;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+/* ersetzt styles.css Zeile 118 + 880 ff */
+h2.teasertitle,
+h3.teasertitle {
+  margin: 0;
+  }
+
 
 /***************
 * ClimateChange 
@@ -66,16 +92,23 @@
 	float: left;
 	padding: 10px;
 }
-/* styles.css Zeile 873 ff */
-.view-ClimateChange .views-row {
-	clear: left;
-  border-bottom: 1px dotted #b3b3b3;
-  padding: 10px 0;
-  margin-bottom: 10px;
-}
+
 .node-article-climatechange.view-mode-teaser.ds-2col > .group-left {
 	width: 30%;
 }
 .node-article-climatechange.view-mode-teaser.ds-2col > .group-right {
 	width: 70%;
+}
+
+/***************
+* Blog 
+****************/
+.node-blog-article.view-mode-teaser .field-name-post-date {
+	font-size: 1.1em;
+}
+
+
+.node-blog-article.view-mode-full .field-name-post-date {
+	color: #F15A24;
+	font-size: 1.8em;
 }

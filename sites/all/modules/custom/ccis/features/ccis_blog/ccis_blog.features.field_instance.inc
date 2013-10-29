@@ -20,19 +20,7 @@ function ccis_blog_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
-        ),
+        'settings' => array(),
         'type' => 'text_default',
         'weight' => 1,
       ),
@@ -40,17 +28,6 @@ function ccis_blog_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
           'trim_length' => 300,
         ),
         'type' => 'text_summary_or_trimmed',
@@ -87,20 +64,8 @@ function ccis_blog_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'lightbox2',
-        'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
-        ),
-        'type' => 'lightbox2__lightbox__large__original',
+        'settings' => array(),
+        'type' => 'lightbox2__lightbox__medium__original',
         'weight' => 2,
       ),
       'teaser' => array(
