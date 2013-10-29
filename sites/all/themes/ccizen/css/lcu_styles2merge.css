@@ -14,6 +14,9 @@
 	width: 25%;
 	float: right;
 }
+.node-event.view-mode-full .field-name-field-image-event-logo {
+	margin-top: 0.5em;
+}
 .node-event.view-mode-full .field-name-field-place-event,
 .node-event.view-mode-full .field-name-field-country-event {
 	color: #999999;
@@ -42,5 +45,11 @@
   font-size: 80%;
   margin-top: 0.5em;
   padding-left: 20px;
+}
+.node-event.view-mode-full blockquote {
+	color: #F15A24;
+	font-style: italic;
+  line-height: 150%;
+  text-align: justify;
 }
 
