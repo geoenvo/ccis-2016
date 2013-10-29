@@ -20,19 +20,7 @@ function ccis_events_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
-        ),
+        'settings' => array(),
         'type' => 'text_default',
         'weight' => 0,
       ),
@@ -86,21 +74,9 @@ function ccis_events_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
-        ),
+        'settings' => array(),
         'type' => 'text_default',
         'weight' => 4,
       ),
@@ -150,22 +126,11 @@ function ccis_events_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'date',
         'settings' => array(
           'format_type' => 'compact',
           'fromto' => 'both',
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
@@ -237,17 +202,6 @@ function ccis_events_field_default_field_instances() {
         'settings' => array(
           'image_link' => '',
           'image_style' => '',
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
         ),
         'type' => 'image',
         'weight' => 1,
@@ -309,21 +263,9 @@ function ccis_events_field_default_field_instances() {
     'description' => 'City, if applicable',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
-        ),
+        'settings' => array(),
         'type' => 'text_default',
         'weight' => 3,
       ),
@@ -374,21 +316,9 @@ function ccis_events_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'inline',
+        'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
-        ),
+        'settings' => array(),
         'type' => 'link_default',
         'weight' => 5,
       ),
