@@ -98,6 +98,9 @@ function ccis_blog_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
+      'dashboard' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -111,6 +114,10 @@ function ccis_blog_strongarm() {
       'display' => array(
         'language' => array(
           'teaser' => array(
+            'weight' => '8',
+            'visible' => FALSE,
+          ),
+          'default' => array(
             'weight' => '8',
             'visible' => FALSE,
           ),
