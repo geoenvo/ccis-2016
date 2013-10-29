@@ -121,6 +121,13 @@ function ccis_content_exchanger_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_export_reset_author_simplenews';
+  $strongarm->value = 1;
+  $export['node_export_reset_author_simplenews'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_export_reset_author_sponsor_logo';
   $strongarm->value = 1;
   $export['node_export_reset_author_sponsor_logo'] = $strongarm;
@@ -163,6 +170,13 @@ function ccis_content_exchanger_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_export_reset_changed_simplenews';
+  $strongarm->value = 0;
+  $export['node_export_reset_changed_simplenews'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_export_reset_changed_sponsor_logo';
   $strongarm->value = 0;
   $export['node_export_reset_changed_sponsor_logo'] = $strongarm;
@@ -201,6 +215,13 @@ function ccis_content_exchanger_strongarm() {
   $strongarm->name = 'node_export_reset_created_page';
   $strongarm->value = 0;
   $export['node_export_reset_created_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_export_reset_created_simplenews';
+  $strongarm->value = 0;
+  $export['node_export_reset_created_simplenews'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -289,6 +310,13 @@ function ccis_content_exchanger_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_export_reset_path_simplenews';
+  $strongarm->value = 0;
+  $export['node_export_reset_path_simplenews'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_export_reset_path_sponsor_logo';
   $strongarm->value = 0;
   $export['node_export_reset_path_sponsor_logo'] = $strongarm;
@@ -327,6 +355,13 @@ function ccis_content_exchanger_strongarm() {
   $strongarm->name = 'node_export_reset_promote_page';
   $strongarm->value = 0;
   $export['node_export_reset_promote_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_export_reset_promote_simplenews';
+  $strongarm->value = 0;
+  $export['node_export_reset_promote_simplenews'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -373,6 +408,13 @@ function ccis_content_exchanger_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_export_reset_status_simplenews';
+  $strongarm->value = 0;
+  $export['node_export_reset_status_simplenews'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_export_reset_status_sponsor_logo';
   $strongarm->value = 0;
   $export['node_export_reset_status_sponsor_logo'] = $strongarm;
@@ -411,6 +453,13 @@ function ccis_content_exchanger_strongarm() {
   $strongarm->name = 'node_export_reset_sticky_page';
   $strongarm->value = 0;
   $export['node_export_reset_sticky_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_export_reset_sticky_simplenews';
+  $strongarm->value = 0;
+  $export['node_export_reset_sticky_simplenews'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
