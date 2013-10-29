@@ -6,7 +6,8 @@
 .node-event.view-mode-full .field-name-field-date-event,
 .node-event.view-mode-full .field-name-field-place-event,
 .node-event.view-mode-full .field-name-field-country-event,
-.node-blog-article .field-name-post-date {
+.node-blog-article .field-name-post-date,
+.node-blog-article .field-name-title {
 	font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
 }
 
