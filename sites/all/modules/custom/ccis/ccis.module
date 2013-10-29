@@ -523,7 +523,7 @@ function _ccis_block_d3($list, $params, $id = 1) {
   $d3 = libraries_get_path('d3');
   drupal_add_js($d3. '/d3.v3.min.js');
   $path = drupal_get_path('module', 'ccis');
-  drupal_add_js($path . '/js/d3.ccis.js', array('weight' => 5, 'type' => 'file'));
+  drupal_add_js($path . '/js/d3.ccis.js', array('weight' => 5));
   drupal_add_css($path . '/css/d3.css');
   drupal_add_js(_ccis_get_d3_settings($list, $params, $id), 'setting');
 
@@ -557,7 +557,7 @@ function _ccis_block_datatables($list = 'unknown', $values) {
   drupal_add_css($path . '/media/css/demo_table.css');
 
   $path = drupal_get_path('module', 'ccis');
-  drupal_add_js($path . '/js/datatables.ccis.js');
+  drupal_add_js($path . '/js/datatables.ccis.js', array('weight' => 6));
   if ($list !== 'unknown') {
     drupal_add_js(_ccis_get_datatables_settings($list, $values, 1), 'setting');
   }
