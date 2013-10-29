@@ -109,11 +109,11 @@ h1#page-title {
   }
 
 h2 {
-  font-size: 2em;
+  font-size: 1.5em;
   }
 
 h3 {
-  font-size: 1.5em;
+  font-size: 1.25em;
   margin: 1em 0 .5em;
   }
 
@@ -123,11 +123,12 @@ h2.teasertitle {
 
 #main h2.block-title,
 #homebox h3.dashboard-title {
-  height: 48px;
+  height: 38px;
   margin-bottom: .5em;
-  background: url('../img/titel_background_left.png') no-repeat bottom left;
+  background: url('../img/titel_background_left.png') no-repeat left -2px;
   padding: 0 0 0 23px;
-  font-size: 1.5em;
+  font-size: 1.25em;
+  line-height: 100%;
   text-align: center;
   clear: left;
   color: #2c4563;
@@ -135,9 +136,9 @@ h2.teasertitle {
 #main h2.block-title span,
 #homebox h3.dashboard-title span {
   display: block;
-  background: url('../img/titel_background_right.png') no-repeat bottom right;
-  padding: 0 23px 0 0;
-  height: 48px;
+  background: url('../img/titel_background_right.png') no-repeat right -2px;
+  padding: 6px 23px 0 0;
+  height: 38px;
   }
 
 #homebox h3.dashboard-title {
