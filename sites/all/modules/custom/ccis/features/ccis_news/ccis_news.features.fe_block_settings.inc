@@ -33,7 +33,7 @@ function ccis_news_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'ccizen',
-        'weight' => 0,
+        'weight' => -3,
       ),
       'seven' => array(
         'region' => '',
