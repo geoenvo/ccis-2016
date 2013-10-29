@@ -310,7 +310,7 @@ html body.admin-menu {
 #footer-columns .block {
   background: #2c4563;
   color: #fff;
-  margin: 0 10px 10px;
+  margin: 0 10px 2px;
   }
 #footer-columns .region-footer-thirdcolumn .block {
   background-color: transparent;
@@ -417,6 +417,7 @@ html body.admin-menu {
 #homebox .homebox-column {
   margin: 0;
   padding: 0;
+  background: none transparent;
   }
 
 #homebox .homebox-portlet,
@@ -432,8 +433,20 @@ html body.admin-menu {
   box-shadow: 2px 2px 2px rgba(0,0,0,.3);
   }
 
-#homebox .portlet-icon {
+.portlet-icon {
   background-color: #fcce00;
+  }
+
+.portlet-maximize,
+.portlet-maximized .portlet-minimize {
+  background-image: url(../img/sprites_ccizen.png);
+  background-repeat: no-repeat; 
+  background-position: -16px -317px;
+  background-color: #fcce00;
+  }
+
+.portlet-maximized .portlet-minimize {
+  background-position: -16px -367px;
   }
 
 .portlet-header .portlet-minus,
@@ -441,12 +454,14 @@ html body.admin-menu {
   display: none;
   }
 
-#homebox .portlet-content {
+#homebox .portlet-content,
+#homebox .portlet-content > div,
+#homebox .portlet-content > form {
   padding: 0;
   }
 
-#homebox .portlet-content > div:first-child,
-#homebox .portlet-content > form {
+#homebox .homebox-column-wrapper-1 .portlet-content > div,
+#homebox .homebox-column-wrapper-1 .portlet-content > div {
   padding: 4px;
   }
 
@@ -1038,7 +1053,7 @@ table {
 
 .ccis-datatable-station-range {
   margin: .05em 0 0 .25em;
-  font-size: 1.25em;
+  font-size: 1em;
   float: left;
   }
 
@@ -1058,6 +1073,7 @@ th,
 table.display thead th {
   color: #2c4563;
   font-weight: normal;
+  font-size: 1.25em;
   }
   
 form th {
@@ -1090,6 +1106,7 @@ tr.odd td.sorting_1 {
 .dataTables_info {
   float: none;
   width: auto;
+  padding-left: 5px;
   }
 
 
@@ -1527,4 +1544,8 @@ tr.odd td.sorting_1 {
 
 #footer-wrapper .stakeholder .views-row-3 p {
   margin-left: 2.8em;
+  }
+
+.page-map #content {
+  padding: 0;
   }

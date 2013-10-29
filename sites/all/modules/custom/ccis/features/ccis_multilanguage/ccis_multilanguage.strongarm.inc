@@ -13,6 +13,13 @@ function ccis_multilanguage_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'i18n_language_list';
+  $strongarm->value = '1';
+  $export['i18n_language_list'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'l10n_update_check_disabled';
   $strongarm->value = 0;
   $export['l10n_update_check_disabled'] = $strongarm;
@@ -206,6 +213,29 @@ function ccis_multilanguage_strongarm() {
     ),
   );
   $export['lang_dropdown'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'locale_language_providers_weight_language';
+  $strongarm->value = array(
+    'locale-url' => '-8',
+    'locale-session' => '-6',
+    'locale-user' => '-4',
+    'locale-browser' => '-2',
+    'language-default' => '10',
+  );
+  $export['locale_language_providers_weight_language'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'variable_realm_list_language';
+  $strongarm->value = array(
+    0 => 'site_name',
+    1 => 'site_slogan',
+  );
+  $export['variable_realm_list_language'] = $strongarm;
 
   return $export;
 }
