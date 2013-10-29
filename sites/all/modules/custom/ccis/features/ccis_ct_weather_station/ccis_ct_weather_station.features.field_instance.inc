@@ -41,7 +41,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_address',
-    'label' => 'Adress',
+    'label' => 'Address',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -55,6 +55,52 @@ function ccis_ct_weather_station_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance: 'node-weather_station-field_address_data'
+  $field_instances['node-weather_station-field_address_data'] = array(
+    'bundle' => 'weather_station',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dashboard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_address_data',
+    'label' => 'Address',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 32,
     ),
   );
 
@@ -102,7 +148,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 34,
     ),
   );
 
@@ -154,7 +200,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_beginposition',
-    'label' => 'TimePeriod of Data Availablility',
+    'label' => 'Begin of Data Availablility',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -258,7 +304,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ci_address',
-    'label' => 'Metadata Address',
+    'label' => 'Address',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -306,7 +352,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ci_contact',
-    'label' => 'Metadata Contact Info (contactInfo)',
+    'label' => 'Contact',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -354,7 +400,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ci_onlineresource',
-    'label' => 'Metadata Online Resource',
+    'label' => 'Online Resource',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -402,7 +448,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ci_responsibleparty',
-    'label' => 'Metadata Responsible Party or Organization',
+    'label' => 'Responsible Organization',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -450,7 +496,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_ci_rolecode',
-    'label' => 'Role of Metadata Contact (pointOfContact etc.)',
+    'label' => 'Role of Contact',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -559,7 +605,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -594,7 +640,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_datacodes',
-    'label' => 'Special Codes (Missing data values etc.)',
+    'label' => 'Special Codes',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -642,7 +688,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_dataquality',
-    'label' => 'Quality control (accomplished tests etc.)',
+    'label' => 'Quality control',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -690,7 +736,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_dataseturi',
-    'label' => 'Link to the Dataset',
+    'label' => 'Link to Dataset',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -738,7 +784,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_datatime',
-    'label' => 'Time (reference period, measurement time etc.)',
+    'label' => 'Measurement times',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -872,7 +918,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 9,
+      'weight' => 39,
     ),
   );
 
@@ -945,7 +991,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 8,
+      'weight' => 38,
     ),
   );
 
@@ -997,7 +1043,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_datestamp',
-    'label' => 'Metadata Date Stamp',
+    'label' => 'Date Stamp',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -1053,7 +1099,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_electronicmailaddress',
-    'label' => 'Metadata E-Mail',
+    'label' => 'E-Mail',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1114,7 +1160,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 23,
+      'weight' => 24,
     ),
   );
 
@@ -1166,7 +1212,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_endposition',
-    'label' => 'TimePeriod of Data Availablility (End)',
+    'label' => 'End of Data Availability',
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
@@ -1222,7 +1268,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_extent',
-    'label' => 'Extent (Bounding Box)',
+    'label' => 'Extent',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1283,7 +1329,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 23,
     ),
   );
 
@@ -1318,7 +1364,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_fileidentifier',
-    'label' => 'Metadata Unique resource identifier',
+    'label' => 'URI',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1414,7 +1460,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_instrumentationtype',
-    'label' => 'Type of instruments (manufacturer, model, sensitivity etc.)',
+    'label' => 'Type',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1462,7 +1508,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_itemsreplacement',
-    'label' => 'Disposable items replacement',
+    'label' => 'Disposable replacement',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1558,7 +1604,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_languagecode',
-    'label' => 'Metadata Resource language',
+    'label' => 'Language',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1606,7 +1652,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_md_charactersetcode',
-    'label' => 'Metadata Character Code',
+    'label' => 'Character Code',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1654,7 +1700,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_md_scopecode',
-    'label' => 'Metadata Scope Code',
+    'label' => 'Scope Code',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1702,7 +1748,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_mdmetadata',
-    'label' => 'Metadata Schema',
+    'label' => 'Schema',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1750,7 +1796,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_metadataconstraints',
-    'label' => 'Metadata Constraints',
+    'label' => 'Constraints',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1798,7 +1844,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_metadatamaintenance',
-    'label' => 'Metadata Maintenance',
+    'label' => 'Maintenance',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1846,7 +1892,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_metadatastandardname',
-    'label' => 'Metadata Standard (i.e. ISO 19915 or INSPIRE etc.)',
+    'label' => 'Standard',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1894,7 +1940,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_metadatastandardversion',
-    'label' => 'Metadata Standard Version',
+    'label' => 'Standard Version',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1942,7 +1988,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_observedelements',
-    'label' => 'List of observed elements',
+    'label' => 'Observed elements',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -1990,7 +2036,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_observercorrections',
-    'label' => 'Corrections made by observer',
+    'label' => 'Corrections',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2134,7 +2180,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_organisationname',
-    'label' => 'Metadata Name of Organization',
+    'label' => 'Organization Name',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2195,7 +2241,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -2291,7 +2337,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -2326,7 +2372,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_routinemaintenance',
-    'label' => 'Routine maintenance operations',
+    'label' => 'Maintenance operations',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2340,6 +2386,52 @@ function ccis_ct_weather_station_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 84,
+    ),
+  );
+
+  // Exported field_instance: 'node-weather_station-field_station_alias'
+  $field_instances['node-weather_station-field_station_alias'] = array(
+    'bundle' => 'weather_station',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dashboard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_station_alias',
+    'label' => 'Station Alias',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 27,
     ),
   );
 
@@ -2400,7 +2492,96 @@ function ccis_ct_weather_station_field_default_field_instances() {
       'module' => 'geofield',
       'settings' => array(),
       'type' => 'geofield_latlon',
-      'weight' => 3,
+      'weight' => 33,
+    ),
+  );
+
+  // Exported field_instance: 'node-weather_station-field_station_number'
+  $field_instances['node-weather_station-field_station_number'] = array(
+    'bundle' => 'weather_station',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '5-digit code',
+    'display' => array(
+      'dashboard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_station_number',
+    'label' => ' WMO Code or station number',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 5,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 28,
+    ),
+  );
+
+  // Exported field_instance: 'node-weather_station-field_station_type'
+  $field_instances['node-weather_station-field_station_type'] = array(
+    'bundle' => 'weather_station',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'dashboard' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_station_type',
+    'label' => 'Type',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 29,
     ),
   );
 
@@ -2435,7 +2616,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationabstract',
-    'label' => 'Station Description',
+    'label' => 'Description',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2483,7 +2664,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationaccuracy',
-    'label' => 'Position and height accuracy, resolution',
+    'label' => 'Accuracy, resolution',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2536,7 +2717,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationadditional',
-    'label' => 'Photos, additional information',
+    'label' => 'Photos, Docs',
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -2592,7 +2773,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationaddress',
-    'label' => 'Adress',
+    'label' => 'Address',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2701,7 +2882,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 36,
     ),
   );
 
@@ -2736,7 +2917,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationcontact',
-    'label' => 'Name of Contact Person',
+    'label' => 'Contact',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2832,7 +3013,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationcrs',
-    'label' => 'Coordinate Reference System',
+    'label' => 'CRS',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -2880,7 +3061,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationelevation',
-    'label' => 'Elevation and reference plane',
+    'label' => 'Elevation',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -3024,7 +3205,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationlinks',
-    'label' => 'Additional Documents: Links, Publications etc.',
+    'label' => 'Attachments',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -3312,7 +3493,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationtopo',
-    'label' => 'Topographical Information',
+    'label' => 'Topography',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -3360,7 +3541,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_stationtype',
-    'label' => 'Station Type',
+    'label' => 'Type',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -3373,7 +3554,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 40,
     ),
   );
 
@@ -3412,7 +3593,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_status',
-    'label' => 'Station Status',
+    'label' => 'Status',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -3424,7 +3605,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 7,
+      'weight' => 37,
     ),
   );
 
@@ -3623,90 +3804,89 @@ function ccis_ct_weather_station_field_default_field_instances() {
         'size' => 5,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 35,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
+  t(' WMO Code or station number');
   t('(Celsius, Kelvin, Fahrenheit etc.)');
   t('(Local land use/land cover, obstacles, ground cover)');
   t('(above Mean Sea Level, NN, barometric, pressure, QNH, QFE, QFF etc.)');
+  t('5-digit code');
+  t('Accuracy, resolution');
   t('Active or Closed Station');
-  t('Additional Documents: Links, Publications etc.');
-  t('Adress');
+  t('Address');
   t('Adress (Street + No.)');
   t('Adress (Street + No.) - Organization');
   t('Alias');
+  t('Attachments');
+  t('Begin of Data Availablility');
+  t('CRS');
+  t('Character Code');
   t('City');
   t('City - Organization');
   t('Closing date');
-  t('Coordinate Reference System');
-  t('Corrections made by observer');
+  t('Constraints');
+  t('Contact');
+  t('Corrections');
   t('Country');
   t('Country - Organization');
   t('Current Position');
+  t('Date Stamp');
+  t('Description');
   t('Description, abstract');
-  t('Disposable items replacement');
+  t('Disposable replacement');
   t('E-Mail');
   t('E-Mail - Organization');
-  t('Elevation and reference plane');
-  t('Extent (Bounding Box)');
+  t('Elevation');
+  t('End of Data Availability');
+  t('Extent');
   t('Fax');
   t('Fax - Organization');
   t('Keywords');
-  t('Link to the Dataset');
-  t('List of observed elements');
+  t('Language');
+  t('Link to Dataset');
+  t('Maintenance');
   t('Maintenance Cycle');
-  t('Metadata Address');
-  t('Metadata Character Code');
-  t('Metadata Constraints');
-  t('Metadata Contact Info (contactInfo)');
-  t('Metadata Date Stamp');
-  t('Metadata E-Mail');
-  t('Metadata Maintenance');
-  t('Metadata Name of Organization');
-  t('Metadata Online Resource');
-  t('Metadata Resource language');
-  t('Metadata Responsible Party or Organization');
-  t('Metadata Schema');
-  t('Metadata Scope Code');
-  t('Metadata Standard (i.e. ISO 19915 or INSPIRE etc.)');
-  t('Metadata Standard Version');
-  t('Metadata Unique resource identifier');
+  t('Maintenance operations');
+  t('Measurement times');
   t('Name');
-  t('Name of Contact Person');
   t('National station number or code');
   t('Observation instructions');
+  t('Observed elements');
   t('Observer level of training');
   t('Observing times');
+  t('Online Resource');
   t('Opening date');
+  t('Organization Name');
   t('Phone');
   t('Phone - Organization');
-  t('Photos, additional information');
-  t('Position and height accuracy, resolution');
+  t('Photos, Docs');
   t('Postcode');
   t('Postcode - Organization');
   t('Province / Region');
   t('Province / Region  - Organization');
-  t('Quality control (accomplished tests etc.)');
+  t('Quality control');
   t('Region');
   t('Relocations');
-  t('Role of Metadata Contact (pointOfContact etc.)');
-  t('Routine maintenance operations');
-  t('Special Codes (Missing data values etc.)');
+  t('Responsible Organization');
+  t('Role of Contact');
+  t('Schema');
+  t('Scope Code');
+  t('Special Codes');
+  t('Standard');
+  t('Standard Version');
+  t('Station Alias');
   t('Station Alias Name');
-  t('Station Description');
   t('Station No.');
-  t('Station Status');
-  t('Station Type');
   t('Station operator or responsible organization name');
-  t('Time (reference period, measurement time etc.)');
-  t('TimePeriod of Data Availablility');
-  t('TimePeriod of Data Availablility (End)');
+  t('Status');
   t('Topic category');
-  t('Topographical Information');
-  t('Type of instruments (manufacturer, model, sensitivity etc.)');
+  t('Topography');
+  t('Type');
+  t('URI');
   t('Units');
   t('Units used');
   t('WMO Code');

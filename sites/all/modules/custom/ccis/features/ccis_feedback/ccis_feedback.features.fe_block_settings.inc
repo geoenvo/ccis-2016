@@ -33,7 +33,7 @@ function ccis_feedback_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'ccizen',
-        'weight' => -14,
+        'weight' => -2,
       ),
       'seven' => array(
         'region' => '',

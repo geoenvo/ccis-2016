@@ -45,6 +45,39 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_address_data'
+  $field_bases['field_address_data'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_address_data',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'foreign keys' => array(
+      'format' => array(
+        'columns' => array(
+          'format' => 'format',
+        ),
+        'table' => 'filter_format',
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+      'profile2_private' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_alias'
   $field_bases['field_alias'] = array(
     'active' => 1,
@@ -104,6 +137,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
         'second' => 0,
         'year' => 'year',
       ),
+      'profile2_private' => FALSE,
       'timezone_db' => '',
       'todate' => '',
       'tz_handling' => 'none',
@@ -175,6 +209,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -209,6 +244,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -243,6 +279,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -277,6 +314,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -311,6 +349,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -345,7 +384,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -380,7 +418,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -415,6 +452,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -449,6 +487,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -483,6 +522,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -517,6 +557,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -653,6 +694,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
         'second' => 0,
         'year' => 'year',
       ),
+      'profile2_private' => FALSE,
       'timezone_db' => '',
       'todate' => '',
       'tz_handling' => 'none',
@@ -690,6 +732,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -724,7 +767,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -757,6 +799,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
         'second' => 0,
         'year' => 'year',
       ),
+      'profile2_private' => FALSE,
       'timezone_db' => '',
       'todate' => '',
       'tz_handling' => 'none',
@@ -794,6 +837,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -828,7 +872,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -863,6 +906,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -930,6 +974,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -964,6 +1009,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1032,6 +1078,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1066,6 +1113,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1100,6 +1148,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1134,6 +1183,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1168,6 +1218,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1202,6 +1253,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1236,6 +1288,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1270,6 +1323,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1303,6 +1357,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1337,6 +1392,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1405,7 +1461,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1440,6 +1495,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1474,7 +1530,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1509,7 +1564,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1544,7 +1598,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1579,8 +1632,38 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_station_alias'
+  $field_bases['field_station_alias'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_station_alias',
+    'foreign keys' => array(
+      'format' => array(
+        'columns' => array(
+          'format' => 'format',
+        ),
+        'table' => 'filter_format',
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1603,6 +1686,70 @@ function ccis_ct_weather_station_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'geofield',
+  );
+
+  // Exported field_base: 'field_station_number'
+  $field_bases['field_station_number'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_station_number',
+    'foreign keys' => array(
+      'format' => array(
+        'columns' => array(
+          'format' => 'format',
+        ),
+        'table' => 'filter_format',
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 10,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_station_type'
+  $field_bases['field_station_type'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_station_type',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'synoptical' => 'synoptical',
+        'aeronautical' => 'aeronautical',
+        'agrometeorological' => 'agrometeorological',
+        'comment' => 'Comment',
+        'bug' => 'Bug Report',
+        'critics' => 'Critics',
+        'other' => 'Other',
+      ),
+      'allowed_values_function' => '',
+      'profile2_private' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_stationabstract'
@@ -1631,6 +1778,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1665,6 +1813,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1699,6 +1848,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'image',
     'settings' => array(
       'default_image' => 0,
+      'profile2_private' => FALSE,
       'uri_scheme' => 'public',
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
@@ -1803,7 +1953,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1838,6 +1987,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1906,6 +2056,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -1940,6 +2091,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -2042,6 +2194,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -2178,7 +2331,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -2247,6 +2399,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -2281,6 +2434,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -2312,6 +2466,7 @@ function ccis_ct_weather_station_field_default_field_bases() {
         1 => '',
       ),
       'allowed_values_function' => '',
+      'profile2_private' => FALSE,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),
@@ -2427,7 +2582,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
           'walter_lieth_diagram' => 'walter_lieth_diagram',
         ),
       ),
-      'profile2_private' => FALSE,
       'target_type' => 'node',
       'views_base_columns' => array(),
       'views_base_table' => 0,

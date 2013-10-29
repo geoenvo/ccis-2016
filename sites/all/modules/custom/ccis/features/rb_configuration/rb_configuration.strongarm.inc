@@ -13,6 +13,13 @@ function rb_configuration_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'clean_url';
+  $strongarm->value = '1';
+  $export['clean_url'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'date_default_timezone';
   $strongarm->value = 'America/New_York';
   $export['date_default_timezone'] = $strongarm;
@@ -51,20 +58,6 @@ function rb_configuration_strongarm() {
   $strongarm->name = 'pathauto_punctuation_hyphen';
   $strongarm->value = 1;
   $export['pathauto_punctuation_hyphen'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'site_403';
-  $strongarm->value = 'node/35';
-  $export['site_403'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'site_404';
-  $strongarm->value = 'node/34';
-  $export['site_404'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
