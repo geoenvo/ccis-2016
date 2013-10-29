@@ -521,8 +521,12 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
  */
 function _ccis_block_d3($list, $params, $id = 1) {
   $d3 = libraries_get_path('d3');
-  drupal_add_js($d3. '/d3.v3.min.js');
+  drupal_add_js($d3. '/d3.v3.min.js', array('group' => JS_LIBRARY));
   $path = drupal_get_path('module', 'ccis');
+  drupal_add_js($path . '/js/jquery.slimscroll.js', array('group' => JS_LIBRARY));
+
+  drupal_add_library('system', 'ui.accordion');
+
   drupal_add_js($path . '/js/d3.ccis.js', array('weight' => 5));
   drupal_add_css($path . '/css/d3.css');
   drupal_add_js(_ccis_get_d3_settings($list, $params, $id), 'setting');
@@ -845,6 +849,16 @@ function _ccis_get_fields_for_fieldtype($type) {
 }
 
 /**
+ * Implements hook_css_alter().
+ */
+function ccis_css_alter(&$css) {
+  $file = 'misc/ui/jquery.ui.accordion.css';
+  if (isset($css[$file])) {
+    unset($css[$file]);
+  }
+}
+
+/**
  * Implements hook_js_alter().
  */
 function ccis_js_alter(&$javascript) {
@@ -857,7 +871,6 @@ function ccis_js_alter(&$javascript) {
   if (!empty($javascript[$js_file])) {
     $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_popup.js';
   }
-
 }
 
 /**
