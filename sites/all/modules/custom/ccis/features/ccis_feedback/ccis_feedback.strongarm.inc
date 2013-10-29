@@ -13,6 +13,13 @@ function ccis_feedback_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'additional_settings__active_tab_simplenews';
+  $strongarm->value = 'edit-i18n';
+  $export['additional_settings__active_tab_simplenews'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_simplenews';
   $strongarm->value = 0;
   $export['comment_anonymous_simplenews'] = $strongarm;
@@ -122,6 +129,13 @@ function ccis_feedback_strongarm() {
     ),
   );
   $export['field_bundle_settings_node__simplenews'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'i18n_node_extended_simplenews';
+  $strongarm->value = '1';
+  $export['i18n_node_extended_simplenews'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -372,6 +386,27 @@ No confirmation necessary because all requested changes equal the current state.
   $strongarm->name = 'simplenews_from_name';
   $strongarm->value = 'CCIS';
   $export['simplenews_from_name'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'simplenews_priority';
+  $strongarm->value = '0';
+  $export['simplenews_priority'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'simplenews_receipt';
+  $strongarm->value = 0;
+  $export['simplenews_receipt'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'simplenews_send';
+  $strongarm->value = '0';
+  $export['simplenews_send'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

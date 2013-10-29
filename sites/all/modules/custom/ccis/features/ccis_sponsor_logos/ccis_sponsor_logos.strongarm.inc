@@ -126,6 +126,13 @@ function ccis_sponsor_logos_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'i18n_node_extended_sponsor_logo';
+  $strongarm->value = '1';
+  $export['i18n_node_extended_sponsor_logo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_sponsor_logo';
   $strongarm->value = '2';
   $export['language_content_type_sponsor_logo'] = $strongarm;
@@ -167,6 +174,13 @@ function ccis_sponsor_logos_strongarm() {
   $strongarm->name = 'node_submitted_sponsor_logo';
   $strongarm->value = 0;
   $export['node_submitted_sponsor_logo'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'save_continue_sponsor_logo';
+  $strongarm->value = 'Save and add fields';
+  $export['save_continue_sponsor_logo'] = $strongarm;
 
   return $export;
 }

@@ -33,7 +33,7 @@ function ccis_sponsor_logos_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'ccizen',
-        'weight' => -18,
+        'weight' => 16,
       ),
       'seven' => array(
         'region' => '',
