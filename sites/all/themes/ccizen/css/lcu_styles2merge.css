@@ -1,3 +1,6 @@
+/***********
+* Events 
+************/
 
 /* styles.css Zeile 66 ff */
 .node-event.view-mode-full .field-name-field-date-event,
@@ -47,9 +50,32 @@
   padding-left: 20px;
 }
 .node-event.view-mode-full blockquote {
-	color: #F15A24;
-	font-style: italic;
+	color: #B3B3B3;
+  font-style: italic;
+  font-weight: bold;
   line-height: 150%;
+  margin: 1.5em 40px;
   text-align: justify;
 }
 
+/***************
+* ClimateChange 
+****************/
+
+.view-ClimateChange .field-name-field-cc-image {
+	float: left;
+	padding: 10px;
+}
+/* styles.css Zeile 873 ff */
+.view-ClimateChange .views-row {
+	clear: left;
+  border-bottom: 1px dotted #b3b3b3;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+.node-article-climatechange.view-mode-teaser.ds-2col > .group-left {
+	width: 30%;
+}
+.node-article-climatechange.view-mode-teaser.ds-2col > .group-right {
+	width: 70%;
+}
