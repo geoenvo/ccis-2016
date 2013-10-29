@@ -103,7 +103,14 @@ function ccis_ct_weather_station_strongarm() {
       ),
     ),
     'extra_fields' => array(
-      'form' => array(),
+      'form' => array(
+        'title' => array(
+          'weight' => '26',
+        ),
+        'path' => array(
+          'weight' => '5',
+        ),
+      ),
       'display' => array(),
     ),
   );
