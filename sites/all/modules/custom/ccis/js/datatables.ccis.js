@@ -61,6 +61,29 @@ Drupal.behaviors.ccis_datatables = {
       "sScrollX": "100%",
       "bScrollCollapse": true,
       "bPaginate": false,
+      "oLanguage": {
+        "sEmptyTable":     Drupal.t("No data available in table"),
+        "sInfo":           Drupal.t("Showing _START_ to _END_ of _TOTAL_ entries"),
+        "sInfoEmpty":      Drupal.t("Showing 0 to 0 of 0 entries"),
+        "sInfoFiltered":   Drupal.t("(filtered from _MAX_ total entries)"),
+        "sInfoPostFix":    "",
+        "sInfoThousands":  ",",
+        "sLengthMenu":     Drupal.t("Show _MENU_ entries"),
+        "sLoadingRecords": Drupal.t("Loading..."),
+        "sProcessing":     Drupal.t("Processing..."),
+        "sSearch":         Drupal.t("Search:"),
+        "sZeroRecords":    Drupal.t("No matching records found"),
+        "oPaginate": {
+            "sFirst":    Drupal.t("First"),
+            "sLast":     Drupal.t("Last"),
+            "sNext":     Drupal.t("Next"),
+            "sPrevious": Drupal.t("Previous")
+        },
+        "oAria": {
+            "sSortAscending":  Drupal.t(": activate to sort column ascending"),
+            "sSortDescending": Drupal.t(": activate to sort column descending")
+        }
+      }
     };
     options = $.extend(true, _datatable.data, options);
     var oTable = $(_tableId).dataTable(options);
