@@ -30,25 +30,19 @@ function ccis_theme_context_default_contexts() {
           'module' => 'lang_dropdown',
           'delta' => 'language',
           'region' => 'utilities',
-          'weight' => '-10',
+          'weight' => '-23',
         ),
         'boxes-socialmedia' => array(
           'module' => 'boxes',
           'delta' => 'socialmedia',
           'region' => 'utilities',
-          'weight' => '-9',
+          'weight' => '-22',
         ),
         'search-form' => array(
           'module' => 'search',
           'delta' => 'form',
           'region' => 'utilities',
-          'weight' => '-8',
-        ),
-        'user-login' => array(
-          'module' => 'user',
-          'delta' => 'login',
-          'region' => 'user',
-          'weight' => '-10',
+          'weight' => '-21',
         ),
         'system-user-menu' => array(
           'module' => 'system',
@@ -74,17 +68,11 @@ function ccis_theme_context_default_contexts() {
           'region' => 'footer_thirdcolumn',
           'weight' => '-10',
         ),
-        'simplenews-1' => array(
+        'simplenews-6' => array(
           'module' => 'simplenews',
-          'delta' => '1',
+          'delta' => '6',
           'region' => 'footer_thirdcolumn',
           'weight' => '-9',
-        ),
-        'system-navigation' => array(
-          'module' => 'system',
-          'delta' => 'navigation',
-          'region' => 'bottom',
-          'weight' => '-10',
         ),
       ),
     ),
