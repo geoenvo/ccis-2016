@@ -28,17 +28,6 @@ function ccis_events_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
           'trim_length' => 600,
         ),
         'type' => 'text_summary_or_trimmed',
@@ -83,19 +72,7 @@ function ccis_events_field_default_field_instances() {
       'teaser' => array(
         'label' => 'above',
         'module' => 'text',
-        'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
-        ),
+        'settings' => array(),
         'type' => 'text_default',
         'weight' => 11,
       ),
@@ -144,17 +121,6 @@ function ccis_events_field_default_field_instances() {
         'settings' => array(
           'format_type' => 'long',
           'fromto' => 'both',
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
@@ -212,17 +178,6 @@ function ccis_events_field_default_field_instances() {
         'settings' => array(
           'image_link' => '',
           'image_style' => '',
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
         ),
         'type' => 'image',
         'weight' => 10,
@@ -272,19 +227,7 @@ function ccis_events_field_default_field_instances() {
       'teaser' => array(
         'label' => 'above',
         'module' => 'text',
-        'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
-        ),
+        'settings' => array(),
         'type' => 'text_default',
         'weight' => 8,
       ),
@@ -325,19 +268,7 @@ function ccis_events_field_default_field_instances() {
       'teaser' => array(
         'label' => 'above',
         'module' => 'link',
-        'settings' => array(
-          'linked_field' => array(
-            'advanced' => array(
-              'class' => '',
-              'rel' => '',
-              'target' => '',
-              'text' => '',
-              'title' => '',
-            ),
-            'destination' => '',
-            'linked' => 0,
-          ),
-        ),
+        'settings' => array(),
         'type' => 'link_default',
         'weight' => 12,
       ),

@@ -118,30 +118,41 @@ h3.teasertitle {
 /******************
 * Login + Register
 *******************/
-#user-register-form {
-	background-color: #EBEBEB;
+.no-sidebars #user-register-form {
+	width: 60%;
+}
+.no-sidebars #user-login,
+.no-sidebars #user-pass {
+	width: 50%;
+}
+#user-register-form,
+#user-login,
+#user-pass {
+	background-color: #E6E6E6;
 	border: 5px solid #B3B3B3;
   border-radius: 5px 5px 5px 5px;
   padding: 20px;
 }
-#user-register-form .form-item {
+#user-register-form .form-item, 
+#user-login .form-item,
+#user-pass .form-item {
 	margin: 0.5em 0;
 }
-#user-register-form .form-item .description {
-    font-size: 0.75em;
+#user-register-form .form-item .description,
+#user-login .form-item .description {
+    font-size: 70%;
 }
-#user-register-form label,
-#user-register-form .fieldset-legend {
-	font-size: 1.2em;
-}
-#user-register-form input {
+#user-register-form input,
+#user-login input,
+#user-pass input {
 	border: none;
+	font-size: 90%;
 }
-#user-register-form .form-submit {
+#user-register-form .form-submit,
+#user-login .form-submit,
+#user-pass .form-submit {
 	background-color: #2C4563;
   color: #C7B299;
   margin-top: 10px;
-}
-#user-register-form .fieldset-legend {
-
+  font-size: 1.1em;
 }

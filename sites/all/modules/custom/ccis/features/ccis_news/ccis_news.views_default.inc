@@ -24,9 +24,9 @@ function ccis_news_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Latest news';
   $handler->display->display_options['css_class'] = 'news';
-  $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'View all recent news';
+  $handler->display->display_options['link_display'] = 'page';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -81,6 +81,7 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_text'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'View all recent news';
+  $handler->display->display_options['link_url'] = 'events-news';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
@@ -98,10 +99,19 @@ function ccis_news_views_default_views() {
   $handler = $view->new_display('block', 'Block Newsfeed', 'block_newsfeed');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'news compact';
+  $handler->display->display_options['link_url'] = '/events-news';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  /* Footer: Global: Text area */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['label'] = 'More-link (to events page)';
+  $handler->display->display_options['footer']['area']['content'] = '<a href="/events-news" class="more-link">View all recent news</a>';
+  $handler->display->display_options['footer']['area']['format'] = 'simple_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Aggregator: Timestamp */
   $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
@@ -179,6 +189,8 @@ function ccis_news_views_default_views() {
 <p>Newsfeed from relevant sources</p>'),
     t('Block Newsfeed'),
     t('more'),
+    t('More-link (to events page)'),
+    t('<a href="/events-news" class="more-link">View all recent news</a>'),
     t('Read more ...'),
     t('[description]  [link]'),
     t('Newsfeed'),
