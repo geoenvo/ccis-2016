@@ -19,7 +19,7 @@ function ccis_ct_weather_data_ctools_plugin_api($module = NULL, $api = NULL) {
 function ccis_ct_weather_data_node_info() {
   $items = array(
     'weather_data' => array(
-      'name' => t('Weather data'),
+      'name' => t('Climate data'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',

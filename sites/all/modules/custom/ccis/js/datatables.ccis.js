@@ -56,11 +56,19 @@ Drupal.behaviors.ccis_datatables = {
     $div.append(table(index));
     _datatable.container.append($div);
     var _tableId = '#ccis-datatable-' + index;
+    var aTargets = [0];
+    for (var i = 5; i < _datatable.data.aoColumns.length; i++) {
+      aTargets.push(i);
+    }
     var options = {
       "sScrollY": "300px",
-      "sScrollX": "100%",
       "bScrollCollapse": true,
       "bPaginate": false,
+      "sDom": 'C<"clear">lfrtip',
+      "aoColumnDefs": [{ "bVisible": false, "aTargets": aTargets }],
+      "oColVis": {
+        "aiExclude": [ 0 ]
+      },
       "oLanguage": {
         "sEmptyTable":     Drupal.t("No data available in table"),
         "sInfo":           Drupal.t("Showing _START_ to _END_ of _TOTAL_ entries"),

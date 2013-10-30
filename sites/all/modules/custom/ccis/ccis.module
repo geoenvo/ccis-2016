@@ -13,14 +13,14 @@ function ccis_menu() {
     'position' => 'left',
   );
   $items[$path . '/csv-import'] = array(
-    'title' => 'Weather data import',
+    'title' => 'Climate data import',
     'access arguments' => array('csv_import'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ccis_import_files_form'),
     'file' => 'ccis.import.inc',
   );
   $items[$path . '/xml-import'] = array(
-    'title' => 'Weather station import',
+    'title' => 'Climate station import',
     'access arguments' => array('xml_import'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ccis_xml_import_files_form'),
@@ -34,7 +34,7 @@ function ccis_menu() {
     'file' => 'ccis.admin.inc',
   );
   $items[$path . '/permissions'] = array(
-    'title' => 'Weather data permissions',
+    'title' => 'Climate data permissions',
     'access arguments' => array('access_weather_data_perms'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ccis_weather_data_permissions'),
@@ -76,10 +76,10 @@ function ccis_permission() {
     'title' => t('Access CCIS search settings'),
   );
   $perms['access_weather_data_perms'] = array(
-    'title' => t('Access CCIS weather data permission settings'),
+    'title' => t('Access CCIS climate data permission settings'),
   );
   $perms['access_ccis_all_weather_data'] = array(
-    'title' => t('Access to all weather data'),
+    'title' => t('Access to all climate data'),
   );
   $fields = _ccis_get_weather_data_labels(FALSE);
   $fields_per_range = variable_get('ccis_weather_data_perms_range', array());
@@ -404,7 +404,11 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#field_prefix' => 2,
     '#attributes' => array('class' => array('form-autocomplete-mousedown')),
     '#states' => array(
-      'visible' => array(array('#edit-input1' => array('filled' => TRUE)), array('#edit-input2' => array('filled' => TRUE)),),
+      'visible' => array(
+        array('#edit-input2' => array('filled' => TRUE)),
+        array('#edit-input1' => array('filled' => TRUE)),
+        array(':input[name="station[2]"]' => array('checked' => TRUE))
+      ),
     ),
   );
   $form['filter'] = array(
@@ -559,7 +563,7 @@ function _ccis_get_d3_settings($list = 'unknown', $values, $id = 1) {
 function _ccis_block_datatables($list = 'unknown', $values) {
   $path = libraries_get_path('datatables');
   drupal_add_js($path . '/media/js/jquery.dataTables.js');
-
+  drupal_add_js($path . '/extras/ColVis/media/js/ColVis.min.js');
   drupal_add_css($path . '/media/css/demo_table.css');
 
   $path = drupal_get_path('module', 'ccis');

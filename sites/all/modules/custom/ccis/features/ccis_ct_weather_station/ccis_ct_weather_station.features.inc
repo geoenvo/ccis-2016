@@ -28,7 +28,7 @@ function ccis_ct_weather_station_ctools_plugin_api($module = NULL, $api = NULL) 
 function ccis_ct_weather_station_node_info() {
   $items = array(
     'weather_station' => array(
-      'name' => t('Weather Station'),
+      'name' => t('Climate Station'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
