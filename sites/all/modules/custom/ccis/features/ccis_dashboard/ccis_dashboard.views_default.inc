@@ -140,7 +140,6 @@ function ccis_dashboard_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Did not found any information.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Current Position */
   $handler->display->display_options['fields']['field_station_geodata']['id'] = 'field_station_geodata';
@@ -195,7 +194,6 @@ function ccis_dashboard_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Did not found any information.'),
     t('All'),
     t('Embed Display (Single)'),
   );
