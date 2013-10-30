@@ -1,10 +1,10 @@
-/***********
+﻿/***********
 * Events 
 ************/
 
 
 
-/* events definiert in styles.css Zeile 871 ff */
+/* events definiert in styles.css Zeile 871 ff 
 .node-event.view-mode-full .field-name-field-image-event-logo {
 	margin-top: 0.5em;
 }
@@ -37,11 +37,12 @@
   margin-top: 0.5em;
   padding-left: 20px;
 }
+*/
 
 /***************
 * Zusammengefasst 
 ****************/
-/* font definiert in styles.css Zeile 66 ff */
+/* font definiert in styles.css Zeile 66 ff 
 .node-event.view-mode-full .field-name-field-date-event,
 .node-event.view-mode-full .field-name-field-place-event,
 .node-event.view-mode-full .field-name-field-country-event,
@@ -51,7 +52,9 @@
 .tabs-primary {
 	font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
 }
+*/
 
+/*
 .node-event.view-mode-full.ds-2col > .group-left,
 .node-blog-article.view-mode-full.ds-2col > .group-left,
 .node-blog-article.view-mode-teaserlist.ds-2col > .group-left,
@@ -75,8 +78,9 @@
   margin: 1.5em 40px;
   text-align: justify;
 }
+*/
 
-/* schon definiert in styles.css Zeile 873 ff */
+/* schon definiert in styles.css Zeile 873 ff 
 .view-ClimateChange .views-row,
 .view-blog .views-row {
 	clear: left;
@@ -84,14 +88,17 @@
   padding: 10px 0;
   margin-bottom: 10px;
 }
-/* ersetzt styles.css Zeile 118 + 880 ff */
+*/
+
+/* ersetzt styles.css Zeile 118 + 880 ff 
 h2.teasertitle,
 h3.teasertitle {
   margin: 0;
 }
+*/
 
-
-/* definiert auch in styles.css Zeile 122 ff aber nicht genau identisch */
+/* definiert auch in styles.css Zeile 122 ff aber nicht genau identisch 
+--- mju: sicher in styles.css? nichts gefunden ---
 #main .tabs-primary__tab, 
 #main .tabs-primary__tab.is-active {
   background: url("../img/titel_background_left.png") no-repeat scroll left -2px rgba(0, 0, 0, 0);
@@ -119,20 +126,22 @@ h3.teasertitle {
    line-height: 100%;
 }
 
+*/
+
 /***************
 * ClimateChange 
-****************/
+***************
 
 .view-ClimateChange .field-name-field-cc-image {
 	float: left;
 	padding: 10px;
 }
-
+*/
 
 
 /***************
 * Blog 
-****************/
+***************
 .node-blog-article.view-mode-teaserlist .field-name-post-date {
 	font-size: 1.1em;
 }
@@ -142,10 +151,11 @@ h3.teasertitle {
 	color: #F15A24;
 	font-size: 1.8em;
 }
+*/
 
 /******************
 * Login + Register
-*******************/
+******************
 .no-sidebars #user-register-form {
 	width: 60%;
 }
@@ -184,4 +194,4 @@ h3.teasertitle {
   margin-top: 10px;
   font-size: 1.1em;
 }
-
+*/

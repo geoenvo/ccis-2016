@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file
  * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
  *
@@ -47,7 +47,9 @@ black   #000000
 white   #ffffff
 -------------- */
 
-
+html {
+  font-size: 87.5%;
+  }
 
 body,
 dd_after,
@@ -74,7 +76,16 @@ input.form-submit, button,
 #footer-columns .block-simplenews,
 table.dataTable,
 .bean-image-teaser .field-name-field-title-visible,
-.ccis-datatable-station-range
+.ccis-weather-datatable-block *,
+.ccis-datatable-station-range,
+.field-name-post-date
+.node-event.view-mode-full .field-name-field-date-event,
+.node-event.view-mode-full .field-name-field-place-event,
+.node-event.view-mode-full .field-name-field-country-event,
+.node-blog-article .field-name-post-date,
+.node-blog-article .field-name-title,
+#user-register-form .fieldset-legend,
+.tabs-primary 
   {
   font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
   }
@@ -99,7 +110,7 @@ label {
 
 h1 {
   clear: both;
-  font-size: 3em;
+  font-size: 2.5em;
   line-height: 1.2em;
   }
 
@@ -113,13 +124,14 @@ h2 {
   }
 
 h3 {
-  font-size: 1.25em;
+  font-size: 1.286em;
   margin: 1em 0 .5em;
   }
 
-h2.teasertitle {
+h2.teasertitle,
+h3.teasertitle {
   margin: 0;
-  }
+}
 
 #main h2.block-title,
 #homebox h3.dashboard-title {
@@ -127,7 +139,7 @@ h2.teasertitle {
   margin-bottom: .5em;
   background: url('../img/titel_background_left.png') no-repeat left -2px;
   padding: 0 0 0 23px;
-  font-size: 1.25em;
+  font-size: 1.5em;
   line-height: 100%;
   text-align: center;
   clear: left;
@@ -144,6 +156,7 @@ h2.teasertitle {
 #homebox h3.dashboard-title {
   margin: .5em 0 0;
   height: 38px;
+  font-size: 1.25em;
   }
 
 #homebox h3.dashboard-title span {
@@ -166,7 +179,7 @@ p, pre {
 /* change zen's navbar concept to allow for header shadow */
 
 #main {padding-top: 0em; top: 0;}
-#navigation {top: -2em;}
+#navigation {top: -2.05em;}
 
 body {
   background-color: #f1f1f1;
@@ -205,6 +218,10 @@ body {
 
 #logo {
   margin: 0 20px 10px 0;
+  }
+
+.block {
+  margin-bottom: 1em;
   }
 
 .region-highlighted {
@@ -294,6 +311,24 @@ html body.admin-menu {
 
 /* +++ footer styling +++ */
 
+
+/* make certain page types "float behind footer" */
+#content {
+  padding-bottom: 120px;
+  }
+#footer-wrapper {
+  position: relative;
+  top: -100px;
+  width: 974px;
+  }
+.page-dashboard #footer-wrapper {
+  top: 0;
+  }
+  
+#footer-columns .section {
+  width: 100%;
+  }
+
 #footer-columns {
   position: relative;
   top: -12px;
@@ -305,13 +340,13 @@ html body.admin-menu {
   width: 25%;
   max-width: 100%;
   border-left: 1px dashed #fff;
-  margin-top: 10px;
+  margin-top: 12px;
   }
 
 #footer-columns .block {
   background: #2c4563;
   color: #fff;
-  margin: 0 10px 2px;
+  margin: 0 10px 5px;
   }
 #footer-columns .region-footer-thirdcolumn .block {
   background-color: transparent;
@@ -341,18 +376,14 @@ html body.admin-menu {
   margin-top: 0;
   }
 
-#footer-wrapper #footer-columns .menu {
-  margin-left: -.25em;
-  }
-
 #footer-columns p {
   margin: 0;
   font-size: .75em;
   }
 
-.stakeholder {
+#footer-columns .stakeholder p {
   white-space: nowrap;
-  font-size: .75em;
+  font-size: 9px;
   }
 .stakeholder .views-row {
   display: table-cell;
@@ -363,6 +394,7 @@ html body.admin-menu {
   }
 .stakeholder .logoimg {
   line-height: 100%;
+  background-color: #fff;
   }
 
 .contactdata {
@@ -398,7 +430,7 @@ html body.admin-menu {
   }
 
 .block-simplenews input {
-  margin-top: .5em;
+  margin-top: .25em;
   }
 
 .block-simplenews .form-item {
@@ -406,10 +438,26 @@ html body.admin-menu {
   }
 
 .block-simplenews .compact-form-label {
-  top: 8px;
+  top: 6px;
   }
 
 .block-simplenews .compact-form input.form-text {
+  }
+  
+.block-simplenews .form-submit {
+  background-color: transparent;
+  color: #c7b299;
+  }
+  
+.block-simplenews .form-submit:focus,
+.block-simplenews .form-submit:hover,
+.block-simplenews .form-submit:active {
+  background-color: #ccc;
+  color: #000;
+  } 
+ 
+.logged-in .block-simplenews {
+  padding-top: 20px;
   }
 
 
@@ -432,22 +480,26 @@ html body.admin-menu {
   border: 0 none;
   color: #777777;
   box-shadow: 2px 2px 2px rgba(0,0,0,.3);
+  min-height: 12px;
+  padding: 0;
   }
 
 .portlet-icon {
   background-color: #fcce00;
+  width: 12px;
+  height: 12px;
   }
 
 .portlet-maximize,
 .portlet-maximized .portlet-minimize {
   background-image: url(../img/sprites_ccizen.png);
   background-repeat: no-repeat; 
-  background-position: -16px -317px;
+  background-position: -18px -319px;
   background-color: #fcce00;
   }
 
 .portlet-maximized .portlet-minimize {
-  background-position: -16px -367px;
+  background-position: -18px -369px;
   }
 
 .portlet-header .portlet-minus,
@@ -485,6 +537,19 @@ html body.admin-menu {
 #homebox-column-wrapper-3 {
   clear: both;
   }
+  
+
+/* +++++ horizontal tabs overrides +++++ */
+
+.horizontal-tabs ul.horizontal-tabs-list li {
+  min-width: 4em;
+  }
+
+.horizontal-tabs li strong {
+  font-weight: normal;
+  font-size: 1.2em;
+  text-transform: capitalize;
+  }
 
 
 /* +++++ Navigation + menus +++++ */
@@ -496,7 +561,7 @@ html body.admin-menu {
   height: auto;
   margin: 0;
   padding: .5em 0 .5em 10px;
-  font-size: 1.25em;
+  font-size: 1.5em;
   line-height: 1em;
   }
 
@@ -534,9 +599,9 @@ html body.admin-menu {
 
 #header .menu a,
 #footer-wrapper .menu a {
-  font-size: 1.25em;
+  font-size: 1.5em;
   text-decoration: none;
-  padding: 2px .25em;
+  padding: 2px .2em;
   }
 
 #header .menu a {
@@ -548,13 +613,20 @@ html body.admin-menu {
   color: ;
   background-color: ;
   }
+
+#footer-wrapper .menu {
+  position: relative;
+  left: -.25em;
+  }
+
 #footer-wrapper .menu a {
   color: #c7b299;
+  font-size: 1.25em;
   }
 #footer-wrapper .menu a:focus,
 #footer-wrapper .menu a:hover,
 #footer-wrapper .menu a:active {
-  color: 2c4563;
+  color: #2c4563;
   background-color: #c7b299;
   }
 
@@ -580,6 +652,10 @@ textarea {
 
 button, input.form-submit {
   font-size: 1.2em;
+  }
+  
+.container-inline-date input.form-text {
+  width: 10em;
   }
 
 .compact-form-label {
@@ -607,57 +683,49 @@ html.js input.throbbing {
   width: 20px;
   margin: 2px;
   }
+  
 
-/* date from-to tweaks */
+/* login + register */
 
-.container-inline-date {
-  position: relative;
+.no-sidebars #user-register-form {
+	width: 60%;
   }
-
-.container-inline-date .form-item .form-item {
-  float: left;
-  width: auto;
-  width: 9em;
+.no-sidebars #user-login,
+.no-sidebars #user-pass {
+	width: 50%;
   }
-
-.container-inline-date .form-type-textfield label {
-  width: auto;
-  float: left;
+#user-register-form,
+#user-login,
+#user-pass {
+	background-color: #E6E6E6;
+	border: 5px solid #B3B3B3;
+  border-radius: 5px 5px 5px 5px;
+  padding: 5px 20px 20px 20px;
   }
-.container-inline-date .form-type-date-popup label {
-  float: left;
-  width: auto;
-  margin-bottom: .75em;
+#user-register-form .form-item, 
+#user-login .form-item,
+#user-pass .form-item {
+	margin: 0.5em 0;
   }
-
-.container-inline-date .date-padding {
-  float: left;
-  padding: 0 5px;
+#user-register-form .form-item .description,
+#user-login .form-item .description {
+  font-size: 70%;
   }
-
-.container-inline-date input.form-text {
-  position: absolute;
-  left: 4em;
-  width: 7em;
+#user-register-form input,
+#user-login input,
+#user-pass input {
+	border: none;
+	font-size: 90%;
   }
-
-.container-inline-date .form-item .description {
-  line-height: 120%;
-  position: relative;
-  }
-.container-inline-date .form-item-start-date .description {
-  left: 3em;
-  }
-.container-inline-date .form-item-end-date .description {
-  left: 4em;
+#user-register-form .form-submit,
+#user-login .form-submit,
+#user-pass .form-submit {
+	background-color: #2C4563;
+  color: #C7B299;
+  margin-top: 10px;
+  font-size: 1.1em;
   }
 
-/*
-input:focus,
-textarea:focus {
-  box-shadow: inset 2px 2px 3px rgba(0,0,0,.3);
-  }
-*/
 
 
 
@@ -779,20 +847,18 @@ textarea:focus {
 
 
 
-/* +++++ Various  +++++ */
-
-/* front page (maybe make more general?) */
+/* +++++ front page  +++++ */
 
 .front #main .block {
   width: 33%;
   float: left;
   }
 .front #main .block-inner {
-  padding: 10px 20px 25px;
+  padding: 10px 20px 15px;
   }
 
 
-/* +++++ Slideshow +++++ */
+/* +++++ slideshow +++++ */
 
 .region-highlighted {
   height: 245px;
@@ -806,9 +872,6 @@ textarea:focus {
 /* reset .block-inner paddings */
 .front #main #block-views-slideshow-block .block-inner {
   padding: 0;
-  }
-
-.slideshow {
   }
 
 .front .view-slideshow {
@@ -882,7 +945,7 @@ textarea:focus {
 
 
 
-/* events */
+/* +++ events teaser +++ */
 
 .events .views-row {
   clear: left;
@@ -891,17 +954,13 @@ textarea:focus {
   margin-bottom: 10px;
   }
 
-h2.teasertitle {
-  margin: 0;
-  }
-
 .evtitle {
   margin-left: 220px;
   }
 
 .teaser-page .evlogo, 
 .teaser-page .evdatebox {
-  margin-top: 26px;
+  margin-top: 42px;
   }
 
 .evlogo {
@@ -960,16 +1019,19 @@ h2.teasertitle {
   top: -2px;
   }
 
-/* blog + news blocks */
+/* +++ blog + news teaser +++ */
 
 .compact {
   font-size: 14px;
   line-height: 1.4em;
   }
 
+/* first 2 declarations may be obsolete */
+.view-ClimateChange .views-row,
+.view-blog .views-row,
 .compact .views-row {
-  margin-bottom: 5px;
-  padding-bottom: 5px;
+  margin-bottom: 10px;
+  padding: 8px 0 10px;
   border-bottom: 2px dotted #ccc;
   }
 
@@ -984,9 +1046,90 @@ h2.teasertitle {
   text-decoration: none;
   }
 
-.compact .field-name-post-date {
-  
+.field-name-post-date {
+  font-size: 1.143em;
   }
+  
+  
+/* ++ climate change node page ++ */
+
+.view-ClimateChange .field-name-field-cc-image {
+	float: left;
+	padding: 10px;
+  }
+
+
+/* ++ blog node page ++ */
+
+.node-blog-article.view-mode-teaserlist .field-name-post-date {
+	font-size: 1.1em;
+  }
+
+.node-blog-article.view-mode-full .field-name-post-date {
+	color: #F15A24;
+	font-size: 1.8em;
+  }
+
+
+/* ++ events node page ++ */
+
+.node-event.view-mode-full .field-name-field-image-event-logo {
+	margin-top: 0.5em;
+  }
+.node-event.view-mode-full .field-name-field-place-event,
+.node-event.view-mode-full .field-name-field-country-event {
+	color: #999999;
+	font-size: 1.6em;
+	margin-bottom: 0.5em;
+  }
+.node-event.view-mode-full .field-name-field-place-event {
+	border-right: 1px solid;
+	float: left; 
+	padding-right: 5px;
+  }
+.node-event.view-mode-full .field-name-field-country-event .field-item {
+	padding-left: 5px;
+	display: inline;
+  }
+.node-event.view-mode-full .field-name-field-date-event {
+	color: #F15A24;
+	font-size: 2.6em;
+	line-height: 80%;
+	margin: 0.5em 0 0.2em 0;
+  }
+.node-event.view-mode-full .field-name-field-url-event {
+	background-image: url("../img/www_16.png");
+  background-position: 0 3px;
+  background-repeat: no-repeat;
+  font-size: 80%;
+  margin-top: 0.5em;
+  padding-left: 20px;
+  }
+
+.node-event.view-mode-full.ds-2col > .group-left,
+.node-blog-article.view-mode-full.ds-2col > .group-left,
+.node-blog-article.view-mode-teaserlist.ds-2col > .group-left,
+.node-article-climatechange.view-mode-teaser.ds-2col > .group-left {
+	width: 70%;
+  }
+.node-event.view-mode-full.ds-2col > .group-right,
+.node-blog-article.view-mode-full.ds-2col > .group-right,
+.node-blog-article.view-mode-teaserlist.ds-2col > .group-right,
+.node-article-climatechange.view-mode-teaser.ds-2col > .group-right {
+	width: 25%;
+	float: right;
+  }
+
+.node-event blockquote,
+.node-blog-article blockquote {
+	color: #B3B3B3;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 150%;
+  margin: 1.5em 40px;
+  text-align: justify;
+  }
+
 
 
 /* +++++ dashboard +++++ */
@@ -1022,7 +1165,6 @@ h2.teasertitle {
   }
 
 
-
 /* ++ data table ++ */
 
 #ccis-weather-datatable-block {
@@ -1056,6 +1198,11 @@ table {
   font-size: 1em;
   float: left;
   }
+  
+.dataTables_filter label, 
+.dataTables_info {
+  font-size: 14px;  
+  }
 
 #ccis-weather-datatable-block table {
   margin-bottom: .25em;
@@ -1067,6 +1214,39 @@ table {
   text-align: left;
   color: #c7b299;
   font-size: 1em;
+  }
+  
+.dataTables_filter input {
+  font-size: 12px;
+  margin-right: 10px;
+  }
+ 
+.ColVis.TableTools {
+  float: right;
+  width: auto;
+  font-size: 12px;
+  }
+
+.ColVis_collection button {
+  background-color: #fff;
+  text-align: left;
+  font-size: 12px;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  }
+ 
+ .ColVis_collection, 
+ .ColVis_collection button {
+  width: 80px !important;
+  }
+  
+.ColVis_radio {
+  margin-right: 4px;
+  }
+  
+.ColVis.TableTools + div[class=clear] {
+  clear: none;
   }
 
 th,
@@ -1401,6 +1581,50 @@ tr.odd td.sorting_1 {
   }
 */
 
+/* date from-to tweaks */
+
+#edit-filter .container-inline-date {
+  position: relative;
+  }
+
+#edit-filter .container-inline-date .form-item .form-item {
+  float: left;
+  width: auto;
+  width: 9em;
+  }
+
+#edit-filter .container-inline-date .form-type-textfield label {
+  width: auto;
+  float: left;
+  }
+#edit-filter .container-inline-date .form-type-date-popup label {
+  float: left;
+  width: auto;
+  margin-bottom: .75em;
+  }
+
+#edit-filter .container-inline-date .date-padding {
+  float: left;
+  padding: 0 5px;
+  }
+
+#edit-filter .container-inline-date input.form-text {
+  position: absolute;
+  left: 4em;
+  width: 7em;
+  }
+
+#edit-filter .container-inline-date .form-item .description {
+  line-height: 120%;
+  position: relative;
+  }
+#edit-filter .container-inline-date .form-item-start-date .description {
+  left: 3em;
+  }
+#edit-filter .container-inline-date .form-item-end-date .description {
+  left: 4em;
+  }
+
 #edit-filter .container-inline-date .form-item .description {
   padding-left: 0;
   margin-bottom: 0;
@@ -1556,7 +1780,46 @@ tr.odd td.sorting_1 {
 .bean-image-teaser a {
   text-decoration: none;
   }
+  
+  
+  
+/* +++++ tabs +++++ */
 
+#main .tabs-primary__tab, 
+#main .tabs-primary__tab.is-active {
+  background: url("../img/titel_background_left.png") no-repeat scroll left -2px rgba(0, 0, 0, 0);
+  font-size: 1.25em;
+  height: 38px;
+  line-height: 100%;
+  margin: 0 -25px -5px 0;
+  padding: 0 0 0 23px;
+  text-align: center;
+  border-radius: 0;
+  border: none;
+  text-shadow: 1px 1px 0 #FFFFFF;
+  position: relative;
+  z-index: 60;
+  }
+
+#main a.tabs-primary__tab-link, 
+#main a.tabs-primary__tab-link.is-active {
+	background: url("../img/titel_background_right.png") no-repeat scroll right -2px rgba(0, 0, 0, 0);
+  color: #777 /*#2C4563*/;
+	display: block;
+	height: 38px;
+	padding: 8px 41px 0 4px;
+	letter-spacing: 0;
+	border: none;
+	border-radius:0;
+	line-height: 100%;
+  }
+
+#main .tabs-primary__tab.is-active {
+  z-index: 100;
+  }
+#main a.tabs-primary__tab-link.is-active {
+  color: #000; /*#f15a24*/
+  }
 
 
 /* ++++++++++ Climability-specific ++++++++++ */
