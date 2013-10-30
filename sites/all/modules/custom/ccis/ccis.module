@@ -403,6 +403,9 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#description' => t('Enter a station name, Station code to compare.'),
     '#field_prefix' => 2,
     '#attributes' => array('class' => array('form-autocomplete-mousedown')),
+    '#states' => array(
+      'visible' => array(array('#edit-input1' => array('filled' => TRUE)), array('#edit-input2' => array('filled' => TRUE)),),
+    ),
   );
   $form['filter'] = array(
     '#type' => 'fieldset',
