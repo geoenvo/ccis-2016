@@ -3,6 +3,17 @@ Drupal.behaviors.ccis = {
   attach: function(d_context, settings) {
   // CUSTOM CODING START
 
+	var d3Block = this;
+	d3Block.container = $("#ccis-weather-d3-block-1");
+	var stations = settings.ccis_dt.stations;
+	if (stations.length > 0) {
+	  var refresh = d3Block.container.data('refresh');
+	  if (refresh != 1) {
+		return;
+	  }
+	  d3Block.container.data('refresh', 0);
+	}
+  
 	// Groups of parameters available including the colors, the legend keywords, the legend hover names, the icons and the units
 	// Position 0: Parameter
 	// Position 1: Color
@@ -369,7 +380,7 @@ Drupal.behaviors.ccis = {
 						.attr("fill", "none")
 						.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");	  
 				}
-				
+
 				function drawGraphs() {
 					for (var i=0; i<temperatureGroupShown.length; i++) {
 						graphDraw(temperatureGroupShown[i][0], temperatureGroupShown[i][5], temperatureGroupShown[i][1]);
@@ -2848,7 +2859,7 @@ Drupal.behaviors.ccis = {
 	// Hide Divs for D3
 	$("#homebox-block-ccis_d3").hide();
 	$("#homebox-block-ccis_d3_2").hide();
-	
+
 	// Select diagram
 	if (settings.ccis.stations[0]) {
 		if (settings.ccis.stations[0].selector === "ccis-weather-d3-block-1" && settings.ccis.stations[0].station_name.length>0) {

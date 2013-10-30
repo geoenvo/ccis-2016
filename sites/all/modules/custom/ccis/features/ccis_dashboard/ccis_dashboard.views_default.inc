@@ -135,13 +135,6 @@ function ccis_dashboard_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['hide_empty'] = TRUE;
-  /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = 'Did not found any information.';
-  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Current Position */
   $handler->display->display_options['fields']['field_station_geodata']['id'] = 'field_station_geodata';
   $handler->display->display_options['fields']['field_station_geodata']['table'] = 'field_data_field_station_geodata';
@@ -163,7 +156,7 @@ function ccis_dashboard_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -195,7 +188,6 @@ function ccis_dashboard_views_default_views() {
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Did not found any information.'),
     t('All'),
     t('Embed Display (Single)'),
   );

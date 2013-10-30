@@ -58,7 +58,7 @@ function d3_preprocess_d3(&$variables) {
 }
 
 /**
- * Implements hook_libraries_paths().
+ * Implements hook_libraries_info_file_paths().
  */
 function d3_libraries_info_file_paths() {
 
@@ -113,6 +113,7 @@ function d3_libraries_info() {
     ),
     'path' => 'js',
     'library path' => drupal_get_path('module', 'd3'),
+    'dependencies' => array('d3'),
     'version' => '1',
   );
 
@@ -165,7 +166,6 @@ function d3_libraries_info() {
         ),
       ),
       'version' => $version,
-      'dependencies' => array('d3.drupal'),
     );
   }
 
