@@ -522,12 +522,12 @@ a.olControlZoomOut {
 
 
 .olControlLayerSwitcher .layersDiv .baseLayersDiv {
-    /*display: none; */
+    display: none; 
 }	
 
 
 .olControlLayerSwitcher .layersDiv .baseLbl {
-    /*display: none; */
+    display: none; 
 } 
 
 /* .popupName {
