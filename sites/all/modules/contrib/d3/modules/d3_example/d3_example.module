@@ -159,12 +159,12 @@ function d3_example_bar() {
       'Design',
     ),
     'rows' => array(
-      array('Stupidly long label length that no one ever uses'),
+      array('2010 - (Data only available after 3rd quarter)'),
+      array('1st Quarter 2011'),
       array('2nd Quarter 2011'),
       array('3rd Quarter 2011'),
       array('4th Quarter 2011'),
       array('1st Quarter 2012'),
-      array('2012'),
     ),
   );
 
