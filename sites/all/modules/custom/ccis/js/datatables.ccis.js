@@ -89,6 +89,7 @@ Drupal.behaviors.ccis_datatables = {
     var oTable = $(_tableId).dataTable(options);
     oTable.fnSort( [ [1,'asc'] ] );
     _datatable.homebox.show();
+    $('.ccis-datatable-title[title]').tipsy({gravity: 's'});
   }
 }
 
