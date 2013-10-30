@@ -17,7 +17,7 @@ function ccis_openlayers_openlayers_maps() {
   $openlayers_maps->title = 'Big map for Weather stations';
   $openlayers_maps->description = 'Big map for Weather stations';
   $openlayers_maps->data = array(
-    'width' => '940px',
+    'width' => '960px',
     'height' => '570px',
     'image_path' => 'sites/all/modules/custom/ccis/css/ol/img/',
     'css_path' => 'sites/all/modules/custom/ccis/css/ol/style.css',
@@ -55,10 +55,26 @@ function ccis_openlayers_openlayers_maps() {
         ),
       ),
       'openlayers_behavior_keyboarddefaults' => array(),
+      'openlayers_behavior_layerswitcher' => array(
+        'ascending' => 1,
+        'sortBaseLayer' => '0',
+        'roundedCorner' => 1,
+        'roundedCornerColor' => '#222222',
+        'maximizeDefault' => 0,
+        'div' => '',
+      ),
       'openlayers_behavior_navigation' => array(
         'zoomWheelEnabled' => 1,
         'zoomBoxEnabled' => 1,
         'documentDrag' => 0,
+      ),
+      'openlayers_plus_behavior_blocktoggle' => array(
+        'enabled' => 1,
+        'a_label' => 'Satellite',
+        'a' => 'mapquest_openaerial',
+        'b_label' => 'Map',
+        'b' => 'mapquest_osm',
+        'position' => 'ne',
       ),
       'openlayers_behavior_popup' => array(
         'layers' => array(
@@ -92,8 +108,8 @@ function ccis_openlayers_openlayers_maps() {
     'layer_weight' => array(
       'boundaries_bundeslaender_900913' => '0',
       'openlayers_kml_example' => '0',
-      'clone_of_ol_stations_openlayers_1' => '0',
       'big_maps_for_weather_stations_openlayers_1' => '0',
+      'clone_of_ol_stations_openlayers_1' => '0',
       'openlayers_geojson_picture_this' => '0',
       'ol_stations_openlayers_1' => '1',
       'geofield_formatter' => '2',
@@ -101,8 +117,8 @@ function ccis_openlayers_openlayers_maps() {
     'layer_styles' => array(
       'openlayers_kml_example' => '0',
       'openlayers_geojson_picture_this' => '0',
-      'big_maps_for_weather_stations_openlayers_1' => '0',
       'clone_of_ol_stations_openlayers_1' => '0',
+      'big_maps_for_weather_stations_openlayers_1' => '0',
       'boundaries_bundeslaender_900913' => '0',
       'ol_stations_openlayers_1' => 'ccis_marker_green_yellow',
       'geofield_formatter' => 'ccis_marker_green_yellow_active_1',
@@ -110,8 +126,8 @@ function ccis_openlayers_openlayers_maps() {
     'layer_styles_select' => array(
       'openlayers_kml_example' => '0',
       'openlayers_geojson_picture_this' => '0',
-      'big_maps_for_weather_stations_openlayers_1' => '0',
       'clone_of_ol_stations_openlayers_1' => '0',
+      'big_maps_for_weather_stations_openlayers_1' => '0',
       'boundaries_bundeslaender_900913' => '0',
       'ol_stations_openlayers_1' => 'ccis_marker_green_yellow',
       'geofield_formatter' => 'ccis_marker_green_yellow_active_1',
@@ -119,8 +135,8 @@ function ccis_openlayers_openlayers_maps() {
     'layer_styles_temporary' => array(
       'openlayers_kml_example' => '0',
       'openlayers_geojson_picture_this' => '0',
-      'big_maps_for_weather_stations_openlayers_1' => '0',
       'clone_of_ol_stations_openlayers_1' => '0',
+      'big_maps_for_weather_stations_openlayers_1' => '0',
       'boundaries_bundeslaender_900913' => '0',
       'ol_stations_openlayers_1' => 'ccis_marker_green_yellow',
       'geofield_formatter' => 'ccis_marker_green_yellow_active_1',
@@ -131,8 +147,8 @@ function ccis_openlayers_openlayers_maps() {
       'geofield_formatter' => 'geofield_formatter',
       'openlayers_kml_example' => 0,
       'openlayers_geojson_picture_this' => 0,
-      'big_maps_for_weather_stations_openlayers_1' => 0,
       'clone_of_ol_stations_openlayers_1' => 0,
+      'big_maps_for_weather_stations_openlayers_1' => 0,
     ),
     'layer_switcher' => array(
       'boundaries_bundeslaender_900913' => 'boundaries_bundeslaender_900913',
@@ -140,8 +156,8 @@ function ccis_openlayers_openlayers_maps() {
       'geofield_formatter' => 0,
       'openlayers_kml_example' => 0,
       'openlayers_geojson_picture_this' => 0,
-      'big_maps_for_weather_stations_openlayers_1' => 0,
       'clone_of_ol_stations_openlayers_1' => 0,
+      'big_maps_for_weather_stations_openlayers_1' => 0,
     ),
     'projection' => 'EPSG:900913',
     'displayProjection' => 'EPSG:4326',
@@ -160,7 +176,7 @@ function ccis_openlayers_openlayers_maps() {
   $openlayers_maps->title = 'Weather stations';
   $openlayers_maps->description = 'Weather stations';
   $openlayers_maps->data = array(
-    'width' => '950px',
+    'width' => '960px',
     'height' => '256px',
     'image_path' => 'sites/all/modules/custom/ccis/css/ol/img/',
     'css_path' => 'sites/all/modules/custom/ccis/css/ol/style.css',
@@ -235,8 +251,8 @@ function ccis_openlayers_openlayers_maps() {
     'layer_weight' => array(
       'boundaries_bundeslaender_900913' => '0',
       'openlayers_kml_example' => '0',
-      'clone_of_ol_stations_openlayers_1' => '0',
       'big_maps_for_weather_stations_openlayers_1' => '0',
+      'clone_of_ol_stations_openlayers_1' => '0',
       'openlayers_geojson_picture_this' => '0',
       'ol_stations_openlayers_1' => '1',
       'geofield_formatter' => '2',
@@ -244,8 +260,8 @@ function ccis_openlayers_openlayers_maps() {
     'layer_styles' => array(
       'openlayers_kml_example' => '0',
       'openlayers_geojson_picture_this' => '0',
-      'big_maps_for_weather_stations_openlayers_1' => '0',
       'clone_of_ol_stations_openlayers_1' => '0',
+      'big_maps_for_weather_stations_openlayers_1' => '0',
       'boundaries_bundeslaender_900913' => '0',
       'ol_stations_openlayers_1' => 'ccis_marker_green_yellow',
       'geofield_formatter' => 'ccis_marker_green_yellow_active_1',
@@ -253,8 +269,8 @@ function ccis_openlayers_openlayers_maps() {
     'layer_styles_select' => array(
       'openlayers_kml_example' => '0',
       'openlayers_geojson_picture_this' => '0',
-      'big_maps_for_weather_stations_openlayers_1' => '0',
       'clone_of_ol_stations_openlayers_1' => '0',
+      'big_maps_for_weather_stations_openlayers_1' => '0',
       'boundaries_bundeslaender_900913' => '0',
       'ol_stations_openlayers_1' => 'ccis_marker_green_yellow',
       'geofield_formatter' => 'ccis_marker_green_yellow_active_1',
@@ -262,8 +278,8 @@ function ccis_openlayers_openlayers_maps() {
     'layer_styles_temporary' => array(
       'openlayers_kml_example' => '0',
       'openlayers_geojson_picture_this' => '0',
-      'big_maps_for_weather_stations_openlayers_1' => '0',
       'clone_of_ol_stations_openlayers_1' => '0',
+      'big_maps_for_weather_stations_openlayers_1' => '0',
       'boundaries_bundeslaender_900913' => '0',
       'ol_stations_openlayers_1' => 'ccis_marker_green_yellow',
       'geofield_formatter' => 'ccis_marker_green_yellow_active_1',
@@ -274,8 +290,8 @@ function ccis_openlayers_openlayers_maps() {
       'geofield_formatter' => 'geofield_formatter',
       'openlayers_kml_example' => 0,
       'openlayers_geojson_picture_this' => 0,
-      'big_maps_for_weather_stations_openlayers_1' => 0,
       'clone_of_ol_stations_openlayers_1' => 0,
+      'big_maps_for_weather_stations_openlayers_1' => 0,
     ),
     'layer_switcher' => array(
       'boundaries_bundeslaender_900913' => 'boundaries_bundeslaender_900913',
@@ -283,8 +299,8 @@ function ccis_openlayers_openlayers_maps() {
       'geofield_formatter' => 0,
       'openlayers_kml_example' => 0,
       'openlayers_geojson_picture_this' => 0,
-      'big_maps_for_weather_stations_openlayers_1' => 0,
       'clone_of_ol_stations_openlayers_1' => 0,
+      'big_maps_for_weather_stations_openlayers_1' => 0,
     ),
     'projection' => 'EPSG:900913',
     'displayProjection' => 'EPSG:4326',
