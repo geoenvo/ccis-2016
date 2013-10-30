@@ -33,6 +33,15 @@ function ccis_blog_field_default_field_instances() {
         'type' => 'text_summary_or_trimmed',
         'weight' => 2,
       ),
+      'teaserlist' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 2,
+      ),
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
@@ -73,6 +82,16 @@ function ccis_blog_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 9,
+      ),
+      'teaserlist' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'medium',
+        ),
+        'type' => 'image',
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -116,6 +135,12 @@ function ccis_blog_field_default_field_instances() {
         'weight' => 11,
       ),
       'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'teaserlist' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',

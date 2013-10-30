@@ -52,17 +52,21 @@
 }
 
 .node-event.view-mode-full.ds-2col > .group-left,
-.node-blog-article.view-mode-full.ds-2col > .group-left {
+.node-blog-article.view-mode-full.ds-2col > .group-left,
+.node-blog-article.view-mode-teaserlist.ds-2col > .group-left,
+.node-article-climatechange.view-mode-teaser.ds-2col > .group-left {
 	width: 70%;
 }
 .node-event.view-mode-full.ds-2col > .group-right,
-.node-blog-article.view-mode-full.ds-2col > .group-right {
+.node-blog-article.view-mode-full.ds-2col > .group-right,
+.node-blog-article.view-mode-teaserlist.ds-2col > .group-right,
+.node-article-climatechange.view-mode-teaser.ds-2col > .group-right {
 	width: 25%;
 	float: right;
 }
 
-.node-event.view-mode-full blockquote,
-.node-blog-article.view-mode-full blockquote {
+.node-event blockquote,
+.node-blog-article blockquote {
 	color: #B3B3B3;
   font-style: italic;
   font-weight: bold;
@@ -95,17 +99,12 @@ h3.teasertitle {
 	padding: 10px;
 }
 
-.node-article-climatechange.view-mode-teaser.ds-2col > .group-left {
-	width: 30%;
-}
-.node-article-climatechange.view-mode-teaser.ds-2col > .group-right {
-	width: 70%;
-}
+
 
 /***************
 * Blog 
 ****************/
-.node-blog-article.view-mode-teaser .field-name-post-date {
+.node-blog-article.view-mode-teaserlist .field-name-post-date {
 	font-size: 1.1em;
 }
 

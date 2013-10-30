@@ -117,6 +117,10 @@ function ccis_static_content_strongarm() {
             'weight' => '2',
             'visible' => FALSE,
           ),
+          'teaser' => array(
+            'weight' => '10',
+            'visible' => FALSE,
+          ),
         ),
       ),
     ),
