@@ -871,6 +871,12 @@ function ccis_js_alter(&$javascript) {
   if (!empty($javascript[$js_file])) {
     $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_popup.js';
   }
+
+  $js_file = drupal_get_path('module', 'openlayers_plus') . '/behaviors/openlayers_plus_behavior_blocktoggle.js';
+  if (!empty($javascript[$js_file])) {
+    $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_plus_behavior_blocktoggle.js';
+  }
+
 }
 
 /**
