@@ -1,4 +1,46 @@
 
+/* Legend Accordion */
+#ccis-weather-d3-block-1 .ui-accordion-header, #ccis-weather-d3-block-2 .ui-accordion-header { 
+	cursor: pointer; 
+	position: relative; 
+	margin-top: 1px; 
+	zoom: 1; 
+}
+#ccis-weather-d3-block-1 .ui-accordion-li-fix, #ccis-weather-d3-block-2 .ui-accordion-li-fix{ 
+	display: inline;
+}
+#ccis-weather-d3-block-1 .ui-accordion-header-active, #ccis-weather-d3-block-2 .ui-accordion-header-active { 
+	border-bottom: 0;
+}
+#ccis-weather-d3-block-1 .ui-accordion-header a, #ccis-weather-d3-block-2 .ui-accordion-header a  { 
+	display: block; 
+	font-size: 1em; 
+	padding: 3px 3px 3px 30px;
+	background-color: #b3b3b3;
+}
+#ccis-weather-d3-block-1 .ui-accordion-header .ui-icon, #ccis-weather-d3-block-2 .ui-accordion-header .ui-icon { 
+	position: absolute; 
+	left: .5em; 
+	top: 50%; 
+	margin-top: -8px; 
+}
+#ccis-weather-d3-block-1 .ui-accordion-content, #ccis-weather-d3-block-2 .ui-accordion-content { 
+	border-top: 0; 
+	margin-top: -2px; 
+	margin-bottom: 0px;
+	position: relative; 
+	overflow: auto; 
+	display: none; 
+	zoom: 1;
+}
+#ccis-weather-d3-block-1 .ui-accordion-content-active, #ccis-weather-d3-block-2 .ui-accordion-content-active { 
+	display: block;
+	background: #b3b3b3;
+}
+.d3_legendClass>div{
+	background: #b3b3b3;
+}
+
 /* Div of graph */
 .d3_GraphDivClass {
 	position: relative;
@@ -17,66 +59,23 @@
 	overflow-x: hidden;
 	overflow-y: scroll;
 	float: right;
-	background-color: #b3b3b3;
+	background-color: #b3b3b3;	
+	font-family: 'Open Sans Condensed','Arial Narrow', sans-serif;
+	font-size: 14px;
+}
+.d3_legendClass h6 {
+	/*font-size: 12px;*/
 }
 
-/* Temperature Legend */
-.d3_iconLegendTempClass {
-	width: 20px;
-	margin: 2px 0px 0px 5px;
-	clear: both;
-	float: left;
-}
-
-/* Precipitation Legend */
-.d3_iconLegendPrecClass {
-	width: 20px;
-	margin: 1px 0px 0px 5px;
-	clear: both;
-	float: left;
-}
-
-/* Wind Legend */
-.d3_iconLegendWindClass {
-	width: 20px;
-	margin: 1px 0px 0px 5px;
-	clear: both;
-	float: left;
-}
-
-/* Other Legend */
-.d3_iconLegendOtherClass {
-	width: 20px;
-	margin: 1px 0px 0px 5px;
-	clear: both;
-	float: left;
-}
-
-/* Title of each group in Legend */
-.d3_toggleClass {
-	float: left;
-	font-size: 12px;
-}
-.d3_toggleSubClass {
-	clear:both;
-	float: left;
-	font-size: 12px;
-}
-
-/* Units in Legend */
-.d3_unitLegend {
-	font-size: 10px;
-}
-
-/* Keys in Legend */
+/* Keys in Legend  */
 .d3_keys {
 	margin-left: 10px;
 }
 
-/* Checkboxes in Legend*/
+/* Checkboxes in Legend */
 .d3_keysTick {
 	clear: both; 
-	float:left;
+	float: left;
 }
 .d3_keysSubTick {
 	margin: 0px 0px 0px 20px;
@@ -84,7 +83,6 @@
 
 /* Box for Text and Icon Div in Legend (Hover) */
 .d3_keysBoxText {
-	position:relative; 
 	float:left;
 }
 	
@@ -92,6 +90,7 @@
 .d3_keysIcon {
 	float: left;
 	margin-left: 5px;
+	width: auto;
 }
 
 /* Text in Legend */
@@ -99,7 +98,7 @@
 	float: left;
 	width: auto;
 	margin-left: 5px;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 /* Vertical line for the tooltip in diagram*/
@@ -116,10 +115,10 @@
 	background-color: white;
 	-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
 	-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);		
-	font-size: 11px;
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);	
+	font-family: 'Open Sans Condensed','Arial Narrow', sans-serif;	
+	font-size: 12px;
 }
-
 
 .printSelectWrapperClass {
 	position: relative;

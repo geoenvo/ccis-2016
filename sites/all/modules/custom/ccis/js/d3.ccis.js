@@ -64,6 +64,25 @@ Drupal.behaviors.ccis = {
 		["ss", "#CCBC08", "SS", "Daily sunshine duration (hours)", "icon.png", "hours"]
 	];
 	
+	// Array with the Units used for the diagram
+	// Position 0: Keyword (the same name as at the parameter groups)
+	// Position 1: Icon filename
+	// Position 2: Axis label
+	// Position 3: Tick format for the axis label
+	// Position 4: Tooltip label
+	var unitsArray = [
+		["celsius", "symbol_legende_thermometer.png", "Celsius", ".1f", "&#8451;"],
+		["days", "", "days", ".0f", "days"],
+		["percent", "", "%", ".1f", "%"],
+		["milimeter", "symbol_legende_drop.png", "mm", ".1f", "mm"],
+		["pascal", "symbol_legende_pressure.png", "hPa", ".0f", "hPa"],
+		["meterPerSecond", "", "m/s", ".1f", "m/s"],
+		["degrees", "", "degrees", ".0f", "&#176;"],
+		["octas", "", "octas", ".1f", "octas"],
+		["centimeter", "", "cm", ".1f", "cm"],
+		["hours", "", "hours", ".1f", "hours"]
+	];
+
 	// ***************************************
 	// ********** DIAGRAM 1 - START **********
 	// ***************************************
@@ -94,81 +113,8 @@ Drupal.behaviors.ccis = {
 		var windHidden;
 		var otherHidden;
 		
-		// Unit groups shown at the graph (max: 4)
-		var celsiusGroupShown;
-		var daysGroupShown;
-		var percentGroupShown;
-		var milimeterGroupShown;
-		var pascalGroupShown;
-		var meterPerSecondGroupShown;
-		var degreesGroupShown;
-		var octasGroupShown;
-		var centimeterGroupShown;
-		var hoursGroupShown;
-		
-		// Y-Scales
-		var yScaleCelsius;
-		var yScaleDays;
-		var yScalePercent;
-		var yScaleMilimeter;
-		var yScalePascal;
-		var yScaleMeterPerSecond;
-		var yScaleDegrees;
-		var yScaleOctas;
-		var yScaleCentimeter;
-		var yScaleHours;
-		
-		// Max-Min Values for Y Scales
-		// Celsius values
-		var minCelsiusYArray;
-		var maxCelsiusYArray;
-		var minCelsiusY;
-		var maxCelsiusY;
-		// Days values
-		var minDaysYArray;
-		var maxDaysYArray;
-		var minDaysY;
-		var maxDaysY;
-		// Percent values
-		var minPercentYArray;
-		var maxPercentYArray;
-		var minPercentY;
-		var maxPercentY;
-		// Milimeter values
-		var minMilimeterYArray;
-		var maxMilimeterYArray;
-		var minMilimeterY;
-		var maxMilimeterY;
-		// Pascal values
-		var minPascalYArray;
-		var maxPascalYArray;
-		var minPascalY;
-		var maxPascalY;
-		// Meter per second values
-		var minMeterPerSecondYArray;
-		var maxMeterPerSecondYArray;
-		var minMeterPerSecondY;
-		var maxMeterPerSecondY;
-		// Degrees values
-		var minDegreesYArray;
-		var maxDegreesYArray;
-		var minDegreesY;
-		var maxDegreesY;
-		// Octas values
-		var minOctasYArray;
-		var maxOctasYArray;
-		var minOctasY;
-		var maxOctasY;
-		// Centimeter values
-		var minCentimeterYArray;
-		var maxCentimeterYArray;
-		var minCentimeterY;
-		var maxCentimeterY;
-		// Hours values
-		var minHoursYArray;
-		var maxHoursYArray;
-		var minHoursY;
-		var maxHoursY;
+		// Object for the Units
+		var d3Units = {};
 		
 		// Arrays for the checkboxes
 		var findTicksArrayTemperature = [];
@@ -179,27 +125,10 @@ Drupal.behaviors.ccis = {
 		var findTicksArrayWind = [];
 		var findTicksArrayOther = [];
 		
-		// Selection for Y Axis
-		var celsius_selection;
-		var days_selection;
-		var percent_selection;
-		var milimeter_selection;
-		var pascal_selection;	
-		var meterPerSecond_selection;
-		var degrees_selection;
-		var octas_selection;
-		var centimeter_selection;
-		var hours_selection;
-		
-		
 		// SVG legend icons
 		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path style='fill:none;stroke:";
 		var partOfSVGLine2 = ";stroke-width:1.96201527;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none' d='m 1.3394886,1047.4364 9.3823584,-6.3952 3.619918,9.4078 4.692159,-5.6505 5.34355,0'/></g></svg>";
-	
-		var legendCategoriesOpen = "Open categories";
-		var legendCategoriesClose = "Close categories";
-		var plus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/plus.png' width='7' height='7'>"
-		var minus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/minus.png' width='7' height='7'>"
+
 		// *** Variables - END ***
 
 		// Parse the JSON with the data
@@ -299,255 +228,57 @@ Drupal.behaviors.ccis = {
 				
 				// Fill the unit groups arrays
 				function fillUnitGroups() {
-				
-					celsiusGroupShown = [];
-					daysGroupShown = [];
-					percentGroupShown = [];
-					milimeterGroupShown = [];
-					pascalGroupShown = [];
-					meterPerSecondGroupShown = [];
-					degreesGroupShown = [];
-					octasGroupShown = [];
-					centimeterGroupShown = [];
-					hoursGroupShown = [];
+					for (var k=0; k<unitsArray.length; k++) {
+						d3Units[unitsArray[k][0]+"GroupShown"] = [];
+					}
 					
-
 					for (var i=0; i<temperatureGroupShown.length; i++) {
-						switch (temperatureGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(temperatureGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (temperatureGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(temperatureGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<warmExtremesGroupShown.length; i++) {
-						switch (warmExtremesGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (warmExtremesGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(warmExtremesGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<coldExtremesGroupShown.length; i++) {
-						switch (coldExtremesGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (coldExtremesGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(coldExtremesGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<precipitationGroupShown.length; i++) {
-						switch (precipitationGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(precipitationGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (precipitationGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(precipitationGroupShown[i][0]);
+							}
 						}
 					}			
 					for (var i=0; i<extremePrecipitationGroupShown.length; i++) {
-						switch (extremePrecipitationGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (extremePrecipitationGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(extremePrecipitationGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<windGroupShown.length; i++) {
-						switch (windGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(windGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (windGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(windGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<otherGroupShown.length; i++) {
-						switch (otherGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(otherGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (otherGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(otherGroupShown[i][0]);
+							}
 						}
 					}
 				}
@@ -555,192 +286,38 @@ Drupal.behaviors.ccis = {
 		
 				// Find the max and min values for the Y scales
 				function findMaxMin() {
-					// Celsius values
-					minCelsiusYArray = [];
-					maxCelsiusYArray = [];
-					for (var i=0; i<celsiusGroupShown.length; i++) {
-						minCelsiusYArray.push(d3.min(data, function(d) { return Math.min(d[celsiusGroupShown[i]]); }) );
-						maxCelsiusYArray.push(d3.max(data, function(d) { return Math.max(d[celsiusGroupShown[i]]); }) );  
+					for (var i=0; i<unitsArray.length; i++) {
+						d3Units["min"+unitsArray[i][0]+"YArray"] = [];
+						d3Units["max"+unitsArray[i][0]+"YArray"] = [];
+						for (var k=0; k<d3Units[unitsArray[i][0]+"GroupShown"].length; k++) {
+							d3Units["min"+unitsArray[i][0]+"YArray"].push(d3.min(data, function(d) { return Math.min(d[d3Units[unitsArray[i][0]+"GroupShown"][k]]); }) );
+							d3Units["max"+unitsArray[i][0]+"YArray"].push(d3.max(data, function(d) { return Math.max(d[d3Units[unitsArray[i][0]+"GroupShown"][k]]); }) );
+						}
+						d3Units["min"+unitsArray[i][0]+"Y"] = d3.min(d3Units["min"+unitsArray[i][0]+"YArray"]);
+						d3Units["max"+unitsArray[i][0]+"Y"] = d3.max(d3Units["max"+unitsArray[i][0]+"YArray"]);
 					}
-					minCelsiusY = d3.min(minCelsiusYArray);
-					maxCelsiusY = d3.max(maxCelsiusYArray);
-					// Days values
-					minDaysYArray = [];
-					maxDaysYArray = [];
-					for (var i=0; i<daysGroupShown.length; i++) {
-						minDaysYArray.push(d3.min(data, function(d) { return Math.min(d[daysGroupShown[i]]); }) );
-						maxDaysYArray.push(d3.max(data, function(d) { return Math.max(d[daysGroupShown[i]]); }) );  
-					}
-					minDaysY = d3.min(minDaysYArray);
-					maxDaysY = d3.max(maxDaysYArray);
-					// Percent values
-					minPercentYArray = [];
-					maxPercentYArray = [];
-					for (var i=0; i<percentGroupShown.length; i++) {
-						minPercentYArray.push(d3.min(data, function(d) { return Math.min(d[percentGroupShown[i]]); }) );
-						maxPercentYArray.push(d3.max(data, function(d) { return Math.max(d[percentGroupShown[i]]); }) );  
-					}
-					minPercentY = d3.min(minPercentYArray);
-					maxPercentY = d3.max(maxPercentYArray);
-					// Milimeter values
-					minMilimeterYArray = [];
-					maxMilimeterYArray = [];
-					for (var i=0; i<milimeterGroupShown.length; i++) {
-						minMilimeterYArray.push(d3.min(data, function(d) { return Math.min(d[milimeterGroupShown[i]]); }) );
-						maxMilimeterYArray.push(d3.max(data, function(d) { return Math.max(d[milimeterGroupShown[i]]); }) );  
-					}
-					minMilimeterY = d3.min(minMilimeterYArray);
-					maxMilimeterY = d3.max(maxMilimeterYArray);
-					// Pascal values
-					minPascalYArray = [];
-					maxPascalYArray = [];
-					for (var i=0; i<pascalGroupShown.length; i++) {
-						minPascalYArray.push(d3.min(data, function(d) { return Math.min(d[pascalGroupShown[i]]); }) );
-						maxPascalYArray.push(d3.max(data, function(d) { return Math.max(d[pascalGroupShown[i]]); }) );  
-					}
-					minPascalY = d3.min(minPascalYArray);
-					maxPascalY = d3.max(maxPascalYArray);
-					// Meter per second values
-					minMeterPerSecondYArray = [];
-					maxMeterPerSecondYArray = [];
-					for (var i=0; i<meterPerSecondGroupShown.length; i++) {
-						minMeterPerSecondYArray.push(d3.min(data, function(d) { return Math.min(d[meterPerSecondGroupShown[i]]); }) );
-						maxMeterPerSecondYArray.push(d3.max(data, function(d) { return Math.max(d[meterPerSecondGroupShown[i]]); }) );  
-					}
-					minMeterPerSecondY = d3.min(minMeterPerSecondYArray);
-					maxMeterPerSecondY = d3.max(maxMeterPerSecondYArray);
-					// Degrees values
-					minDegreesYArray = [];
-					maxDegreesYArray = [];
-					for (var i=0; i<degreesGroupShown.length; i++) {
-						minDegreesYArray.push(d3.min(data, function(d) { return Math.min(d[degreesGroupShown[i]]); }) );
-						maxDegreesYArray.push(d3.max(data, function(d) { return Math.max(d[degreesGroupShown[i]]); }) );  
-					}
-					minDegreesY = d3.min(minDegreesYArray);
-					maxDegreesY = d3.max(maxDegreesYArray);
-					// Octas values
-					minOctasYArray = [];
-					maxOctasYArray = [];
-					for (var i=0; i<octasGroupShown.length; i++) {
-						minOctasYArray.push(d3.min(data, function(d) { return Math.min(d[octasGroupShown[i]]); }) );
-						maxOctasYArray.push(d3.max(data, function(d) { return Math.max(d[octasGroupShown[i]]); }) );  
-					}
-					minOctasY = d3.min(minOctasYArray);
-					maxOctasY = d3.max(maxOctasYArray);
-					// Centimeter values
-					minCentimeterYArray = [];
-					maxCentimeterYArray = [];
-					for (var i=0; i<centimeterGroupShown.length; i++) {
-						minCentimeterYArray.push(d3.min(data, function(d) { return Math.min(d[centimeterGroupShown[i]]); }) );
-						maxCentimeterYArray.push(d3.max(data, function(d) { return Math.max(d[centimeterGroupShown[i]]); }) );  
-					}
-					minCentimeterY = d3.min(minCentimeterYArray);
-					maxCentimeterY = d3.max(maxCentimeterYArray);
-					// Hours values
-					minHoursYArray = [];
-					maxHoursYArray = [];
-					for (var i=0; i<hoursGroupShown.length; i++) {
-						minHoursYArray.push(d3.min(data, function(d) { return Math.min(d[hoursGroupShown[i]]); }) );
-						maxHoursYArray.push(d3.max(data, function(d) { return Math.max(d[hoursGroupShown[i]]); }) );  
-					}
-					minHoursY = d3.min(minHoursYArray);
-					maxHoursY = d3.max(maxHoursYArray);
 				}
 				findMaxMin();
 				
 				// Y Scales
-				yScaleCelsius = d3.scale.linear()
-					.domain([minCelsiusY, maxCelsiusY])
-					.range([height, 0]);
-				yScaleDays = d3.scale.linear()
-					.domain([minDaysY, maxDaysY])
-					.range([height, 0]);
-				yScalePercent = d3.scale.linear()
-					.domain([minPercentY, maxPercentY])
-					.range([height, 0]);
-				yScaleMilimeter = d3.scale.linear()
-					.domain([minMilimeterY, maxMilimeterY])
-					.range([height, 0]);
-				yScalePascal = d3.scale.linear()
-					.domain([minPascalY, maxPascalY])
-					.range([height, 0]);	
-				yScaleMeterPerSecond = d3.scale.linear()
-					.domain([minMeterPerSecondY, maxMeterPerSecondY])
-					.range([height, 0]);
-				yScaleDegrees = d3.scale.linear()
-					.domain([minDegreesY, maxDegreesY])
-					.range([height, 0]);
-				yScaleOctas = d3.scale.linear()
-					.domain([minOctasY, maxOctasY])
-					.range([height, 0]);
-				yScaleCentimeter = d3.scale.linear()
-					.domain([minCentimeterY, maxCentimeterY])
-					.range([height, 0]);
-				yScaleHours = d3.scale.linear()
-					.domain([minHoursY, maxHoursY])
-					.range([height, 0]);
+				for (var i=0; i<unitsArray.length; i++) {
+					d3Units["yScale"+unitsArray[i][0]] = d3.scale.linear()
+						.domain([d3Units["min"+unitsArray[i][0]+"Y"], d3Units["max"+unitsArray[i][0]+"Y"]])
+						.range([height, 0]);
+				}
 				
 				// Which and how many Y-Axes we need
 				function findAxis() {
 					axis_selection = 0;
-					yAxisArray = [];
-					celsius_selection = false;
-					if (celsiusGroupShown.length>0) {
-						celsius_selection=true;
-						yAxisArray.push(["yAxisCelsius", yScaleCelsius, "Celsius"]);
-						axis_selection=axis_selection+1;
-					}
-					days_selection = false;
-					if (daysGroupShown.length>0) {
-						days_selection = true;
-						yAxisArray.push(["yAxisDays", yScaleDays, "Days"]);
-						axis_selection=axis_selection+1;
-					}
-					percent_selection = false;
-					if (percentGroupShown.length>0) {
-						percent_selection = true;
-						yAxisArray.push(["yAxisPercent", yScalePercent, "Percent"]);
-						axis_selection=axis_selection+1;
-					}
-					milimeter_selection = false;
-					if (milimeterGroupShown.length>0) {
-						milimeter_selection = true;
-						yAxisArray.push(["yAxisMilimeter", yScaleMilimeter, "Milimeter"]);
-						axis_selection=axis_selection+1;
-					}
-					pascal_selection = false;
-					if (pascalGroupShown.length>0) {
-						pascal_selection = true;
-						yAxisArray.push(["yAxisPascal", yScalePascal, "Pascal"]);
-						axis_selection=axis_selection+1;
-					}	
-					meterPerSecond_selection = false;
-					if (meterPerSecondGroupShown.length>0) {
-						meterPerSecond_selection = true;
-						yAxisArray.push(["yAxisMeterPerSecond", yScaleMeterPerSecond, "Meter Per Second"]);
-						axis_selection=axis_selection+1;
-					}
-					degrees_selection = false;
-					if (degreesGroupShown.length>0) {
-						degrees_selection = true;
-						yAxisArray.push(["yAxisDegrees", yScaleDegrees, "Degrees"]);
-						axis_selection=axis_selection+1;
-					}
-					octas_selection = false;
-					if (octasGroupShown.length>0) {
-						octas_selection = true;
-						yAxisArray.push(["yAxisOctas", yScaleOctas, "Octas"]);
-						axis_selection=axis_selection+1;
-					}
-					if (centimeterGroupShown.length>0) {
-						centimeter_selection = true;
-						yAxisArray.push(["yAxisCentimeter", yScaleCentimeter, "Centimeter"]);
-						axis_selection=axis_selection+1;
-					}
-					if (hoursGroupShown.length>0) {
-						hours_selection = true;
-						yAxisArray.push(["yAxisHours", yScaleHours, "Hours"]);
-						axis_selection=axis_selection+1;
+					yAxisArray = [];			
+					for (var i=0; i<unitsArray.length; i++) {
+						d3Units[unitsArray[i][0]+"_selection"] = true;
+						if (d3Units[unitsArray[i][0]+"GroupShown"].length>0)  {
+							d3Units[unitsArray[i][0]+"_selection"] = false;
+							//yAxisArray.push([d3Units["yAxis"+unitsArray[i][0]], d3Units["yScale"+unitsArray[i][0]], unitsArray[i][0]]);
+							yAxisArray.push([unitsArray[i][0], d3Units["yScale"+unitsArray[i][0]], unitsArray[i][0]]);
+							axis_selection=axis_selection+1;
+						}
 					}
 				}
 				findAxis();
@@ -767,37 +344,12 @@ Drupal.behaviors.ccis = {
 				// Create graphs
 				function graphDraw(graphType, yScale, color) {
 					var yScaleType;
-					switch (yScale) {
-						case "celsius":
-							yScaleType=yScaleCelsius;
-							break;
-						case "days":
-							yScaleType=yScaleDays;
-							break;
-						case "percent":
-							yScaleType=yScalePercent;
-							break;
-						case "milimeter":
-							yScaleType=yScaleMilimeter;
-							break;
-						case "pascal":
-							yScaleType=yScalePascal;
-							break;
-						case "meterPerSecond":
-							yScaleType=yScaleMeterPerSecond;
-							break;
-						case "degrees":
-							yScaleType=yScaleDegrees;
-							break;
-						case "octas":
-							yScaleType=yScaleOctas;
-							break;
-						case "centimeter":
-							yScaleType=yScaleCentimeter;
-							break;
-						case "hours":
-							yScaleType=yScaleHours;
-							break;							
+					for (var i=0; i<unitsArray.length; i++) {
+						switch (yScale){
+							case unitsArray[i][0]:
+								yScaleType=d3Units["yScale"+unitsArray[i][0]];
+								break;
+						}
 					}
 					
 					var graphObj = {};
@@ -852,83 +404,20 @@ Drupal.behaviors.ccis = {
 					var iconLink;
 					var iconWidth;
 					var iconHeight;
-					if (axisType==="yAxisCelsius") {
-						yAxisLabel = "Celsius"
-						yAxisLabelOffset = -30;
-						yAxisTickFormat = ".1f";
-						iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
-						iconWidth = "7px";
-						iconHeight = "21px";
-					} else if (axisType==="yAxisDays") {
-						yAxisLabel = "days"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".0f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
-						iconWidth = "7px";
-						iconHeight = "21px";
-					} else if (axisType==="yAxisPercent") {
-						yAxisLabel = "%"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
-						iconWidth = "7px";
-						iconHeight = "21px";
-					} else if (axisType==="yAxisMilimeter") {
-						yAxisLabel = "mm"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png";
-						iconWidth = "12px";
-						iconHeight = "17px";
-					} else if (axisType==="yAxisPascal") {
-						yAxisLabel = "hPa"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".0f";
-						iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
-						iconWidth = "19px";
-						iconHeight = "16px";
-					} else if (axisType==="yAxisMeterPerSecond") {
-						yAxisLabel = "m/s"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
-						iconWidth = "7px";
-						iconHeight = "21px";
-					} else if (axisType==="yAxisDegrees") {
-						yAxisLabel = "degrees"
-						yAxisLabelOffset = -30;
-						yAxisTickFormat = ".0f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png";
-						iconWidth = "12px";
-						iconHeight = "17px";
-					} else if (axisType==="yAxisOctas") {
-						yAxisLabel = "octas"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
-						iconWidth = "19px";
-						iconHeight = "16px";
-					} else if (axisType==="yAxisCentimeter") {
-						yAxisLabel = "cm"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
-						iconWidth = "19px";
-						iconHeight = "16px";
-					} else if (axisType==="yAxisHours") {
-						yAxisLabel = "hours"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
-						iconWidth = "19px";
-						iconHeight = "16px";
+					
+					for (var i=0; i<unitsArray.length; i++) {
+						if (axisType===unitsArray[i][0]) {
+							yAxisLabel = unitsArray[i][2];
+							yAxisLabelOffset = -30;
+							yAxisTickFormat = unitsArray[i][3];
+							if (unitsArray[i][1].length>0) {
+								iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/"+unitsArray[i][1];
+							} else {
+								iconLink = "";
+							}
+							iconWidth = "10px";
+							iconHeight = "20px";
+						}
 					}
 								
 					// Grid only for the first y axis
@@ -1004,29 +493,67 @@ Drupal.behaviors.ccis = {
 				}
 				addCss();
 	
+				// Hoverintent for legend accordion			
+				$.event.special.hoverintent = {
+					setup: function () {
+						$(this).bind("mouseover", jQuery.event.special.hoverintent.handler);
+					},
+					teardown: function () {
+						$(this).unbind("mouseover", jQuery.event.special.hoverintent.handler);
+					},
+					handler: function (event) {
+						var currentX, currentY, timeout,
+						args = arguments,
+						target = $(event.target),
+						previousX = event.pageX,
+						previousY = event.pageY;
+
+						function track(event) {
+							currentX = event.pageX;
+							currentY = event.pageY;
+						};
+
+						function clear() {
+							target
+							.unbind("mousemove", track)
+							.unbind("mouseout", clear);
+							clearTimeout(timeout);
+						}
+
+						function handler() {
+							var prop,
+							orig = event;
+							if ((Math.abs(previousX - currentX) +
+							Math.abs(previousY - currentY)) < 7) {
+								clear();
+								event = $.Event("hoverintent");
+								for (prop in orig) {
+									if (!(prop in event)) {
+										event[prop] = orig[prop];
+									}
+								}
+								delete event.originalEvent;
+								target.trigger(event);
+							} else {
+								previousX = currentX;
+								previousY = currentY;
+								timeout = setTimeout(handler, 100);
+							}
+						}
+						timeout = setTimeout(handler, 100);
+						target.bind({
+						mousemove: track,
+						mouseout: clear
+						});
+					}
+				};
+				
 				// Legend Tooltips
 				function hoverLegend(topPosition, keyPlace, text) {			
 					$("#d3_tooltipLegend"+keyPlace+block)
 						.css("position", "absolute")
 						.css("right", (legendWidth-3)+"px")
-						.css("top", (topPosition+27)+"px")
-						.css("width", "auto")
-						.css("clear", "both")
-						.css("float", "left")
-						.css("background-color", "#fcce00")
-						.css("border", "solid 1px #D1D1FF")
-						.css("border-radius", "8px 8px 8px 8px")
-						.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-						.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-						.css("box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-						.css("font-size","12px")
-						.html(text);
-				}
-				function hoverLegendCategories(topPosition, text) {			
-					$("#d3_tooltipLegendCategories"+block)
-						.css("position", "absolute")
-						.css("right", (legendWidth+5)+"px")
-						.css("top", (topPosition+27)+"px")
+						.css("top", (topPosition+20)+"px")
 						.css("width", "auto")
 						.css("clear", "both")
 						.css("float", "left")
@@ -1046,24 +573,22 @@ Drupal.behaviors.ccis = {
 				$("#d3_legendDiv"+block)
 					.css("width", legendWidth-1)
 					.css("height", height + margin.top + margin.bottom - heightPrintSelect);
-	
+					
+				// Scrollbar (slimScroll)
+				$("#d3_legendDiv"+block).slimScroll({
+					width: legendWidth-1,
+					height: height + margin.top + margin.bottom - heightPrintSelect,
+					//railVisible: true,
+					alwaysVisible: true,
+					//railColor: "yellow",
+					color: "#455468"
+				});
+					
 				// Create DIVs for the keys
 				// Temperature group
 				if (temperatureGroupUsed.length>0 || warmExtremesGroupUsed.length>0 || coldExtremesGroupUsed.length>0) {
-					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_temperatureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_tempMinus"+block+"' class='d3_minus'>"+plus+"</span> Temperature<span class='d3_unitLegend'></span></b></div>");
-					$("#d3_temperatureToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_temperatureToggle"+block).position().top;
-						var legendText;
-						if (temperatureHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (temperatureHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendTemperatureGroup"+block+"'></div></a></h6>");
+					$("#legendTemperatureGroup"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'><b> Temperature</b></div>");
 					// Main temperature group
 					if (temperatureGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivTemperature"+block+"'></div>");
@@ -1076,19 +601,21 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivTemperature"+block).append("<div id='d3_keysTemperature"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysTemperature"+i+block).append("<div id='d3_keysTemperatureTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxTemperature"+i+block+"' type='checkbox' value='"+i+"' "+findTemperatureChecked()+"></div>");			
+							$("#d3_keysTemperature"+i+block).append("<div id='d3_keysTemperatureTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxTemperature"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findTemperatureChecked()+"></div>");			
 							$("#d3_keysTemperature"+i+block).append("<div id='d3_keysTemperatureBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysTemperatureText"+i+block).append(temperatureGroupUsed[i][2]);
 							//$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+temperatureGroupUsed[i][4]+"' width='25' height='15'></div>");
 							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+temperatureGroupUsed[i][1]+partOfSVGLine2+"</div>");
-
+							
 							(function(i) {
 								$("#d3_keysTemperatureBoxText"+i+block)
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysTemperatureBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivTemperature"+block).position().top;
+										var topPositionBoxText = $("#d3_keysTemperatureBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, temperatureGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -1097,19 +624,7 @@ Drupal.behaviors.ccis = {
 					}
 					// Warm Extremes group
 					if (warmExtremesGroupUsed.length>0) {
-						$("#d3_legendDiv"+block).append("<div id='d3_warmExtremesToggle"+block+"' class='d3_toggleSubClass'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><span id='d3_warmExtremesMinus"+block+"' class='d3_minus'>"+plus+"</span> Warm Extremes <span class='d3_unitLegend'></span></b></div>");
-						$("#d3_warmExtremesToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_warmExtremesToggle"+block).position().top;
-						var legendText;
-						if (warmExtremesHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (warmExtremesHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+						$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendWarmExtremes"+block+"'> Warm Extremes</div></a></h6>");
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivWarmExtremes"+block+"'></div>");
 						for (var i=0; i<warmExtremesGroupUsed.length; i++) {
 							function findWarmExtremesChecked() {
@@ -1120,7 +635,7 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivWarmExtremes"+block).append("<div id='d3_keysWarmExtremes"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysWarmExtremes"+i+block).append("<div id='d3_keysWarmExtremesTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxWarmExtremes"+i+block+"' type='checkbox' value='"+i+"' "+findWarmExtremesChecked()+"></div>");			
+							$("#d3_keysWarmExtremes"+i+block).append("<div id='d3_keysWarmExtremesTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxWarmExtremes"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findWarmExtremesChecked()+"></div>");			
 							$("#d3_keysWarmExtremes"+i+block).append("<div id='d3_keysWarmExtremesBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysWarmExtremesText"+i+block).append(warmExtremesGroupUsed[i][2]);
@@ -1132,7 +647,9 @@ Drupal.behaviors.ccis = {
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysWarmExtremesBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivWarmExtremes"+block).position().top;
+										var topPositionBoxText = $("#d3_keysWarmExtremesBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, warmExtremesGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -1141,19 +658,7 @@ Drupal.behaviors.ccis = {
 					}
 					// Cold Extremes group
 					if (coldExtremesGroupUsed.length>0) {
-						$("#d3_legendDiv"+block).append("<div id='d3_coldExtremesToggle"+block+"' class='d3_toggleSubClass'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><span id='d3_coldExtremesMinus"+block+"' class='d3_minus'>"+plus+"</span> Cold Extremes <span class='d3_unitLegend'></span></b></div>");
-						$("#d3_coldExtremesToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_coldExtremesToggle"+block).position().top;
-						var legendText;
-						if (coldExtremesHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (coldExtremesHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+						$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendColdExtremes"+block+"'> Cold Extremes</div></a></h6>");
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivColdExtremes"+block+"'></div>");
 						for (var i=0; i<coldExtremesGroupUsed.length; i++) {
 							function findColdExtremesChecked() {
@@ -1164,7 +669,7 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivColdExtremes"+block).append("<div id='d3_keysColdExtremes"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysColdExtremes"+i+block).append("<div id='d3_keysColdExtremesTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxColdExtremes"+i+block+"' type='checkbox' value='"+i+"' "+findColdExtremesChecked()+"></div>");			
+							$("#d3_keysColdExtremes"+i+block).append("<div id='d3_keysColdExtremesTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxColdExtremes"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findColdExtremesChecked()+"></div>");			
 							$("#d3_keysColdExtremes"+i+block).append("<div id='d3_keysColdExtremesBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysColdExtremesText"+i+block).append(coldExtremesGroupUsed[i][2]);
@@ -1175,7 +680,9 @@ Drupal.behaviors.ccis = {
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysColdExtremesBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivColdExtremes"+block).position().top;
+										var topPositionBoxText = $("#d3_keysColdExtremesBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, coldExtremesGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -1183,22 +690,10 @@ Drupal.behaviors.ccis = {
 						}
 					}
 				}		
-				// Precipitation group
+				// Precipitation group		
 				if (precipitationGroupUsed.length>0 || extremePrecipitationGroupUsed.length>0) {
-					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_precipitationToggle"+block+"' class='d3_toggleClass'><b><span id='d3_precMinus"+block+"' class='d3_minus'>"+plus+"</span> Precipitation<span class='d3_unitLegend'></span></b></div>");
-					$("#d3_precipitationToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_precipitationToggle"+block).position().top;
-						var legendText;
-						if (precipitationHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (precipitationHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendPrecipitationGroup"+block+"'></div></a></h6>");
+					$("#legendPrecipitationGroup"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'><b> Precipitation</b></div>");
 					// Main precipitation group
 					if (precipitationGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivPrecipitation"+block+"'></div>");
@@ -1211,7 +706,7 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivPrecipitation"+block).append("<div id='d3_keysPrecipitation"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysPrecipitation"+i+block).append("<div id='d3_keysPrecipitationTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxPrecipitation"+i+block+"' type='checkbox' value='"+i+"' "+findPrecipitationChecked()+"></div>");
+							$("#d3_keysPrecipitation"+i+block).append("<div id='d3_keysPrecipitationTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxPrecipitation"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findPrecipitationChecked()+"></div>");
 							$("#d3_keysPrecipitation"+i+block).append("<div id='d3_keysPrecipitationBoxText"+i+block+"' class='d3_keysBoxText'></div>")
 							
 							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationText"+i+block+"' class='d3_keysText'></div>");
@@ -1223,7 +718,9 @@ Drupal.behaviors.ccis = {
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysPrecipitationBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivPrecipitation"+block).position().top;
+										var topPositionBoxText = $("#d3_keysPrecipitationBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, precipitationGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -1232,19 +729,7 @@ Drupal.behaviors.ccis = {
 					}
 					// Extreme Precipitation group
 					if (extremePrecipitationGroupUsed.length>0) {
-						$("#d3_legendDiv"+block).append("<div id='d3_extremePrecipitationToggle"+block+"' class='d3_toggleSubClass'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><span id='d3_extremePrecMinus"+block+"' class='d3_minus'>"+plus+"</span> Extreme Precipitation <span class='d3_unitLegend'></span></b></div>");
-						$("#d3_extremePrecipitationToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_extremePrecipitationToggle"+block).position().top;
-						var legendText;
-						if (extremePrecipitationHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (extremePrecipitationHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+						$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendExtremePrecipitation"+block+"'> Extreme Precipitation</div></a></h6>");
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivExtremePrecipitation"+block+"'></div>");
 						for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {
 							function findExtremePrecipitationChecked() {
@@ -1255,11 +740,11 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivExtremePrecipitation"+block).append("<div id='d3_keysExtremePrecipitation"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysExtremePrecipitation"+i+block).append("<div id='d3_keysExtremePrecipitationTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxExtremePrecipitation"+i+block+"' type='checkbox' value='"+i+"' "+findExtremePrecipitationChecked()+"></div>");
+							$("#d3_keysExtremePrecipitation"+i+block).append("<div id='d3_keysExtremePrecipitationTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxExtremePrecipitation"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findExtremePrecipitationChecked()+"></div>");
 							$("#d3_keysExtremePrecipitation"+i+block).append("<div id='d3_keysExtremePrecipitationBoxText"+i+block+"' class='d3_keysBoxText'></div>")
 							
-							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationnText"+i+block+"' class='d3_keysText'></div>");
-							$("#d3_keysExtremePrecipitationnText"+i+block).append(extremePrecipitationGroupUsed[i][2]);
+							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationText"+i+block+"' class='d3_keysText'></div>");
+							$("#d3_keysExtremePrecipitationText"+i+block).append(extremePrecipitationGroupUsed[i][2]);
 							//$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+extremePrecipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
 							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+extremePrecipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
@@ -1267,7 +752,9 @@ Drupal.behaviors.ccis = {
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysExtremePrecipitationBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivExtremePrecipitation"+block).position().top;
+										var topPositionBoxText = $("#d3_keysExtremePrecipitationBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, extremePrecipitationGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -1275,22 +762,10 @@ Drupal.behaviors.ccis = {
 						}
 					}
 				}
-				// Wind group
+				// Wind group				
 				if (windGroupUsed.length>0) {
-					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendWind"+block+"' class='d3_iconLegendWindClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='11' height='17'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_windToggle"+block+"' class='d3_toggleClass'><b><span id='d3_windMinus"+block+"' class='d3_minus'>"+plus+"</span> Wind<span class='d3_unitLegend'></span></b></div>");
-					$("#d3_windToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_windToggle"+block).position().top;
-						var legendText;
-						if (windHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (windHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendWindGroup"+block+"'></div></a></h6>");
+					$("#legendWindGroup"+block).append("<div id='d3_iconLegendWind"+block+"' class='d3_iconLegendWindClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='11' height='17'><b> Wind</b></div>");
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivWind"+block+"'></div>");
 					for (var i=0; i<windGroupUsed.length; i++) {
 						function findWindChecked() {
@@ -1301,7 +776,7 @@ Drupal.behaviors.ccis = {
 							}
 						}
 						$("#d3_keysDivWind"+block).append("<div id='d3_keysWind"+i+block+"' class='d3_keys'></div>");
-						$("#d3_keysWind"+i+block).append("<div id='d3_keysWindTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxWind"+i+block+"' type='checkbox' value='"+i+"' "+findWindChecked()+"></div>");
+						$("#d3_keysWind"+i+block).append("<div id='d3_keysWindTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxWind"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findWindChecked()+"></div>");
 						$("#d3_keysWind"+i+block).append("<div id='d3_keysWindBoxText"+i+block+"' class='d3_keysBoxText'></div>")
 						
 						$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindText"+i+block+"' class='d3_keysText'></div>");
@@ -1313,7 +788,9 @@ Drupal.behaviors.ccis = {
 								.hover(function(){
 									$(this).css("cursor","default"); 
 									$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-									var topPosition = $("#d3_keysWindBoxText"+i+block).position().top; 
+									var topPositionKeysDiv = $("#d3_keysDivWind"+block).position().top;
+									var topPositionBoxText = $("#d3_keysWindBoxText"+i+block).position().top;
+									var topPosition = topPositionKeysDiv + topPositionBoxText;	
 									hoverLegend(topPosition, i, windGroupUsed[i][3]);
 								},
 								function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -1322,20 +799,8 @@ Drupal.behaviors.ccis = {
 				}
 				// Other group
 				if (otherGroupUsed.length>0) {
-					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendOther"+block+"' class='d3_iconLegendOtherClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='16' height='4'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_otherToggle"+block+"' class='d3_toggleClass'><b><span id='d3_otherMinus"+block+"' class='d3_minus'>"+plus+"</span> Other<span class='d3_unitLegend'></span></b></div>");
-					$("#d3_otherToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_otherToggle"+block).position().top;
-						var legendText;
-						if (otherHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (otherHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendOtherGroup"+block+"'></div></a></h6>");
+					$("#legendOtherGroup"+block).append("<div id='d3_iconLegendOther"+block+"' class='d3_iconLegendOtherClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='16' height='4'><b> Other</b></div>");
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivOther"+block+"'></div>");
 					for (var i=0; i<otherGroupUsed.length; i++) {
 						function findOtherChecked() {
@@ -1346,7 +811,7 @@ Drupal.behaviors.ccis = {
 							}
 						}
 						$("#d3_keysDivOther"+block).append("<div id='d3_keysOther"+i+block+"' class='d3_keys'></div>");
-						$("#d3_keysOther"+i+block).append("<div id='d3_keysOtherTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxOther"+i+block+"' type='checkbox' value='"+i+"' "+findOtherChecked()+"></div>");
+						$("#d3_keysOther"+i+block).append("<div id='d3_keysOtherTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxOther"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findOtherChecked()+"></div>");
 						$("#d3_keysOther"+i+block).append("<div id='d3_keysOtherBoxText"+i+block+"' class='d3_keysBoxText'></div>")
 						
 						$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherText"+i+block+"' class='d3_keysText'></div>");
@@ -1358,212 +823,152 @@ Drupal.behaviors.ccis = {
 								.hover(function(){
 									$(this).css("cursor","default"); 
 									$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-									var topPosition = $("#d3_keysOtherBoxText"+i+block).position().top; 
+									var topPositionKeysDiv = $("#d3_keysDivOther"+block).position().top;
+									var topPositionBoxText = $("#d3_keysOtherBoxText"+i+block).position().top;
+									var topPosition = topPositionKeysDiv + topPositionBoxText;	
 									hoverLegend(topPosition, i, otherGroupUsed[i][3]);
 								},
 								function() {$("#d3_tooltipLegend"+i+block).remove();});
 						})(i);
 					}
 				}
-				
+								
 				// Maximum checkboxes checked: 4 / Minimum: 1
-				var maxChecked = $("#"+blockID+" :checkbox:checked").length >= 4; 
-				$("#"+blockID+" :checkbox").not(":checked").attr("disabled",maxChecked);
-				var minChecked = $("#"+blockID+" :checkbox:checked").length <= 1;
-				$("#"+blockID+" :checkbox:checked").attr("disabled",minChecked);
+				var maxChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4; 
+				$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled",maxChecked);
+				var minChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length <= 1;
+				$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled",minChecked);
 				
-				// By default is the dropdown hidden
-				for (var i=0; i<temperatureGroupUsed.length; i++) {
-					$("#d3_keysTemperature"+i+block).hide();
-					if ($("#d3_checkboxTemperature"+i+block).is(":checked")) {
-						$("#d3_keysTemperature"+i+block).show();
-					}	
-				}
-				temperatureHidden=true;
-				for (var i=0; i<warmExtremesGroupUsed.length; i++) {
-					$("#d3_keysWarmExtremes"+i+block).hide();
-					if ($("#d3_checkboxWarmExtremes"+i+block).is(":checked")) {
-						$("#d3_keysWarmExtremes"+i+block).show();
-					}	
-				} 
-				warmExtremesHidden=true;
-				for (var i=0; i<coldExtremesGroupUsed.length; i++) {
-					$("#d3_keysColdExtremes"+i+block).hide();
-					if ($("#d3_checkboxColdExtremes"+i+block).is(":checked")) {
-						$("#d3_keysColdExtremes"+i+block).show();
-					}	
-				}
-				coldExtremesHidden=true;
-				for (var i=0; i<precipitationGroupUsed.length; i++) {
-					$("#d3_keysPrecipitation"+i+block).hide();
-					if ($("#d3_checkboxPrecipitation"+i+block).is(":checked")) {
-						$("#d3_keysPrecipitation"+i+block).show();
-					}	
-				}
-				precipitationHidden=true;
-				for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {
-					$("#d3_keysExtremePrecipitation"+i+block).hide();
-					if ($("#d3_checkboxExtremePrecipitation"+i+block).is(":checked")) {
-						$("#d3_keysExtremePrecipitation"+i+block).show();
-					}	
-				}
-				extremePrecipitationHidden=true;
-				for (var i=0; i<windGroupUsed.length; i++) {
-					$("#d3_keysWind"+i+block).hide();
-					if ($("#d3_checkboxWind"+i+block).is(":checked")) {
-						$("#d3_keysWind"+i+block).show();
-					}	
-				}
-				windHidden=true;
-				for (var i=0; i<otherGroupUsed.length; i++) {
-					$("#d3_keysOther"+i+block).hide();
-					if ($("#d3_checkboxOther"+i+block).is(":checked")) {
-						$("#d3_keysOther"+i+block).show();
-					}	
-				}
-				otherHidden=true;
+				// Accordion for Legend
+				$("#d3_legendDiv"+block).accordion({
+					event: "click hoverintent",
+					autoHeight: false,
+					changestart: function( event, ui ) {
+						accordionShowCheckedKeys();
+					}
+				});
 				
-				// Collapse	
-				$("#d3_temperatureToggle"+block).click(function() {
-					if (temperatureHidden===true) {
-						$("#d3_tempMinus"+block).html(minus);
-						for (var i=0; i<temperatureGroupUsed.length; i++) {			
-							$("#d3_keysTemperature"+i+block).show();
-						}
-						temperatureHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (temperatureHidden===false) {
-						$("#d3_tempMinus"+block).html(plus);
-						for (var i=0; i<temperatureGroupUsed.length; i++) {
-							$("#d3_keysTemperature"+i+block).hide();
-							if ($("#d3_checkboxTemperature"+i+block).is(":checked")) {
-								$("#d3_keysTemperature"+i+block).show();
-							}	
-						}
-						temperatureHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
+				// Show checked checkboxes when accordion is inactive 
+				function accordionShowCheckedKeys() {
+					// Remove old checkboxes
+					if ($("#d3_keysTemperature_TEMP"+block).length>0) {
+						$("#d3_keysTemperature_TEMP"+block).remove();
 					}
-				});
-				$("#d3_warmExtremesToggle"+block).click(function() {
-					if (warmExtremesHidden===true) {
-						$("#d3_warmExtremesMinus"+block).html(minus);
-						for (var i=0; i<warmExtremesGroupUsed.length; i++) {			
-							$("#d3_keysWarmExtremes"+i+block).show();
-						}
-						warmExtremesHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (warmExtremesHidden===false) {
-						$("#d3_warmExtremesMinus"+block).html(plus);
-						for (var i=0; i<warmExtremesGroupUsed.length; i++) {
-							$("#d3_keysWarmExtremes"+i+block).hide();
-							if ($("#d3_checkboxWarmExtremes"+i+block).is(":checked")) {
-								$("#d3_keysWarmExtremes"+i+block).show();
-							}	
-						}
-						warmExtremesHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
+					if ($("#d3_keysColdExtremes_TEMP"+block).length>0) {
+						$("#d3_keysColdExtremes_TEMP"+block).remove();
 					}
-				});
-				$("#d3_coldExtremesToggle"+block).click(function() {
-					if (coldExtremesHidden===true) {
-						$("#d3_coldExtremesMinus"+block).html(minus);
-						for (var i=0; i<coldExtremesGroupUsed.length; i++) {			
-							$("#d3_keysColdExtremes"+i+block).show();
-						}
-						coldExtremesHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (coldExtremesHidden===false) {
-						$("#d3_coldExtremesMinus"+block).html(plus);
-						for (var i=0; i<coldExtremesGroupUsed.length; i++) {
-							$("#d3_keysColdExtremes"+i+block).hide();
-							if ($("#d3_checkboxColdExtremes"+i+block).is(":checked")) {
-								$("#d3_keysColdExtremes"+i+block).show();
-							}	
-						}
-						coldExtremesHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
+					if ($("#d3_keysWarmExtremes_TEMP"+block).length>0) {
+						$("#d3_keysWarmExtremes_TEMP"+block).remove();
 					}
-				});
-				$("#d3_precipitationToggle"+block).click(function() {
-					if (precipitationHidden===true) {
-						$("#d3_precMinus"+block).html(minus);
-						for (var i=0; i<precipitationGroupUsed.length; i++) {			
-							$("#d3_keysPrecipitation"+i+block).show();
-						}
-						precipitationHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (precipitationHidden===false) {
-						$("#d3_precMinus"+block).html(plus);
-						for (var i=0; i<precipitationGroupUsed.length; i++) {
-							$("#d3_keysPrecipitation"+i+block).hide();
-							if ($("#d3_checkboxPrecipitation"+i+block).is(":checked")) {
-								$("#d3_keysPrecipitation"+i+block).show();
-							}	
-						}
-						precipitationHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
+					if ($("#d3_keysPrecipitation_TEMP"+block).length>0) {
+						$("#d3_keysPrecipitation_TEMP"+block).remove();
 					}
-				});
-				$("#d3_extremePrecipitationToggle"+block).click(function() {
-					if (extremePrecipitationHidden===true) {
-						$("#d3_extremePrecMinus"+block).html(minus);
-						for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {			
-							$("#d3_keysExtremePrecipitation"+i+block).show();
-						}
-						extremePrecipitationHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (extremePrecipitationHidden===false) {
-						$("#d3_extremePrecMinus"+block).html(plus);
-						for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {
-							$("#d3_keysExtremePrecipitation"+i+block).hide();
-							if ($("#d3_checkboxExtremePrecipitation"+i+block).is(":checked")) {
-								$("#d3_keysExtremePrecipitation"+i+block).show();
-							}	
-						}
-						extremePrecipitationHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
+					if ($("#d3_keysExtremePrecipitation_TEMP"+block).length>0) {
+						$("#d3_keysExtremePrecipitation_TEMP"+block).remove();
 					}
-				});
-				$("#d3_windToggle"+block).click(function() {
-					if (windHidden===true) {
-						$("#d3_windMinus"+block).html(minus);
-						for (var i=0; i<windGroupUsed.length; i++) {			
-							$("#d3_keysWind"+i+block).show();
-						}
-						windHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (windHidden===false) {
-						$("#d3_windMinus"+block).html(plus);
-						for (var i=0; i<windGroupUsed.length; i++) {
-							$("#d3_keysWind"+i+block).hide();
-							if ($("#d3_checkboxWind"+i+block).is(":checked")) {
-								$("#d3_keysWind"+i+block).show();
-							}	
-						}
-						windHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
+					if ($("#d3_keysWind_TEMP"+block).length>0) {
+						$("#d3_keysWind_TEMP"+block).remove();
 					}
-				});
-				$("#d3_otherToggle"+block).click(function() {
-					if (otherHidden===true) {
-						$("#d3_otherMinus"+block).html(minus);
-						for (var i=0; i<otherGroupUsed.length; i++) {			
-							$("#d3_keysOther"+i+block).show();
-						}
-						otherHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (otherHidden===false) {
-						$("#d3_otherMinus"+block).html(plus);
-						for (var i=0; i<otherGroupUsed.length; i++) {
-							$("#d3_keysOther"+i+block).hide();
-							if ($("#d3_checkboxOther"+i+block).is(":checked")) {
-								$("#d3_keysOther"+i+block).show();
-							}	
-						}
-						otherHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
+					if ($("#d3_keysOther_TEMP"+block).length>0) {
+						$("#d3_keysOther_TEMP"+block).remove();
 					}
-				});
+					
+					// Find active accordion header
+					var legendDivActive=$("#d3_legendDiv"+block).accordion("option", "active");
+					
+					var legendDivsCount=$("#d3_legendDiv"+block).children("div");
+					for (var i=0; i<legendDivsCount.length; i++) {
+						if (i!==legendDivActive) {
+							switch (legendDivsCount[i].id) {
+								case "d3_keysDivTemperature"+block:
+									$("#legendTemperatureGroup"+block).append("<div id='d3_keysTemperature_TEMP"+block+"'</div>");
+									for (var k=0; k<coldExtremesGroupUsed.length; k++) {
+										if ($("#d3_checkboxTemperature"+k+block).is(":checked")) {
+											$("#d3_keysTemperature_TEMP"+block).append("<div id='d3_keysTemperatureTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysTemperature_TEMP"+block).append("<div id='d3_keysTemperatureBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysTemperatureBoxText_TEMP"+k+block).append("<div id='keysTemperatureText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#keysTemperatureText_TEMP"+k+block).append(temperatureGroupUsed[k][2]);
+											$("#d3_keysTemperatureBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+temperatureGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivWarmExtremes"+block:
+									$("#legendWarmExtremes"+block).append("<div id='d3_keysWarmExtremes_TEMP"+block+"'</div>");
+									for (var k=0; k<warmExtremesGroupUsed.length; k++) {
+										if ($("#d3_checkboxWarmExtremes"+k+block).is(":checked")) {
+											$("#d3_keysWarmExtremes_TEMP"+block).append("<div id='d3_keysWarmExtremesTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysWarmExtremes_TEMP"+block).append("<div id='d3_keysWarmExtremesBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysWarmExtremesBoxText_TEMP"+k+block).append("<div id='keysWarmExtremesText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#keysWarmExtremesText_TEMP"+k+block).append(warmExtremesGroupUsed[k][2]);
+											$("#d3_keysWarmExtremesBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+warmExtremesGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivColdExtremes"+block:
+									$("#legendColdExtremes"+block).append("<div id='d3_keysColdExtremes_TEMP"+block+"'</div>");
+									for (var k=0; k<coldExtremesGroupUsed.length; k++) {
+										if ($("#d3_checkboxColdExtremes"+k+block).is(":checked")) {
+											$("#d3_keysColdExtremes_TEMP"+block).append("<div id='d3_keysColdExtremesTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysColdExtremes_TEMP"+block).append("<div id='d3_keysColdExtremesBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysColdExtremesBoxText_TEMP"+k+block).append("<div id='keysColdExtremesText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#keysColdExtremesText_TEMP"+k+block).append(coldExtremesGroupUsed[k][2]);
+											$("#d3_keysColdExtremesBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+coldExtremesGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivPrecipitation"+block:
+									$("#legendPrecipitationGroup"+block).append("<div id='d3_keysPrecipitation_TEMP"+block+"'</div>");
+									for (var k=0; k<precipitationGroupUsed.length; k++) {
+										if ($("#d3_checkboxPrecipitation"+k+block).is(":checked")) {
+											$("#d3_keysPrecipitation_TEMP"+block).append("<div id='d3_keysPrecipitationTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysPrecipitation_TEMP"+block).append("<div id='d3_keysPrecipitationBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div id='d3_keysPrecipitationText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysPrecipitationText_TEMP"+k+block).append(precipitationGroupUsed[k][2]);
+											$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+precipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivExtremePrecipitation"+block:
+									$("#legendExtremePrecipitation"+block).append("<div id='d3_keysExtremePrecipitation_TEMP"+block+"'</div>");
+									for (var k=0; k<extremePrecipitationGroupUsed.length; k++) {
+										if ($("#d3_checkboxExtremePrecipitation"+k+block).is(":checked")) {
+											$("#d3_keysExtremePrecipitation_TEMP"+block).append("<div id='d3_keysExtremePrecipitationTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysExtremePrecipitation_TEMP"+block).append("<div id='d3_keysExtremePrecipitationBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div id='keysColdExtremesText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysExtremePrecipitationText_TEMP"+k+block).append(extremePrecipitationGroupUsed[k][2]);
+											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+extremePrecipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivWind"+block:
+									$("#legendWindGroup"+block).append("<div id='d3_keysWind_TEMP"+block+"'</div>");
+									for (var k=0; k<windGroupUsed.length; k++) {
+										if ($("#d3_checkboxWind"+k+block).is(":checked")) {
+											$("#d3_keysWind_TEMP"+block).append("<div id='d3_keysWindTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysWind_TEMP"+block).append("<div id='d3_keysWindBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysWindBoxText_TEMP"+k+block).append("<div id='d3_keysWindText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysWindText_TEMP"+k+block).append(windGroupUsed[k][2]);
+											$("#d3_keysWindBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+windGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivOther"+block:
+									$("#legendOtherGroup"+block).append("<div id='d3_keysOther_TEMP"+block+"'</div>");
+									for (var k=0; k<otherGroupUsed.length; k++) {
+										if ($("#d3_checkboxOther"+k+block).is(":checked")) {
+											$("#d3_keysOther_TEMP"+block).append("<div id='d3_keysOtherTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysOther_TEMP"+block).append("<div id='d3_keysOtherBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysOtherBoxText_TEMP"+k+block).append("<div id='d3_keysOtherText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysOtherText_TEMP"+k+block).append(otherGroupUsed[k][2]);
+											$("#d3_keysOtherBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+otherGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+							}
+						}
+					}
+				}
+				accordionShowCheckedKeys();
 
 				// Print preview button
 				$("#"+blockID).append("<div id='printSelectWrapper"+block+"' class='printSelectWrapperClass'></div>");
@@ -1683,17 +1088,9 @@ Drupal.behaviors.ccis = {
 					xScale.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
 					
 					// Update Y range
-					yScaleCelsius.range([height, 0]);
-					yScaleDays.range([height, 0]);
-					yScalePercent.range([height, 0]);
-					yScaleMilimeter.range([height, 0]);
-					yScaleDays.range([height, 0]);
-					yScalePascal.range([height, 0]);	
-					yScaleMeterPerSecond.range([height, 0]);
-					yScaleDegrees.range([height, 0]);
-					yScaleOctas.range([height, 0]);
-					yScaleCentimeter.range([height, 0]);
-					yScaleHours.range([height, 0]);
+					for (var i=0; i<unitsArray.length; i++) {
+						d3Units["yScale"+unitsArray[i][0]].range([height, 0]);
+					}
 					
 					// Create again the svg
 					createSvg();
@@ -1702,16 +1099,9 @@ Drupal.behaviors.ccis = {
 					findMaxMin();
 					
 					// Update Y domains
-					yScaleCelsius.domain([minCelsiusY, maxCelsiusY]);
-					yScaleDays.domain([minDaysY, maxDaysY]);
-					yScalePercent.domain([minPercentY, maxPercentY]);
-					yScaleMilimeter.domain([minMilimeterY, maxMilimeterY]);
-					yScalePascal.domain([minPascalY, maxPascalY]);		
-					yScaleMeterPerSecond.domain([minMeterPerSecondY, maxMeterPerSecondY]);
-					yScaleDegrees.domain([minDegreesY, maxDegreesY]);
-					yScaleOctas.domain([minOctasY, maxOctasY]);
-					yScaleCentimeter.domain([minCentimeterY, maxCentimeterY]);
-					yScaleHours.domain([minHoursY, maxHoursY]);
+					for (var i=0; i<unitsArray.length; i++) {
+						d3Units["yScale"+unitsArray[i][0]].domain([d3Units["min"+unitsArray[i][0]+"Y"], d3Units["max"+unitsArray[i][0]+"Y"]]);
+					}
 										
 					// Redraw Graphs
 					drawGraphs();
@@ -1735,96 +1125,10 @@ Drupal.behaviors.ccis = {
 				// Click checkbox
 				$("#"+blockID+" :checkbox").click(function() {
 					// Maximum checkboxes checked: 4 / Minimum: 1
-					var maxChecked = $("#"+blockID+" :checkbox:checked").length >= 4; 
-					$("#"+blockID+" :checkbox").not(":checked").attr("disabled",maxChecked);
-					var minChecked = $("#"+blockID+" :checkbox:checked").length <= 1;
-					$("#"+blockID+" :checkbox:checked").attr("disabled",minChecked);
-					if (temperatureHidden===true) {
-						for (var i=0; i<temperatureGroupUsed.length; i++) {
-							if ($("#d3_checkboxTemperature"+i+block).is(":checked")) {
-								$("#d3_keysTemperature"+i+block).show();
-							} else {
-								$("#d3_keysTemperature"+i+block).hide();
-							}
-						}
-					}
-					if (warmExtremesHidden===true) {
-						for (var i=0; i<warmExtremesGroupUsed.length; i++) {
-							if ($("#d3_checkboxWarmExtremes"+i+block).is(":checked")) {
-								$("#d3_keysWarmExtremes"+i+block).show();
-							} else {
-								$("#d3_keysWarmExtremes"+i+block).hide();
-							}
-						}
-					}
-					if (coldExtremesHidden===true) {
-						for (var i=0; i<coldExtremesGroupUsed.length; i++) {
-							if ($("#d3_checkboxColdExtremes"+i+block).is(":checked")) {
-								$("#d3_keysColdExtremes"+i+block).show();
-							} else {
-								$("#d3_keysColdExtremes"+i+block).hide();
-							}
-						}
-					}
-					if (precipitationHidden===true) {
-						for (var i=0; i<precipitationGroupUsed.length; i++) {
-							if ($("#d3_checkboxPrecipitation"+i+block).is(":checked")) {
-								$("#d3_keysPrecipitation"+i+block).show();
-							} else {
-								$("#d3_keysPrecipitation"+i+block).hide();
-							}
-						}
-					}
-					if (extremePrecipitationHidden===true) {
-						for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {
-							if ($("#d3_checkboxExtremePrecipitation"+i+block).is(":checked")) {
-								$("#d3_keysExtremePrecipitation"+i+block).show();
-							} else {
-								$("#d3_keysExtremePrecipitation"+i+block).hide();
-							}
-						}
-					}
-					if (windHidden===true) {
-						for (var i=0; i<windGroupUsed.length; i++) {
-							if ($("#d3_checkboxWind"+i+block).is(":checked")) {
-								$("#d3_keysWind"+i+block).show();
-							} else {
-								$("#d3_keysWind"+i+block).hide();
-							}
-						}
-					}
-					if (otherHidden===true) {
-						for (var i=0; i<otherGroupUsed.length; i++) {
-							if ($("#d3_checkboxOther"+i+block).is(":checked")) {
-								$("#d3_keysOther"+i+block).show();
-							} else {
-								$("#d3_keysOther"+i+block).hide();
-							}
-						}
-					}
-		
-					// Hide dropdowns with delay
-					if (temperatureHidden===false) {
-						setTimeout(function(){$("#d3_temperatureToggle"+block).click();}, 2000);
-					}
-					if (warmExtremesHidden===false) {
-						setTimeout(function(){$("#d3_warmExtremesToggle"+block).click();}, 2000);
-					}
-					if (coldExtremesHidden===false) {
-						setTimeout(function(){$("#d3_coldExtremesToggle"+block).click();}, 2000);
-					}
-					if (precipitationHidden===false) {
-						setTimeout(function(){$("#d3_precipitationToggle"+block).click();}, 2000); 
-					}
-					if (extremePrecipitationHidden===false) {
-						setTimeout(function(){$("#d3_extremePrecipitationToggle"+block).click();}, 2000); 
-					}
-					if (windHidden===false) {
-						setTimeout(function(){$("#d3_windToggle"+block).click();}, 2000); 
-					}
-					if (otherHidden===false) {
-						setTimeout(function(){$("#d3_otherToggle"+block).click();}, 2000); 
-					}
+					var maxChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4; 
+					$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled",maxChecked);
+					var minChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length <= 1;
+					$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled",minChecked);
 					
 					// Redraw graph
 					redrawGraph();
@@ -1837,6 +1141,10 @@ Drupal.behaviors.ccis = {
 					width = widthDiv - margin.left - margin.right - legendWidth;
 					height = width/2;
 					$("#d3_legendDiv"+block).css("height", height + margin.top + margin.bottom - heightPrintSelect);
+					
+					// Update scrollbar height
+					$("#ccis-weather-d3-block-1").children(".slimScrollDiv")[0].style.setProperty("height", height + margin.top + margin.bottom - heightPrintSelect+"px");
+				
 					// Redraw graph
 					redrawGraph();
 				});
@@ -1900,37 +1208,12 @@ Drupal.behaviors.ccis = {
 						
 						// Find the Units
 						function findHoverUnits(label) {
-							switch (label) {
-								case "celsius":
-									return "&#8451;";
-									break;
-								case "days":
-									return "days";
-									break;
-								case "percent":
-									return "%";
-									break;
-								case "milimeter":
-									return "mm";
-									break;
-								case "pascal":
-									return "hPa";
-									break;
-								case "meterPerSecond":
-									return "m/s";
-									break;
-								case "degrees":
-									return "&#176;";
-									break;
-								case "octas":
-									return "octas";
-									break;
-								case "centimeter":
-									return "cm";
-									break;
-								case "hours":
-									return "hours";
-									break;
+							for (var i=0; i<unitsArray.length; i++) {
+								switch (label) {
+									case unitsArray[i][0]:
+										return unitsArray[i][4];
+										break;
+								}
 							}
 						}
 						
@@ -2045,7 +1328,7 @@ Drupal.behaviors.ccis = {
 									for (var i=0; i<windGroupShown.length; i++) {
 										if (wind===true) {
 											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
-											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='19' height='16'></td>";
+											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind_black.png' width='19' height='16'></td>";
 										} else {
 											tooltipText += "<tr>";
 											tooltipText += "<td></td>";
@@ -2193,7 +1476,7 @@ Drupal.behaviors.ccis = {
 		var width = widthDiv - margin.left - margin.right - legendWidth;
 		var height = width/2;
 		var widthTemp = width;
-		var topOffset = 298;
+		var topOffset = 293;
 		var heightPrintSelect = 50;
 		var axis_sum = 4;	// MAX: 4
 		var axis_selection;
@@ -2210,81 +1493,8 @@ Drupal.behaviors.ccis = {
 		var windHidden;
 		var otherHidden;
 		
-		// Unit groups shown at the graph (max: 4)
-		var celsiusGroupShown;
-		var daysGroupShown;
-		var percentGroupShown;
-		var milimeterGroupShown;
-		var pascalGroupShown;
-		var meterPerSecondGroupShown;
-		var degreesGroupShown;
-		var octasGroupShown;
-		var centimeterGroupShown;
-		var hoursGroupShown;
-		
-		// Y-Scales
-		var yScaleCelsius;
-		var yScaleDays;
-		var yScalePercent;
-		var yScaleMilimeter;
-		var yScalePascal;
-		var yScaleMeterPerSecond;
-		var yScaleDegrees;
-		var yScaleOctas;
-		var yScaleCentimeter;
-		var yScaleHours;
-		
-		// Max-Min Values for Y Scales
-		// Celsius values
-		var minCelsiusYArray;
-		var maxCelsiusYArray;
-		var minCelsiusY;
-		var maxCelsiusY;
-		// Days values
-		var minDaysYArray;
-		var maxDaysYArray;
-		var minDaysY;
-		var maxDaysY;
-		// Percent values
-		var minPercentYArray;
-		var maxPercentYArray;
-		var minPercentY;
-		var maxPercentY;
-		// Milimeter values
-		var minMilimeterYArray;
-		var maxMilimeterYArray;
-		var minMilimeterY;
-		var maxMilimeterY;
-		// Pascal values
-		var minPascalYArray;
-		var maxPascalYArray;
-		var minPascalY;
-		var maxPascalY;
-		// Meter per second values
-		var minMeterPerSecondYArray;
-		var maxMeterPerSecondYArray;
-		var minMeterPerSecondY;
-		var maxMeterPerSecondY;
-		// Degrees values
-		var minDegreesYArray;
-		var maxDegreesYArray;
-		var minDegreesY;
-		var maxDegreesY;
-		// Octas values
-		var minOctasYArray;
-		var maxOctasYArray;
-		var minOctasY;
-		var maxOctasY;
-		// Centimeter values
-		var minCentimeterYArray;
-		var maxCentimeterYArray;
-		var minCentimeterY;
-		var maxCentimeterY;
-		// Hours values
-		var minHoursYArray;
-		var maxHoursYArray;
-		var minHoursY;
-		var maxHoursY;
+		// Object for the Units
+		var d3Units = {};
 		
 		// Arrays for the checkboxes
 		var findTicksArrayTemperature = [];
@@ -2295,35 +1505,19 @@ Drupal.behaviors.ccis = {
 		var findTicksArrayWind = [];
 		var findTicksArrayOther = [];
 		
-		// Selection for Y Axis
-		var celsius_selection;
-		var days_selection;
-		var percent_selection;
-		var milimeter_selection;
-		var pascal_selection;	
-		var meterPerSecond_selection;
-		var degrees_selection;
-		var octas_selection;
-		var centimeter_selection;
-		var hours_selection;
-		
 		// SVG legend icons
 		var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path style='fill:none;stroke:";
 		var partOfSVGLine2 = ";stroke-width:1.96201527;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none' d='m 1.3394886,1047.4364 9.3823584,-6.3952 3.619918,9.4078 4.692159,-5.6505 5.34355,0'/></g></svg>";
 
-		var legendCategoriesOpen = "Open categories";
-		var legendCategoriesClose = "Close categories";
-		var plus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/plus.png' width='7' height='7'>"
-		var minus = "<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/minus.png' width='7' height='7'>"
 		// *** Variables - END ***
 
 		// Parse the JSON with the data
 		d3.json(settings.ccis.stations[1].path, function(json) {
 			if (json.length===0) {
 				$("#"+blockID).html("");
-			} else {
+			} else {		
 				$("#"+blockID).html("");
-				
+
 				// Get parameters names
 				var dataKeysArray = Object.keys(json[1]);
 				
@@ -2337,7 +1531,6 @@ Drupal.behaviors.ccis = {
 						obj[dataKeysArray[i]] = parseFloat(d[dataKeysArray[i]]);
 					}
 					return obj;
-	  
 				});
 				
 				// Parameter groups parsed for the specific user
@@ -2415,255 +1608,57 @@ Drupal.behaviors.ccis = {
 				
 				// Fill the unit groups arrays
 				function fillUnitGroups() {
-				
-					celsiusGroupShown = [];
-					daysGroupShown = [];
-					percentGroupShown = [];
-					milimeterGroupShown = [];
-					pascalGroupShown = [];
-					meterPerSecondGroupShown = [];
-					degreesGroupShown = [];
-					octasGroupShown = [];
-					centimeterGroupShown = [];
-					hoursGroupShown = [];
+					for (var k=0; k<unitsArray.length; k++) {
+						d3Units[unitsArray[k][0]+"GroupShown"] = [];
+					}
 					
-
 					for (var i=0; i<temperatureGroupShown.length; i++) {
-						switch (temperatureGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(temperatureGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(temperatureGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (temperatureGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(temperatureGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<warmExtremesGroupShown.length; i++) {
-						switch (warmExtremesGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(warmExtremesGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (warmExtremesGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(warmExtremesGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<coldExtremesGroupShown.length; i++) {
-						switch (coldExtremesGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(coldExtremesGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (coldExtremesGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(coldExtremesGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<precipitationGroupShown.length; i++) {
-						switch (precipitationGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(precipitationGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(precipitationGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (precipitationGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(precipitationGroupShown[i][0]);
+							}
 						}
 					}			
 					for (var i=0; i<extremePrecipitationGroupShown.length; i++) {
-						switch (extremePrecipitationGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(extremePrecipitationGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (extremePrecipitationGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(extremePrecipitationGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<windGroupShown.length; i++) {
-						switch (windGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(windGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(windGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (windGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(windGroupShown[i][0]);
+							}
 						}
 					}
 					for (var i=0; i<otherGroupShown.length; i++) {
-						switch (otherGroupShown[i][5]) {
-							case "celsius":
-								celsiusGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "days":
-								daysGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "percent":
-								percentGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "milimeter":
-								milimeterGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "pascal":
-								pascalGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "meterPerSecond":
-								meterPerSecondGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "degrees":
-								degreesGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "octas":
-								octasGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "centimeter":
-								centimeterGroupShown.push(otherGroupShown[i][0]);
-								break;
-							case "hours":
-								hoursGroupShown.push(otherGroupShown[i][0]);
-								break;
+						for (var k=0; k<unitsArray.length; k++) {
+							if (otherGroupShown[i][5]===unitsArray[k][0]) {
+								d3Units[unitsArray[k][0]+"GroupShown"].push(otherGroupShown[i][0]);
+							}
 						}
 					}
 				}
@@ -2671,192 +1666,38 @@ Drupal.behaviors.ccis = {
 		
 				// Find the max and min values for the Y scales
 				function findMaxMin() {
-					// Celsius values
-					minCelsiusYArray = [];
-					maxCelsiusYArray = [];
-					for (var i=0; i<celsiusGroupShown.length; i++) {
-						minCelsiusYArray.push(d3.min(data, function(d) { return Math.min(d[celsiusGroupShown[i]]); }) );
-						maxCelsiusYArray.push(d3.max(data, function(d) { return Math.max(d[celsiusGroupShown[i]]); }) );  
+					for (var i=0; i<unitsArray.length; i++) {
+						d3Units["min"+unitsArray[i][0]+"YArray"] = [];
+						d3Units["max"+unitsArray[i][0]+"YArray"] = [];
+						for (var k=0; k<d3Units[unitsArray[i][0]+"GroupShown"].length; k++) {
+							d3Units["min"+unitsArray[i][0]+"YArray"].push(d3.min(data, function(d) { return Math.min(d[d3Units[unitsArray[i][0]+"GroupShown"][k]]); }) );
+							d3Units["max"+unitsArray[i][0]+"YArray"].push(d3.max(data, function(d) { return Math.max(d[d3Units[unitsArray[i][0]+"GroupShown"][k]]); }) );
+						}
+						d3Units["min"+unitsArray[i][0]+"Y"] = d3.min(d3Units["min"+unitsArray[i][0]+"YArray"]);
+						d3Units["max"+unitsArray[i][0]+"Y"] = d3.max(d3Units["max"+unitsArray[i][0]+"YArray"]);
 					}
-					minCelsiusY = d3.min(minCelsiusYArray);
-					maxCelsiusY = d3.max(maxCelsiusYArray);
-					// Days values
-					minDaysYArray = [];
-					maxDaysYArray = [];
-					for (var i=0; i<daysGroupShown.length; i++) {
-						minDaysYArray.push(d3.min(data, function(d) { return Math.min(d[daysGroupShown[i]]); }) );
-						maxDaysYArray.push(d3.max(data, function(d) { return Math.max(d[daysGroupShown[i]]); }) );  
-					}
-					minDaysY = d3.min(minDaysYArray);
-					maxDaysY = d3.max(maxDaysYArray);
-					// Percent values
-					minPercentYArray = [];
-					maxPercentYArray = [];
-					for (var i=0; i<percentGroupShown.length; i++) {
-						minPercentYArray.push(d3.min(data, function(d) { return Math.min(d[percentGroupShown[i]]); }) );
-						maxPercentYArray.push(d3.max(data, function(d) { return Math.max(d[percentGroupShown[i]]); }) );  
-					}
-					minPercentY = d3.min(minPercentYArray);
-					maxPercentY = d3.max(maxPercentYArray);
-					// Milimeter values
-					minMilimeterYArray = [];
-					maxMilimeterYArray = [];
-					for (var i=0; i<milimeterGroupShown.length; i++) {
-						minMilimeterYArray.push(d3.min(data, function(d) { return Math.min(d[milimeterGroupShown[i]]); }) );
-						maxMilimeterYArray.push(d3.max(data, function(d) { return Math.max(d[milimeterGroupShown[i]]); }) );  
-					}
-					minMilimeterY = d3.min(minMilimeterYArray);
-					maxMilimeterY = d3.max(maxMilimeterYArray);
-					// Pascal values
-					minPascalYArray = [];
-					maxPascalYArray = [];
-					for (var i=0; i<pascalGroupShown.length; i++) {
-						minPascalYArray.push(d3.min(data, function(d) { return Math.min(d[pascalGroupShown[i]]); }) );
-						maxPascalYArray.push(d3.max(data, function(d) { return Math.max(d[pascalGroupShown[i]]); }) );  
-					}
-					minPascalY = d3.min(minPascalYArray);
-					maxPascalY = d3.max(maxPascalYArray);
-					// Meter per second values
-					minMeterPerSecondYArray = [];
-					maxMeterPerSecondYArray = [];
-					for (var i=0; i<meterPerSecondGroupShown.length; i++) {
-						minMeterPerSecondYArray.push(d3.min(data, function(d) { return Math.min(d[meterPerSecondGroupShown[i]]); }) );
-						maxMeterPerSecondYArray.push(d3.max(data, function(d) { return Math.max(d[meterPerSecondGroupShown[i]]); }) );  
-					}
-					minMeterPerSecondY = d3.min(minMeterPerSecondYArray);
-					maxMeterPerSecondY = d3.max(maxMeterPerSecondYArray);
-					// Degrees values
-					minDegreesYArray = [];
-					maxDegreesYArray = [];
-					for (var i=0; i<degreesGroupShown.length; i++) {
-						minDegreesYArray.push(d3.min(data, function(d) { return Math.min(d[degreesGroupShown[i]]); }) );
-						maxDegreesYArray.push(d3.max(data, function(d) { return Math.max(d[degreesGroupShown[i]]); }) );  
-					}
-					minDegreesY = d3.min(minDegreesYArray);
-					maxDegreesY = d3.max(maxDegreesYArray);
-					// Octas values
-					minOctasYArray = [];
-					maxOctasYArray = [];
-					for (var i=0; i<octasGroupShown.length; i++) {
-						minOctasYArray.push(d3.min(data, function(d) { return Math.min(d[octasGroupShown[i]]); }) );
-						maxOctasYArray.push(d3.max(data, function(d) { return Math.max(d[octasGroupShown[i]]); }) );  
-					}
-					minOctasY = d3.min(minOctasYArray);
-					maxOctasY = d3.max(maxOctasYArray);
-					// Centimeter values
-					minCentimeterYArray = [];
-					maxCentimeterYArray = [];
-					for (var i=0; i<centimeterGroupShown.length; i++) {
-						minCentimeterYArray.push(d3.min(data, function(d) { return Math.min(d[centimeterGroupShown[i]]); }) );
-						maxCentimeterYArray.push(d3.max(data, function(d) { return Math.max(d[centimeterGroupShown[i]]); }) );  
-					}
-					minCentimeterY = d3.min(minCentimeterYArray);
-					maxCentimeterY = d3.max(maxCentimeterYArray);
-					// Hours values
-					minHoursYArray = [];
-					maxHoursYArray = [];
-					for (var i=0; i<hoursGroupShown.length; i++) {
-						minHoursYArray.push(d3.min(data, function(d) { return Math.min(d[hoursGroupShown[i]]); }) );
-						maxHoursYArray.push(d3.max(data, function(d) { return Math.max(d[hoursGroupShown[i]]); }) );  
-					}
-					minHoursY = d3.min(minHoursYArray);
-					maxHoursY = d3.max(maxHoursYArray);
 				}
 				findMaxMin();
 				
 				// Y Scales
-				yScaleCelsius = d3.scale.linear()
-					.domain([minCelsiusY, maxCelsiusY])
-					.range([height, 0]);
-				yScaleDays = d3.scale.linear()
-					.domain([minDaysY, maxDaysY])
-					.range([height, 0]);
-				yScalePercent = d3.scale.linear()
-					.domain([minPercentY, maxPercentY])
-					.range([height, 0]);
-				yScaleMilimeter = d3.scale.linear()
-					.domain([minMilimeterY, maxMilimeterY])
-					.range([height, 0]);
-				yScalePascal = d3.scale.linear()
-					.domain([minPascalY, maxPascalY])
-					.range([height, 0]);	
-				yScaleMeterPerSecond = d3.scale.linear()
-					.domain([minMeterPerSecondY, maxMeterPerSecondY])
-					.range([height, 0]);
-				yScaleDegrees = d3.scale.linear()
-					.domain([minDegreesY, maxDegreesY])
-					.range([height, 0]);
-				yScaleOctas = d3.scale.linear()
-					.domain([minOctasY, maxOctasY])
-					.range([height, 0]);
-				yScaleCentimeter = d3.scale.linear()
-					.domain([minCentimeterY, maxCentimeterY])
-					.range([height, 0]);
-				yScaleHours = d3.scale.linear()
-					.domain([minHoursY, maxHoursY])
-					.range([height, 0]);
+				for (var i=0; i<unitsArray.length; i++) {
+					d3Units["yScale"+unitsArray[i][0]] = d3.scale.linear()
+						.domain([d3Units["min"+unitsArray[i][0]+"Y"], d3Units["max"+unitsArray[i][0]+"Y"]])
+						.range([height, 0]);
+				}
 				
 				// Which and how many Y-Axes we need
 				function findAxis() {
 					axis_selection = 0;
-					yAxisArray = [];
-					celsius_selection = false;
-					if (celsiusGroupShown.length>0) {
-						celsius_selection=true;
-						yAxisArray.push(["yAxisCelsius", yScaleCelsius, "Celsius"]);
-						axis_selection=axis_selection+1;
-					}
-					days_selection = false;
-					if (daysGroupShown.length>0) {
-						days_selection = true;
-						yAxisArray.push(["yAxisDays", yScaleDays, "Days"]);
-						axis_selection=axis_selection+1;
-					}
-					percent_selection = false;
-					if (percentGroupShown.length>0) {
-						percent_selection = true;
-						yAxisArray.push(["yAxisPercent", yScalePercent, "Percent"]);
-						axis_selection=axis_selection+1;
-					}
-					milimeter_selection = false;
-					if (milimeterGroupShown.length>0) {
-						milimeter_selection = true;
-						yAxisArray.push(["yAxisMilimeter", yScaleMilimeter, "Milimeter"]);
-						axis_selection=axis_selection+1;
-					}
-					pascal_selection = false;
-					if (pascalGroupShown.length>0) {
-						pascal_selection = true;
-						yAxisArray.push(["yAxisPascal", yScalePascal, "Pascal"]);
-						axis_selection=axis_selection+1;
-					}	
-					meterPerSecond_selection = false;
-					if (meterPerSecondGroupShown.length>0) {
-						meterPerSecond_selection = true;
-						yAxisArray.push(["yAxisMeterPerSecond", yScaleMeterPerSecond, "Meter Per Second"]);
-						axis_selection=axis_selection+1;
-					}
-					degrees_selection = false;
-					if (degreesGroupShown.length>0) {
-						degrees_selection = true;
-						yAxisArray.push(["yAxisDegrees", yScaleDegrees, "Degrees"]);
-						axis_selection=axis_selection+1;
-					}
-					octas_selection = false;
-					if (octasGroupShown.length>0) {
-						octas_selection = true;
-						yAxisArray.push(["yAxisOctas", yScaleOctas, "Octas"]);
-						axis_selection=axis_selection+1;
-					}
-					if (centimeterGroupShown.length>0) {
-						centimeter_selection = true;
-						yAxisArray.push(["yAxisCentimeter", yScaleCentimeter, "Centimeter"]);
-						axis_selection=axis_selection+1;
-					}
-					if (hoursGroupShown.length>0) {
-						hours_selection = true;
-						yAxisArray.push(["yAxisHours", yScaleHours, "Hours"]);
-						axis_selection=axis_selection+1;
+					yAxisArray = [];			
+					for (var i=0; i<unitsArray.length; i++) {
+						d3Units[unitsArray[i][0]+"_selection"] = true;
+						if (d3Units[unitsArray[i][0]+"GroupShown"].length>0)  {
+							d3Units[unitsArray[i][0]+"_selection"] = false;
+							//yAxisArray.push([d3Units["yAxis"+unitsArray[i][0]], d3Units["yScale"+unitsArray[i][0]], unitsArray[i][0]]);
+							yAxisArray.push([unitsArray[i][0], d3Units["yScale"+unitsArray[i][0]], unitsArray[i][0]]);
+							axis_selection=axis_selection+1;
+						}
 					}
 				}
 				findAxis();
@@ -2883,37 +1724,12 @@ Drupal.behaviors.ccis = {
 				// Create graphs
 				function graphDraw(graphType, yScale, color) {
 					var yScaleType;
-					switch (yScale) {
-						case "celsius":
-							yScaleType=yScaleCelsius;
-							break;
-						case "days":
-							yScaleType=yScaleDays;
-							break;
-						case "percent":
-							yScaleType=yScalePercent;
-							break;
-						case "milimeter":
-							yScaleType=yScaleMilimeter;
-							break;
-						case "pascal":
-							yScaleType=yScalePascal;
-							break;
-						case "meterPerSecond":
-							yScaleType=yScaleMeterPerSecond;
-							break;
-						case "degrees":
-							yScaleType=yScaleDegrees;
-							break;
-						case "octas":
-							yScaleType=yScaleOctas;
-							break;	
-						case "centimeter":
-							yScaleType=yScaleCentimeter;
-							break;
-						case "hours":
-							yScaleType=yScaleHours;
-							break;	
+					for (var i=0; i<unitsArray.length; i++) {
+						switch (yScale){
+							case unitsArray[i][0]:
+								yScaleType=d3Units["yScale"+unitsArray[i][0]];
+								break;
+						}
 					}
 					
 					var graphObj = {};
@@ -2968,83 +1784,20 @@ Drupal.behaviors.ccis = {
 					var iconLink;
 					var iconWidth;
 					var iconHeight;
-					if (axisType==="yAxisCelsius") {
-						yAxisLabel = "Celsius"
-						yAxisLabelOffset = -30;
-						yAxisTickFormat = ".1f";
-						iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
-						iconWidth = "7px";
-						iconHeight = "21px";
-					} else if (axisType==="yAxisDays") {
-						yAxisLabel = "days"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".0f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
-						iconWidth = "7px";
-						iconHeight = "21px";
-					} else if (axisType==="yAxisPercent") {
-						yAxisLabel = "%"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
-						iconWidth = "7px";
-						iconHeight = "21px";
-					} else if (axisType==="yAxisMilimeter") {
-						yAxisLabel = "mm"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png";
-						iconWidth = "12px";
-						iconHeight = "17px";
-					} else if (axisType==="yAxisPascal") {
-						yAxisLabel = "hPa"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".0f";
-						iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
-						iconWidth = "19px";
-						iconHeight = "16px";
-					} else if (axisType==="yAxisMeterPerSecond") {
-						yAxisLabel = "m/s"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png";
-						iconWidth = "7px";
-						iconHeight = "21px";
-					} else if (axisType==="yAxisDegrees") {
-						yAxisLabel = "degrees"
-						yAxisLabelOffset = -30;
-						yAxisTickFormat = ".0f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png";
-						iconWidth = "12px";
-						iconHeight = "17px";
-					} else if (axisType==="yAxisOctas") {
-						yAxisLabel = "octas"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
-						iconWidth = "19px";
-						iconHeight = "16px";
-					} else if (axisType==="yAxisCentimeter") {
-						yAxisLabel = "cm"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
-						iconWidth = "19px";
-						iconHeight = "16px";
-					} else if (axisType==="yAxisHours") {
-						yAxisLabel = "hours"
-						yAxisLabelOffset = -20;
-						yAxisTickFormat = ".1f";
-						iconLink = "";
-						//iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/symbol_legende_pressure.png";
-						iconWidth = "19px";
-						iconHeight = "16px";
+					
+					for (var i=0; i<unitsArray.length; i++) {
+						if (axisType===unitsArray[i][0]) {
+							yAxisLabel = unitsArray[i][2];
+							yAxisLabelOffset = -30;
+							yAxisTickFormat = unitsArray[i][3];
+							if (unitsArray[i][1].length>0) {
+								iconLink = settings.basePath +"sites/all/modules/custom/ccis/images/d3/"+unitsArray[i][1];
+							} else {
+								iconLink = "";
+							}
+							iconWidth = "10px";
+							iconHeight = "20px";
+						}
 					}
 								
 					// Grid only for the first y axis
@@ -3120,6 +1873,61 @@ Drupal.behaviors.ccis = {
 				}
 				addCss();
 	
+				// Hoverintent for legend accordion			
+				$.event.special.hoverintent = {
+					setup: function () {
+						$(this).bind("mouseover", jQuery.event.special.hoverintent.handler);
+					},
+					teardown: function () {
+						$(this).unbind("mouseover", jQuery.event.special.hoverintent.handler);
+					},
+					handler: function (event) {
+						var currentX, currentY, timeout,
+						args = arguments,
+						target = $(event.target),
+						previousX = event.pageX,
+						previousY = event.pageY;
+
+						function track(event) {
+							currentX = event.pageX;
+							currentY = event.pageY;
+						};
+
+						function clear() {
+							target
+							.unbind("mousemove", track)
+							.unbind("mouseout", clear);
+							clearTimeout(timeout);
+						}
+
+						function handler() {
+							var prop,
+							orig = event;
+							if ((Math.abs(previousX - currentX) +
+							Math.abs(previousY - currentY)) < 7) {
+								clear();
+								event = $.Event("hoverintent");
+								for (prop in orig) {
+									if (!(prop in event)) {
+										event[prop] = orig[prop];
+									}
+								}
+								delete event.originalEvent;
+								target.trigger(event);
+							} else {
+								previousX = currentX;
+								previousY = currentY;
+								timeout = setTimeout(handler, 100);
+							}
+						}
+						timeout = setTimeout(handler, 100);
+						target.bind({
+						mousemove: track,
+						mouseout: clear
+						});
+					}
+				};
+				
 				// Legend Tooltips
 				function hoverLegend(topPosition, keyPlace, text) {			
 					$("#d3_tooltipLegend"+keyPlace+block)
@@ -3138,24 +1946,7 @@ Drupal.behaviors.ccis = {
 						.css("font-size","12px")
 						.html(text);
 				}
-				function hoverLegendCategories(topPosition, text) {			
-					$("#d3_tooltipLegendCategories"+block)
-						.css("position", "absolute")
-						.css("right", (legendWidth+5)+"px")
-						.css("top", (topPosition+topOffset)+"px")
-						.css("width", "auto")
-						.css("clear", "both")
-						.css("float", "left")
-						.css("background-color", "#fcce00")
-						.css("border", "solid 1px #D1D1FF")
-						.css("border-radius", "8px 8px 8px 8px")
-						.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-						.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-						.css("box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-						.css("font-size","12px")
-						.html(text);
-				}
-				
+
 				// Add div for the legend
 				$("#"+blockID).append("<div id='d3_legendDiv"+block+"' class='d3_legendClass'></div>");
 				
@@ -3163,23 +1954,21 @@ Drupal.behaviors.ccis = {
 					.css("width", legendWidth-1)
 					.css("height", height + margin.top + margin.bottom - heightPrintSelect);
 					
+				// Scrollbar (slimScroll)
+				$("#d3_legendDiv"+block).slimScroll({
+					width: legendWidth-1,
+					height: height + margin.top + margin.bottom - heightPrintSelect,
+					//railVisible: true,
+					alwaysVisible: true,
+					//railColor: "yellow",
+					color: "#455468"
+				});
+					
 				// Create DIVs for the keys
 				// Temperature group
 				if (temperatureGroupUsed.length>0 || warmExtremesGroupUsed.length>0 || coldExtremesGroupUsed.length>0) {
-					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_temperatureToggle"+block+"' class='d3_toggleClass'><b><span id='d3_tempMinus"+block+"' class='d3_minus'>"+plus+"</span> Temperature<span class='d3_unitLegend'></span></b></div>");
-					$("#d3_temperatureToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_temperatureToggle"+block).position().top;
-						var legendText;
-						if (temperatureHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (temperatureHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendTemperatureGroup"+block+"'></div></a></h6>");
+					$("#legendTemperatureGroup"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'><b> Temperature</b></div>");
 					// Main temperature group
 					if (temperatureGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivTemperature"+block+"'></div>");
@@ -3192,18 +1981,21 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivTemperature"+block).append("<div id='d3_keysTemperature"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysTemperature"+i+block).append("<div id='d3_keysTemperatureTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxTemperature"+i+block+"' type='checkbox' value='"+i+"' "+findTemperatureChecked()+"></div>");			
+							$("#d3_keysTemperature"+i+block).append("<div id='d3_keysTemperatureTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxTemperature"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findTemperatureChecked()+"></div>");			
 							$("#d3_keysTemperature"+i+block).append("<div id='d3_keysTemperatureBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysTemperatureText"+i+block).append(temperatureGroupUsed[i][2]);
 							//$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+temperatureGroupUsed[i][4]+"' width='25' height='15'></div>");
 							$("#d3_keysTemperatureBoxText"+i+block).append("<div id='keysTemperatureIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+temperatureGroupUsed[i][1]+partOfSVGLine2+"</div>");
+							
 							(function(i) {
 								$("#d3_keysTemperatureBoxText"+i+block)
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysTemperatureBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivTemperature"+block).position().top;
+										var topPositionBoxText = $("#d3_keysTemperatureBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, temperatureGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -3212,19 +2004,7 @@ Drupal.behaviors.ccis = {
 					}
 					// Warm Extremes group
 					if (warmExtremesGroupUsed.length>0) {
-						$("#d3_legendDiv"+block).append("<div id='d3_warmExtremesToggle"+block+"' class='d3_toggleSubClass'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><span id='d3_warmExtremesMinus"+block+"' class='d3_minus'>"+plus+"</span> Warm Extremes <span class='d3_unitLegend'></span></b></div>");
-						$("#d3_warmExtremesToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_warmExtremesToggle"+block).position().top;
-						var legendText;
-						if (warmExtremesHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (warmExtremesHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+						$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendWarmExtremes"+block+"'> Warm Extremes</div></a></h6>");
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivWarmExtremes"+block+"'></div>");
 						for (var i=0; i<warmExtremesGroupUsed.length; i++) {
 							function findWarmExtremesChecked() {
@@ -3235,18 +2015,21 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivWarmExtremes"+block).append("<div id='d3_keysWarmExtremes"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysWarmExtremes"+i+block).append("<div id='d3_keysWarmExtremesTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxWarmExtremes"+i+block+"' type='checkbox' value='"+i+"' "+findWarmExtremesChecked()+"></div>");			
+							$("#d3_keysWarmExtremes"+i+block).append("<div id='d3_keysWarmExtremesTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxWarmExtremes"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findWarmExtremesChecked()+"></div>");			
 							$("#d3_keysWarmExtremes"+i+block).append("<div id='d3_keysWarmExtremesBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysWarmExtremesText"+i+block).append(warmExtremesGroupUsed[i][2]);
 							//$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+warmExtremesGroupUsed[i][4]+"' width='25' height='15'></div>");
 							$("#d3_keysWarmExtremesBoxText"+i+block).append("<div id='keysWarmExtremesIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+warmExtremesGroupUsed[i][1]+partOfSVGLine2+"</div>");
+
 							(function(i) {
 								$("#d3_keysWarmExtremesBoxText"+i+block)
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysWarmExtremesBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivWarmExtremes"+block).position().top;
+										var topPositionBoxText = $("#d3_keysWarmExtremesBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, warmExtremesGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -3255,19 +2038,7 @@ Drupal.behaviors.ccis = {
 					}
 					// Cold Extremes group
 					if (coldExtremesGroupUsed.length>0) {
-						$("#d3_legendDiv"+block).append("<div id='d3_coldExtremesToggle"+block+"' class='d3_toggleSubClass'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><span id='d3_coldExtremesMinus"+block+"' class='d3_minus'>"+plus+"</span> Cold Extremes <span class='d3_unitLegend'></span></b></div>");
-						$("#d3_coldExtremesToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_coldExtremesToggle"+block).position().top;
-						var legendText;
-						if (coldExtremesHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (coldExtremesHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+						$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendColdExtremes"+block+"'> Cold Extremes</div></a></h6>");
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivColdExtremes"+block+"'></div>");
 						for (var i=0; i<coldExtremesGroupUsed.length; i++) {
 							function findColdExtremesChecked() {
@@ -3278,7 +2049,7 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivColdExtremes"+block).append("<div id='d3_keysColdExtremes"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysColdExtremes"+i+block).append("<div id='d3_keysColdExtremesTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxColdExtremes"+i+block+"' type='checkbox' value='"+i+"' "+findColdExtremesChecked()+"></div>");			
+							$("#d3_keysColdExtremes"+i+block).append("<div id='d3_keysColdExtremesTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxColdExtremes"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findColdExtremesChecked()+"></div>");			
 							$("#d3_keysColdExtremes"+i+block).append("<div id='d3_keysColdExtremesBoxText"+i+block+"' class='d3_keysBoxText'></div>");
 							$("#d3_keysColdExtremesBoxText"+i+block).append("<div id='keysColdExtremesText"+i+block+"' class='d3_keysText'></div>");
 							$("#keysColdExtremesText"+i+block).append(coldExtremesGroupUsed[i][2]);
@@ -3289,7 +2060,9 @@ Drupal.behaviors.ccis = {
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysColdExtremesBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivColdExtremes"+block).position().top;
+										var topPositionBoxText = $("#d3_keysColdExtremesBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, coldExtremesGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -3297,22 +2070,10 @@ Drupal.behaviors.ccis = {
 						}
 					}
 				}		
-				// Precipitation group
+				// Precipitation group		
 				if (precipitationGroupUsed.length>0 || extremePrecipitationGroupUsed.length>0) {
-					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_precipitationToggle"+block+"' class='d3_toggleClass'><b><span id='d3_precMinus"+block+"' class='d3_minus'>"+plus+"</span> Precipitation<span class='d3_unitLegend'></span></b></div>");
-					$("#d3_precipitationToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_precipitationToggle"+block).position().top;
-						var legendText;
-						if (precipitationHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (precipitationHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendPrecipitationGroup"+block+"'></div></a></h6>");
+					$("#legendPrecipitationGroup"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'><b> Precipitation</b></div>");
 					// Main precipitation group
 					if (precipitationGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivPrecipitation"+block+"'></div>");
@@ -3325,7 +2086,7 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivPrecipitation"+block).append("<div id='d3_keysPrecipitation"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysPrecipitation"+i+block).append("<div id='d3_keysPrecipitationTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxPrecipitation"+i+block+"' type='checkbox' value='"+i+"' "+findPrecipitationChecked()+"></div>");
+							$("#d3_keysPrecipitation"+i+block).append("<div id='d3_keysPrecipitationTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxPrecipitation"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findPrecipitationChecked()+"></div>");
 							$("#d3_keysPrecipitation"+i+block).append("<div id='d3_keysPrecipitationBoxText"+i+block+"' class='d3_keysBoxText'></div>")
 							
 							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationText"+i+block+"' class='d3_keysText'></div>");
@@ -3337,7 +2098,9 @@ Drupal.behaviors.ccis = {
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysPrecipitationBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivPrecipitation"+block).position().top;
+										var topPositionBoxText = $("#d3_keysPrecipitationBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, precipitationGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -3346,19 +2109,7 @@ Drupal.behaviors.ccis = {
 					}
 					// Extreme Precipitation group
 					if (extremePrecipitationGroupUsed.length>0) {
-						$("#d3_legendDiv"+block).append("<div id='d3_extremePrecipitationToggle"+block+"' class='d3_toggleSubClass'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><span id='d3_extremePrecMinus"+block+"' class='d3_minus'>"+plus+"</span> Extreme Precipitation <span class='d3_unitLegend'></span></b></div>");
-						$("#d3_extremePrecipitationToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_extremePrecipitationToggle"+block).position().top;
-						var legendText;
-						if (extremePrecipitationHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (extremePrecipitationHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+						$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendExtremePrecipitation"+block+"'> Extreme Precipitation</div></a></h6>");
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivExtremePrecipitation"+block+"'></div>");
 						for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {
 							function findExtremePrecipitationChecked() {
@@ -3369,11 +2120,11 @@ Drupal.behaviors.ccis = {
 								}
 							}
 							$("#d3_keysDivExtremePrecipitation"+block).append("<div id='d3_keysExtremePrecipitation"+i+block+"' class='d3_keys'></div>");
-							$("#d3_keysExtremePrecipitation"+i+block).append("<div id='d3_keysExtremePrecipitationTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxExtremePrecipitation"+i+block+"' type='checkbox' value='"+i+"' "+findExtremePrecipitationChecked()+"></div>");
+							$("#d3_keysExtremePrecipitation"+i+block).append("<div id='d3_keysExtremePrecipitationTick"+i+block+"' class='d3_keysTick d3_keysSubTick'><input id='d3_checkboxExtremePrecipitation"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findExtremePrecipitationChecked()+"></div>");
 							$("#d3_keysExtremePrecipitation"+i+block).append("<div id='d3_keysExtremePrecipitationBoxText"+i+block+"' class='d3_keysBoxText'></div>")
 							
-							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationnText"+i+block+"' class='d3_keysText'></div>");
-							$("#d3_keysExtremePrecipitationnText"+i+block).append(extremePrecipitationGroupUsed[i][2]);
+							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationText"+i+block+"' class='d3_keysText'></div>");
+							$("#d3_keysExtremePrecipitationText"+i+block).append(extremePrecipitationGroupUsed[i][2]);
 							//$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+extremePrecipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
 							$("#d3_keysExtremePrecipitationBoxText"+i+block).append("<div id='d3_keysExtremePrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+extremePrecipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
 							(function(i) {
@@ -3381,7 +2132,9 @@ Drupal.behaviors.ccis = {
 									.hover(function(){
 										$(this).css("cursor","default"); 
 										$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-										var topPosition = $("#d3_keysExtremePrecipitationBoxText"+i+block).position().top; 
+										var topPositionKeysDiv = $("#d3_keysDivExtremePrecipitation"+block).position().top;
+										var topPositionBoxText = $("#d3_keysExtremePrecipitationBoxText"+i+block).position().top;
+										var topPosition = topPositionKeysDiv + topPositionBoxText;
 										hoverLegend(topPosition, i, extremePrecipitationGroupUsed[i][3]);
 									},
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -3389,22 +2142,10 @@ Drupal.behaviors.ccis = {
 						}
 					}
 				}
-				// Wind group
+				// Wind group				
 				if (windGroupUsed.length>0) {
-					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendWind"+block+"' class='d3_iconLegendWindClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='11' height='17'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_windToggle"+block+"' class='d3_toggleClass'><b><span id='d3_windMinus"+block+"' class='d3_minus'>"+plus+"</span> Wind<span class='d3_unitLegend'></span></b></div>");
-					$("#d3_windToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_windToggle"+block).position().top;
-						var legendText;
-						if (windHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (windHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendWindGroup"+block+"'></div></a></h6>");
+					$("#legendWindGroup"+block).append("<div id='d3_iconLegendWind"+block+"' class='d3_iconLegendWindClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='11' height='17'><b> Wind</b></div>");
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivWind"+block+"'></div>");
 					for (var i=0; i<windGroupUsed.length; i++) {
 						function findWindChecked() {
@@ -3415,7 +2156,7 @@ Drupal.behaviors.ccis = {
 							}
 						}
 						$("#d3_keysDivWind"+block).append("<div id='d3_keysWind"+i+block+"' class='d3_keys'></div>");
-						$("#d3_keysWind"+i+block).append("<div id='d3_keysWindTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxWind"+i+block+"' type='checkbox' value='"+i+"' "+findWindChecked()+"></div>");
+						$("#d3_keysWind"+i+block).append("<div id='d3_keysWindTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxWind"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findWindChecked()+"></div>");
 						$("#d3_keysWind"+i+block).append("<div id='d3_keysWindBoxText"+i+block+"' class='d3_keysBoxText'></div>")
 						
 						$("#d3_keysWindBoxText"+i+block).append("<div id='d3_keysWindText"+i+block+"' class='d3_keysText'></div>");
@@ -3427,7 +2168,9 @@ Drupal.behaviors.ccis = {
 								.hover(function(){
 									$(this).css("cursor","default"); 
 									$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-									var topPosition = $("#d3_keysWindBoxText"+i+block).position().top; 
+									var topPositionKeysDiv = $("#d3_keysDivWind"+block).position().top;
+									var topPositionBoxText = $("#d3_keysWindBoxText"+i+block).position().top;
+									var topPosition = topPositionKeysDiv + topPositionBoxText;	
 									hoverLegend(topPosition, i, windGroupUsed[i][3]);
 								},
 								function() {$("#d3_tooltipLegend"+i+block).remove();});
@@ -3436,20 +2179,8 @@ Drupal.behaviors.ccis = {
 				}
 				// Other group
 				if (otherGroupUsed.length>0) {
-					$("#d3_legendDiv"+block).append("<div id='d3_iconLegendOther"+block+"' class='d3_iconLegendOtherClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='16' height='4'></div>");
-					$("#d3_legendDiv"+block).append("<div id='d3_otherToggle"+block+"' class='d3_toggleClass'><b><span id='d3_otherMinus"+block+"' class='d3_minus'>"+plus+"</span> Other<span class='d3_unitLegend'></span></b></div>");
-					$("#d3_otherToggle"+block).hover(function() {
-						$(this).css("cursor","pointer");
-						$("#"+blockID).append("<div id='d3_tooltipLegendCategories"+block+"'></div>"); 
-						var topPosition = $("#d3_otherToggle"+block).position().top;
-						var legendText;
-						if (otherHidden===true) {
-							legendText = legendCategoriesOpen;
-						} else if (otherHidden===false) {
-							legendText = legendCategoriesClose;
-						}
-						hoverLegendCategories(topPosition, legendText);
-					}, function() {$("#d3_tooltipLegendCategories"+block).remove();});
+					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendOtherGroup"+block+"'></div></a></h6>");
+					$("#legendOtherGroup"+block).append("<div id='d3_iconLegendOther"+block+"' class='d3_iconLegendOtherClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='16' height='4'><b> Other</b></div>");
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivOther"+block+"'></div>");
 					for (var i=0; i<otherGroupUsed.length; i++) {
 						function findOtherChecked() {
@@ -3460,7 +2191,7 @@ Drupal.behaviors.ccis = {
 							}
 						}
 						$("#d3_keysDivOther"+block).append("<div id='d3_keysOther"+i+block+"' class='d3_keys'></div>");
-						$("#d3_keysOther"+i+block).append("<div id='d3_keysOtherTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxOther"+i+block+"' type='checkbox' value='"+i+"' "+findOtherChecked()+"></div>");
+						$("#d3_keysOther"+i+block).append("<div id='d3_keysOtherTick"+i+block+"' class='d3_keysTick'><input id='d3_checkboxOther"+i+block+"' class='d3_checkboxClass' type='checkbox' value='"+i+"' "+findOtherChecked()+"></div>");
 						$("#d3_keysOther"+i+block).append("<div id='d3_keysOtherBoxText"+i+block+"' class='d3_keysBoxText'></div>")
 						
 						$("#d3_keysOtherBoxText"+i+block).append("<div id='d3_keysOtherText"+i+block+"' class='d3_keysText'></div>");
@@ -3472,219 +2203,160 @@ Drupal.behaviors.ccis = {
 								.hover(function(){
 									$(this).css("cursor","default"); 
 									$("#"+blockID).append("<div id='d3_tooltipLegend"+i+block+"'></div>"); 
-									var topPosition = $("#d3_keysOtherBoxText"+i+block).position().top; 
+									var topPositionKeysDiv = $("#d3_keysDivOther"+block).position().top;
+									var topPositionBoxText = $("#d3_keysOtherBoxText"+i+block).position().top;
+									var topPosition = topPositionKeysDiv + topPositionBoxText;	
 									hoverLegend(topPosition, i, otherGroupUsed[i][3]);
 								},
 								function() {$("#d3_tooltipLegend"+i+block).remove();});
 						})(i);
 					}
 				}
-				
+								
 				// Maximum checkboxes checked: 4 / Minimum: 1
-				var maxChecked = $("#"+blockID+" :checkbox:checked").length >= 4; 
-				$("#"+blockID+" :checkbox").not(":checked").attr("disabled",maxChecked);
-				var minChecked = $("#"+blockID+" :checkbox:checked").length <= 1;
-				$("#"+blockID+" :checkbox:checked").attr("disabled",minChecked);
+				var maxChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4; 
+				$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled",maxChecked);
+				var minChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length <= 1;
+				$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled",minChecked);
 				
-				// By default is the dropdown hidden
-				for (var i=0; i<temperatureGroupUsed.length; i++) {
-					$("#d3_keysTemperature"+i+block).hide();
-					if ($("#d3_checkboxTemperature"+i+block).is(":checked")) {
-						$("#d3_keysTemperature"+i+block).show();
-					}	
-				}
-				temperatureHidden=true;
-				for (var i=0; i<warmExtremesGroupUsed.length; i++) {
-					$("#d3_keysWarmExtremes"+i+block).hide();
-					if ($("#d3_checkboxWarmExtremes"+i+block).is(":checked")) {
-						$("#d3_keysWarmExtremes"+i+block).show();
-					}	
-				} 
-				warmExtremesHidden=true;
-				for (var i=0; i<coldExtremesGroupUsed.length; i++) {
-					$("#d3_keysColdExtremes"+i+block).hide();
-					if ($("#d3_checkboxColdExtremes"+i+block).is(":checked")) {
-						$("#d3_keysColdExtremes"+i+block).show();
-					}	
-				}
-				coldExtremesHidden=true;
-				for (var i=0; i<precipitationGroupUsed.length; i++) {
-					$("#d3_keysPrecipitation"+i+block).hide();
-					if ($("#d3_checkboxPrecipitation"+i+block).is(":checked")) {
-						$("#d3_keysPrecipitation"+i+block).show();
-					}	
-				}
-				precipitationHidden=true;
-				for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {
-					$("#d3_keysExtremePrecipitation"+i+block).hide();
-					if ($("#d3_checkboxExtremePrecipitation"+i+block).is(":checked")) {
-						$("#d3_keysExtremePrecipitation"+i+block).show();
-					}	
-				}
-				extremePrecipitationHidden=true;
-				for (var i=0; i<windGroupUsed.length; i++) {
-					$("#d3_keysWind"+i+block).hide();
-					if ($("#d3_checkboxWind"+i+block).is(":checked")) {
-						$("#d3_keysWind"+i+block).show();
-					}	
-				}
-				windHidden=true;
-				for (var i=0; i<otherGroupUsed.length; i++) {
-					$("#d3_keysOther"+i+block).hide();
-					if ($("#d3_checkboxOther"+i+block).is(":checked")) {
-						$("#d3_keysOther"+i+block).show();
-					}	
-				}
-				otherHidden=true;
-				
-				// Collapse	
-				$("#d3_temperatureToggle"+block).click(function() {
-					if (temperatureHidden===true) {
-						$("#d3_tempMinus"+block).html(minus);
-						for (var i=0; i<temperatureGroupUsed.length; i++) {			
-							$("#d3_keysTemperature"+i+block).show();
-						}
-						temperatureHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (temperatureHidden===false) {
-						$("#d3_tempMinus"+block).html(plus);
-						for (var i=0; i<temperatureGroupUsed.length; i++) {
-							$("#d3_keysTemperature"+i+block).hide();
-							if ($("#d3_checkboxTemperature"+i+block).is(":checked")) {
-								$("#d3_keysTemperature"+i+block).show();
-							}	
-						}
-						temperatureHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
-					}
-				});
-				$("#d3_warmExtremesToggle"+block).click(function() {
-					if (warmExtremesHidden===true) {
-						$("#d3_warmExtremesMinus"+block).html(minus);
-						for (var i=0; i<warmExtremesGroupUsed.length; i++) {			
-							$("#d3_keysWarmExtremes"+i+block).show();
-						}
-						warmExtremesHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (warmExtremesHidden===false) {
-						$("#d3_warmExtremesMinus"+block).html(plus);
-						for (var i=0; i<warmExtremesGroupUsed.length; i++) {
-							$("#d3_keysWarmExtremes"+i+block).hide();
-							if ($("#d3_checkboxWarmExtremes"+i+block).is(":checked")) {
-								$("#d3_keysWarmExtremes"+i+block).show();
-							}	
-						}
-						warmExtremesHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
-					}
-				});
-				$("#d3_coldExtremesToggle"+block).click(function() {
-					if (coldExtremesHidden===true) {
-						$("#d3_coldExtremesMinus"+block).html(minus);
-						for (var i=0; i<coldExtremesGroupUsed.length; i++) {			
-							$("#d3_keysColdExtremes"+i+block).show();
-						}
-						coldExtremesHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (coldExtremesHidden===false) {
-						$("#d3_coldExtremesMinus"+block).html(plus);
-						for (var i=0; i<coldExtremesGroupUsed.length; i++) {
-							$("#d3_keysColdExtremes"+i+block).hide();
-							if ($("#d3_checkboxColdExtremes"+i+block).is(":checked")) {
-								$("#d3_keysColdExtremes"+i+block).show();
-							}	
-						}
-						coldExtremesHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
-					}
-				});
-				$("#d3_precipitationToggle"+block).click(function() {
-					if (precipitationHidden===true) {
-						$("#d3_precMinus"+block).html(minus);
-						for (var i=0; i<precipitationGroupUsed.length; i++) {			
-							$("#d3_keysPrecipitation"+i+block).show();
-						}
-						precipitationHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (precipitationHidden===false) {
-						$("#d3_precMinus"+block).html(plus);
-						for (var i=0; i<precipitationGroupUsed.length; i++) {
-							$("#d3_keysPrecipitation"+i+block).hide();
-							if ($("#d3_checkboxPrecipitation"+i+block).is(":checked")) {
-								$("#d3_keysPrecipitation"+i+block).show();
-							}	
-						}
-						precipitationHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
-					}
-				});
-				$("#d3_extremePrecipitationToggle"+block).click(function() {
-					if (extremePrecipitationHidden===true) {
-						$("#d3_extremePrecMinus"+block).html(minus);
-						for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {			
-							$("#d3_keysExtremePrecipitation"+i+block).show();
-						}
-						extremePrecipitationHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (extremePrecipitationHidden===false) {
-						$("#d3_extremePrecMinus"+block).html(plus);
-						for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {
-							$("#d3_keysExtremePrecipitation"+i+block).hide();
-							if ($("#d3_checkboxExtremePrecipitation"+i+block).is(":checked")) {
-								$("#d3_keysExtremePrecipitation"+i+block).show();
-							}	
-						}
-						extremePrecipitationHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
-					}
-				});
-				$("#d3_windToggle"+block).click(function() {
-					if (windHidden===true) {
-						$("#d3_windMinus"+block).html(minus);
-						for (var i=0; i<windGroupUsed.length; i++) {			
-							$("#d3_keysWind"+i+block).show();
-						}
-						windHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (windHidden===false) {
-						$("#d3_windMinus"+block).html(plus);
-						for (var i=0; i<windGroupUsed.length; i++) {
-							$("#d3_keysWind"+i+block).hide();
-							if ($("#d3_checkboxWind"+i+block).is(":checked")) {
-								$("#d3_keysWind"+i+block).show();
-							}	
-						}
-						windHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
-					}
-				});
-				$("#d3_otherToggle"+block).click(function() {
-					if (otherHidden===true) {
-						$("#d3_otherMinus"+block).html(minus);
-						for (var i=0; i<otherGroupUsed.length; i++) {			
-							$("#d3_keysOther"+i+block).show();
-						}
-						otherHidden=false;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesClose);
-					} else if (otherHidden===false) {
-						$("#d3_otherMinus"+block).html(plus);
-						for (var i=0; i<otherGroupUsed.length; i++) {
-							$("#d3_keysOther"+i+block).hide();
-							if ($("#d3_checkboxOther"+i+block).is(":checked")) {
-								$("#d3_keysOther"+i+block).show();
-							}	
-						}
-						otherHidden=true;
-						$("#d3_tooltipLegendCategories"+block).html(legendCategoriesOpen);
+				// Accordion for Legend
+				$("#d3_legendDiv"+block).accordion({
+					event: "click hoverintent",
+					autoHeight: false,
+					changestart: function( event, ui ) {
+						accordionShowCheckedKeys();
 					}
 				});
 				
+				// Show checked checkboxes when accordion is inactive 
+				function accordionShowCheckedKeys() {
+					// Remove old checkboxes
+					if ($("#d3_keysTemperature_TEMP"+block).length>0) {
+						$("#d3_keysTemperature_TEMP"+block).remove();
+					}
+					if ($("#d3_keysColdExtremes_TEMP"+block).length>0) {
+						$("#d3_keysColdExtremes_TEMP"+block).remove();
+					}
+					if ($("#d3_keysWarmExtremes_TEMP"+block).length>0) {
+						$("#d3_keysWarmExtremes_TEMP"+block).remove();
+					}
+					if ($("#d3_keysPrecipitation_TEMP"+block).length>0) {
+						$("#d3_keysPrecipitation_TEMP"+block).remove();
+					}
+					if ($("#d3_keysExtremePrecipitation_TEMP"+block).length>0) {
+						$("#d3_keysExtremePrecipitation_TEMP"+block).remove();
+					}
+					if ($("#d3_keysWind_TEMP"+block).length>0) {
+						$("#d3_keysWind_TEMP"+block).remove();
+					}
+					if ($("#d3_keysOther_TEMP"+block).length>0) {
+						$("#d3_keysOther_TEMP"+block).remove();
+					}
+					
+					// Find active accordion header
+					var legendDivActive=$("#d3_legendDiv"+block).accordion("option", "active");
+					
+					var legendDivsCount=$("#d3_legendDiv"+block).children("div");
+					for (var i=0; i<legendDivsCount.length; i++) {
+						if (i!==legendDivActive) {
+							switch (legendDivsCount[i].id) {
+								case "d3_keysDivTemperature"+block:
+									$("#legendTemperatureGroup"+block).append("<div id='d3_keysTemperature_TEMP"+block+"'</div>");
+									for (var k=0; k<coldExtremesGroupUsed.length; k++) {
+										if ($("#d3_checkboxTemperature"+k+block).is(":checked")) {
+											$("#d3_keysTemperature_TEMP"+block).append("<div id='d3_keysTemperatureTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysTemperature_TEMP"+block).append("<div id='d3_keysTemperatureBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysTemperatureBoxText_TEMP"+k+block).append("<div id='keysTemperatureText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#keysTemperatureText_TEMP"+k+block).append(temperatureGroupUsed[k][2]);
+											$("#d3_keysTemperatureBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+temperatureGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivWarmExtremes"+block:
+									$("#legendWarmExtremes"+block).append("<div id='d3_keysWarmExtremes_TEMP"+block+"'</div>");
+									for (var k=0; k<warmExtremesGroupUsed.length; k++) {
+										if ($("#d3_checkboxWarmExtremes"+k+block).is(":checked")) {
+											$("#d3_keysWarmExtremes_TEMP"+block).append("<div id='d3_keysWarmExtremesTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysWarmExtremes_TEMP"+block).append("<div id='d3_keysWarmExtremesBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysWarmExtremesBoxText_TEMP"+k+block).append("<div id='keysWarmExtremesText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#keysWarmExtremesText_TEMP"+k+block).append(warmExtremesGroupUsed[k][2]);
+											$("#d3_keysWarmExtremesBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+warmExtremesGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivColdExtremes"+block:
+									$("#legendColdExtremes"+block).append("<div id='d3_keysColdExtremes_TEMP"+block+"'</div>");
+									for (var k=0; k<coldExtremesGroupUsed.length; k++) {
+										if ($("#d3_checkboxColdExtremes"+k+block).is(":checked")) {
+											$("#d3_keysColdExtremes_TEMP"+block).append("<div id='d3_keysColdExtremesTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysColdExtremes_TEMP"+block).append("<div id='d3_keysColdExtremesBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysColdExtremesBoxText_TEMP"+k+block).append("<div id='keysColdExtremesText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#keysColdExtremesText_TEMP"+k+block).append(coldExtremesGroupUsed[k][2]);
+											$("#d3_keysColdExtremesBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+coldExtremesGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivPrecipitation"+block:
+									$("#legendPrecipitationGroup"+block).append("<div id='d3_keysPrecipitation_TEMP"+block+"'</div>");
+									for (var k=0; k<precipitationGroupUsed.length; k++) {
+										if ($("#d3_checkboxPrecipitation"+k+block).is(":checked")) {
+											$("#d3_keysPrecipitation_TEMP"+block).append("<div id='d3_keysPrecipitationTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysPrecipitation_TEMP"+block).append("<div id='d3_keysPrecipitationBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div id='d3_keysPrecipitationText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysPrecipitationText_TEMP"+k+block).append(precipitationGroupUsed[k][2]);
+											$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+precipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivExtremePrecipitation"+block:
+									$("#legendExtremePrecipitation"+block).append("<div id='d3_keysExtremePrecipitation_TEMP"+block+"'</div>");
+									for (var k=0; k<extremePrecipitationGroupUsed.length; k++) {
+										if ($("#d3_checkboxExtremePrecipitation"+k+block).is(":checked")) {
+											$("#d3_keysExtremePrecipitation_TEMP"+block).append("<div id='d3_keysExtremePrecipitationTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysExtremePrecipitation_TEMP"+block).append("<div id='d3_keysExtremePrecipitationBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div id='keysColdExtremesText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysExtremePrecipitationText_TEMP"+k+block).append(extremePrecipitationGroupUsed[k][2]);
+											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+extremePrecipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivWind"+block:
+									$("#legendWindGroup"+block).append("<div id='d3_keysWind_TEMP"+block+"'</div>");
+									for (var k=0; k<windGroupUsed.length; k++) {
+										if ($("#d3_checkboxWind"+k+block).is(":checked")) {
+											$("#d3_keysWind_TEMP"+block).append("<div id='d3_keysWindTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysWind_TEMP"+block).append("<div id='d3_keysWindBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysWindBoxText_TEMP"+k+block).append("<div id='d3_keysWindText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysWindText_TEMP"+k+block).append(windGroupUsed[k][2]);
+											$("#d3_keysWindBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+windGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+								case "d3_keysDivOther"+block:
+									$("#legendOtherGroup"+block).append("<div id='d3_keysOther_TEMP"+block+"'</div>");
+									for (var k=0; k<otherGroupUsed.length; k++) {
+										if ($("#d3_checkboxOther"+k+block).is(":checked")) {
+											$("#d3_keysOther_TEMP"+block).append("<div id='d3_keysOtherTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
+											$("#d3_keysOther_TEMP"+block).append("<div id='d3_keysOtherBoxText_TEMP"+k+block+"'></div>");
+											$("#d3_keysOtherBoxText_TEMP"+k+block).append("<div id='d3_keysOtherText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysOtherText_TEMP"+k+block).append(otherGroupUsed[k][2]);
+											$("#d3_keysOtherBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+otherGroupUsed[k][1]+partOfSVGLine2+"</div>");
+										}	
+									}
+									break;
+							}
+						}
+					}
+				}
+				accordionShowCheckedKeys();
+
 				// Print preview button
 				$("#"+blockID).append("<div id='printSelectWrapper"+block+"' class='printSelectWrapperClass'></div>");
 				$("#printSelectWrapper"+block)
 					.css("width", legendWidth)
 					.css("height", heightPrintSelect);
-				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'><i>Select up to 4 indices</i></div>");
+
+				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'><i>Select up to 4 indices</i></div>");		
 				$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><b><span style='font-size:14px;'>&nbsp;Print Preview</span></b></div>");
 				$("#d3_printPreviewId"+block).hover(function() {
 					$(this).css("cursor","pointer");
@@ -3692,7 +2364,7 @@ Drupal.behaviors.ccis = {
 				$("#d3_printPreviewId"+block).click(function() {
 					printPreview();
 				});
-				
+
 				// *** Redraw the Graph - START ***
 				function redrawGraph() {
 
@@ -3796,17 +2468,9 @@ Drupal.behaviors.ccis = {
 					xScale.range([0, (width+(margin.left_single*axis_sum)-(margin.left_single*axis_selection))]);
 					
 					// Update Y range
-					yScaleCelsius.range([height, 0]);
-					yScaleDays.range([height, 0]);
-					yScalePercent.range([height, 0]);
-					yScaleMilimeter.range([height, 0]);
-					yScaleDays.range([height, 0]);
-					yScalePascal.range([height, 0]);	
-					yScaleMeterPerSecond.range([height, 0]);
-					yScaleDegrees.range([height, 0]);
-					yScaleOctas.range([height, 0]);
-					yScaleCentimeter.range([height, 0]);
-					yScaleHours.range([height, 0]);
+					for (var i=0; i<unitsArray.length; i++) {
+						d3Units["yScale"+unitsArray[i][0]].range([height, 0]);
+					}
 					
 					// Create again the svg
 					createSvg();
@@ -3815,16 +2479,9 @@ Drupal.behaviors.ccis = {
 					findMaxMin();
 					
 					// Update Y domains
-					yScaleCelsius.domain([minCelsiusY, maxCelsiusY]);
-					yScaleDays.domain([minDaysY, maxDaysY]);
-					yScalePercent.domain([minPercentY, maxPercentY]);
-					yScaleMilimeter.domain([minMilimeterY, maxMilimeterY]);
-					yScalePascal.domain([minPascalY, maxPascalY]);		
-					yScaleMeterPerSecond.domain([minMeterPerSecondY, maxMeterPerSecondY]);
-					yScaleDegrees.domain([minDegreesY, maxDegreesY]);
-					yScaleOctas.domain([minOctasY, maxOctasY]);
-					yScaleCentimeter.domain([minCentimeterY, maxCentimeterY]);
-					yScaleHours.domain([minHoursY, maxHoursY]);
+					for (var i=0; i<unitsArray.length; i++) {
+						d3Units["yScale"+unitsArray[i][0]].domain([d3Units["min"+unitsArray[i][0]+"Y"], d3Units["max"+unitsArray[i][0]+"Y"]]);
+					}
 										
 					// Redraw Graphs
 					drawGraphs();
@@ -3848,96 +2505,10 @@ Drupal.behaviors.ccis = {
 				// Click checkbox
 				$("#"+blockID+" :checkbox").click(function() {
 					// Maximum checkboxes checked: 4 / Minimum: 1
-					var maxChecked = $("#"+blockID+" :checkbox:checked").length >= 4; 
-					$("#"+blockID+" :checkbox").not(":checked").attr("disabled",maxChecked);
-					var minChecked = $("#"+blockID+" :checkbox:checked").length <= 1;
-					$("#"+blockID+" :checkbox:checked").attr("disabled",minChecked);
-					if (temperatureHidden===true) {
-						for (var i=0; i<temperatureGroupUsed.length; i++) {
-							if ($("#d3_checkboxTemperature"+i+block).is(":checked")) {
-								$("#d3_keysTemperature"+i+block).show();
-							} else {
-								$("#d3_keysTemperature"+i+block).hide();
-							}
-						}
-					}
-					if (warmExtremesHidden===true) {
-						for (var i=0; i<warmExtremesGroupUsed.length; i++) {
-							if ($("#d3_checkboxWarmExtremes"+i+block).is(":checked")) {
-								$("#d3_keysWarmExtremes"+i+block).show();
-							} else {
-								$("#d3_keysWarmExtremes"+i+block).hide();
-							}
-						}
-					}
-					if (coldExtremesHidden===true) {
-						for (var i=0; i<coldExtremesGroupUsed.length; i++) {
-							if ($("#d3_checkboxColdExtremes"+i+block).is(":checked")) {
-								$("#d3_keysColdExtremes"+i+block).show();
-							} else {
-								$("#d3_keysColdExtremes"+i+block).hide();
-							}
-						}
-					}
-					if (precipitationHidden===true) {
-						for (var i=0; i<precipitationGroupUsed.length; i++) {
-							if ($("#d3_checkboxPrecipitation"+i+block).is(":checked")) {
-								$("#d3_keysPrecipitation"+i+block).show();
-							} else {
-								$("#d3_keysPrecipitation"+i+block).hide();
-							}
-						}
-					}
-					if (extremePrecipitationHidden===true) {
-						for (var i=0; i<extremePrecipitationGroupUsed.length; i++) {
-							if ($("#d3_checkboxExtremePrecipitation"+i+block).is(":checked")) {
-								$("#d3_keysExtremePrecipitation"+i+block).show();
-							} else {
-								$("#d3_keysExtremePrecipitation"+i+block).hide();
-							}
-						}
-					}
-					if (windHidden===true) {
-						for (var i=0; i<windGroupUsed.length; i++) {
-							if ($("#d3_checkboxWind"+i+block).is(":checked")) {
-								$("#d3_keysWind"+i+block).show();
-							} else {
-								$("#d3_keysWind"+i+block).hide();
-							}
-						}
-					}
-					if (otherHidden===true) {
-						for (var i=0; i<otherGroupUsed.length; i++) {
-							if ($("#d3_checkboxOther"+i+block).is(":checked")) {
-								$("#d3_keysOther"+i+block).show();
-							} else {
-								$("#d3_keysOther"+i+block).hide();
-							}
-						}
-					}
-		
-					// Hide dropdowns with delay
-					if (temperatureHidden===false) {
-						setTimeout(function(){$("#d3_temperatureToggle"+block).click();}, 2000);
-					}
-					if (warmExtremesHidden===false) {
-						setTimeout(function(){$("#d3_warmExtremesToggle"+block).click();}, 2000);
-					}
-					if (coldExtremesHidden===false) {
-						setTimeout(function(){$("#d3_coldExtremesToggle"+block).click();}, 2000);
-					}
-					if (precipitationHidden===false) {
-						setTimeout(function(){$("#d3_precipitationToggle"+block).click();}, 2000); 
-					}
-					if (extremePrecipitationHidden===false) {
-						setTimeout(function(){$("#d3_extremePrecipitationToggle"+block).click();}, 2000); 
-					}
-					if (windHidden===false) {
-						setTimeout(function(){$("#d3_windToggle"+block).click();}, 2000); 
-					}
-					if (otherHidden===false) {
-						setTimeout(function(){$("#d3_otherToggle"+block).click();}, 2000); 
-					}
+					var maxChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4; 
+					$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled",maxChecked);
+					var minChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length <= 1;
+					$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled",minChecked);
 					
 					// Redraw graph
 					redrawGraph();
@@ -3951,11 +2522,15 @@ Drupal.behaviors.ccis = {
 					height = width/2;
 					// Change offset for the legend tooltips
 					if (width>widthTemp) {
-						topOffset = 25;
+						topOffset = 20;
 					} else {
-						topOffset = 298;
+						topOffset = 293;
 					}
 					$("#d3_legendDiv"+block).css("height", height + margin.top + margin.bottom - heightPrintSelect);
+
+					// Update scrollbar height
+					$("#ccis-weather-d3-block-2").children(".slimScrollDiv")[0].style.setProperty("height", height + margin.top + margin.bottom - heightPrintSelect+"px");
+					
 					// Redraw graph
 					redrawGraph();
 				});
@@ -4019,37 +2594,12 @@ Drupal.behaviors.ccis = {
 						
 						// Find the Units
 						function findHoverUnits(label) {
-							switch (label) {
-								case "celsius":
-									return "&#8451;";
-									break;
-								case "days":
-									return "days";
-									break;
-								case "percent":
-									return "%";
-									break;
-								case "milimeter":
-									return "mm";
-									break;
-								case "pascal":
-									return "hPa";
-									break;
-								case "meterPerSecond":
-									return "m/s";
-									break;
-								case "degrees":
-									return "&#176;";
-									break;
-								case "octas":
-									return "octas";
-									break;
-								case "centimeter":
-									return "cm";
-									break;
-								case "hours":
-									return "hours";
-									break;
+							for (var i=0; i<unitsArray.length; i++) {
+								switch (label) {
+									case unitsArray[i][0]:
+										return unitsArray[i][4];
+										break;
+								}
 							}
 						}
 						
@@ -4164,7 +2714,7 @@ Drupal.behaviors.ccis = {
 									for (var i=0; i<windGroupShown.length; i++) {
 										if (wind===true) {
 											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
-											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='19' height='16'></td>";
+											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind_black.png' width='19' height='16'></td>";
 										} else {
 											tooltipText += "<tr>";
 											tooltipText += "<td></td>";
@@ -4224,7 +2774,7 @@ Drupal.behaviors.ccis = {
 						var html = clone.html();
 
 						// Get the name of the Station
-						var stationName = settings.ccis.stations[1].station_name;
+						var stationName = settings.ccis.stations[0].station_name;
 						
 						var printKeys = "";
 						for (var i=0; i<temperatureGroupShown.length; i++) {
