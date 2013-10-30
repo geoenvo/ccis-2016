@@ -691,7 +691,11 @@ function _ccis_block_stationmap($nodes = NULL) {
   }
   $nids = empty($nids) ? NULL : implode(',', $nids);
   $view = views_embed_view('station_map', 'embed_1', $nids);
-  $output = '<div class="ccis-station-map-block" id="ccis-station-map-block">';
+  $hide_portlet = '1';
+  if (!empty($view)) {
+    $hide_portlet = '0';
+  }
+  $output = '<div class="ccis-station-map-block" id="ccis-station-map-block" data-hide-portlet=' . $hide_portlet . '>';
   $output .= $view;
   $output .= '</div>';
   return $output;
@@ -874,11 +878,11 @@ function ccis_js_alter(&$javascript) {
   if (!empty($javascript[$js_file])) {
     $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_popup.js';
   }
-
   $js_file = drupal_get_path('module', 'openlayers_plus') . '/behaviors/openlayers_plus_behavior_blocktoggle.js';
   if (!empty($javascript[$js_file])) {
     $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_plus_behavior_blocktoggle.js';
   }
+
 }
 
 /**
