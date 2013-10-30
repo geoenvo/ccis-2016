@@ -497,7 +497,9 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   $settings = _ccis_get_datatables_settings($list2, $form_state['values'], 2);
   $commands[] = ajax_command_settings($settings, TRUE);
 
-  $commands[] = ajax_command_data('#ccis-weather-datatable-block', 'refresh', "1");
+  $commands[] = ajax_command_data('#ccis-weather-d3-block-1', 'refresh', '1');
+  $commands[] = ajax_command_data('#ccis-weather-d3-block-2', 'refresh', '1');
+  $commands[] = ajax_command_data('#ccis-weather-datatable-block', 'refresh', '1');
 
   $commands[] = ajax_command_replace('#ccis-station-info-block-1', _ccis_block_stationinfo($station_1));
   if (!empty($station_2)) {
@@ -510,9 +512,6 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
 
   $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap(array($station_1, $station_2)));
 
-  // TODO Empty also search result?
-  #$commands[] = ajax_command_replace('#ccis-station-search-result', '<div id="ccis-station-search-result"></div>');
-  $commands[] = ajax_command_prepend(NULL, theme('status_messages'));
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
@@ -531,7 +530,7 @@ function _ccis_block_d3($list, $params, $id = 1) {
   drupal_add_css($path . '/css/d3.css');
   drupal_add_js(_ccis_get_d3_settings($list, $params, $id), 'setting');
 
-  $output = '<div id="ccis-weather-d3-block-' . $id . '">';
+  $output = '<div data-refresh="1" id="ccis-weather-d3-block-' . $id . '">';
   $output .= '</div>';
   return $output;
 }
@@ -880,7 +879,6 @@ function ccis_js_alter(&$javascript) {
   if (!empty($javascript[$js_file])) {
     $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_plus_behavior_blocktoggle.js';
   }
-
 }
 
 /**
