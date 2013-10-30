@@ -757,7 +757,11 @@ function _ccis_get_weather_data_labels($list = NULL) {
     $tmp = array();
     $field_infos = field_info_instances('node', 'weather_data');
     foreach ($field_infos as $field_name => $info) {
-      $label = ' <span class="ccis-datatable-title" title="' . check_plain($info['description']) . '">';
+      $desc = trim($info['description']);
+      if (!empty($desc)) {
+        $desc = ' title="' . check_plain($desc) . '"';
+      }
+      $label = '<span class="ccis-datatable-title" ' . $desc . '>';
       $label .= check_plain($info['label']);
       $label .= '</span>';
       if (!empty($info['settings']['suffix'])) {

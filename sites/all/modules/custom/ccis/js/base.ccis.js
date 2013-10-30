@@ -1,7 +1,7 @@
 (function($) {
 Drupal.behaviors.ccis_base = {
-  attach: function(d_context, settings) {
-    var $list = $('#ccis-station-search-result', d_context);
+  attach: function(context, settings) {
+    var $list = $('#ccis-station-search-result', context);
     var $radios = $list.find("[type=radio]");
     var checked, station_number, station_input, form;
     $radios.click( function(e) {
