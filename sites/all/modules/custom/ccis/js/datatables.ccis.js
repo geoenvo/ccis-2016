@@ -64,10 +64,12 @@ Drupal.behaviors.ccis_datatables = {
       "sScrollY": "300px",
       "bScrollCollapse": true,
       "bPaginate": false,
-      "sDom": 'C<"clear">lfrtip',
+      "sDom": 'RC<"clear">lfrtip',
       "aoColumnDefs": [{ "bVisible": false, "aTargets": aTargets }],
       "oColVis": {
-        "aiExclude": [ 0 ]
+        "aiExclude": [ 0 ],
+        "bRestore": true,
+        "sAlign": "right"
       },
       "oLanguage": {
         "sEmptyTable":     Drupal.t("No data available in table"),
