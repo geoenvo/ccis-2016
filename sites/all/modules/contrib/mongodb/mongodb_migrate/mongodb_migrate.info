@@ -5,9 +5,9 @@ core = 7.x
 requirements[] = entity
 requirements[] = mongodb_field_storage
 
-; Information added by drupal.org packaging script on 2013-10-01
-version = "7.x-1.0-rc2+17-dev"
+; Information added by drupal.org packaging script on 2013-10-26
+version = "7.x-1.0-rc2+18-dev"
 core = "7.x"
 project = "mongodb"
-datestamp = "1380587741"
+datestamp = "1382751121"
 
