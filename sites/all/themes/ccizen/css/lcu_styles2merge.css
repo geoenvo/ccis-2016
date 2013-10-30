@@ -2,14 +2,7 @@
 * Events 
 ************/
 
-/* font definiert in styles.css Zeile 66 ff */
-.node-event.view-mode-full .field-name-field-date-event,
-.node-event.view-mode-full .field-name-field-place-event,
-.node-event.view-mode-full .field-name-field-country-event,
-.node-blog-article .field-name-post-date,
-.node-blog-article .field-name-title {
-	font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
-}
+
 
 /* events definiert in styles.css Zeile 871 ff */
 .node-event.view-mode-full .field-name-field-image-event-logo {
@@ -48,6 +41,15 @@
 /***************
 * Zusammengefasst 
 ****************/
+/* font definiert in styles.css Zeile 66 ff */
+.node-event.view-mode-full .field-name-field-date-event,
+.node-event.view-mode-full .field-name-field-place-event,
+.node-event.view-mode-full .field-name-field-country-event,
+.node-blog-article .field-name-post-date,
+.node-blog-article .field-name-title,
+#user-register-form .fieldset-legend {
+	font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
+}
 
 .node-event.view-mode-full.ds-2col > .group-left,
 .node-blog-article.view-mode-full.ds-2col > .group-left {
@@ -111,4 +113,35 @@ h3.teasertitle {
 .node-blog-article.view-mode-full .field-name-post-date {
 	color: #F15A24;
 	font-size: 1.8em;
+}
+
+/******************
+* Login + Register
+*******************/
+#user-register-form {
+	background-color: #EBEBEB;
+	border: 5px solid #B3B3B3;
+  border-radius: 5px 5px 5px 5px;
+  padding: 20px;
+}
+#user-register-form .form-item {
+	margin: 0.5em 0;
+}
+#user-register-form .form-item .description {
+    font-size: 0.75em;
+}
+#user-register-form label,
+#user-register-form .fieldset-legend {
+	font-size: 1.2em;
+}
+#user-register-form input {
+	border: none;
+}
+#user-register-form .form-submit {
+	background-color: #2C4563;
+  color: #C7B299;
+  margin-top: 10px;
+}
+#user-register-form .fieldset-legend {
+
 }
