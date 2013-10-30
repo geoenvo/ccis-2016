@@ -466,7 +466,7 @@ html body.admin-menu {
   }
 
 #homebox #homebox-column-1 .homebox-portlet .portlet-content {
-  padding: 0 5px;
+  padding: 0 5px 5px;
   }
 
 #homebox #homebox-block-ccis_stationinfo,
@@ -1435,6 +1435,7 @@ tr.odd td.sorting_1 {
 
 #ccis-station-search-result th {
   color: #fcce00;
+  font-size: 1em;
   }
 
 #ccis-station-search-result .form-type-radio {

@@ -74,7 +74,41 @@ function ccis_users_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 2,
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'profile2-main-field_middle_name'
+  $field_instances['profile2-main-field_middle_name'] = array(
+    'bundle' => 'main',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'profile2',
+    'field_name' => 'field_middle_name',
+    'label' => 'Middle name',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
     ),
   );
 
@@ -95,7 +129,7 @@ function ccis_users_field_default_field_instances() {
     ),
     'entity_type' => 'profile2',
     'field_name' => 'field_surname',
-    'label' => 'Surname',
+    'label' => 'Last name',
     'required' => 1,
     'settings' => array(
       'text_processing' => 0,
@@ -108,7 +142,7 @@ function ccis_users_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -142,7 +176,7 @@ function ccis_users_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 5,
     ),
   );
 
@@ -176,7 +210,7 @@ function ccis_users_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 7,
     ),
   );
 
@@ -197,7 +231,7 @@ function ccis_users_field_default_field_instances() {
     ),
     'entity_type' => 'profile2',
     'field_name' => 'field_user_postcode',
-    'label' => 'Postcode',
+    'label' => 'Postal code',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -207,10 +241,10 @@ function ccis_users_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'size' => 60,
+        'size' => 10,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 6,
     ),
   );
 
@@ -220,8 +254,9 @@ function ccis_users_field_default_field_instances() {
   t('City');
   t('First Name');
   t('Institution');
-  t('Postcode');
-  t('Surname');
+  t('Last name');
+  t('Middle name');
+  t('Postal code');
 
   return $field_instances;
 }

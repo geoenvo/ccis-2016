@@ -239,6 +239,14 @@ function ccis_openlayers_openlayers_maps() {
         'point_zoom_level' => '5',
         'zoomtolayer_scale' => '1',
       ),
+      'openlayers_plus_behavior_blocktoggle' => array(
+        'enabled' => 1,
+        'a_label' => 'Satellite',
+        'a' => 'mapquest_openaerial',
+        'b_label' => 'Map',
+        'b' => 'mapquest_osm',
+        'position' => 'ne',
+      ),
     ),
     'default_layer' => 'mapquest_osm',
     'layers' => array(
