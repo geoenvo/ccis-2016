@@ -564,6 +564,7 @@ function _ccis_block_datatables($list = 'unknown', $values) {
   $path = libraries_get_path('datatables');
   drupal_add_js($path . '/media/js/jquery.dataTables.js');
   drupal_add_js($path . '/extras/ColVis/media/js/ColVis.min.js');
+  drupal_add_js($path . '/extras/ColReorder/media/js/ColReorder.min.js');
   drupal_add_css($path . '/media/css/demo_table.css');
 
   $path = drupal_get_path('module', 'ccis');
