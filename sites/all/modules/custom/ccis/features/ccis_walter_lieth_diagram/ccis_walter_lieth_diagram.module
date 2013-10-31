@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the CCIS Walter-Lieth-Diagram feature.
- */
-
-include_once 'ccis_walter_lieth_diagram.features.inc';

@@ -10,6 +10,173 @@
 function ccis_ct_weather_station_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-walter_lieth_diagram-field_diagram_picture'
+  $field_instances['node-walter_lieth_diagram-field_diagram_picture'] = array(
+    'bundle' => 'walter_lieth_diagram',
+    'deleted' => 0,
+    'description' => 'Please add the Walter-Lieth-Diagram',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+          'linked_field' => array(
+            'advanced' => array(
+              'class' => '',
+              'rel' => '',
+              'target' => '',
+              'text' => '',
+              'title' => '',
+            ),
+            'destination' => '',
+            'linked' => 0,
+          ),
+        ),
+        'type' => 'image',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_diagram_picture',
+    'label' => 'Diagram Picture',
+    'required' => 1,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-walter_lieth_diagram-field_statement'
+  $field_instances['node-walter_lieth_diagram-field_statement'] = array(
+    'bundle' => 'walter_lieth_diagram',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Pleas add a statement.',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'linked_field' => array(
+            'advanced' => array(
+              'class' => '',
+              'rel' => '',
+              'target' => '',
+              'text' => '',
+              'title' => '',
+            ),
+            'destination' => '',
+            'linked' => 0,
+          ),
+        ),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_statement',
+    'label' => 'Statement',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-walter_lieth_diagram-field_weather_station'
+  $field_instances['node-walter_lieth_diagram-field_weather_station'] = array(
+    'bundle' => 'walter_lieth_diagram',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+          'linked_field' => array(
+            'advanced' => array(
+              'class' => '',
+              'rel' => '',
+              'target' => '',
+              'text' => '',
+              'title' => '',
+            ),
+            'destination' => '',
+            'linked' => 0,
+          ),
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_weather_station',
+    'label' => 'Weather Station',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'node-weather_station-field_address'
   $field_instances['node-weather_station-field_address'] = array(
     'bundle' => 'weather_station',
@@ -3749,6 +3916,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Date Stamp');
   t('Description');
   t('Description, abstract');
+  t('Diagram Picture');
   t('Disposable replacement');
   t('E-Mail');
   t('E-Mail - Organization');
@@ -3778,6 +3946,8 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Phone');
   t('Phone - Organization');
   t('Photos, Docs');
+  t('Pleas add a statement.');
+  t('Please add the Walter-Lieth-Diagram');
   t('Postcode');
   t('Postcode - Organization');
   t('Province / Region');
@@ -3792,6 +3962,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Special Codes');
   t('Standard');
   t('Standard Version');
+  t('Statement');
   t('Station Alias Name');
   t('Station No.');
   t('Station operator or responsible organization name');
@@ -3806,6 +3977,7 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('WMO Code');
   t('WMO Code or station number');
   t('Walter-Lieth-Diagram');
+  t('Weather Station');
   t('when any of the location parameters are changed');
 
   return $field_instances;
