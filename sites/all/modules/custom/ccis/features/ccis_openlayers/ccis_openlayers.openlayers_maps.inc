@@ -58,7 +58,7 @@ function ccis_openlayers_openlayers_maps() {
       'openlayers_behavior_layerswitcher' => array(
         'ascending' => 1,
         'sortBaseLayer' => '0',
-        'roundedCorner' => 1,
+        'roundedCorner' => 0,
         'roundedCornerColor' => '#222222',
         'maximizeDefault' => 0,
         'div' => '',
