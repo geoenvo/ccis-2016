@@ -50,7 +50,7 @@ function ccis_basic_page_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => -4,
     ),
   );
 
