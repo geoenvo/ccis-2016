@@ -23,12 +23,6 @@ function ccis_slideshow_default_fe_block_settings() {
     'pages' => '<front>',
     'roles' => array(),
     'themes' => array(
-      'bartik' => array(
-        'region' => '',
-        'status' => 0,
-        'theme' => 'bartik',
-        'weight' => 0,
-      ),
       'ccizen' => array(
         'region' => '',
         'status' => 0,
