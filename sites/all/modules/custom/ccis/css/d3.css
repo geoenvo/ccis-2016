@@ -63,9 +63,6 @@
 	font-family: 'Open Sans Condensed','Arial Narrow', sans-serif;
 	font-size: 14px;
 }
-.d3_legendClass h6 {
-	/*font-size: 12px;*/
-}
 
 /* Keys in Legend  */
 .d3_keys {
@@ -125,18 +122,16 @@
 	float: right;
 	background-color: #b3b3b3;
 	border-top: 1px solid black;
+	padding-bottom: 2px;
 }
 
 .d3_SelectDiagramsTextClass {
-	position:relative;
-	float:right;
 	right: 28px;
 	font-size:12px;
+	margin-left: 30px;
 }
 
 .d3_printPreviewClass {
 	width: 120px;
-	position:relative; 
-	float:right;
-	right: 30px;
+	margin-left: 25px;
 }
