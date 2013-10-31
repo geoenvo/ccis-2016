@@ -104,11 +104,11 @@ Drupal.behaviors.ccis = {
 		
 		var margin = {top: 20, right: 10, bottom: 25, left: 140, left_single: 35};
 		var widthDiv = $("#"+blockID).width();
-		var legendWidth = 170;
+		var legendWidth = 150;
 		var tooltipWidth = 200;
 		var width = widthDiv - margin.left - margin.right - legendWidth;
 		var height = width/2;
-		var heightPrintSelect = 50;
+		var heightPrintSelect = 40;
 		var axis_sum = 4;	// MAX: 4
 		var axis_selection;
 		var svg;	
@@ -564,7 +564,7 @@ Drupal.behaviors.ccis = {
 					$("#d3_tooltipLegend"+keyPlace+block)
 						.css("position", "absolute")
 						.css("right", (legendWidth-3)+"px")
-						.css("top", (topPosition+20)+"px")
+						.css("top", (topPosition+7)+"px")
 						.css("width", "auto")
 						.css("clear", "both")
 						.css("float", "left")
@@ -945,7 +945,7 @@ Drupal.behaviors.ccis = {
 										if ($("#d3_checkboxExtremePrecipitation"+k+block).is(":checked")) {
 											$("#d3_keysExtremePrecipitation_TEMP"+block).append("<div id='d3_keysExtremePrecipitationTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
 											$("#d3_keysExtremePrecipitation_TEMP"+block).append("<div id='d3_keysExtremePrecipitationBoxText_TEMP"+k+block+"'></div>");
-											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div id='keysColdExtremesText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div id='d3_keysExtremePrecipitationText_TEMP"+k+block+"' class='d3_keysText'></div>");
 											$("#d3_keysExtremePrecipitationText_TEMP"+k+block).append(extremePrecipitationGroupUsed[k][2]);
 											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+extremePrecipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
 										}	
@@ -1340,6 +1340,7 @@ Drupal.behaviors.ccis = {
 										if (wind===true) {
 											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind_black.png' width='19' height='16'></td>";
+											wind = false;
 										} else {
 											tooltipText += "<tr>";
 											tooltipText += "<td></td>";
@@ -1354,6 +1355,7 @@ Drupal.behaviors.ccis = {
 										if (other===true) {
 											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='19' height='16'></td>";
+											other = false;
 										} else {
 											tooltipText += "<tr>";
 											tooltipText += "<td></td>";
@@ -1482,13 +1484,13 @@ Drupal.behaviors.ccis = {
 		
 		var margin = {top: 20, right: 10, bottom: 25, left: 140, left_single: 35};
 		var widthDiv = $("#"+blockID).width();
-		var legendWidth = 170;
+		var legendWidth = 150;
 		var tooltipWidth = 200;
 		var width = widthDiv - margin.left - margin.right - legendWidth;
 		var height = width/2;
 		var widthTemp = width;
-		var topOffset = 293;
-		var heightPrintSelect = 50;
+		var topOffset = 280;
+		var heightPrintSelect = 40;
 		var axis_sum = 4;	// MAX: 4
 		var axis_selection;
 		var svg;	
@@ -2325,7 +2327,7 @@ Drupal.behaviors.ccis = {
 										if ($("#d3_checkboxExtremePrecipitation"+k+block).is(":checked")) {
 											$("#d3_keysExtremePrecipitation_TEMP"+block).append("<div id='d3_keysExtremePrecipitationTick_TEMP"+k+block+"' class='d3_keysTick'><input type='checkbox' checked></div>");			
 											$("#d3_keysExtremePrecipitation_TEMP"+block).append("<div id='d3_keysExtremePrecipitationBoxText_TEMP"+k+block+"'></div>");
-											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div id='keysColdExtremesText_TEMP"+k+block+"' class='d3_keysText'></div>");
+											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div id='d3_keysExtremePrecipitationText_TEMP"+k+block+"' class='d3_keysText'></div>");
 											$("#d3_keysExtremePrecipitationText_TEMP"+k+block).append(extremePrecipitationGroupUsed[k][2]);
 											$("#d3_keysExtremePrecipitationBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+extremePrecipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
 										}	
@@ -2533,9 +2535,9 @@ Drupal.behaviors.ccis = {
 					height = width/2;
 					// Change offset for the legend tooltips
 					if (width>widthTemp) {
-						topOffset = 20;
+						topOffset = 7;
 					} else {
-						topOffset = 293;
+						topOffset = 280;
 					}
 					$("#d3_legendDiv"+block).css("height", height + margin.top + margin.bottom - heightPrintSelect);
 
@@ -2726,6 +2728,7 @@ Drupal.behaviors.ccis = {
 										if (wind===true) {
 											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind_black.png' width='19' height='16'></td>";
+											wind = false;
 										} else {
 											tooltipText += "<tr>";
 											tooltipText += "<td></td>";
@@ -2740,6 +2743,7 @@ Drupal.behaviors.ccis = {
 										if (other===true) {
 											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='19' height='16'></td>";
+											other = false;
 										} else {
 											tooltipText += "<tr>";
 											tooltipText += "<td></td>";
