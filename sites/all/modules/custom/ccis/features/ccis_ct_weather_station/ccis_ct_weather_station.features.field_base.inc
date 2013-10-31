@@ -394,42 +394,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_csv_files'
-  $field_bases['field_csv_files'] = array(
-    'active' => 1,
-    'cardinality' => 3,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_csv_files',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'foreign keys' => array(
-      'fid' => array(
-        'columns' => array(
-          'fid' => 'fid',
-        ),
-        'table' => 'file_managed',
-      ),
-    ),
-    'indexes' => array(
-      'fid' => array(
-        0 => 'fid',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'file',
-    'settings' => array(
-      'display_default' => 0,
-      'display_field' => 0,
-      'uri_scheme' => 'private',
-      'views_base_columns' => array(),
-      'views_base_table' => FALSE,
-    ),
-    'translatable' => 0,
-    'type' => 'file',
-  );
-
   // Exported field_base: 'field_datacodes'
   $field_bases['field_datacodes'] = array(
     'active' => 1,
@@ -1368,40 +1332,6 @@ function ccis_ct_weather_station_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
       'profile2_private' => FALSE,
-      'views_base_columns' => array(),
-      'views_base_table' => FALSE,
-    ),
-    'translatable' => 0,
-    'type' => 'text',
-  );
-
-  // Exported field_base: 'field_mongodb_list_name'
-  $field_bases['field_mongodb_list_name'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_mongodb_list_name',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'foreign keys' => array(
-      'format' => array(
-        'columns' => array(
-          'format' => 'format',
-        ),
-        'table' => 'filter_format',
-      ),
-    ),
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(
-      'max_length' => 255,
       'views_base_columns' => array(),
       'views_base_table' => FALSE,
     ),

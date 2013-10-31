@@ -730,54 +730,6 @@ function ccis_ct_weather_station_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-weather_station-field_csv_files'
-  $field_instances['node-weather_station-field_csv_files'] = array(
-    'bundle' => 'weather_station',
-    'deleted' => 0,
-    'description' => 'The filename must be in this pattern <em>stationname_(daily|monthly|yearly).csv</em>. Note: It is not possible at the moment to replace a file here.',
-    'display' => array(
-      'dashboard' => array(
-        'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
-      ),
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'file',
-        'settings' => array(),
-        'type' => 'file_default',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_csv_files',
-    'label' => 'CSV-Files',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'file_directory' => 'csv_incoming',
-      'file_extensions' => 'csv',
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'file_generic',
-      'weight' => 2,
-    ),
-  );
-
   // Exported field_instance: 'node-weather_station-field_datacodes'
   $field_instances['node-weather_station-field_datacodes'] = array(
     'bundle' => 'weather_station',
@@ -2123,52 +2075,6 @@ function ccis_ct_weather_station_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 43,
-    ),
-  );
-
-  // Exported field_instance: 'node-weather_station-field_mongodb_list_name'
-  $field_instances['node-weather_station-field_mongodb_list_name'] = array(
-    'bundle' => 'weather_station',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'In case the station title is not equal with csv file name suffix, enter here the right suffix. Example: Station title is <em>München</em>, File name is <em>munich_yearly.csv</em> then enter <em>munich</em>.',
-    'display' => array(
-      'dashboard' => array(
-        'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
-      ),
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'inline',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 2,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_mongodb_list_name',
-    'label' => 'MongoDB List Suffix',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 1,
     ),
   );
 
@@ -3902,7 +3808,6 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Attachments');
   t('Begin of Data Availablility');
   t('CRS');
-  t('CSV-Files');
   t('Character Code');
   t('City');
   t('City - Organization');
@@ -3925,7 +3830,6 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Extent');
   t('Fax');
   t('Fax - Organization');
-  t('In case the station title is not equal with csv file name suffix, enter here the right suffix. Example: Station title is <em>München</em>, File name is <em>munich_yearly.csv</em> then enter <em>munich</em>.');
   t('Keywords');
   t('Language');
   t('Link to Dataset');
@@ -3933,7 +3837,6 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Maintenance Cycle');
   t('Maintenance operations');
   t('Measurement times');
-  t('MongoDB List Suffix');
   t('Name');
   t('National station number or code');
   t('Observation instructions');
@@ -3967,7 +3870,6 @@ function ccis_ct_weather_station_field_default_field_instances() {
   t('Station No.');
   t('Station operator or responsible organization name');
   t('Status');
-  t('The filename must be in this pattern <em>stationname_(daily|monthly|yearly).csv</em>. Note: It is not possible at the moment to replace a file here.');
   t('Topic category');
   t('Topography');
   t('Type');
