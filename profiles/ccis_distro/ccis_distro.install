@@ -5,6 +5,66 @@
  */
 
 /**
+ * Implements hook_install_tasks_alter().
+ */
+function ccis_distro_install_tasks_alter(&$tasks, $install_state) {
+  global $install_state;
+  if (!isset($tasks['file_system'])) {
+    $finish_task = $tasks['install_finished'];
+    unset($tasks['install_finished']);
+    module_load_include('inc', 'system', 'system.admin');
+    $tasks['file_system'] = array(
+      'display_name' => st('File system'),
+      'type' => 'form',
+      'function' => 'ccis_distro_install_file_system',
+    );
+    $tasks = array_merge($tasks, array('install_finished' => $finish_task));
+  }
+}
+
+
+/**
+ * Form for the - file_system - install task.
+ */
+function ccis_distro_install_file_system($form, &$form_state, $install_state) {
+  global $install_state;
+  drupal_set_title(t('File system'), PASS_THROUGH);
+  $page = isset($install_state['parameters']['filesystem_page']) ? $install_state['parameters']['filesystem_page'] : 1;
+  $form = system_file_system_settings();
+  if ($page == 1) {
+    $form['file_private_path']['#default_value'] = $form['file_public_path']['#default_value'] . '/private';
+    unset($form['file_default_scheme']);
+  }
+  else{
+    unset($form['file_private_path']);
+    unset($form['file_public_path']);
+    unset($form['file_temporary_path']);
+  }
+  $form['actions'] = array('#type' => 'actions');
+  $form['actions']['submit'] = array(
+      '#type' => 'submit',
+      '#value' => st('Save and continue'),
+      '#weight' => 15,
+  );
+  $form['#submit'][] = 'ccis_distro_install_file_system_submit';
+  return $form;
+}
+
+/**
+ * Submit handler for ccis_distro_install_file_system().
+ */
+function ccis_distro_install_file_system_submit(&$form, &$form_state) {
+  global $install_state;
+  $page = isset($install_state['parameters']['filesystem_page']) ? $install_state['parameters']['filesystem_page'] : 1;
+
+  if ($page == 1) {
+    $install_state['parameters']['filesystem_page'] = 2;
+    $install_state['parameters_changed'] = TRUE;
+    $install_state['task_not_complete'] = TRUE;
+  }
+}
+
+/**
  * Implements hook_install().
  *
  * Perform actions to set up the site for this profile.
@@ -431,4 +491,34 @@ function ccis_distro_install() {
     ->execute();
   variable_set('admin_theme', 'seven');
   variable_set('node_admin_theme', '1');
+  // Disable default Bartik theme
+  //theme_disable(array('bartik'));
+//   $modules = array(
+//     'ccis_ct_weather_station',
+//     'ccis_weather_station_importer',
+//     'ccis_basic_page',
+//     'ccis_blog',
+//     'ccis_ct_weather_data',
+//     'ccis_content_exchanger',
+//     'ccis_dashboard',
+//     'ccis_events',
+//     'ccis_feedback',
+//     'ccis_formatters',
+//     'ccis_multilanguage',
+//     'ccis_news',
+//     'ccis_openlayers',
+//     'ccis_roles_permissions',
+//     'ccis_slideshow',
+//     'ccis_sponsor_logos',
+//     'ccis_static_content',
+//     'ccis_theme',
+//     'ccis_users',
+//     'ccis_walter_lieth_diagram',
+//     'cli_sample_content',
+//     'cli_sample_positioning',
+//     'cli_sponsor_logos',
+//     'rb_configuration',
+//   );
+//   // enabled basic features
+//   module_enable($modules);
 }
