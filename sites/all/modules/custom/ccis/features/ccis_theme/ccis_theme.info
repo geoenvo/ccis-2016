@@ -5,6 +5,7 @@ package = CCIS
 version = 7.x-1.0-beta2
 project = ccis_theme
 dependencies[] = boxes
+dependencies[] = ccis_sponsor_logos
 dependencies[] = cli_sample_positioning
 dependencies[] = compact_forms
 dependencies[] = context
