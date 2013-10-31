@@ -36,13 +36,13 @@ function ccis_theme_context_default_contexts() {
           'module' => 'boxes',
           'delta' => 'socialmedia',
           'region' => 'utilities',
-          'weight' => '-21',
+          'weight' => '-20',
         ),
         'search-form' => array(
           'module' => 'search',
           'delta' => 'form',
           'region' => 'utilities',
-          'weight' => '-21',
+          'weight' => '-19',
         ),
         'system-user-menu' => array(
           'module' => 'system',
