@@ -5,6 +5,7 @@ package = CCIS
 version = 7.x-1.0-alpha10
 project = ccis_dashboard
 dependencies[] = ccis
+dependencies[] = ccis_openlayers
 dependencies[] = ccis_theme
 dependencies[] = ctools
 dependencies[] = features
