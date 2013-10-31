@@ -117,6 +117,10 @@ function ccis_sponsor_logos_strongarm() {
             'weight' => '3',
             'visible' => FALSE,
           ),
+          'teaser' => array(
+            'weight' => '0',
+            'visible' => FALSE,
+          ),
         ),
       ),
     ),
@@ -157,7 +161,6 @@ function ccis_sponsor_logos_strongarm() {
   $strongarm->name = 'node_options_sponsor_logo';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_sponsor_logo'] = $strongarm;
 
