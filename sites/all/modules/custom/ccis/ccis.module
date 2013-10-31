@@ -565,7 +565,12 @@ function _ccis_block_datatables($list = 'unknown', $values) {
   drupal_add_js($path . '/media/js/jquery.dataTables.js');
   drupal_add_js($path . '/extras/ColVis/media/js/ColVis.min.js');
   drupal_add_js($path . '/extras/ColReorder/media/js/ColReorder.min.js');
+  drupal_add_js($path . '/extras/TableTools/media/js/TableTools.min.js');
+
   drupal_add_css($path . '/media/css/demo_table.css');
+  drupal_add_css($path . '/extras/TableTools/media/css/TableTools.css');
+  drupal_add_css($path . '/extras/ColReorder/media/css/ColReorder.css');
+  drupal_add_css($path . '/extras/ColVis/media/css/ColVis.css');
 
   $path = drupal_get_path('module', 'ccis');
   drupal_add_js($path . '/js/datatables.ccis.js', array('weight' => 6));
@@ -583,12 +588,15 @@ function _ccis_block_datatables($list = 'unknown', $values) {
 function _ccis_get_datatables_settings($list = 'unknown', $values, $id = 1) {
   static $stations;
   $range = _ccis_get_date_range($values);
+  $path = libraries_get_path('datatables');
+  $sSwfPath = $path . '/extras/TableTools/media/swf/copy_csv_xls_pdf.swf';
   $settings = array();
   $settings['ccis_dt'] = array(
     'legends' => _ccis_get_weather_data_labels(NULL),
     'range' => _ccis_get_range_label($range),
+    'sSwfPath' => $sSwfPath,
   );
-  $node = _ccis_get_station_node($values, 'input'.$id);
+  $node = _ccis_get_station_node($values, 'input' . $id);
   $stations[] = array(
     'path' => url("ccis/dataquery/$list/datatables", array('query' => $values)),
     'station_name' => isset($node->title) ? check_plain($node->title) : '',

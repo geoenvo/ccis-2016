@@ -6,6 +6,7 @@ Drupal.behaviors.ccis_datatables = {
     datatable.container = $('#ccis-weather-datatable-block');
     datatable.range = settings.ccis_dt.range;
     datatable.legends = settings.ccis_dt.legends;
+    datatable.sSwfPath = settings.ccis_dt.sSwfPath;
     var $stations = settings.ccis_dt.stations;
     if ($stations.length > 0) {
       var $refresh = datatable.container.data('refresh');
@@ -64,8 +65,27 @@ Drupal.behaviors.ccis_datatables = {
       "sScrollY": "300px",
       "bScrollCollapse": true,
       "bPaginate": false,
-      "sDom": 'RC<"clear">lfrtip',
+      "sDom": 'RC<"clear">lfrtip<"clear">T<"clear">',
       "aoColumnDefs": [{ "bVisible": false, "aTargets": aTargets }],
+      "oTableTools": {
+        "sSwfPath": _datatable.sSwfPath,
+        "aButtons": [
+          {
+            "sExtends": "copy",
+            "sButtonText": Drupal.t("Copy"),
+          },
+          {
+            "sExtends": "print",
+            "sButtonText": Drupal.t("Print")
+          },
+          {
+            "sExtends":    "collection",
+            "sButtonText": Drupal.t("Save"),
+            "aButtons":    [ "csv", "xls", "pdf" ]
+          }
+      ]
+
+      },
       "oColVis": {
         "aiExclude": [ 0 ],
         "bRestore": true,
