@@ -20,14 +20,14 @@ function ccis_slideshow_default_fe_block_settings() {
     'i18n_mode' => 0,
     'module' => 'views',
     'node_types' => array(),
-    'pages' => '<front>',
+    'pages' => '',
     'roles' => array(),
     'themes' => array(
       'ccizen' => array(
         'region' => '',
         'status' => 0,
         'theme' => 'ccizen',
-        'weight' => -12,
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',
@@ -37,7 +37,7 @@ function ccis_slideshow_default_fe_block_settings() {
       ),
     ),
     'title' => '<none>',
-    'visibility' => 1,
+    'visibility' => 0,
   );
 
   return $export;
