@@ -51,6 +51,4 @@ features[variable][] = node_preview_event
 features[variable][] = node_submitted_event
 features[variable][] = pathauto_node_event_pattern
 features[views_view][] = events
-features_exclude[dependencies][ccis_ct_weather_data] = ccis_ct_weather_data
-features_exclude[field_base][body] = body
 project path = sites/all/modules/custom/ccis/features
