@@ -633,6 +633,10 @@ Drupal.behaviors.ccis = {
 							})(i);
 						}
 					}
+					// If we only have a subcategory, create an empty div for the accordion
+					if (temperatureGroupUsed.length===0 && (warmExtremesGroupUsed.length>0 || coldExtremesGroupUsed.length>0)) {
+						$("#d3_legendDiv"+block).append("<div></div>");
+					}
 					// Warm Extremes group
 					if (warmExtremesGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendWarmExtremes"+block+"'> Warm Extremes</div></a></h6>");
@@ -737,6 +741,10 @@ Drupal.behaviors.ccis = {
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
 							})(i);
 						}
+					}
+					// If we only have the subcategory, create an empty div for the accordion
+					if (precipitationGroupUsed.length===0 && extremePrecipitationGroupUsed.length>0) {
+						$("#d3_legendDiv"+block).append("<div></div>");
 					}
 					// Extreme Precipitation group
 					if (extremePrecipitationGroupUsed.length>0) {
@@ -2015,6 +2023,10 @@ Drupal.behaviors.ccis = {
 							})(i);
 						}
 					}
+					// If we only have a subcategory, create an empty div for the accordion
+					if (temperatureGroupUsed.length===0 && (warmExtremesGroupUsed.length>0 || coldExtremesGroupUsed.length>0)) {
+						$("#d3_legendDiv"+block).append("<div></div>");
+					}
 					// Warm Extremes group
 					if (warmExtremesGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendWarmExtremes"+block+"'> Warm Extremes</div></a></h6>");
@@ -2119,6 +2131,10 @@ Drupal.behaviors.ccis = {
 									function() {$("#d3_tooltipLegend"+i+block).remove();});
 							})(i);
 						}
+					}
+					// If we only have the subcategory, create an empty div for the accordion
+					if (precipitationGroupUsed.length===0 && extremePrecipitationGroupUsed.length>0) {
+						$("#d3_legendDiv"+block).append("<div></div>");
 					}
 					// Extreme Precipitation group
 					if (extremePrecipitationGroupUsed.length>0) {
