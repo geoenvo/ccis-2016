@@ -195,3 +195,57 @@ h3.teasertitle {
   font-size: 1.1em;
 }
 */
+/******************
+* Node edit
+* Als Selector hab ich .node-form genommen, sonst muss jeweils fuer
+* .page-node-add + .page-node-edit definiert werden.
+* Font-size nochmal extra zusammengefasst, weil vielleicht zu klein/gross...
+******************/
+.node-form .fieldset-legend {
+  font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
+}
+.node-form div.vertical-tabs, 
+#content .node-form input,
+#content .node-form select,
+#content .node-form textarea,
+#content .node-form .filter-wrapper {
+  font-size: 90%;
+}
+.node-form .form-item .description,
+.node-form .fieldset-description,
+.node-form .form-item .field-suffix {
+  font-size: 70%;
+}
+.node-form  {
+  background-color: #E6E6E6;
+  margin: 0;
+  padding: 5px 20px 20px 20px;
+  border: 5px solid #B3B3B3;
+  border-radius: 5px 5px 5px 5px;
+}
+.node-form .horizontal-tabs ul.horizontal-tabs-list {
+  border-color: #CCCCCC;
+  border-bottom: 3px solid #FFFFFF;
+  background-color: #E6E6E6;
+}
+.node-form div.vertical-tabs {
+  background-color: #E6E6E6;
+}
+.node-form .form-item {
+  margin: 0.5em 0;
+}
+.node-form .container-inline-date .date-padding {
+  padding: 0 10px;
+}
+#content .node-form input,
+#content .node-form select,
+#content .node-form textarea {
+  border: none;
+  background-color: #FFFFFF;
+}
+#content .node-form .form-submit {
+  background-color: #2C4563;
+  color: #C7B299;
+  font-size: 1.1em;
+  margin: 0 3px;
+}
