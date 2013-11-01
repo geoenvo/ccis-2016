@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the CCIS Climate Change feature.
- */
-
-include_once 'ccis_climate_change.features.inc';

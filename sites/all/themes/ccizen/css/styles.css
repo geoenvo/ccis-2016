@@ -78,7 +78,7 @@ table.dataTable,
 .bean-image-teaser .field-name-field-title-visible,
 .ccis-weather-datatable-block *,
 .ccis-datatable-station-range,
-.field-name-post-date
+.field-name-post-date,
 .node-event.view-mode-full .field-name-field-date-event,
 .node-event.view-mode-full .field-name-field-place-event,
 .node-event.view-mode-full .field-name-field-country-event,
@@ -503,7 +503,8 @@ html body.admin-menu {
   }
 
 .portlet-header .portlet-minus,
-.portlet-header .portlet-plus {
+.portlet-header .portlet-plus,
+#homebox-block-ccis_filter .portlet-icon {
   display: none;
   }
 
@@ -511,6 +512,7 @@ html body.admin-menu {
 #homebox .portlet-content > div,
 #homebox .portlet-content > form {
   padding: 0;
+  position: relative;
   }
 
 #homebox .homebox-portlet {
@@ -687,6 +689,7 @@ html.js input.throbbing {
 
 /* login + register */
 
+.no-sidebars #user-profile-form,
 .no-sidebars #user-register-form {
 	width: 60%;
   }
@@ -694,6 +697,7 @@ html.js input.throbbing {
 .no-sidebars #user-pass {
 	width: 50%;
   }
+#user-profile-form,
 #user-register-form,
 #user-login,
 #user-pass {
@@ -702,21 +706,25 @@ html.js input.throbbing {
   border-radius: 5px 5px 5px 5px;
   padding: 5px 20px 20px 20px;
   }
++user-profile-form .form-item,
 #user-register-form .form-item, 
 #user-login .form-item,
 #user-pass .form-item {
 	margin: 0.5em 0;
   }
+#user-profile-form .form-item .description,
 #user-register-form .form-item .description,
 #user-login .form-item .description {
   font-size: 70%;
   }
+#user-profile-form input,
 #user-register-form input,
 #user-login input,
 #user-pass input {
 	border: none;
 	font-size: 90%;
   }
+#user-profile-form .form-submit,
 #user-register-form .form-submit,
 #user-login .form-submit,
 #user-pass .form-submit {
@@ -939,7 +947,7 @@ html.js input.throbbing {
   line-height: 1px;
   z-index: 65;
   }
-.views_slideshow_active_pager_field_item {
+.views_slideshow_pager_field_item.active {
   background-color: #f15a24;
   }
 
@@ -1217,8 +1225,10 @@ table {
   }
   
 .dataTables_filter input {
-  font-size: 12px;
+  font-size: 14px;
   margin-right: 10px;
+  padding: 4px 5px;
+  width: 80px;
   }
  
 .ColVis.TableTools {
@@ -1534,11 +1544,11 @@ tr.odd td.sorting_1 {
   float: left;
   width: 16px;
   height: 19px;
-  padding: 4px;
+  padding: 6px 4px 2px;
   text-align: center;
   background-color: #fff;
   color: #2c4563;
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 100%;
   font-weight: bold;
   }
@@ -1825,11 +1835,15 @@ tr.odd td.sorting_1 {
 /* ++++++++++ Climability-specific ++++++++++ */
 
 /* +++ hide certain page titles +++ */
-
 .page-dashboard #page-title,
+.page-user #page-title,
 .front #page-title 
   {
   display: none;
+  }
+.page-user #content 
+  {
+  padding-top: 20px;
   }
 
 
