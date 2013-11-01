@@ -46,7 +46,7 @@ Drupal.behaviors.ccis = {
 		["csdi", "#7FBED4", "CSDI", "Cold speel duration index (days)", "icon.png", "days"]
 	];
 	var precipitationGroup = [
-		["rr", "#9900FF", "RR", "Daily precipitation amount (mm)", "icon.png", "milimeter"],
+		["rr", "#0099FF", "RR", "Daily precipitation amount (mm)", "icon.png", "milimeter"],
 		["cwd", "#B87EDE", "CWD", "Maximum length of wet spell (days with RR = 1mm) (days)", "icon.png", "days"],
 		["prcptot", "#B897DB", "PRCPTOT", "Annual total precipitation in wet days (mm)", "icon.png", "milimeter"]
 	];
@@ -365,20 +365,51 @@ Drupal.behaviors.ccis = {
 					
 					var graphObj = {};
 					
-					graphObj[graphType] = d3.svg.line()
-						.interpolate("linear")
-						.x(function(d){return xScale(d.date)})
-						.y(function(d){return yScaleType(d[graphType])})
-						.defined(function(d) {return !isNaN(d[graphType]);});	// do not show NaN
-	
-					d3.select("#svg"+block)
-						.append("path")
-					  	.attr("id", "d3_path"+graphType+"ID"+block)
-						.attr("d", graphObj[graphType](data))
-						.attr("stroke", color)
-						.attr("stroke-width", "2")
-						.attr("fill", "none")
-						.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");	  
+					// Clip rects
+						// Test the clip area
+						/*var rect = svg.append('svg:rect')
+							.attr('width', (width + (margin.left_single)*axis_sum + margin.right))
+							.attr('height', height)
+							.attr('fill', 'yellow');*/
+					var clip = svg.append("svg:clipPath")
+						.attr("id", "d3_clip");
+					clip.append("svg:rect")
+						.attr("width", (width + (margin.left_single)*axis_sum + margin.right))
+						.attr("height", height);
+									
+					if (graphType === "rr") {
+						// Bars for the RR parameter
+						var barPadding = 3;
+						var barWidth = ((width + (margin.left_single)*axis_sum + margin.right)/data.length)-barPadding;
+						svg.selectAll("#d3_rectId")
+							.data(data)
+							.enter()
+							.append("rect")
+							.attr("id", "d3_rectId")
+							.attr("clip-path", "url(#d3_clip)")		// Clip
+							.attr("x", function(d) {return xScale(d.date)-barWidth;})
+							.attr("y", function(d) {return yScaleType(d[graphType])-1;})
+							.attr("width", barWidth+"px")
+							.attr("height", function(d) {return height-yScaleType(d[graphType]);})
+							.attr("fill", color);
+					} else {
+						// Lines for the rest				
+						graphObj[graphType] = d3.svg.line()
+							.interpolate("linear")
+							.x(function(d){return xScale(d.date)})
+							.y(function(d){return yScaleType(d[graphType])})
+							.defined(function(d) {return !isNaN(d[graphType]);});	// do not show NaN
+		
+						d3.select("#svg"+block)
+							.append("path")
+							.attr("clip-path", "url(#d3_clip)")		// Clip
+							.attr("id", "d3_path"+graphType+"ID"+block)
+							.attr("d", graphObj[graphType](data))
+							.attr("stroke", color)
+							.attr("stroke-width", "2")
+							.attr("fill", "none")
+							.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");	  
+					}
 				}
 
 				function drawGraphs() {
@@ -1755,20 +1786,51 @@ Drupal.behaviors.ccis = {
 					
 					var graphObj = {};
 					
-					graphObj[graphType] = d3.svg.line()
-						.interpolate("linear")
-						.x(function(d){return xScale(d.date)})
-						.y(function(d){return yScaleType(d[graphType])})
-						.defined(function(d) {return !isNaN(d[graphType]);});	// do not show NaN
-	
-					d3.select("#svg"+block)
-						.append("path")
-					  	.attr("id", "d3_path"+graphType+"ID"+block)
-						.attr("d", graphObj[graphType](data))
-						.attr("stroke", color)
-						.attr("stroke-width", "2")
-						.attr("fill", "none")
-						.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");	  
+					// Clip rects
+						// Test the clip area
+						/*var rect = svg.append('svg:rect')
+							.attr('width', (width + (margin.left_single)*axis_sum + margin.right))
+							.attr('height', height)
+							.attr('fill', 'yellow');*/
+					var clip = svg.append("svg:clipPath")
+						.attr("id", "d3_clip");
+					clip.append("svg:rect")
+						.attr("width", (width + (margin.left_single)*axis_sum + margin.right))
+						.attr("height", height);
+									
+					if (graphType === "rr") {
+						// Bars for the RR parameter
+						var barPadding = 3;
+						var barWidth = ((width + (margin.left_single)*axis_sum + margin.right)/data.length)-barPadding;
+						svg.selectAll("#d3_rectId")
+							.data(data)
+							.enter()
+							.append("rect")
+							.attr("id", "d3_rectId")
+							.attr("clip-path", "url(#d3_clip)")		// Clip
+							.attr("x", function(d) {return xScale(d.date)-barWidth;})
+							.attr("y", function(d) {return yScaleType(d[graphType])-1;})
+							.attr("width", barWidth+"px")
+							.attr("height", function(d) {return height-yScaleType(d[graphType]);})
+							.attr("fill", color);
+					} else {
+						// Lines for the rest				
+						graphObj[graphType] = d3.svg.line()
+							.interpolate("linear")
+							.x(function(d){return xScale(d.date)})
+							.y(function(d){return yScaleType(d[graphType])})
+							.defined(function(d) {return !isNaN(d[graphType]);});	// do not show NaN
+		
+						d3.select("#svg"+block)
+							.append("path")
+							.attr("clip-path", "url(#d3_clip)")		// Clip
+							.attr("id", "d3_path"+graphType+"ID"+block)
+							.attr("d", graphObj[graphType](data))
+							.attr("stroke", color)
+							.attr("stroke-width", "2")
+							.attr("fill", "none")
+							.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");	  
+					}
 				}
 				
 				function drawGraphs() {
