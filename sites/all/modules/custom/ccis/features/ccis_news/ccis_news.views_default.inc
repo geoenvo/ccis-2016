@@ -158,23 +158,6 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['fields']['description']['element_type'] = 'p';
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   $handler->display->display_options['block_description'] = 'Newsfeed';
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'news';
-  $handler->display->display_options['menu']['title'] = 'News';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
-
-  /* Display: Content pane */
-  $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
-  $handler->display->display_options['enabled'] = FALSE;
-  $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
   $translatables['news_via_feeds'] = array(
     t('Master'),
     t('Latest news'),
@@ -203,9 +186,6 @@ function ccis_news_views_default_views() {
     t('Read more ...'),
     t('[description]  [link]'),
     t('Newsfeed'),
-    t('Page'),
-    t('Content pane'),
-    t('View panes'),
   );
   $export['news_via_feeds'] = $view;
 
