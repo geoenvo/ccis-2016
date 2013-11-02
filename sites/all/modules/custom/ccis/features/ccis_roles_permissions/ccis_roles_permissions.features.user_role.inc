@@ -10,12 +10,6 @@
 function ccis_roles_permissions_user_default_roles() {
   $roles = array();
 
-  // Exported role: administrator.
-  $roles['administrator'] = array(
-    'name' => 'administrator',
-    'weight' => 2,
-  );
-
   // Exported role: climability editor.
   $roles['climability editor'] = array(
     'name' => 'climability editor',
