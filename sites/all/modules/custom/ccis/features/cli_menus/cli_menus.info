@@ -1,0 +1,13 @@
+name = CLI Menus
+description = Menu definitions
+core = 7.x
+package = CCIS
+version = 7.x-1.0-alpha1
+project = cli_menus
+dependencies[] = features
+dependencies[] = menu
+features[features_api][] = api:2
+features[menu_custom][] = main-menu
+features[menu_custom][] = menu-footer-menu
+features[menu_custom][] = user-menu
+project path = sites/all/modules/custom/ccis/features
