@@ -36,7 +36,7 @@ function ccis_theme_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'compact_forms_ids';
   $strongarm->value = 'user-login-form
-simplenews-block-form-6';
+simplenews-block-form-1';
   $export['compact_forms_ids'] = $strongarm;
 
   $strongarm = new stdClass();

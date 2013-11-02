@@ -27,7 +27,7 @@ function ccis_theme_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'ccizen',
-        'weight' => -14,
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',
@@ -55,7 +55,7 @@ function ccis_theme_default_fe_block_settings() {
         'region' => '',
         'status' => 0,
         'theme' => 'ccizen',
-        'weight' => 12,
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',
