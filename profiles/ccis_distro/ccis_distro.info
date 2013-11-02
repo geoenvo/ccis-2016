@@ -1,14 +1,13 @@
-name              = CCIS
+name              = Open climability suite
 description       = Install with commonly used features pre-configured.
 version           = VERSION
 core              = 7.x
-distribution_name = CCIS Distro
+distribution_name = Open climability suite
 exclusive         = TRUE
 
 dependencies[] = block
 dependencies[] = comment
 dependencies[] = contextual
-;dependencies[] = dashboard
 dependencies[] = help
 dependencies[] = image
 dependencies[] = list
