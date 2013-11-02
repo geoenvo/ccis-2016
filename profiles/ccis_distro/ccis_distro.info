@@ -108,4 +108,5 @@ dependencies[] = ccis_dashboard
 dependencies[] = cli_sample_positioning
 dependencies[] = cli_sample_content
 dependencies[] = cli_sponsor_logos
+dependencies[] = cli_menus
 dependencies[] = rb_configuration
