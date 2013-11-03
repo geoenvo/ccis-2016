@@ -216,7 +216,7 @@ function ccis_date_formats() {
     array(
       'type' => 'datatable',
       'format' => 'Y-m-d',
-      'locales' => array('en', 'en-us', 'fr-fr', 'id-id', 'es-es'),
+      'locales' => array(),
     ),
   );
 }
