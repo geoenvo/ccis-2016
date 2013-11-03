@@ -10,6 +10,9 @@
  *
  *  - locale_date_format
  *    Localized date formats.
+ *
+ *  - custom_date_formats
+ *    These formats can be deleted via gui and can be used in all date format types.
  */
 
 /**
