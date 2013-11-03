@@ -1,0 +1,4 @@
+name = Features Date
+core = 7.x
+version = VERSION
+description = Provides features support for date format types and localized date formats
