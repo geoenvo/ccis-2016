@@ -19,7 +19,7 @@ function ccis_blog_ds_field_settings_info() {
   $ds_fieldsetting->settings = array(
     'post_date' => array(
       'weight' => '0',
-      'label' => 'inline',
+      'label' => 'hidden',
       'format' => 'ds_post_date_datatable',
     ),
   );
@@ -49,6 +49,36 @@ function ccis_blog_ds_field_settings_info() {
     ),
   );
   $export['node|blog_article|teaser'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|blog_article|teaserlist';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'blog_article';
+  $ds_fieldsetting->view_mode = 'teaserlist';
+  $ds_fieldsetting->settings = array(
+    'title' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => 'h2',
+        'class' => 'teasertitle',
+      ),
+    ),
+    'node_link' => array(
+      'weight' => '3',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'post_date' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'ds_post_date_compact',
+    ),
+  );
+  $export['node|blog_article|teaserlist'] = $ds_fieldsetting;
 
   return $export;
 }
