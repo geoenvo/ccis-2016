@@ -83,6 +83,7 @@ dependencies[] = views_slideshow_xtra
 
 ; CCIS
 dependencies[] = ccis
+dependencies[] = features_date
 
 ; Features
 dependencies[] = ccis_basic_page
