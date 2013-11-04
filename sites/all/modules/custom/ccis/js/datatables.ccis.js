@@ -65,27 +65,8 @@ Drupal.behaviors.ccis_datatables = {
       "sScrollY": "300px",
       "bScrollCollapse": true,
       "bPaginate": false,
-      "sDom": 'RC<"clear">lfrtip<"clear">T<"clear">',
+      "sDom": 'RC<"clear">lfrtip<"clear">',
       "aoColumnDefs": [{ "bVisible": false, "aTargets": aTargets }],
-      "oTableTools": {
-        "sSwfPath": _datatable.sSwfPath,
-        "aButtons": [
-          {
-            "sExtends": "copy",
-            "sButtonText": Drupal.t("Copy"),
-          },
-          {
-            "sExtends": "print",
-            "sButtonText": Drupal.t("Print")
-          },
-          {
-            "sExtends":    "collection",
-            "sButtonText": Drupal.t("Save"),
-            "aButtons":    [ "csv", "xls", "pdf" ]
-          }
-      ]
-
-      },
       "oColVis": {
         "aiExclude": [ 0 ],
         "bRestore": true,
