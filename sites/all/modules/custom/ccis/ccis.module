@@ -81,6 +81,10 @@ function ccis_permission() {
   $perms['access_ccis_all_weather_data'] = array(
     'title' => t('Access to all climate data'),
   );
+  $perms['access_ccis_download_link'] = array(
+    'title' => t('Access csv download link'),
+    'description' => t('Allows a user to download the displayed weather data as csv file.'),
+  );
   $fields = _ccis_get_weather_data_labels(FALSE);
   $fields_per_range = variable_get('ccis_weather_data_perms_range', array());
   $fields_per_range = array_filter($fields_per_range);
@@ -274,7 +278,7 @@ function ccis_admin_overview() {
  */
 function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
   $supported_formats = array('json', 'csv');
-  $supported_sources = array('d3', 'datatables');
+  $supported_sources = array('d3', 'datatables', 'download');
   $error = FALSE;
   if (!in_array($format, $supported_formats)) {
     watchdog('ccis', 'Overgiven format: @format is not supported', array('@format' => $format), WATCHDOG_ERROR);
@@ -287,6 +291,10 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
   if ($error) {
     drupal_json_output(array());
     drupal_exit();
+  }
+  if ($source == 'download' && !user_access('access_ccis_download_link')) {
+    drupal_access_denied();
+    return '';
   }
   $params = drupal_get_query_parameters();
   try{
@@ -591,10 +599,16 @@ function _ccis_get_datatables_settings($list = 'unknown', $values, $id = 1) {
     'legends' => _ccis_get_weather_data_labels(NULL),
     'range' => _ccis_get_range_label($range),
   );
+  $download = '';
+  if (user_access('access_ccis_download_link')) {
+    $link =  l(t('Export data'), "ccis/dataquery/$list/download/csv");
+    $download = '<div class="ccis-data-download">' . $link . '</div>';
+  }
   $node = _ccis_get_station_node($values, 'input' . $id);
   $stations[] = array(
     'path' => url("ccis/dataquery/$list/datatables", array('query' => $values)),
     'station_name' => isset($node->title) ? check_plain($node->title) : '',
+    'download' => $download,
   );
   $settings['ccis_dt']['stations'] = $stations;
   return $settings;

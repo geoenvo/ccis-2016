@@ -6,7 +6,6 @@ Drupal.behaviors.ccis_datatables = {
     datatable.container = $('#ccis-weather-datatable-block');
     datatable.range = settings.ccis_dt.range;
     datatable.legends = settings.ccis_dt.legends;
-    datatable.sSwfPath = settings.basePath + settings.ccis_dt.sSwfPath;
     var $stations = settings.ccis_dt.stations;
     if ($stations.length > 0) {
       var $refresh = datatable.container.data('refresh');
@@ -54,6 +53,9 @@ Drupal.behaviors.ccis_datatables = {
     var $div = $(dt_c);
     $div.append("<div class='ccis-datatable-station-number'>" + (index + 1) + "</div>");
     $div.append("<div class='ccis-datatable-station-range'>" + Drupal.t("Data: ") + _datatable.range + "</div>");
+    if (_datatable.current_station.download) {
+      $div.append(_datatable.current_station.download);
+    }
     $div.append(table(index));
     _datatable.container.append($div);
     var _tableId = '#ccis-datatable-' + index;
