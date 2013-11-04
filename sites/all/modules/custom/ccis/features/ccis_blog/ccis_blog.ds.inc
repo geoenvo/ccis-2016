@@ -19,7 +19,7 @@ function ccis_blog_ds_field_settings_info() {
   $ds_fieldsetting->settings = array(
     'post_date' => array(
       'weight' => '0',
-      'label' => 'inline',
+      'label' => 'hidden',
       'format' => 'ds_post_date_datatable',
     ),
   );
@@ -99,13 +99,15 @@ function ccis_blog_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'left' => array(
-        0 => 'body',
+        0 => 'post_date',
+        1 => 'body',
       ),
       'right' => array(
-        1 => 'field_blog_image',
+        2 => 'field_blog_image',
       ),
     ),
     'fields' => array(
+      'post_date' => 'left',
       'body' => 'left',
       'field_blog_image' => 'right',
     ),
