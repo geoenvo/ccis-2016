@@ -595,7 +595,7 @@ Drupal.behaviors.ccis = {
 					$("#d3_tooltipLegend"+keyPlace+block)
 						.css("position", "absolute")
 						.css("right", (legendWidth-3)+"px")
-						.css("top", (topPosition+7)+"px")
+						.css("top", topPosition+"px")
 						.css("width", "auto")
 						.css("clear", "both")
 						.css("float", "left")
@@ -1528,7 +1528,6 @@ Drupal.behaviors.ccis = {
 		var width = widthDiv - margin.left - margin.right - legendWidth;
 		var height = width/2;
 		var widthTemp = width;
-		var topOffset = 280;
 		var heightPrintSelect = 40;
 		var axis_sum = 4;	// MAX: 4
 		var axis_selection;
@@ -2012,11 +2011,11 @@ Drupal.behaviors.ccis = {
 				};
 				
 				// Legend Tooltips
-				function hoverLegend(topPosition, keyPlace, text) {			
+				function hoverLegend(topPosition, keyPlace, text) {		
 					$("#d3_tooltipLegend"+keyPlace+block)
 						.css("position", "absolute")
 						.css("right", (legendWidth-3)+"px")
-						.css("top", (topPosition+topOffset)+"px")
+						.css("top", topPosition+"px")
 						.css("width", "auto")
 						.css("clear", "both")
 						.css("float", "left")
@@ -2611,12 +2610,6 @@ Drupal.behaviors.ccis = {
 					widthDiv = $("#"+blockID).width();
 					width = widthDiv - margin.left - margin.right - legendWidth;
 					height = width/2;
-					// Change offset for the legend tooltips
-					if (width>widthTemp) {
-						topOffset = 7;
-					} else {
-						topOffset = 280;
-					}
 					$("#d3_legendDiv"+block).css("height", height + margin.top + margin.bottom - heightPrintSelect);
 
 					// Update scrollbar height
