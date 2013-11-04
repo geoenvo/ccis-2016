@@ -4,6 +4,15 @@ Drupal.behaviors.ccis_base = {
     this.searchResultClicker();
     this.hidePortlets();
     this.addToolTipFieldsets();
+    this.resetHomebox();
+  },
+  resetHomebox: function(context) {
+    var groups = $('.field-group-format-title, .horizontal-tab-button a');
+    groups.click(function() {
+      if (typeof Drupal.homebox.$columns != 'undefined') {
+       Drupal.homebox.equalizeColumnsHeights();
+      }
+    });
   },
   addToolTipFieldsets: function() {
     var ankers = $('body.page-dashboard .horizontal-tab-button > a');
