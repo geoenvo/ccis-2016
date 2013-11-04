@@ -94,8 +94,8 @@ function ccis_permission() {
       foreach ($ranges as $range => $label) {
         $perm_key = "access_ccis_{$fieldname}_{$range}";
         $perms[$perm_key] = array(
-          'title' => t('View data of %field in %range', array(
-            '%field' => $fieldlabel,
+          'title' => t('View data of !field in %range', array(
+            '!field' => $fieldlabel,
             '%range' => $label,
           )),
         );
@@ -103,8 +103,8 @@ function ccis_permission() {
     }
     else{
       $perms["access_ccis_{$fieldname}"] = array(
-        'title' => t('View data of %field', array(
-          '%field' => $fieldlabel,
+        'title' => t('View data of !field', array(
+          '!field' => $fieldlabel,
         )),
       );
     }
