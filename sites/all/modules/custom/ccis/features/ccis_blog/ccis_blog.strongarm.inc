@@ -125,7 +125,7 @@ function ccis_blog_strongarm() {
             'visible' => FALSE,
           ),
           'teaserlist' => array(
-            'weight' => '9',
+            'weight' => '8',
             'visible' => FALSE,
           ),
         ),
