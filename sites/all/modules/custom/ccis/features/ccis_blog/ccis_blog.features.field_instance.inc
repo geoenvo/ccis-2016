@@ -22,7 +22,7 @@ function ccis_blog_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -75,7 +75,7 @@ function ccis_blog_field_default_field_instances() {
         'module' => 'lightbox2',
         'settings' => array(),
         'type' => 'lightbox2__lightbox__medium__original',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
