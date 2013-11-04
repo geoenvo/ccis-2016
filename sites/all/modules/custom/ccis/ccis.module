@@ -622,7 +622,17 @@ function _ccis_get_station_node($values, $key = 'input1') {
   elseif (isset($values[$key])) {
     $pattern = "/(.+)\((\d+)\)/";
     preg_match($pattern, $values[$key], $matches);
-    $nid = isset($matches[2]) ? $matches[2] : NULL;
+    $code = isset($matches[2]) ? $matches[2] : NULL;
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'weather_station')
+      ->propertyCondition('status', 1)
+      ->fieldCondition('field_stationcode', 'value', $code, '=');
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      $nids = array_keys($result['node']);
+      $nid = reset($nids);
+    }
   }
   if (!empty($nid)) {
     return node_load($nid);
@@ -742,13 +752,13 @@ function ccis_autocomplete_response($type, $string) {
   if ($type == 'station_search' && $string) {
 
     $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_wmocode', 'f', 'n.nid = f.entity_id');
+    $query->leftJoin('field_data_field_stationcode', 'f', 'n.nid = f.entity_id');
 
     $n_and = db_and()->condition('n.title', db_like($string) . '%', 'LIKE');
-    $f_and = db_and()->condition('f.field_wmocode_value', db_like($string) . '%', 'LIKE');
+    $f_and = db_and()->condition('f.field_stationcode_value', db_like($string) . '%', 'LIKE');
 
     $query->fields('n', array('nid', 'title'))
-      ->fields('f', array('field_wmocode_value'))
+      ->fields('f', array('field_stationcode_value'))
       ->condition('n.type', 'weather_station')
       ->condition(db_or()->condition($n_and)->condition($f_and))
       ->addTag('node_access')
@@ -757,9 +767,9 @@ function ccis_autocomplete_response($type, $string) {
       $results = $query->execute();
       foreach ($results as $result) {
         // $key will be placed in the input field after the user choose a suggention.
-        $key = $result->title . ' (' . $result->nid . ')';
+        $key = $result->title . ' (' . $result->field_stationcode_value . ')';
         // $title will be shown to user underneath input field will he typing.
-        $title = check_plain("$result->title (WMO Code: $result->field_wmocode_value) ");
+        $title = check_plain($key);
         $matches[$key] = $title;
       }
     }
