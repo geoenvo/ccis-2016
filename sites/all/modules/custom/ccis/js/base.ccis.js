@@ -3,10 +3,10 @@ Drupal.behaviors.ccis_base = {
   attach: function(context, settings) {
     this.searchResultClicker();
     this.hidePortlets();
-    this.addToolTipFieldsets(context);
+    this.addToolTipFieldsets();
   },
-  addToolTipFieldsets: function(context) {
-    var ankers = $('body.page-dashboard .horizontal-tab-button > a', context);
+  addToolTipFieldsets: function() {
+    var ankers = $('body.page-dashboard .horizontal-tab-button > a');
     $.each(ankers, function() {
       var a = $(this);
       a.attr('title', a.find('strong').text());
