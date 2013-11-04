@@ -1026,7 +1026,7 @@ Drupal.behaviors.ccis = {
 					.css("width", legendWidth)
 					.css("height", heightPrintSelect);
 
-				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'><i>Select up to 4 indices</i></div>");		
+				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'>Select up to 4 indices</div>");		
 				$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><b><span style='font-size:14px;'>&nbsp;Print Preview</span></b></div>");
 				$("#d3_printPreviewId"+block).hover(function() {
 					$(this).css("cursor","pointer");
@@ -2446,7 +2446,7 @@ Drupal.behaviors.ccis = {
 					.css("width", legendWidth)
 					.css("height", heightPrintSelect);
 
-				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'><i>Select up to 4 indices</i></div>");		
+				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'>Select up to 4 indices</div>");		
 				$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><b><span style='font-size:14px;'>&nbsp;Print Preview</span></b></div>");
 				$("#d3_printPreviewId"+block).hover(function() {
 					$(this).css("cursor","pointer");
