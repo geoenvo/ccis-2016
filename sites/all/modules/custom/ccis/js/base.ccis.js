@@ -1,6 +1,19 @@
 (function($) {
 Drupal.behaviors.ccis_base = {
   attach: function(context, settings) {
+    this.searchResultClicker();
+    this.hidePortlets();
+    this.addToolTipFieldsets(context);
+  },
+  addToolTipFieldsets: function(context) {
+    var ankers = $('body.page-dashboard .horizontal-tab-button > a', context);
+    $.each(ankers, function() {
+      var a = $(this);
+      a.attr('title', a.find('strong').text());
+    });
+    ankers.tipsy({gravity: 's'});
+  },
+  searchResultClicker: function(context) {
     var $list = $('#ccis-station-search-result', context);
     var $radios = $list.find("[type=radio]");
     var checked, station_number, station_input, form;
@@ -17,6 +30,8 @@ Drupal.behaviors.ccis_base = {
         form.find("[type=submit]").mousedown();
       }
     });
+  },
+  hidePortlets: function() {
     var $homeboxcontent = $(".portlet-content");
     if ($homeboxcontent.length > 0) {
       for (var i = 0; i < $homeboxcontent.length; i++) {
