@@ -66,7 +66,6 @@ function ccis_import_csv_file(stdClass $file, &$context) {
     $row = 1;
     $header = $end_data = array();
     $header_count = 0;
-    $expected_fields = _ccis_get_weather_data_labels(FALSE);
     if (($handle = fopen($file->uri, "r")) !== FALSE) {
       while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         if ($row == 1) {
@@ -78,6 +77,7 @@ function ccis_import_csv_file(stdClass $file, &$context) {
           // Empty data must be comma seperated.
           $data_count = count($data);
           if ($data_count !== $header_count) {
+            $context['message'] .= '<br>' . t('Skipping row %row.', array('%row' => $row));
             continue;
           }
           $data = array_combine($header, $data);
@@ -160,7 +160,7 @@ function ccis_csv_file_name_validate(stdClass $file, $pattern) {
   $pattern = preg_replace('/ +/', '|', preg_quote($pattern));
   $regex = '/(' . $pattern . ').csv$/i';
   if (!preg_match($regex, $file->filename)) {
-    $errors[] = t('The filename must be in this pattern <em>stationname_@pattern.csv', array('@pattern' => $pattern));
+    $errors[] = t('The filename must be in this pattern <em>STADTIONID_@pattern.csv. Example 41_daily.csv.', array('@pattern' => $pattern));
     return $errors;
   }
   return $errors;
