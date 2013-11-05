@@ -1,0 +1,5 @@
+name = Features aggregator
+core = 7.x
+description = Allow the features export of feeds of the aggregator module.
+dependencies[] = features
+dependencies[] = aggregator

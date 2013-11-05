@@ -1,0 +1,95 @@
+<?php
+/**
+ * @file
+ *  Features export of feeds of the aggregator module.
+ */
+
+/**
+ * Implements hook_features_api().
+ */
+function features_aggregator_features_api() {
+  $components['aggregator_feed'] = array(
+    'name' => t('Aggregator feeds'),
+    'default_hook' => 'aggregator_default_feeds',
+    'feature_source' => TRUE
+  );
+  return $components;
+}
+
+/**
+ * Implements hook_features_export_options().
+ */
+function aggregator_feed_features_export_options() {
+  $options = array();
+  $result = db_query('SELECT title, url FROM {aggregator_feed}');
+  foreach ($result as $feed) {
+    $options[$feed->title] = $feed->title . " ($feed->url)";
+  }
+  return $options;
+}
+
+/**
+ * Implements hook_features_export().
+ */
+function aggregator_feed_features_export($data, &$export, $module_name = '') {
+  $export['dependencies']['features_aggregator'] = 'features_aggregator';
+  $map = features_get_default_map('aggregator_feed', 'title');
+  foreach ($data as $feed) {
+    // Feed is provided by another module. Add dependency.
+    if (isset($map[$feed]) && $map[$feed] != $module_name) {
+      $export['dependencies'][$map[$feed]] = $map[$feed];
+    }
+    // Export.
+    else {
+      $export['features']['aggregator_feed'][$feed] = $feed;
+    }
+  }
+  return array();
+}
+
+/**
+ * Implements hook_features_export_render().
+ */
+function aggregator_feed_features_export_render($module, $data) {
+  $code = array();
+  $code[] = '  $feeds = array();';
+  $code[] = '';
+  foreach ($data as $title) {
+    $feed = db_query("SELECT title, url, refresh, block FROM {aggregator_feed} WHERE title = :title", array(':title' => $title))->fetchObject();
+    if ($feed) {
+      $feed_identifier = features_var_export($title);
+      $feed_export = features_var_export($feed, '  ');
+      $code[] = "  // Exported feed: {$title}";
+      $code[] = "  \$feeds[{$feed_identifier}] = {$feed_export};";
+      $code[] = "";
+    }
+  }
+  $code[] = '  return $feeds;';
+  $code = implode("\n", $code);
+  return array(
+    'aggregator_default_feeds' => $code,
+  );
+}
+
+/**
+ * Implements hook_features_revert().
+ */
+function aggregator_feed_features_revert($module) {
+  aggregator_feed_features_rebuild($module);
+}
+
+/**
+ * Implements hook_features_rebuild().
+ */
+function aggregator_feed_features_rebuild($module) {
+  if ($defaults = features_get_default('aggregator_feed', $module)) {
+    foreach ($defaults as $feed) {
+      // Both title and url must match, because we do not know the fid.
+      $existing_feed = db_query("SELECT * FROM {aggregator_feed} WHERE title = :title AND url = :url", array(':title' => $feed['title'], ':url' => $feed['url']))->fetchObject();
+      if ($existing_feed) {
+        $feed = array_merge((array) $existing_feed, $feed);
+      }
+      aggregator_save_feed($feed);
+    }
+  }
+}
