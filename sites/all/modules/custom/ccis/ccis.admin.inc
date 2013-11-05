@@ -4,19 +4,19 @@
  * Page callback for admin/ccis/search.
  */
 function ccis_search_settings($form, $form_state) {
-  $search_fields = array();
+  $options = array();
   $field_infos = field_info_instances('node', 'weather_station');
   $types = array('text', 'text_long');
   foreach ($field_infos as $field_name => $info) {
     $field = field_info_field($field_name);
     if (in_array($field['type'], $types)) {
-      $search_fields[$field_name] = $info['label'];
+      $options[$field_name] = $info['label'] . " ($field_name)";
     }
   }
   $form['ccis_station_search_terms'] = array(
     '#title' => t('Fields'),
     '#type' => 'checkboxes',
-    '#options' => $search_fields,
+    '#options' => $options,
     '#default_value' => variable_get('ccis_station_search_terms', array()),
   );
   return system_settings_form($form);

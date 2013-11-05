@@ -59,18 +59,18 @@ Drupal.behaviors.ccis_datatables = {
     $div.append(table(index));
     _datatable.container.append($div);
     var _tableId = '#ccis-datatable-' + index;
-    var aTargets = [0];
+    var aTargets = [];
     for (var i = 5; i < _datatable.data.aoColumns.length; i++) {
       aTargets.push(i);
     }
     var options = {
       "sScrollY": "300px",
+      "sScrollX": "100%",
       "bScrollCollapse": true,
       "bPaginate": false,
       "sDom": 'RC<"clear">lfrtip<"clear">',
       "aoColumnDefs": [{ "bVisible": false, "aTargets": aTargets }],
       "oColVis": {
-        "aiExclude": [ 0 ],
         "bRestore": true,
         "sAlign": "right"
       },

@@ -22,7 +22,6 @@ function ccis_static_content_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Climate Change';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -128,7 +127,6 @@ function ccis_static_content_views_default_views() {
   );
   $translatables['ClimateChange'] = array(
     t('Master'),
-    t('Climate Change'),
     t('more'),
     t('Apply'),
     t('Reset'),

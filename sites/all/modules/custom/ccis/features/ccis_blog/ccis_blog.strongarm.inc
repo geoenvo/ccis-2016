@@ -121,11 +121,11 @@ function ccis_blog_strongarm() {
             'visible' => FALSE,
           ),
           'default' => array(
-            'weight' => '8',
+            'weight' => '10',
             'visible' => FALSE,
           ),
           'teaserlist' => array(
-            'weight' => '9',
+            'weight' => '8',
             'visible' => FALSE,
           ),
         ),
