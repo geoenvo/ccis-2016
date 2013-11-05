@@ -1,0 +1,4 @@
+name = Features user role plus
+core = 7.x
+description = Allows the export of all permissions per role.
+dependencies[] = features
