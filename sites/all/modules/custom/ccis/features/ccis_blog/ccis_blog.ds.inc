@@ -67,11 +67,6 @@ function ccis_blog_ds_field_settings_info() {
         'class' => 'teasertitle',
       ),
     ),
-    'node_link' => array(
-      'weight' => '3',
-      'label' => 'hidden',
-      'format' => 'default',
-    ),
     'post_date' => array(
       'weight' => '0',
       'label' => 'hidden',
@@ -155,6 +150,64 @@ function ccis_blog_ds_layout_settings_info() {
     'layout_link_custom' => '',
   );
   $export['node|blog_article|teaser'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|blog_article|teaserlist';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'blog_article';
+  $ds_layout->view_mode = 'teaserlist';
+  $ds_layout->layout = 'ds_2col';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'left' => array(
+        0 => 'post_date',
+        1 => 'title',
+        2 => 'body',
+      ),
+      'right' => array(
+        3 => 'field_blog_image',
+      ),
+    ),
+    'fields' => array(
+      'post_date' => 'left',
+      'title' => 'left',
+      'body' => 'left',
+      'field_blog_image' => 'right',
+    ),
+    'limit' => array(
+      'field_blog_image' => '1',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'left' => 'div',
+      'right' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+  );
+  $export['node|blog_article|teaserlist'] = $ds_layout;
+
+  return $export;
+}
+
+/**
+ * Implements hook_ds_view_modes_info().
+ */
+function ccis_blog_ds_view_modes_info() {
+  $export = array();
+
+  $ds_view_mode = new stdClass();
+  $ds_view_mode->api_version = 1;
+  $ds_view_mode->view_mode = 'teaserlist';
+  $ds_view_mode->label = 'TeaserList';
+  $ds_view_mode->entities = array(
+    'node' => 'node',
+  );
+  $export['teaserlist'] = $ds_view_mode;
 
   return $export;
 }
