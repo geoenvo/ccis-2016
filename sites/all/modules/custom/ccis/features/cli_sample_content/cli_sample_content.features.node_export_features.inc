@@ -242,8 +242,8 @@ function cli_sample_content_node_export_features_default() {
           array(
             \'value\' => \'2014-09-01 00:00:00\',
             \'value2\' => \'2014-09-01 00:00:00\',
-            \'timezone\' => \'Europe/Berlin\',
-            \'timezone_db\' => \'Europe/Berlin\',
+            \'timezone\' => \'Europe/Paris\',
+            \'timezone_db\' => \'Europe/Paris\',
             \'date_type\' => \'datetime\',
           ),
         ),
@@ -402,8 +402,8 @@ function cli_sample_content_node_export_features_default() {
           array(
             \'value\' => \'2013-11-04 00:00:00\',
             \'value2\' => \'2013-11-07 00:00:00\',
-            \'timezone\' => \'Europe/Berlin\',
-            \'timezone_db\' => \'Europe/Berlin\',
+            \'timezone\' => \'Europe/Paris\',
+            \'timezone_db\' => \'Europe/Paris\',
             \'date_type\' => \'datetime\',
           ),
         ),
@@ -687,8 +687,8 @@ function cli_sample_content_node_export_features_default() {
           array(
             \'value\' => \'2013-11-11 00:00:00\',
             \'value2\' => \'2013-11-22 00:00:00\',
-            \'timezone\' => \'Europe/Berlin\',
-            \'timezone_db\' => \'Europe/Berlin\',
+            \'timezone\' => \'Europe/Paris\',
+            \'timezone_db\' => \'Europe/Paris\',
             \'date_type\' => \'datetime\',
           ),
         ),
@@ -1042,8 +1042,8 @@ function cli_sample_content_node_export_features_default() {
           \'tid\' => \'1\',
           \'status\' => \'0\',
           \'sent_subscriber_count\' => \'0\',
-          \'name\' => \'Drupal newsletter\',
-          \'description\' => \'Drupal newsletter categories.\',
+          \'name\' => \'Climability Editors\',
+          \'description\' => \'News addressing editors working with Open Climability Suite\',
           \'weight\' => \'0\',
         ),
       \'status\' => \'1\',
@@ -1398,8 +1398,8 @@ function cli_sample_content_node_export_features_default() {
           array(
             \'value\' => \'2013-09-24 00:00:00\',
             \'value2\' => \'2013-09-24 00:00:00\',
-            \'timezone\' => \'Europe/Berlin\',
-            \'timezone_db\' => \'Europe/Berlin\',
+            \'timezone\' => \'Europe/Paris\',
+            \'timezone_db\' => \'Europe/Paris\',
             \'date_type\' => \'datetime\',
           ),
         ),
@@ -1576,13 +1576,13 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/13\',
+        \'source\' => \'node/22\',
         \'alias\' => \'climatechange/extremeweather2013\',
         \'language\' => \'en\',
         \'pathauto\' => FALSE,
       ),
       \'picture\' => \'0\',
-      \'promote\' => \'0\',
+      \'promote\' => \'1\',
       \'rdf_mapping\' => array(
         \'rdftype\' => array(
           \'sioc:Item\',
@@ -1690,7 +1690,19 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_tags\' => array(),
+      \'field_tags\' => array(
+        \'und\' => array(
+          array(
+            \'tid\' => \'1\',
+          ),
+          array(
+            \'tid\' => \'2\',
+          ),
+          array(
+            \'tid\' => \'3\',
+          ),
+        ),
+      ),
       \'files\' => array(),
       \'language\' => \'en\',
       \'last_comment_name\' => NULL,
@@ -1702,7 +1714,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/14\',
+        \'source\' => \'node/13\',
         \'alias\' => \'blog/adaptation-climate-change-–-strategies-climate-protection-programme\',
         \'language\' => \'en\',
         \'pathauto\' => FALSE,
@@ -1907,7 +1919,7 @@ function cli_sample_content_node_export_features_default() {
         \'mlid\' => 0,
         \'plid\' => \'0\',
         \'menu_name\' => \'main-menu\',
-        \'weight\' => \'30\',
+        \'weight\' => \'45\',
         \'options\' => array(),
         \'module\' => \'menu\',
         \'expanded\' => \'0\',
@@ -1915,7 +1927,7 @@ function cli_sample_content_node_export_features_default() {
         \'has_children\' => \'0\',
         \'customized\' => 0,
         \'parent_depth_limit\' => 8,
-        \'description\' => \'About CCIS\',
+        \'description\' => \'\',
         \'enabled\' => 1,
       ),
       \'name\' => \'admin\',
@@ -2033,7 +2045,22 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_tags\' => array(),
+      \'field_tags\' => array(
+        \'und\' => array(
+          array(
+            \'tid\' => \'1\',
+          ),
+          array(
+            \'tid\' => \'2\',
+          ),
+          array(
+            \'tid\' => \'4\',
+          ),
+          array(
+            \'tid\' => \'5\',
+          ),
+        ),
+      ),
       \'files\' => array(),
       \'language\' => \'und\',
       \'last_comment_name\' => NULL,
@@ -2045,7 +2072,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/17\',
+        \'source\' => \'node/16\',
         \'alias\' => \'blog/developing-countries-are-especially-vulnerable\',
         \'language\' => \'und\',
         \'pathauto\' => FALSE,

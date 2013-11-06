@@ -38,7 +38,7 @@ function ccis_theme_menu_default_menu_links() {
     'link_title' => 'Register',
     'options' => array(
       'attributes' => array(
-        'title' => 'Register new account',
+        'title' => '',
       ),
       'identifier' => 'user-menu_register:user/register',
     ),
