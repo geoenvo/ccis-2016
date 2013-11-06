@@ -5,6 +5,7 @@
 	position: relative; 
 	margin-top: 1px; 
 	zoom: 1; 
+	border: 1px solid #e6e6e6;
 }
 #ccis-weather-d3-block-1 .ui-accordion-li-fix, #ccis-weather-d3-block-2 .ui-accordion-li-fix{ 
 	display: inline;
@@ -22,7 +23,7 @@
 	position: absolute; 
 	left: .5em; 
 	top: 50%; 
-	margin-top: -8px; 
+	margin-top: -8px;
 }
 #ccis-weather-d3-block-1 .ui-accordion-content, #ccis-weather-d3-block-2 .ui-accordion-content { 
 	border-top: 0; 
@@ -45,12 +46,17 @@
 .d3_GraphDivClass {
 	position: relative;
 	float: left;
+ 	background-color: #ffffff;
 }
 
 /* The SVG */
 .d3_svgElement {
 	background-color: #ffffff;
-	outline: solid 1px #D1D1FF;
+}
+
+/* Grid */
+.d3_yGrid line {
+	stroke: #e6e6e6;
 }
 
 /* Legend Div */
@@ -122,16 +128,23 @@
 	float: right;
 	background-color: #b3b3b3;
 	border-top: 1px solid black;
-	padding-bottom: 2px;
+	border-bottom: 1px solid #b3b3b3;
+ 	padding-bottom: 3px;
 }
 
 .d3_SelectDiagramsTextClass {
+	display: inline-block;
 	right: 28px;
 	font-size:12px;
 	margin-left: 30px;
+	border: 1px solid #b3b3b3;
+}
+.d3_tooManySelectionsTextClass {
+	background-color: #fcce00;
+	border: 1px solid #e6e6e6;
 }
 
 .d3_printPreviewClass {
 	width: 120px;
-	margin-left: 25px;
+	margin-left: 50px;
 }
