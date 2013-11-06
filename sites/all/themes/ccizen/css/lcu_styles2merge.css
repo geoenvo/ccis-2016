@@ -80,3 +80,9 @@
 #edit-lang-dropdown-select_msdd {
   width: 140px !important; 
   }
+
+/* user-login no description */
+#user-login .form-item-name .description,
+#user-login .form-item-pass .description {
+  display: none;
+}
