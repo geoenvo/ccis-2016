@@ -23,7 +23,7 @@ function ccis_news_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Latest news';
-  $handler->display->display_options['css_class'] = 'news';
+  $handler->display->display_options['css_class'] = 'news teaser teaser-page ';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'View all recent news';
   $handler->display->display_options['link_display'] = 'page';
@@ -75,48 +75,23 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
 
-  /* Display: Attachment Newsfeed */
-  $handler = $view->new_display('attachment', 'Attachment Newsfeed', 'attachment_newsfeed');
+  /* Display: Block Newsfeed */
+  $handler = $view->new_display('block', 'Block Newsfeed', 'block_newsfeed');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
-  $handler->display->display_options['css_class'] = 'news teaser teaser-page';
+  $handler->display->display_options['css_class'] = 'news compact';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['use_more'] = TRUE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_text'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'View all recent news';
-  $handler->display->display_options['link_url'] = 'events-news';
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['label'] = 'Header';
-  $handler->display->display_options['header']['area']['content'] = '<h1>Latest news</h1>
-<p>Newsfeed from relevant sources</p>';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
-  $handler->display->display_options['attachment_position'] = 'after';
-  $handler->display->display_options['inherit_pager'] = TRUE;
-  $handler->display->display_options['render_pager'] = TRUE;
-
-  /* Display: Block Newsfeed */
-  $handler = $view->new_display('block', 'Block Newsfeed', 'block_newsfeed');
-  $handler->display->display_options['defaults']['css_class'] = FALSE;
-  $handler->display->display_options['css_class'] = 'news compact';
   $handler->display->display_options['link_url'] = '/events-news';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Footer: Global: Text area */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['label'] = 'More-link (to events page)';
-  $handler->display->display_options['footer']['area']['content'] = '<div class="more-link"><a href="/events-news">View all recent news</a></div>';
-  $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Aggregator: Timestamp */
   $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
@@ -158,6 +133,16 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['fields']['description']['element_type'] = 'p';
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   $handler->display->display_options['block_description'] = 'Newsfeed';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_newsfeed');
+  $handler->display->display_options['path'] = 'news';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'News';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $translatables['news_via_feeds'] = array(
     t('Master'),
     t('Latest news'),
@@ -175,17 +160,12 @@ function ccis_news_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Source'),
-    t('Attachment Newsfeed'),
-    t('Header'),
-    t('<h1>Latest news</h1>
-<p>Newsfeed from relevant sources</p>'),
     t('Block Newsfeed'),
-    t('more'),
-    t('More-link (to events page)'),
-    t('<div class="more-link"><a href="/events-news">View all recent news</a></div>'),
     t('Read more ...'),
     t('[description]  [link]'),
     t('Newsfeed'),
+    t('Page'),
+    t('more'),
   );
   $export['news_via_feeds'] = $view;
 
