@@ -930,7 +930,7 @@ function cli_sample_content_node_export_features_default() {
   (object) array(
       \'vid\' => \'32\',
       \'uid\' => \'1\',
-      \'title\' => \'Climability Newsletter\',
+      \'title\' => \'Climability Newsletter 2013/11\',
       \'log\' => \'\',
       \'status\' => \'1\',
       \'comment\' => \'2\',
@@ -941,19 +941,19 @@ function cli_sample_content_node_export_features_default() {
       \'type\' => \'simplenews\',
       \'language\' => \'und\',
       \'created\' => \'1381764783\',
-      \'changed\' => \'1381764783\',
+      \'changed\' => \'1383747026\',
       \'tnid\' => \'0\',
       \'translate\' => \'0\',
       \'uuid\' => \'4ca746b7-5226-4823-a717-4acc1800b4df\',
-      \'revision_timestamp\' => \'1383743992\',
+      \'revision_timestamp\' => \'1383747026\',
       \'revision_uid\' => \'1\',
       \'body\' => array(
         \'und\' => array(
           array(
-            \'value\' => \'Test\',
+            \'value\' => "Hello World.\\r\\nThis is a sample newsletter. Feel free to add your own content.",
             \'summary\' => \'\',
             \'format\' => \'simple_html\',
-            \'safe_value\' => "<p>Test</p>\\n",
+            \'safe_value\' => "<p>Hello World.<br />\\nThis is a sample newsletter. Feel free to add your own content.</p>\\n",
             \'safe_summary\' => \'\',
           ),
         ),
@@ -961,7 +961,7 @@ function cli_sample_content_node_export_features_default() {
       \'field_simplenews_term\' => array(
         \'und\' => array(
           array(
-            \'tid\' => \'6\',
+            \'tid\' => \'1\',
           ),
         ),
       ),
@@ -1027,9 +1027,12 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'simplenews\' => (object) array(
           \'nid\' => \'8\',
-          \'tid\' => \'6\',
-          \'status\' => 0,
-          \'sent_subscriber_count\' => 0,
+          \'tid\' => \'1\',
+          \'status\' => \'0\',
+          \'sent_subscriber_count\' => \'0\',
+          \'name\' => \'Drupal newsletter\',
+          \'description\' => \'Drupal newsletter categories.\',
+          \'weight\' => \'0\',
         ),
       \'name\' => \'admin\',
       \'picture\' => \'0\',

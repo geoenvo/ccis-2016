@@ -1,8 +1,8 @@
 name = CCIS Feedback
-description = The feedback formular
+description = Feedback (contact) form + newsletter
 core = 7.x
 package = CCIS
-version = 7.x-1.0-alpha6
+version = 7.x-1.0-beta1
 project = ccis_feedback
 dependencies[] = ccis_basic_page
 dependencies[] = ccis_events
