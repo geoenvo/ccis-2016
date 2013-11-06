@@ -94,7 +94,7 @@ function ccis_static_content_views_default_views() {
   $handler->display->display_options['path'] = 'climate-change';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Climate Change';
-  $handler->display->display_options['menu']['weight'] = '-49';
+  $handler->display->display_options['menu']['weight'] = '-20';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
