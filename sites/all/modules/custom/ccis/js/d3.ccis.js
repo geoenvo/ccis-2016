@@ -600,7 +600,7 @@ Drupal.behaviors.ccis = {
 						.css("clear", "both")
 						.css("float", "left")
 						.css("background-color", "#fcce00")
-						.css("border", "solid 1px #D1D1FF")
+						.css("border", "solid 1px #e6e6e6")
 						.css("border-radius", "8px 8px 8px 8px")
 						.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
 						.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
@@ -613,12 +613,12 @@ Drupal.behaviors.ccis = {
 				$("#"+blockID).append("<div id='d3_legendDiv"+block+"' class='d3_legendClass'></div>");
 				
 				$("#d3_legendDiv"+block)
-					.css("width", legendWidth-1)
+					.css("width", legendWidth)
 					.css("height", height + margin.top + margin.bottom - heightPrintSelect);
 					
 				// Scrollbar (slimScroll)
 				$("#d3_legendDiv"+block).slimScroll({
-					width: legendWidth-1,
+					width: legendWidth,
 					height: height + margin.top + margin.bottom - heightPrintSelect,
 					//railVisible: true,
 					alwaysVisible: true,
@@ -884,10 +884,15 @@ Drupal.behaviors.ccis = {
 				}
 								
 				// Maximum checkboxes checked: 4 / Minimum: 1
-				var maxChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4; 
-				$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled",maxChecked);
+				if ($("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4) {
+					$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled", "disabled");
+					$("#d3_SelectDiagramsText"+block).addClass("d3_tooManySelectionsTextClass");
+				} else {
+					$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled", "");
+					$("#d3_SelectDiagramsText"+block).removeClass("d3_tooManySelectionsTextClass");
+				}
 				var minChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length <= 1;
-				$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled",minChecked);
+				$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled", minChecked);
 				
 				// Accordion for Legend
 				$("#d3_legendDiv"+block).accordion({
@@ -1027,7 +1032,7 @@ Drupal.behaviors.ccis = {
 					.css("height", heightPrintSelect);
 
 				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'>Select up to 4 indices</div>");		
-				$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><b><span style='font-size:14px;'>&nbsp;Print Preview</span></b></div>");
+				$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><span style='font-size:14px;'>&nbsp;&nbsp;Print</span></div>");
 				$("#d3_printPreviewId"+block).hover(function() {
 					$(this).css("cursor","pointer");
 				});
@@ -1175,10 +1180,15 @@ Drupal.behaviors.ccis = {
 				// Click checkbox
 				$("#"+blockID+" :checkbox").click(function() {
 					// Maximum checkboxes checked: 4 / Minimum: 1
-					var maxChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4; 
-					$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled",maxChecked);
+					if ($("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4) {
+						$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled", "disabled");
+						$("#d3_SelectDiagramsText"+block).addClass("d3_tooManySelectionsTextClass");
+					} else {
+						$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled", "");
+						$("#d3_SelectDiagramsText"+block).removeClass("d3_tooManySelectionsTextClass");
+					}
 					var minChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length <= 1;
-					$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled",minChecked);
+					$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled", minChecked);
 					
 					// Redraw graph
 					redrawGraph();
@@ -1302,7 +1312,7 @@ Drupal.behaviors.ccis = {
 								if (temperatureGroupShown.length>0) {
 									for (var i=0; i<temperatureGroupShown.length; i++) {									
 										if (thermometer===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></td>";
 											thermometer = false;
 										} else {
@@ -1317,7 +1327,7 @@ Drupal.behaviors.ccis = {
 								if (warmExtremesGroupShown.length>0) {
 									for (var i=0; i<warmExtremesGroupShown.length; i++) {									
 										if (thermometer===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></td>";
 											thermometer = false;
 										} else {
@@ -1332,7 +1342,7 @@ Drupal.behaviors.ccis = {
 								if (coldExtremesGroupShown.length>0) {
 									for (var i=0; i<coldExtremesGroupShown.length; i++) {									
 										if (thermometer===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></td>";
 											thermometer = false;
 										} else {
@@ -1347,7 +1357,7 @@ Drupal.behaviors.ccis = {
 								if (precipitationGroupShown.length>0) {
 									for (var i=0; i<precipitationGroupShown.length; i++) {
 										if (drop===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'></td>";
 											drop = false;
 										} else {
@@ -1362,7 +1372,7 @@ Drupal.behaviors.ccis = {
 								if (extremePrecipitationGroupShown.length>0) {
 									for (var i=0; i<extremePrecipitationGroupShown.length; i++) {
 										if (drop===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'></td>";
 											drop = false;
 										} else {
@@ -1377,7 +1387,7 @@ Drupal.behaviors.ccis = {
 								if (windGroupShown.length>0) {
 									for (var i=0; i<windGroupShown.length; i++) {
 										if (wind===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind_black.png' width='19' height='16'></td>";
 											wind = false;
 										} else {
@@ -1392,7 +1402,7 @@ Drupal.behaviors.ccis = {
 								if (otherGroupShown.length>0) {
 									for (var i=0; i<otherGroupShown.length; i++) {
 										if (other===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='19' height='16'></td>";
 											other = false;
 										} else {
@@ -1432,7 +1442,7 @@ Drupal.behaviors.ccis = {
 					$(newWindow).ready(function(){
 				
 						// Clone Diagram
-						clone = $("#d3_GraphDiv"+block).clone();
+						var clone = $("#d3_GraphDiv"+block).clone();
 						// Remove background color and border
 						clone[0].firstChild.setAttribute("style", "background-color: ; outline: ;");
 						
@@ -1465,7 +1475,10 @@ Drupal.behaviors.ccis = {
 							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+otherGroupShown[i][1]+"; border-bottom: 5px solid "+otherGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+otherGroupShown[i][3]+"</span>";
 						}
 						newWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys+"<br/><br/><button id='printButton"+block+"' class='d3_buttonId'>Print</button>  <button id='closePreviewWindow"+block+"' class='d3_buttonId'>Close Window</button>";
-			
+						
+						// Delete the first bar (located outside the graph)
+						$(newWindow.document).contents().find("#d3_rectId:first").remove();
+						
 						// CSS for the Buttons (new window)
 						$(newWindow.document).contents().find(".d3_buttonId")
 							.css("border", "1px solid #dcdcdc")
@@ -1496,7 +1509,8 @@ Drupal.behaviors.ccis = {
 							var printWindow=window.open("","","");
 							$(newWindow).ready(function(){
 								printWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys;
-	
+								// Delete the first bar (located outside the graph)
+								$(printWindow.document).contents().find("#d3_rectId:first").remove();
 								printWindow.print();
 								printWindow.close();
 							});			
@@ -2020,7 +2034,7 @@ Drupal.behaviors.ccis = {
 						.css("clear", "both")
 						.css("float", "left")
 						.css("background-color", "#fcce00")
-						.css("border", "solid 1px #D1D1FF")
+						.css("border", "solid 1px #e6e6e6")
 						.css("border-radius", "8px 8px 8px 8px")
 						.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
 						.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
@@ -2033,12 +2047,12 @@ Drupal.behaviors.ccis = {
 				$("#"+blockID).append("<div id='d3_legendDiv"+block+"' class='d3_legendClass'></div>");
 				
 				$("#d3_legendDiv"+block)
-					.css("width", legendWidth-1)
+					.css("width", legendWidth)
 					.css("height", height + margin.top + margin.bottom - heightPrintSelect);
 					
 				// Scrollbar (slimScroll)
 				$("#d3_legendDiv"+block).slimScroll({
-					width: legendWidth-1,
+					width: legendWidth,
 					height: height + margin.top + margin.bottom - heightPrintSelect,
 					//railVisible: true,
 					alwaysVisible: true,
@@ -2304,10 +2318,15 @@ Drupal.behaviors.ccis = {
 				}
 								
 				// Maximum checkboxes checked: 4 / Minimum: 1
-				var maxChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4; 
-				$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled",maxChecked);
+				if ($("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4) {
+					$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled", "disabled");
+					$("#d3_SelectDiagramsText"+block).addClass("d3_tooManySelectionsTextClass");
+				} else {
+					$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled", "");
+					$("#d3_SelectDiagramsText"+block).removeClass("d3_tooManySelectionsTextClass");
+				}
 				var minChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length <= 1;
-				$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled",minChecked);
+				$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled", minChecked);
 				
 				// Accordion for Legend
 				$("#d3_legendDiv"+block).accordion({
@@ -2447,7 +2466,7 @@ Drupal.behaviors.ccis = {
 					.css("height", heightPrintSelect);
 
 				$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'>Select up to 4 indices</div>");		
-				$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><b><span style='font-size:14px;'>&nbsp;Print Preview</span></b></div>");
+				$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><span style='font-size:14px;'>&nbsp;Print</span></div>");
 				$("#d3_printPreviewId"+block).hover(function() {
 					$(this).css("cursor","pointer");
 				});
@@ -2595,10 +2614,15 @@ Drupal.behaviors.ccis = {
 				// Click checkbox
 				$("#"+blockID+" :checkbox").click(function() {
 					// Maximum checkboxes checked: 4 / Minimum: 1
-					var maxChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4; 
-					$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled",maxChecked);
+					if ($("#"+blockID+" :checkbox.d3_checkboxClass:checked").length >= 4) {
+						$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled", "disabled");
+						$("#d3_SelectDiagramsText"+block).addClass("d3_tooManySelectionsTextClass");
+					} else {
+						$("#"+blockID+" :checkbox.d3_checkboxClass").not(":checked").attr("disabled", "");
+						$("#d3_SelectDiagramsText"+block).removeClass("d3_tooManySelectionsTextClass");
+					}
 					var minChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length <= 1;
-					$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled",minChecked);
+					$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled", minChecked);
 					
 					// Redraw graph
 					redrawGraph();
@@ -2722,7 +2746,7 @@ Drupal.behaviors.ccis = {
 								if (temperatureGroupShown.length>0) {
 									for (var i=0; i<temperatureGroupShown.length; i++) {									
 										if (thermometer===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></td>";
 											thermometer = false;
 										} else {
@@ -2737,7 +2761,7 @@ Drupal.behaviors.ccis = {
 								if (warmExtremesGroupShown.length>0) {
 									for (var i=0; i<warmExtremesGroupShown.length; i++) {									
 										if (thermometer===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></td>";
 											thermometer = false;
 										} else {
@@ -2752,7 +2776,7 @@ Drupal.behaviors.ccis = {
 								if (coldExtremesGroupShown.length>0) {
 									for (var i=0; i<coldExtremesGroupShown.length; i++) {									
 										if (thermometer===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'></td>";
 											thermometer = false;
 										} else {
@@ -2767,7 +2791,7 @@ Drupal.behaviors.ccis = {
 								if (precipitationGroupShown.length>0) {
 									for (var i=0; i<precipitationGroupShown.length; i++) {
 										if (drop===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'></td>";
 											drop = false;
 										} else {
@@ -2782,7 +2806,7 @@ Drupal.behaviors.ccis = {
 								if (extremePrecipitationGroupShown.length>0) {
 									for (var i=0; i<extremePrecipitationGroupShown.length; i++) {
 										if (drop===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'></td>";
 											drop = false;
 										} else {
@@ -2797,7 +2821,7 @@ Drupal.behaviors.ccis = {
 								if (windGroupShown.length>0) {
 									for (var i=0; i<windGroupShown.length; i++) {
 										if (wind===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind_black.png' width='19' height='16'></td>";
 											wind = false;
 										} else {
@@ -2812,7 +2836,7 @@ Drupal.behaviors.ccis = {
 								if (otherGroupShown.length>0) {
 									for (var i=0; i<otherGroupShown.length; i++) {
 										if (other===true) {
-											tooltipText += "<tr style='border-top: 1pt solid #D1D1FF;'>";
+											tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 											tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='19' height='16'></td>";
 											other = false;
 										} else {
@@ -2852,7 +2876,7 @@ Drupal.behaviors.ccis = {
 					$(newWindow).ready(function(){
 				
 						// Clone Diagram
-						clone = $("#d3_GraphDiv"+block).clone();
+						var clone = $("#d3_GraphDiv"+block).clone();
 						// Remove background color and border
 						clone[0].firstChild.setAttribute("style", "background-color: ; outline: ;");
 						
@@ -2886,6 +2910,9 @@ Drupal.behaviors.ccis = {
 						}
 						newWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys+"<br/><br/><button id='printButton"+block+"' class='d3_buttonId'>Print</button>  <button id='closePreviewWindow"+block+"' class='d3_buttonId'>Close Window</button>";
 			
+						// Delete the first bar (located outside the graph)
+						$(newWindow.document).contents().find("#d3_rectId:first").remove();
+			
 						// CSS for the Buttons (new window)
 						$(newWindow.document).contents().find(".d3_buttonId")
 							.css("border", "1px solid #dcdcdc")
@@ -2916,7 +2943,8 @@ Drupal.behaviors.ccis = {
 							var printWindow=window.open("","","");
 							$(newWindow).ready(function(){
 								printWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys;
-	
+								// Delete the first bar (located outside the graph)
+								$(printWindow.document).contents().find("#d3_rectId:first").remove();
 								printWindow.print();
 								printWindow.close();
 							});			

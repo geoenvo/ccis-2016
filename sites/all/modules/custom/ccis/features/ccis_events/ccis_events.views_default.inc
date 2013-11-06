@@ -166,13 +166,6 @@ function ccis_events_views_default_views() {
   );
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Footer: Global: View area */
-  $handler->display->display_options['footer']['view']['id'] = 'view';
-  $handler->display->display_options['footer']['view']['table'] = 'views';
-  $handler->display->display_options['footer']['view']['field'] = 'view';
-  $handler->display->display_options['footer']['view']['label'] = 'Newsfeed attachment';
-  $handler->display->display_options['footer']['view']['view_to_insert'] = 'news_via_feeds:attachment_newsfeed';
-  $handler->display->display_options['footer']['view']['inherit_arguments'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Event Logo */
   $handler->display->display_options['fields']['field_image_event_logo']['id'] = 'field_image_event_logo';
@@ -326,10 +319,10 @@ function ccis_events_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '600',
   );
-  $handler->display->display_options['path'] = 'events-news';
+  $handler->display->display_options['path'] = 'events';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Events & News';
-  $handler->display->display_options['menu']['weight'] = '-46';
+  $handler->display->display_options['menu']['title'] = 'Events';
+  $handler->display->display_options['menu']['weight'] = '35';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
@@ -495,7 +488,6 @@ function ccis_events_views_default_views() {
     t('last »'),
     t('[field_place_event], [field_country_event]'),
     t('Page'),
-    t('Newsfeed attachment'),
     t('<div class="evdate month">[field_date_event]</div>
 <div class="evdate day">[field_date_event_1]</div>
 <div class="evdate year">[field_date_event_2]</div>'),

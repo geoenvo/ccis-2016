@@ -54,9 +54,21 @@
   margin: 0 3px;
 }
 
+/***************
+* ClimateChange 
+***************/
 .node-article-climatechange.view-mode-teaser.ds-2col > .group-left {
   width: 30%;
 }
 .node-article-climatechange.view-mode-teaser.ds-2col > .group-right {
   width: 70%;
+}
+
+/* styles.css Zeile 958ff  +++ events teaser +++ */
+.events .views-row,
+.news .views-row {
+  border-bottom: 1px dotted #B3B3B3;
+  clear: left;
+  margin-bottom: 10px;
+  padding: 10px 0;
 }
