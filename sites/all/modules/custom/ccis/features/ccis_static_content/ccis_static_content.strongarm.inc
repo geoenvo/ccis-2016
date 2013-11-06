@@ -13,6 +13,13 @@ function ccis_static_content_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'additional_settings__active_tab_article_climatechange';
+  $strongarm->value = 'edit-i18n';
+  $export['additional_settings__active_tab_article_climatechange'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_article_climatechange';
   $strongarm->value = 0;
   $export['comment_anonymous_article_climatechange'] = $strongarm;
@@ -126,6 +133,22 @@ function ccis_static_content_strongarm() {
     ),
   );
   $export['field_bundle_settings_node__article_climatechange'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'i18n_node_extended_article_climatechange';
+  $strongarm->value = '1';
+  $export['i18n_node_extended_article_climatechange'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'i18n_node_options_article_climatechange';
+  $strongarm->value = array(
+    0 => 'current',
+  );
+  $export['i18n_node_options_article_climatechange'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
