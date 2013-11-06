@@ -1,0 +1,35 @@
+diff --git a/node_export.module b/node_export.module
+index 8bdadb9..8b8fd69 100755
+--- a/node_export.module
++++ b/node_export.module
+@@ -784,6 +784,12 @@ function node_export_node_clone($original_node) {
+   if (variable_get('node_export_reset_author_' . $node->type, TRUE)) {
+     $node->name = !empty($user->name) ? $user->name : (!empty($user->uid) ? NULL : variable_get('anonymous', t('Anonymous')));
+     $node->uid = $user->uid;
++    $node->revision_uid = $user->uid;
++  }
++
++  // note: a uid of 0 is erroneous in any case, reset it to 1 (admin user)
++  if ($node->revision_uid == 0) {
++    $node->revision_uid = 1;
+   }
+ 
+   if (variable_get('node_export_reset_created_' . $node->type, TRUE)) {
+@@ -838,6 +844,17 @@ function node_export_node_clone($original_node) {
+     $node->sticky = FALSE;
+   }
+ 
++  // check for a data casting error
++  if ($node->data == 'b:0;') { // data has been serialized as a FALSE instead of NULL
++    $node->data = NULL;
++  }
++
++  // sort the node keys, so that there is a consistent representation for
++  // (drupal_)var_export
++  $array_node = (array) $node;
++  ksort( $array_node);
++  $node = (object) $array_node;
++
+   return $node;
+ 
+ }

@@ -261,6 +261,68 @@ function ccis_features_pipe_user_permission_alter(&$pipe, $data, $export) {
 }
 
 /**
+ * Implements hook_node_export_node_import_alter().
+ *
+ * Resets the uid to 1.
+ */
+function ccis_node_export_node_import_alter(&$node, $original_node, $save) {
+  if ($node->uid == 0) {
+    $node->uid = 1;
+  }
+}
+
+/**
+ * Implements hook_node_export_alter().
+ *
+ * Most code is from node_export_file_field_export().
+ * We resets some node, file properties to NULL.
+ */
+function ccis_node_export_alter(&$nodes, $format_handler) {
+  foreach ($nodes as &$node) {
+    $node->data = $node->last_comment_uid = $node->created = $node->changed = NULL;
+    // get all fields from this node type
+    $fields = field_info_instances('node', $node->type);
+    foreach ($fields as $field_instance) {
+
+      // load field infos to check the type
+      $field = &$node->{$field_instance['field_name']};
+      $info = field_info_field($field_instance['field_name']);
+
+      $supported_fields = array_map('trim', explode(',', variable_get('node_export_file_supported_fields', 'file, image')));
+
+      // check if this field should implement file import/export system
+      if (in_array($info['type'], $supported_fields)) {
+
+        // we need to loop into each language because i18n translation can build
+        // fields with different language than the node one.
+        foreach ($field as $language => $files) {
+
+          if (is_array($files)) {
+            foreach ($files as $i => $file) {
+
+              // convert file to array to stay into the default node_export_file format
+              $file = (object) $file;
+
+              // Check the file
+              if (!isset($file->uri) || !is_file($file->uri)) {
+                continue;
+              }
+              if (empty($file->alt)) {
+                $field[$language][$i]['alt'] = NULL;
+              }
+              if (empty($file->title)) {
+                $field[$language][$i]['title'] = NULL;
+              }
+              $field[$language][$i]['timestamp'] = NULL;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
  * Page callback for all ccis admin pages.
  */
 function ccis_admin_overview() {
