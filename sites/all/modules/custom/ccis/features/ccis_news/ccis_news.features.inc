@@ -15,7 +15,7 @@ function ccis_news_aggregator_default_feeds() {
     'title' => 'IISD',
     'url' => 'http://climate-l.iisd.org/feed/',
     'refresh' => 43200,
-    'block' => 5,
+    'block' => 0,
   );
 
   // Exported feed: RTCC
@@ -23,7 +23,15 @@ function ccis_news_aggregator_default_feeds() {
     'title' => 'RTCC',
     'url' => 'http://www.rtcc.org/feed/',
     'refresh' => 43200,
-    'block' => 5,
+    'block' => 0,
+  );
+
+  // Exported feed: Service status
+  $feeds['Service status'] = array(
+    'title' => 'Service status',
+    'url' => 'https://drupal.org/planet/rss.xml',
+    'refresh' => 86400,
+    'block' => 0,
   );
 
   // Exported feed: UN Framework Convention on Climate Change
@@ -31,7 +39,7 @@ function ccis_news_aggregator_default_feeds() {
     'title' => 'UN Framework Convention on Climate Change',
     'url' => 'http://unfccc.int/tools_xml/headlines_rss.xml',
     'refresh' => 43200,
-    'block' => 5,
+    'block' => 0,
   );
 
   return $feeds;
