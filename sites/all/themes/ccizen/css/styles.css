@@ -74,7 +74,7 @@ input.form-submit, button,
 .horizontal-tab-button,
 .menu li a,
 #footer-columns .block-simplenews,
-table.dataTable,
+table.dataTable, .ccis-data-download,
 .bean-image-teaser .field-name-field-title-visible,
 .ccis-weather-datatable-block *,
 .ccis-datatable-station-range,
@@ -189,8 +189,8 @@ body {
   }
 
 #header {
-  padding-top: 0;
-  padding-left: 0;
+  padding-top: 10px;
+  padding-left: 10px;
   padding-bottom: 0 /*4em*/;
   background-color: #e6e6e6;
   position: relative;
@@ -523,6 +523,7 @@ html body.admin-menu {
   padding: 0 5px 5px;
   }
 
+#homebox .homebox-column-wrapper-1,
 #homebox #homebox-block-ccis_stationinfo,
 #homebox #homebox-block-ccis_stationinfo_2,
 #homebox #homebox-block-ccis_filter {
@@ -766,7 +767,7 @@ html.js input.throbbing {
 /* language switcher */
 
 #edit-lang-dropdown-select_msdd {
-  width: 185px !important; 
+  width: auto !important; 
   }
 
 .dd_after {
@@ -781,9 +782,14 @@ html.js input.throbbing {
   }
 
 .dd_after .ddTitle span.ddTitleText {
-  text-indent: 30px;
   line-height: 24px;
   white-space: nowrap;
+  display: block;
+  padding-left: 0;
+  }
+
+.dd_after .ddTitle span.ddTitleText span.ddTitleText {
+  padding-left: 28px;
   }
 
 .dd_after .ddTitle span.arrow {
@@ -794,10 +800,14 @@ html.js input.throbbing {
   background-position: -16px -266px !important;
   }
 
+#edit-lang-dropdown-select_child {
+  width: auto !important;
+  }
+
 .dd_after .ddChild a {
   color: #2c4563;
   background-color: #fff;
-  padding: 2px 6px 2px 9px;
+  padding: 2px 5px 2px 10px;
   }
 .dd_after .ddChild a.selected {
   background-color: #fcce00;
@@ -807,6 +817,7 @@ html.js input.throbbing {
   background-color: #2c4563;
   color: #fff;
   }
+
 
 
 
@@ -889,9 +900,9 @@ html.js input.throbbing {
   }
 
 .views-slideshow-xtra-overlay-row {
-  width: 33%;
+  width: 290px;
   height: 225px;
-  background-color: rgba(255,255,255,.5);
+  background-color: rgba(255,255,255,.75);
   padding: 10px 10px 40px;
   color: #444;
   z-index: 35;
@@ -1180,7 +1191,7 @@ html.js input.throbbing {
   }
 
 .dataTables_wrapper {
-  margin-bottom: 20px;
+  margin: 4px 0 20px;
   clear: none;
   }
 
@@ -1198,7 +1209,8 @@ table {
   }
 
 #ccis-weather-datatable-block .ccis-datatable-station-number {
-  /*float: none;*/
+  position: relative; 
+  top: -4px;
   }
 
 .ccis-datatable-station-range {
@@ -1225,30 +1237,60 @@ table {
   }
   
 .dataTables_filter input {
+  /* (waiting for ticket 278)
+  position: absolute;
+  left: -5000;
+  */
+  }
+
+.dataTables_filter input {
   font-size: 14px;
   margin-right: 10px;
-  padding: 4px 5px;
-  width: 80px;
+  padding: 4px 5px 4px 25px;
+  width: 100px;
+  background: url(../img/sprites_ccizen.png) no-repeat -11px -560px #fff;
   }
  
 .ColVis.TableTools {
   float: right;
   width: auto;
   font-size: 12px;
+  margin-right: 10px;
   }
 
-.ColVis_collection button {
+.ColVis_Button {
+  margin-right: 0;
+  }
+
+.ColVis_MasterButton {
+  background: url(../img/sprites_ccizen.png) no-repeat -12px -460px #fff;
+  padding-left: 25px;
+  }
+
+.ColVis_MasterButton span {
+  font-size: 14px;
+  }
+
+div.ColVis_collection button.ColVis_Button {
   background-color: #fff;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
+  border: 0 none;
+  margin: 0;
+  height: auto;
+  }
+div.ColVis_collection button.ColVis_Button:focus,
+div.ColVis_collection button.ColVis_Button:hover {
+  border: 0 none;
+  background-color: #2c4563;
+  color: #c7b299;
   }
  
  .ColVis_collection, 
  .ColVis_collection button {
-  width: 80px !important;
   }
   
 .ColVis_radio {
@@ -1257,6 +1299,27 @@ table {
   
 .ColVis.TableTools + div[class=clear] {
   clear: none;
+  }
+
+.ccis-data-download {
+  float: right;
+  width: auto;
+  height: 22px;
+  margin-right: 3px;
+  padding: 4px 5px 2px 25px;
+  border: 1px solid #2c4563;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background: url(../img/sprites_ccizen.png) no-repeat -12px -412px #fff;
+  line-height: 17px;
+  text-decoration: none;
+  }
+.ccis-data-download a {
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  color: #000;
   }
 
 th,
@@ -1272,12 +1335,12 @@ form th {
 
 tbody tr.even, 
 tbody tr.odd {
-  background-color: #f2f2f2;
+  background-color: #e6e6e6;
   border-bottom: 0 none;
   }
 
 tbody tr.odd {
-  background-color: #cccccc;
+  background-color: #f2f2f2;
   }
 
 tbody td {
@@ -1293,14 +1356,48 @@ tr.odd td.sorting_1 {
   background-color: transparent;
   }
 
+.sorting,
+.sorting_asc,
+.sorting_desc {
+  background-image: url(../img/sprites_tablesort.png);
+  background-repeat: no-repeat;
+  background-position: right -9px;
+  }
+.sorting_asc {
+  background-position: right -109px;
+  }
+.sorting_desc {
+  background-position: right -59px;
+  }
+
 .dataTables_info {
   float: none;
   width: auto;
   padding-left: 5px;
   }
 
+.ccis-datatable-unit {
+  font-size: .75em;
+  color: #c7b299;
+  }
+
 
 /* ++ station info ++ */
+
+.view-station-info .horizontal-tabs-panes {
+  visibility: visible;
+  opacity: 1;
+  animation: stationinfodelay 3s;
+  -webkit-animation: stationinfodelay 3s;
+  }
+@keyframes stationinfodelay {
+  0% {visibility: hidden; opacity: 0;}
+  25% {visibility: hidden; opacity: 0;}
+  50% {visibility: hidden; opacity: 0;}
+  60% {visibility: visible; opacity: 0;}
+  100% {visibility: visible; opacity: 1;}
+  }
+
 
 .view-station-info header,
 .view-station-info header a {
