@@ -50,6 +50,12 @@ function cli_sample_positioning_context_default_contexts() {
           'region' => 'content',
           'weight' => '-6',
         ),
+        'views-status_feed-block' => array(
+          'module' => 'views',
+          'delta' => 'status_feed-block',
+          'region' => 'content',
+          'weight' => '-5',
+        ),
       ),
     ),
   );
