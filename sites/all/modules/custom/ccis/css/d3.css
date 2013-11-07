@@ -66,8 +66,8 @@
 	overflow-y: scroll;
 	float: right;
 	background-color: #b3b3b3;	
-	font-family: 'Open Sans Condensed','Arial Narrow', sans-serif;
-	font-size: 14px;
+	font-family: 'Pathway Gothic One', 'Open Sans Condensed','Arial Narrow', sans-serif;
+	font-size: 15px;
 }
 
 /* Keys in Legend  */
@@ -119,8 +119,8 @@
 	-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
 	-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);	
-	font-family: 'Open Sans Condensed','Arial Narrow', sans-serif;	
-	font-size: 12px;
+	font-family: 'Pathway Gothic One', 'Open Sans Condensed','Arial Narrow', sans-serif;	
+	font-size: 14px;
 }
 
 .printSelectWrapperClass {
@@ -147,4 +147,33 @@
 .d3_printPreviewClass {
 	width: 120px;
 	margin-left: 50px;
+}
+
+/* PRINT WINDOW */
+@font-face {
+  font-family: 'Pathway Gothic One Print';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Pathway Gothic One'), local('PathwayGothicOne-Regular'), url(http://themes.googleusercontent.com/static/fonts/pathwaygothicone/v1/Lqv9ztoTUV8Q0FmQZzPqaBfSZ9PF2sGs8WIylam6T2Y.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans Condensed Print';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Cond Light'), local('OpenSans-CondensedLight'), url(http://themes.googleusercontent.com/static/fonts/opensanscondensed/v6/gk5FxslNkTTHtojXrkp-xF1YPouZEKgzpqZW9wN-3Ek.woff) format('woff');
+}
+
+.d3_printTitle {
+	font-family: 'Pathway Gothic One Print', 'Arial Narrow', sans-serif;
+	font-size: 20px;
+}
+
+.d3_printDiagDiv {
+	font-family: 'OpenSans Condensed Print', 'Arial Narrow', sans-serif;
+}
+
+.d3_printKeys {
+	font-family: 'Pathway Gothic One Print', 'Arial Narrow', sans-serif;
+	font-size:16px;
 }

@@ -46,7 +46,7 @@ Drupal.behaviors.ccis = {
 		["csdi", "#7FBED4", "CSDI", "Cold speel duration index (days)", "icon.png", "days"]
 	];
 	var precipitationGroup = [
-		["rr", "#0099FF", "RR", "Daily precipitation amount (mm)", "icon.png", "milimeter"],
+		["rr", "#3B516C", "RR", "Daily precipitation amount (mm)", "symbol_legende_rr.png", "milimeter"],
 		["cwd", "#B87EDE", "CWD", "Maximum length of wet spell (days with RR = 1mm) (days)", "icon.png", "days"],
 		["prcptot", "#B897DB", "PRCPTOT", "Annual total precipitation in wet days (mm)", "icon.png", "milimeter"]
 	];
@@ -89,7 +89,7 @@ Drupal.behaviors.ccis = {
 		["pascal", "symbol_legende_pressure.png", "hPa", ".0f", "hPa"],
 		["meterPerSecond", "", "m/s", ".1f", "m/s"],
 		["degrees", "", "degrees", ".0f", "&#176;"],
-		["octas", "", "octas", ".1f", "octas"],
+		["octas", "symbol_legende_octas.png", "octas", ".1f", "octas"],
 		["centimeter", "", "cm", ".1f", "cm"],
 		["hours", "", "hours", ".1f", "hours"]
 	];
@@ -154,11 +154,11 @@ Drupal.behaviors.ccis = {
 				
 				// Create object with the parameters and the values
 				var data = json.map(function(d) {
-					var obj = {};
+				var obj = {};
 					//obj.date: d3.time.format("%Y-%m-%d %H:%M:%S").parse(d.date.slice(0,-3); // Datum & Zeit ohne Zeitzone
 					obj.date = d3.time.format("%Y-%m-%d").parse(d.date.slice(0,-12)); // Nur Datum
-					// i=2: The first two parameters are Station and Date
-					for (var i=2; i<dataKeysArray.length; i++) {
+					// i=1: The first parameter is the Date
+					for (var i=1; i<dataKeysArray.length; i++) {
 						obj[dataKeysArray[i]] = parseFloat(d[dataKeysArray[i]]);
 					}
 					return obj;
@@ -174,7 +174,7 @@ Drupal.behaviors.ccis = {
 				var otherGroupUsed = [];
 				
 				// Create an array per group with the parameters used, the colors, the legend keywords, the legend hover names, the icons and the units
-				for (var i=2; i<dataKeysArray.length; i++) {
+				for (var i=1; i<dataKeysArray.length; i++) {
 					for (var k=0; k<temperatureGroup.length; k++) {
 						if (dataKeysArray[i]===temperatureGroup[k][0]) {
 							temperatureGroupUsed.push([temperatureGroup[k][0], temperatureGroup[k][1], temperatureGroup[k][2], temperatureGroup[k][3], temperatureGroup[k][4], temperatureGroup[k][5]]);
@@ -630,7 +630,7 @@ Drupal.behaviors.ccis = {
 				// Temperature group
 				if (temperatureGroupUsed.length>0 || warmExtremesGroupUsed.length>0 || coldExtremesGroupUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendTemperatureGroup"+block+"'></div></a></h6>");
-					$("#legendTemperatureGroup"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'><b> Temperature</b></div>");
+					$("#legendTemperatureGroup"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'> Temperature</div>");
 					// Main temperature group
 					if (temperatureGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivTemperature"+block+"'></div>");
@@ -739,7 +739,7 @@ Drupal.behaviors.ccis = {
 				// Precipitation group		
 				if (precipitationGroupUsed.length>0 || extremePrecipitationGroupUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendPrecipitationGroup"+block+"'></div></a></h6>");
-					$("#legendPrecipitationGroup"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'><b> Precipitation</b></div>");
+					$("#legendPrecipitationGroup"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'> Precipitation</div>");
 					// Main precipitation group
 					if (precipitationGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivPrecipitation"+block+"'></div>");
@@ -758,7 +758,11 @@ Drupal.behaviors.ccis = {
 							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationText"+i+block+"' class='d3_keysText'></div>");
 							$("#d3_keysPrecipitationText"+i+block).append(precipitationGroupUsed[i][2]);
 							//$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
-							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+precipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
+							if (precipitationGroupUsed[i][0] === "rr") {
+								$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[i][4]+"' width='16' height='14'></div>");
+							} else {
+								$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+precipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
+							}
 							(function(i) {
 								$("#d3_keysPrecipitationBoxText"+i+block)
 									.hover(function(){
@@ -815,7 +819,7 @@ Drupal.behaviors.ccis = {
 				// Wind group				
 				if (windGroupUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendWindGroup"+block+"'></div></a></h6>");
-					$("#legendWindGroup"+block).append("<div id='d3_iconLegendWind"+block+"' class='d3_iconLegendWindClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='11' height='17'><b> Wind</b></div>");
+					$("#legendWindGroup"+block).append("<div id='d3_iconLegendWind"+block+"' class='d3_iconLegendWindClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='11' height='17'> Wind</div>");
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivWind"+block+"'></div>");
 					for (var i=0; i<windGroupUsed.length; i++) {
 						function findWindChecked() {
@@ -850,7 +854,7 @@ Drupal.behaviors.ccis = {
 				// Other group
 				if (otherGroupUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendOtherGroup"+block+"'></div></a></h6>");
-					$("#legendOtherGroup"+block).append("<div id='d3_iconLegendOther"+block+"' class='d3_iconLegendOtherClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='16' height='4'><b> Other</b></div>");
+					$("#legendOtherGroup"+block).append("<div id='d3_iconLegendOther"+block+"' class='d3_iconLegendOtherClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='16' height='4'> Other</div>");
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivOther"+block+"'></div>");
 					for (var i=0; i<otherGroupUsed.length; i++) {
 						function findOtherChecked() {
@@ -979,7 +983,11 @@ Drupal.behaviors.ccis = {
 											$("#d3_keysPrecipitation_TEMP"+block).append("<div id='d3_keysPrecipitationBoxText_TEMP"+k+block+"'></div>");
 											$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div id='d3_keysPrecipitationText_TEMP"+k+block+"' class='d3_keysText'></div>");
 											$("#d3_keysPrecipitationText_TEMP"+k+block).append(precipitationGroupUsed[k][2]);
-											$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+precipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
+											if (precipitationGroupUsed[k][0] === "rr") {
+												$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[k][4]+"' width='16' height='14'></div>");
+											} else {
+												$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div"+partOfSVGLine1+precipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
+											}
 										}	
 									}
 									break;
@@ -1302,12 +1310,12 @@ Drupal.behaviors.ccis = {
 							}
 							// Create content for tooltips
 							var tooltipText="";
-							tooltipText = "<b><table style='margin:0px;'>";
+							tooltipText = "<table style='margin:0px;'>";
 								
 								tooltipText += "<tr>";
 									tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_infobereich_clock.png' width='11' height='12'></td>";
 									tooltipText += "<td>&nbsp;Date: </td>";
-									tooltipText += "<td><b>"+date+"</b></td>";
+									tooltipText += "<td>"+date+"</td>";
 								tooltipText += "</tr>";	
 								if (temperatureGroupShown.length>0) {
 									for (var i=0; i<temperatureGroupShown.length; i++) {									
@@ -1415,7 +1423,7 @@ Drupal.behaviors.ccis = {
 									}		
 								}
 								
-							tooltipText += "</table></b>";
+							tooltipText += "</table>";
 	
 							// Create tooltip
 							$("#d3_GraphDiv"+block).append("<div id='d3_tooltip"+block+"' class='d3_tooltipClass'</div>");		
@@ -1437,9 +1445,9 @@ Drupal.behaviors.ccis = {
 					
 				// *** Print functions - START ***
 				function printPreview() {
-					var newWindow=window.open("","","");
+				var newWindow=window.open("","","");
 					
-					$(newWindow).ready(function(){
+					$(newWindow).ready(function() {
 				
 						// Clone Diagram
 						var clone = $("#d3_GraphDiv"+block).clone();
@@ -1454,67 +1462,38 @@ Drupal.behaviors.ccis = {
 						
 						var printKeys = "";
 						for (var i=0; i<temperatureGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+temperatureGroupShown[i][1]+"; border-bottom: 5px solid "+temperatureGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+temperatureGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+temperatureGroupShown[i][1]+"; border-bottom: 5px solid "+temperatureGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+temperatureGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<warmExtremesGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+warmExtremesGroupShown[i][1]+"; border-bottom: 5px solid "+warmExtremesGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+warmExtremesGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+warmExtremesGroupShown[i][1]+"; border-bottom: 5px solid "+warmExtremesGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+warmExtremesGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<coldExtremesGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+coldExtremesGroupShown[i][1]+"; border-bottom: 5px solid "+coldExtremesGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+coldExtremesGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+coldExtremesGroupShown[i][1]+"; border-bottom: 5px solid "+coldExtremesGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+coldExtremesGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<precipitationGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+precipitationGroupShown[i][1]+"; border-bottom: 5px solid "+precipitationGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+precipitationGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+precipitationGroupShown[i][1]+"; border-bottom: 5px solid "+precipitationGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+precipitationGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<extremePrecipitationGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+extremePrecipitationGroupShown[i][1]+"; border-bottom: 5px solid "+extremePrecipitationGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+extremePrecipitationGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+extremePrecipitationGroupShown[i][1]+"; border-bottom: 5px solid "+extremePrecipitationGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+extremePrecipitationGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<windGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+windGroupShown[i][1]+"; border-bottom: 5px solid "+windGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+windGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+windGroupShown[i][1]+"; border-bottom: 5px solid "+windGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+windGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<otherGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+otherGroupShown[i][1]+"; border-bottom: 5px solid "+otherGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+otherGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+otherGroupShown[i][1]+"; border-bottom: 5px solid "+otherGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+otherGroupShown[i][3]+"</span>";
 						}
-						newWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys+"<br/><br/><button id='printButton"+block+"' class='d3_buttonId'>Print</button>  <button id='closePreviewWindow"+block+"' class='d3_buttonId'>Close Window</button>";
 						
-						// Delete the first bar (located outside the graph)
-						$(newWindow.document).contents().find("#d3_rectId:first").remove();
-						
-						// CSS for the Buttons (new window)
-						$(newWindow.document).contents().find(".d3_buttonId")
-							.css("border", "1px solid #dcdcdc")
-							.css("-webkit-border-radius", "10px")
-							.css("-moz-border-radius", "10px")
-							.css("border-radius", "10px")
-							.css("background-color", "#ededed")
-							.css("color", "#211921")
-							.css("-moz-box-shadow", "inset 0px -1px 0px 0px #877087")
-							.css("-webkit-box-shadow", "inset 0px -1px 0px 0px #877087")
-							.css("box-shadow", "inset 0px -1px 0px 0px #877087");		
-						$(newWindow.document).contents().find(".d3_buttonId").hover( function(){
-						     $(this).css("background-color", "#dfdfdf");
-						},
-						function(){
-							$(this).css('background-color', '#ededed');
-						});
-						
-						$(newWindow.document).contents().find("#printButton"+block).click(function() {
-							printFunction();
-						});	
-						
-						$(newWindow.document).contents().find("#closePreviewWindow"+block).click(function() {
-							newWindow.close();
-						});	
-						
-						function printFunction() {
-							var printWindow=window.open("","","");
-							$(newWindow).ready(function(){
-								printWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys;
-								// Delete the first bar (located outside the graph)
-								$(printWindow.document).contents().find("#d3_rectId:first").remove();
-								printWindow.print();
-								printWindow.close();
-							});			
-						}
+						// Add the content
+						newWindow.document.open();						
+						newWindow.document.write("<html><head><link rel='shortcut icon' href='"+settings.basePath+"sites/all/themes/ccizen/favicon.ico' />	<title>Dashboard | CCIS - Print Diagram</title>");
+						newWindow.document.write("<link rel='stylesheet' href='"+settings.basePath+"sites/all/modules/custom/ccis/css/d3.css' type='text/css' />");
+						newWindow.document.write("</head><body>");
+						newWindow.document.write("<div class='d3_printDiv'><span class='d3_printTitle'>Station: "+stationName+"</span><br/><span class='d3_printDiagDiv''>"+html+"</span>"+printKeys+"</div>");
+						newWindow.document.write("</body></html>");
+						newWindow.document.close();
+						newWindow.print();
+						newWindow.close();
+
 					});
 				}
 				// *** Print functions - END ***
@@ -1591,8 +1570,8 @@ Drupal.behaviors.ccis = {
 					var obj = {};
 					//obj.date: d3.time.format("%Y-%m-%d %H:%M:%S").parse(d.date.slice(0,-3); // Datum & Zeit ohne Zeitzone
 					obj.date = d3.time.format("%Y-%m-%d").parse(d.date.slice(0,-12)); // Nur Datum
-					// i=2: The first two parameters are Station and Date
-					for (var i=2; i<dataKeysArray.length; i++) {
+					// i=1: The first parameter is the Date
+					for (var i=1; i<dataKeysArray.length; i++) {
 						obj[dataKeysArray[i]] = parseFloat(d[dataKeysArray[i]]);
 					}
 					return obj;
@@ -1608,7 +1587,7 @@ Drupal.behaviors.ccis = {
 				var otherGroupUsed = [];
 				
 				// Create an array per group with the parameters used, the colors, the legend keywords, the legend hover names, the icons and the units
-				for (var i=2; i<dataKeysArray.length; i++) {
+				for (var i=1; i<dataKeysArray.length; i++) {
 					for (var k=0; k<temperatureGroup.length; k++) {
 						if (dataKeysArray[i]===temperatureGroup[k][0]) {
 							temperatureGroupUsed.push([temperatureGroup[k][0], temperatureGroup[k][1], temperatureGroup[k][2], temperatureGroup[k][3], temperatureGroup[k][4], temperatureGroup[k][5]]);
@@ -2064,7 +2043,7 @@ Drupal.behaviors.ccis = {
 				// Temperature group
 				if (temperatureGroupUsed.length>0 || warmExtremesGroupUsed.length>0 || coldExtremesGroupUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendTemperatureGroup"+block+"'></div></a></h6>");
-					$("#legendTemperatureGroup"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'><b> Temperature</b></div>");
+					$("#legendTemperatureGroup"+block).append("<div id='d3_iconLegendTemp"+block+"' class='d3_iconLegendTempClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_thermometer.png' width='7' height='21'> Temperature</div>");
 					// Main temperature group
 					if (temperatureGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivTemperature"+block+"'></div>");
@@ -2173,7 +2152,7 @@ Drupal.behaviors.ccis = {
 				// Precipitation group		
 				if (precipitationGroupUsed.length>0 || extremePrecipitationGroupUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendPrecipitationGroup"+block+"'></div></a></h6>");
-					$("#legendPrecipitationGroup"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'><b> Precipitation</b></div>");
+					$("#legendPrecipitationGroup"+block).append("<div id='d3_iconLegendPrec"+block+"' class='d3_iconLegendPrecClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_drop.png' width='11' height='17'> Precipitation</div>");
 					// Main precipitation group
 					if (precipitationGroupUsed.length>0) {
 						$("#d3_legendDiv"+block).append("<div id='d3_keysDivPrecipitation"+block+"'></div>");
@@ -2192,7 +2171,11 @@ Drupal.behaviors.ccis = {
 							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationText"+i+block+"' class='d3_keysText'></div>");
 							$("#d3_keysPrecipitationText"+i+block).append(precipitationGroupUsed[i][2]);
 							//$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[i][4]+"' width='25' height='15'></div>");
-							$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+precipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
+							if (precipitationGroupUsed[i][0] === "rr") {
+								$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[i][4]+"' width='16' height='14'></div>");
+							} else {
+								$("#d3_keysPrecipitationBoxText"+i+block).append("<div id='d3_keysPrecipitationIcon"+i+block+"' class='d3_keysIcon'>"+partOfSVGLine1+precipitationGroupUsed[i][1]+partOfSVGLine2+"</div>");
+							}
 							(function(i) {
 								$("#d3_keysPrecipitationBoxText"+i+block)
 									.hover(function(){
@@ -2249,7 +2232,7 @@ Drupal.behaviors.ccis = {
 				// Wind group				
 				if (windGroupUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendWindGroup"+block+"'></div></a></h6>");
-					$("#legendWindGroup"+block).append("<div id='d3_iconLegendWind"+block+"' class='d3_iconLegendWindClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='11' height='17'><b> Wind</b></div>");
+					$("#legendWindGroup"+block).append("<div id='d3_iconLegendWind"+block+"' class='d3_iconLegendWindClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_wind.png' width='11' height='17'> Wind</div>");
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivWind"+block+"'></div>");
 					for (var i=0; i<windGroupUsed.length; i++) {
 						function findWindChecked() {
@@ -2284,7 +2267,7 @@ Drupal.behaviors.ccis = {
 				// Other group
 				if (otherGroupUsed.length>0) {
 					$("#d3_legendDiv"+block).append("<h6><a href='#'><div id='legendOtherGroup"+block+"'></div></a></h6>");
-					$("#legendOtherGroup"+block).append("<div id='d3_iconLegendOther"+block+"' class='d3_iconLegendOtherClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='16' height='4'><b> Other</b></div>");
+					$("#legendOtherGroup"+block).append("<div id='d3_iconLegendOther"+block+"' class='d3_iconLegendOtherClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_legende_other.png' width='16' height='4'> Other</div>");
 					$("#d3_legendDiv"+block).append("<div id='d3_keysDivOther"+block+"'></div>");
 					for (var i=0; i<otherGroupUsed.length; i++) {
 						function findOtherChecked() {
@@ -2413,7 +2396,11 @@ Drupal.behaviors.ccis = {
 											$("#d3_keysPrecipitation_TEMP"+block).append("<div id='d3_keysPrecipitationBoxText_TEMP"+k+block+"'></div>");
 											$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div id='d3_keysPrecipitationText_TEMP"+k+block+"' class='d3_keysText'></div>");
 											$("#d3_keysPrecipitationText_TEMP"+k+block).append(precipitationGroupUsed[k][2]);
-											$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div>"+partOfSVGLine1+precipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
+											if (precipitationGroupUsed[k][0] === "rr") {
+												$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/"+precipitationGroupUsed[k][4]+"' width='16' height='14'></div>");
+											} else {
+												$("#d3_keysPrecipitationBoxText_TEMP"+k+block).append("<div"+partOfSVGLine1+precipitationGroupUsed[k][1]+partOfSVGLine2+"</div>");
+											}
 										}	
 									}
 									break;
@@ -2736,12 +2723,12 @@ Drupal.behaviors.ccis = {
 							}
 							// Create content for tooltips
 							var tooltipText="";
-							tooltipText = "<b><table style='margin:0px;'>";
+							tooltipText = "<table style='margin:0px;'>";
 								
 								tooltipText += "<tr>";
 									tooltipText += "<td>&nbsp;<img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_infobereich_clock.png' width='11' height='12'></td>";
 									tooltipText += "<td>&nbsp;Date: </td>";
-									tooltipText += "<td><b>"+date+"</b></td>";
+									tooltipText += "<td>"+date+"</td>";
 								tooltipText += "</tr>";	
 								if (temperatureGroupShown.length>0) {
 									for (var i=0; i<temperatureGroupShown.length; i++) {									
@@ -2849,7 +2836,7 @@ Drupal.behaviors.ccis = {
 									}		
 								}
 								
-							tooltipText += "</table></b>";
+							tooltipText += "</table>";
 	
 							// Create tooltip
 							$("#d3_GraphDiv"+block).append("<div id='d3_tooltip"+block+"' class='d3_tooltipClass'</div>");		
@@ -2873,7 +2860,7 @@ Drupal.behaviors.ccis = {
 				function printPreview() {
 					var newWindow=window.open("","","");
 					
-					$(newWindow).ready(function(){
+					$(newWindow).ready(function() {
 				
 						// Clone Diagram
 						var clone = $("#d3_GraphDiv"+block).clone();
@@ -2888,67 +2875,37 @@ Drupal.behaviors.ccis = {
 						
 						var printKeys = "";
 						for (var i=0; i<temperatureGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+temperatureGroupShown[i][1]+"; border-bottom: 5px solid "+temperatureGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+temperatureGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+temperatureGroupShown[i][1]+"; border-bottom: 5px solid "+temperatureGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+temperatureGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<warmExtremesGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+warmExtremesGroupShown[i][1]+"; border-bottom: 5px solid "+warmExtremesGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+warmExtremesGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+warmExtremesGroupShown[i][1]+"; border-bottom: 5px solid "+warmExtremesGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+warmExtremesGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<coldExtremesGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+coldExtremesGroupShown[i][1]+"; border-bottom: 5px solid "+coldExtremesGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+coldExtremesGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+coldExtremesGroupShown[i][1]+"; border-bottom: 5px solid "+coldExtremesGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+coldExtremesGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<precipitationGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+precipitationGroupShown[i][1]+"; border-bottom: 5px solid "+precipitationGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+precipitationGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+precipitationGroupShown[i][1]+"; border-bottom: 5px solid "+precipitationGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+precipitationGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<extremePrecipitationGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+extremePrecipitationGroupShown[i][1]+"; border-bottom: 5px solid "+extremePrecipitationGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+extremePrecipitationGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+extremePrecipitationGroupShown[i][1]+"; border-bottom: 5px solid "+extremePrecipitationGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+extremePrecipitationGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<windGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+windGroupShown[i][1]+"; border-bottom: 5px solid "+windGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+windGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+windGroupShown[i][1]+"; border-bottom: 5px solid "+windGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+windGroupShown[i][3]+"</span>";
 						}
 						for (var i=0; i<otherGroupShown.length; i++) {
-							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+otherGroupShown[i][1]+"; border-bottom: 5px solid "+otherGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span style='font-size:14px'>"+otherGroupShown[i][3]+"</span>";
+							printKeys += "<br><div style='height:0px; width:10px; border-top: 5px solid "+otherGroupShown[i][1]+"; border-bottom: 5px solid "+otherGroupShown[i][1]+"; outline:solid 1px black; float:left; margin-left:5px; margin-right:5px; margin-top:3px;'></div><span class='d3_printKeys'>"+otherGroupShown[i][3]+"</span>";
 						}
-						newWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys+"<br/><br/><button id='printButton"+block+"' class='d3_buttonId'>Print</button>  <button id='closePreviewWindow"+block+"' class='d3_buttonId'>Close Window</button>";
-			
-						// Delete the first bar (located outside the graph)
-						$(newWindow.document).contents().find("#d3_rectId:first").remove();
-			
-						// CSS for the Buttons (new window)
-						$(newWindow.document).contents().find(".d3_buttonId")
-							.css("border", "1px solid #dcdcdc")
-							.css("-webkit-border-radius", "10px")
-							.css("-moz-border-radius", "10px")
-							.css("border-radius", "10px")
-							.css("background-color", "#ededed")
-							.css("color", "#211921")
-							.css("-moz-box-shadow", "inset 0px -1px 0px 0px #877087")
-							.css("-webkit-box-shadow", "inset 0px -1px 0px 0px #877087")
-							.css("box-shadow", "inset 0px -1px 0px 0px #877087");		
-						$(newWindow.document).contents().find(".d3_buttonId").hover( function(){
-						     $(this).css("background-color", "#dfdfdf");
-						},
-						function(){
-							$(this).css('background-color', '#ededed');
-						});
 						
-						$(newWindow.document).contents().find("#printButton"+block).click(function() {
-							printFunction();
-						});	
-						
-						$(newWindow.document).contents().find("#closePreviewWindow"+block).click(function() {
-							newWindow.close();
-						});	
-						
-						function printFunction() {
-							var printWindow=window.open("","","");
-							$(newWindow).ready(function(){
-								printWindow.document.body.innerHTML = "<span style='font-size:16px'>Station: <b>"+stationName+"</b></span><br/>"+html+printKeys;
-								// Delete the first bar (located outside the graph)
-								$(printWindow.document).contents().find("#d3_rectId:first").remove();
-								printWindow.print();
-								printWindow.close();
-							});			
-						}
+						// Add the content
+						newWindow.document.open();						
+						newWindow.document.write("<html><head><link rel='shortcut icon' href='"+settings.basePath+"sites/all/themes/ccizen/favicon.ico' />	<title>Dashboard | CCIS - Print Diagram</title>");
+						newWindow.document.write("<link rel='stylesheet' href='"+settings.basePath+"sites/all/modules/custom/ccis/css/d3.css' type='text/css' />");
+						newWindow.document.write("</head><body>");
+						newWindow.document.write("<div class='d3_printDiv'><span class='d3_printTitle'>Station: "+stationName+"</span><br/><span class='d3_printDiagDiv''>"+html+"</span>"+printKeys+"</div>");
+						newWindow.document.write("</body></html>");
+						newWindow.document.close();
+						newWindow.print();
+						newWindow.close();
 					});
 				}
 				// *** Print functions - END ***
