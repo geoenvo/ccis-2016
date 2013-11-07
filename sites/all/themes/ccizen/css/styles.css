@@ -1302,6 +1302,7 @@ div.ColVis_collection button.ColVis_Button:hover {
   }
 
 .ccis-data-download {
+  position: relative;
   float: right;
   width: auto;
   height: 22px;
@@ -1314,6 +1315,7 @@ div.ColVis_collection button.ColVis_Button:hover {
   background: url(../img/sprites_ccizen.png) no-repeat -12px -412px #fff;
   line-height: 17px;
   text-decoration: none;
+  z-index: 100;
   }
 .ccis-data-download a {
   font-size: 14px;
