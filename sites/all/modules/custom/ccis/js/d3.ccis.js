@@ -154,11 +154,11 @@ Drupal.behaviors.ccis = {
 				
 				// Create object with the parameters and the values
 				var data = json.map(function(d) {
-					var obj = {};
+				var obj = {};
 					//obj.date: d3.time.format("%Y-%m-%d %H:%M:%S").parse(d.date.slice(0,-3); // Datum & Zeit ohne Zeitzone
 					obj.date = d3.time.format("%Y-%m-%d").parse(d.date.slice(0,-12)); // Nur Datum
-					// i=2: The first two parameters are Station and Date
-					for (var i=2; i<dataKeysArray.length; i++) {
+					// i=1: The first parameter is the Date
+					for (var i=1; i<dataKeysArray.length; i++) {
 						obj[dataKeysArray[i]] = parseFloat(d[dataKeysArray[i]]);
 					}
 					return obj;
@@ -174,7 +174,7 @@ Drupal.behaviors.ccis = {
 				var otherGroupUsed = [];
 				
 				// Create an array per group with the parameters used, the colors, the legend keywords, the legend hover names, the icons and the units
-				for (var i=2; i<dataKeysArray.length; i++) {
+				for (var i=1; i<dataKeysArray.length; i++) {
 					for (var k=0; k<temperatureGroup.length; k++) {
 						if (dataKeysArray[i]===temperatureGroup[k][0]) {
 							temperatureGroupUsed.push([temperatureGroup[k][0], temperatureGroup[k][1], temperatureGroup[k][2], temperatureGroup[k][3], temperatureGroup[k][4], temperatureGroup[k][5]]);
@@ -1570,8 +1570,8 @@ Drupal.behaviors.ccis = {
 					var obj = {};
 					//obj.date: d3.time.format("%Y-%m-%d %H:%M:%S").parse(d.date.slice(0,-3); // Datum & Zeit ohne Zeitzone
 					obj.date = d3.time.format("%Y-%m-%d").parse(d.date.slice(0,-12)); // Nur Datum
-					// i=2: The first two parameters are Station and Date
-					for (var i=2; i<dataKeysArray.length; i++) {
+					// i=1: The first parameter is the Date
+					for (var i=1; i<dataKeysArray.length; i++) {
 						obj[dataKeysArray[i]] = parseFloat(d[dataKeysArray[i]]);
 					}
 					return obj;
@@ -1587,7 +1587,7 @@ Drupal.behaviors.ccis = {
 				var otherGroupUsed = [];
 				
 				// Create an array per group with the parameters used, the colors, the legend keywords, the legend hover names, the icons and the units
-				for (var i=2; i<dataKeysArray.length; i++) {
+				for (var i=1; i<dataKeysArray.length; i++) {
 					for (var k=0; k<temperatureGroup.length; k++) {
 						if (dataKeysArray[i]===temperatureGroup[k][0]) {
 							temperatureGroupUsed.push([temperatureGroup[k][0], temperatureGroup[k][1], temperatureGroup[k][2], temperatureGroup[k][3], temperatureGroup[k][4], temperatureGroup[k][5]]);
