@@ -340,7 +340,7 @@ function ccis_admin_overview() {
  */
 function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
   $supported_formats = array('json', 'csv');
-  $supported_sources = array('d3', 'datatables', 'download');
+  $supported_sources = array('d3', 'datatables', 'download', 'data');
   $error = FALSE;
   if (!in_array($format, $supported_formats)) {
     watchdog('ccis', 'Overgiven format: @format is not supported', array('@format' => $format), WATCHDOG_ERROR);
@@ -449,6 +449,10 @@ function _ccis_block_filter($node) {
  * Filter form.
  */
 function ccis_block_filter_form($form, $form_state, $node = NULL) {
+  $input1 = '';
+  if (!empty($node->field_stationcode)) {
+    $input1 = $node->field_stationcode['und'][0]['safe_value'];
+  }
   $form['station_input'] = array(
     '#type' => 'fieldset',
   );
@@ -461,7 +465,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#autocomplete_path' => 'ccis/autocomplete/station_search',
     '#title_display' => 'invisible',
     '#description' => t('Enter a station name, Station code etc.'),
-    '#default_value' => isset($node->title) ? "$node->title ($node->nid)" : '',
+    '#default_value' => isset($node->title) ? "$node->title ($input1)" : '',
     '#field_prefix' => 1,
     '#attributes' => array('class' => array('form-autocomplete-mousedown')),
   );
@@ -554,8 +558,11 @@ function ccis_block_filter_form_submit($form, &$form_state) {
 function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   form_state_values_clean($form_state);
 
-  $station_1 = _ccis_get_station_node($form_state['values']);
+  $station_1 = _ccis_get_station_node($form_state['values'], 'input1');
+  #debug($station_1);
+  #debug($form_state['values']);
   $station_2 = _ccis_get_station_node($form_state['values'], 'input2');
+ # debug($station_2);
   if (empty($station_1)) {
     $station_1 = $station_2;
     $station_2 = NULL;
@@ -573,6 +580,11 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   $settings = _ccis_get_datatables_settings($list1, $form_state['values']);
   $settings = _ccis_get_datatables_settings($list2, $form_state['values'], 2);
   $commands[] = ajax_command_settings($settings, TRUE);
+
+//   $commands[] = ajax_command_data('body', 'refresh', time());
+//   $settings = ccis_get_stations_settings($list1, $form_state['values']);
+//   $settings = ccis_get_stations_settings($list2, $form_state['values'], 2);
+//   $commands[] = ajax_command_settings($settings, TRUE);
 
   $commands[] = ajax_command_data('#ccis-weather-d3-block-1', 'refresh', '1');
   $commands[] = ajax_command_data('#ccis-weather-d3-block-2', 'refresh', '1');
@@ -592,6 +604,15 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   return array('#type' => 'ajax', '#commands' => $commands);
 }
 
+function ccis_get_stations_settings($list, $values, $id = 1) {
+  static $stations;
+  $stations[] = array(
+    'path' => url("ccis/dataquery/$list/data", array('query' => $values)),
+  );
+  $settings['ccisnew']['stations'] = $stations;
+  return $settings;
+}
+
 /**
  * Block output for the D3 graph.
  */
@@ -606,7 +627,7 @@ function _ccis_block_d3($list, $params, $id = 1) {
   drupal_add_js($path . '/js/d3.ccis.js', array('weight' => 5));
   drupal_add_css($path . '/css/d3.css');
   drupal_add_js(_ccis_get_d3_settings($list, $params, $id), 'setting');
-
+  #drupal_add_js(ccis_get_stations_settings($list, $params, $id), 'setting');
   $output = '<div data-refresh="1" id="ccis-weather-d3-block-' . $id . '">';
   $output .= '</div>';
   return $output;
@@ -685,6 +706,7 @@ function _ccis_get_station_node($values, $key = 'input1') {
     $pattern = "/(.+)\((\d+)\)/";
     preg_match($pattern, $values[$key], $matches);
     $code = isset($matches[2]) ? $matches[2] : NULL;
+   # debug($code, $key);
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'weather_station')
@@ -1004,13 +1026,14 @@ function ccis_search_terms_finder_list($values) {
   #$query = db_select('node', 'n')->extend('PagerDefault')->limit(2);
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_wmocode', 'f', 'n.nid = f.entity_id');
+  $query->leftJoin('field_data_field_stationcode', 'sc', 'n.nid = sc.entity_id');
   if (!empty($region)) {
     $query->leftJoin('field_data_field_stationprovince', 'region', 'n.nid = region.entity_id');
     $query->condition('region.field_stationprovince_value', $region);
   }
   $query->fields('n', array('nid', 'title'));
   $query->fields('f', array('field_wmocode_value'));
-
+  $query->fields('sc', array('field_stationcode_value'));
   $db_or = db_or();
   foreach ($search_fields as $index => $search_field) {
     $query->leftJoin('field_data_' . $search_field, 'f' . $index, 'n.nid = f' . $index . '.entity_id');
@@ -1035,7 +1058,7 @@ function ccis_search_terms_finder_list($values) {
     $results = $query->execute();
     $options = array();
     foreach ($results as $result) {
-      $input =  $result->title . ' (' . $result->nid . ')';
+      $input =  $result->title . ' (' . $result->field_stationcode_value . ')';
       $checkbox1 = array(
         '#type' => 'radio',
         '#name' => 'station[1]',
