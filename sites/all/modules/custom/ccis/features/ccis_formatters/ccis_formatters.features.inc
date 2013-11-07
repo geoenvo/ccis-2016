@@ -19,7 +19,7 @@ function ccis_formatters_ctools_plugin_api($module = NULL, $api = NULL) {
 function ccis_formatters_custom_date_formats() {
   $custom_date_formats = array();
   $custom_date_formats['F'] = 'F';
-  $custom_date_formats['M t, Y'] = 'M t, Y';
+  $custom_date_formats['M d, Y'] = 'M d, Y';
   $custom_date_formats['Y'] = 'Y';
   $custom_date_formats['d'] = 'd';
   return $custom_date_formats;
