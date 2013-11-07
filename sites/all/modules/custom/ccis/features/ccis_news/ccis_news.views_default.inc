@@ -181,7 +181,7 @@ function ccis_news_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Status Feed';
+  $handler->display->display_options['title'] = 'System status';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'time';
@@ -201,6 +201,9 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['fields']['timestamp']['label'] = '';
   $handler->display->display_options['fields']['timestamp']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['timestamp']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['timestamp']['element_wrapper_class'] = 'field-name-post-date';
+  $handler->display->display_options['fields']['timestamp']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['timestamp']['date_format'] = 'compact';
   /* Field: Aggregator: Title */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
@@ -208,6 +211,8 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['label'] = '';
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_1']['element_wrapper_type'] = 'h3';
+  $handler->display->display_options['fields']['title_1']['element_default_classes'] = FALSE;
   /* Field: Aggregator: Body */
   $handler->display->display_options['fields']['description']['id'] = 'description';
   $handler->display->display_options['fields']['description']['table'] = 'aggregator_item';
@@ -229,10 +234,12 @@ function ccis_news_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'clistatus compact';
   $handler->display->display_options['block_caching'] = '8';
   $translatables['status_feed'] = array(
     t('Master'),
-    t('Status Feed'),
+    t('System status'),
     t('more'),
     t('Apply'),
     t('Reset'),
