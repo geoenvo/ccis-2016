@@ -20,7 +20,7 @@ function ccis_blog_ds_field_settings_info() {
     'post_date' => array(
       'weight' => '0',
       'label' => 'hidden',
-      'format' => 'ds_post_date_datatable',
+      'format' => 'ds_post_date_compact',
     ),
   );
   $export['node|blog_article|default'] = $ds_fieldsetting;
@@ -45,7 +45,7 @@ function ccis_blog_ds_field_settings_info() {
     'post_date' => array(
       'weight' => '0',
       'label' => 'hidden',
-      'format' => 'ds_post_date_datatable',
+      'format' => 'ds_post_date_compact',
     ),
   );
   $export['node|blog_article|teaser'] = $ds_fieldsetting;
