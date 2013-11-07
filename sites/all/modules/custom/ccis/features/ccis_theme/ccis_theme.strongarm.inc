@@ -781,7 +781,7 @@ foo
     'toggle_main_menu' => 1,
     'toggle_secondary_menu' => 0,
     'default_logo' => 1,
-    'logo_path' => 'public://logo_climability.png',
+    'logo_path' => '',
     'logo_upload' => '',
     'default_favicon' => 1,
     'favicon_path' => '',
