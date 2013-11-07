@@ -562,7 +562,7 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   #debug($station_1);
   #debug($form_state['values']);
   $station_2 = _ccis_get_station_node($form_state['values'], 'input2');
- # debug($station_2);
+  #debug($station_2);
   if (empty($station_1)) {
     $station_1 = $station_2;
     $station_2 = NULL;
@@ -596,7 +596,7 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   }
   else{
     // Reset the block with a empty div.
-    $commands[] = ajax_command_replace('#ccis-station-info-block-2', '<div id="ccis-station-info-block-2 data-hide-portlet=1"></div>');
+    $commands[] = ajax_command_data('#ccis-station-info-block-2', 'hide-portlet', '1');
   }
 
   $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap(array($station_1, $station_2)));
@@ -706,7 +706,6 @@ function _ccis_get_station_node($values, $key = 'input1') {
     $pattern = "/(.+)\((\d+)\)/";
     preg_match($pattern, $values[$key], $matches);
     $code = isset($matches[2]) ? $matches[2] : NULL;
-   # debug($code, $key);
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'node')
       ->entityCondition('bundle', 'weather_station')
@@ -788,7 +787,6 @@ function _ccis_get_listname($node, $range) {
 function _ccis_block_stationinfo($node = NULL, $id = 1) {
   $nid = empty($node) ? NULL : $node->nid;
   $view = views_embed_view('station_info', 'embed_1', $nid);
-
   $output = '<div data-hide-portlet=0 id="ccis-station-info-block-' . $id . '">';
   $output .= $view;
   $output .= '</div>';
