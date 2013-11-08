@@ -331,12 +331,6 @@ function ccis_openlayers_views_default_views() {
   $handler->display->display_options['fields']['field_station_geodata']['settings'] = array(
     'data' => 'full',
   );
-  /* Field: Content: Region */
-  $handler->display->display_options['fields']['field_stationprovince']['id'] = 'field_stationprovince';
-  $handler->display->display_options['fields']['field_stationprovince']['table'] = 'field_data_field_stationprovince';
-  $handler->display->display_options['fields']['field_stationprovince']['field'] = 'field_stationprovince';
-  $handler->display->display_options['fields']['field_stationprovince']['label'] = '';
-  $handler->display->display_options['fields']['field_stationprovince']['element_label_colon'] = FALSE;
   /* Field: Content: WMO Code */
   $handler->display->display_options['fields']['field_wmocode']['id'] = 'field_wmocode';
   $handler->display->display_options['fields']['field_wmocode']['table'] = 'field_data_field_wmocode';
