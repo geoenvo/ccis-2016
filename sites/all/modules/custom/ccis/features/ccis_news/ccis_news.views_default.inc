@@ -69,11 +69,18 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['fields']['author']['table'] = 'aggregator_item';
   $handler->display->display_options['fields']['author']['field'] = 'author';
   $handler->display->display_options['fields']['author']['label'] = 'Source';
+  $handler->display->display_options['fields']['author']['hide_empty'] = TRUE;
   /* Sort criterion: Aggregator: Timestamp */
   $handler->display->display_options['sorts']['timestamp']['id'] = 'timestamp';
   $handler->display->display_options['sorts']['timestamp']['table'] = 'aggregator_item';
   $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
+  /* Filter criterion: Aggregator category: Category */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'aggregator_category';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = '!=';
+  $handler->display->display_options['filters']['title']['value'] = 'System';
 
   /* Display: Block Newsfeed */
   $handler = $view->new_display('block', 'Block Newsfeed', 'block_newsfeed');
@@ -136,6 +143,39 @@ function ccis_news_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_newsfeed');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Aggregator: Timestamp */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'aggregator_item';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['label'] = '';
+  $handler->display->display_options['fields']['timestamp']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['timestamp']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['timestamp']['element_wrapper_class'] = 'field-name-post-date';
+  $handler->display->display_options['fields']['timestamp']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['timestamp']['date_format'] = 'compact';
+  $handler->display->display_options['fields']['timestamp']['custom_date_format'] = 'D, d M Y';
+  /* Field: Aggregator: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'aggregator_item';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'h2';
+  $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'teasertitle';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  /* Field: Aggregator: Body */
+  $handler->display->display_options['fields']['description']['id'] = 'description';
+  $handler->display->display_options['fields']['description']['table'] = 'aggregator_item';
+  $handler->display->display_options['fields']['description']['field'] = 'description';
+  $handler->display->display_options['fields']['description']['label'] = '';
+  $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
+  /* Field: Aggregator: Author */
+  $handler->display->display_options['fields']['author']['id'] = 'author';
+  $handler->display->display_options['fields']['author']['table'] = 'aggregator_item';
+  $handler->display->display_options['fields']['author']['field'] = 'author';
+  $handler->display->display_options['fields']['author']['label'] = 'Source';
+  $handler->display->display_options['fields']['author']['hide_empty'] = TRUE;
   $handler->display->display_options['path'] = 'news';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'News';
