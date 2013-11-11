@@ -44,8 +44,8 @@
         var $div = $(dt_c);
         $div.append("<div class='ccis-datatable-station-number'>" + _datatable.current_station.nr + "</div>");
         $div.append("<div class='ccis-datatable-station-range'>" + Drupal.t("Data: ") + _datatable.info.range + "</div>");
-        if (_datatable.current_station.download) {
-          $div.append(_datatable.current_station.download);
+        if (_datatable.info.download) {
+          $div.append(_datatable.info.download);
         }
         $div.append(table(_datatable.current_station.nr));
         _datatable.container.append($div);
