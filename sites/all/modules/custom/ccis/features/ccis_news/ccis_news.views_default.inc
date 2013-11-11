@@ -75,12 +75,12 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['sorts']['timestamp']['table'] = 'aggregator_item';
   $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
-  /* Filter criterion: Aggregator category: Category */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'aggregator_category';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = '!=';
-  $handler->display->display_options['filters']['title']['value'] = 'System';
+  /* Filter criterion: Aggregator: Link */
+  $handler->display->display_options['filters']['link']['id'] = 'link';
+  $handler->display->display_options['filters']['link']['table'] = 'aggregator_item';
+  $handler->display->display_options['filters']['link']['field'] = 'link';
+  $handler->display->display_options['filters']['link']['operator'] = '!=';
+  $handler->display->display_options['filters']['link']['value'] = 'https://drupal.org/planet';
 
   /* Display: Block Newsfeed */
   $handler = $view->new_display('block', 'Block Newsfeed', 'block_newsfeed');
