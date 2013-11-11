@@ -55,6 +55,17 @@ function rb_configuration_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'final_polish_remove_paths';
+  $strongarm->value = array(
+    0 => 'filter/tips',
+    1 => 'node',
+    2 => 'rss.xml',
+  );
+  $export['final_polish_remove_paths'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_pattern';
   $strongarm->value = '[node:menu-link:parent]/[node:menu-link]';
   $export['pathauto_node_pattern'] = $strongarm;
