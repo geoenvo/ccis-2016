@@ -497,7 +497,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#type' => 'textfield',
     '#autocomplete_path' => 'ccis/autocomplete/station_search',
     '#title_display' => 'invisible',
-    '#description' => t('Enter a station name, Station code etc.'),
+    '#description' => t('Enter a station name or station code'),
     '#default_value' => isset($node->title) ? "$node->title ($input1)" : '',
     '#field_prefix' => 1,
     '#attributes' => array('class' => array('form-autocomplete-mousedown')),
@@ -507,7 +507,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#type' => 'textfield',
     '#autocomplete_path' => 'ccis/autocomplete/station_search',
     '#title_display' => 'invisible',
-    '#description' => t('Enter a station name, Station code to compare.'),
+    '#description' => t('Enter a station name or station code to compare.'),
     '#field_prefix' => 2,
     '#attributes' => array('class' => array('form-autocomplete-mousedown')),
     '#states' => array(
@@ -527,7 +527,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
   $form['filter']['searchterm'] = array(
     '#title' => t('Search'),
     '#type' => 'textfield',
-    '#description' => t('Enter metadata search term.'),
+    '#description' => t('Enter metadata search term'),
     '#ajax' => array(
       'callback' => 'ccis_block_filter_form_ajax_searchterms',
       'wrapper' => 'ccis-station-search-result',
