@@ -78,40 +78,6 @@ function ccis_users_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'profile2-main-field_middle_name'
-  $field_instances['profile2-main-field_middle_name'] = array(
-    'bundle' => 'main',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'inline',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'profile2',
-    'field_name' => 'field_middle_name',
-    'label' => 'Middle name',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'profile2-main-field_surname'
   $field_instances['profile2-main-field_surname'] = array(
     'bundle' => 'main',
@@ -214,6 +180,74 @@ function ccis_users_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'profile2-main-field_user_country'
+  $field_instances['profile2-main-field_user_country'] = array(
+    'bundle' => 'main',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'profile2',
+    'field_name' => 'field_user_country',
+    'label' => 'Country',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 8,
+    ),
+  );
+
+  // Exported field_instance: 'profile2-main-field_user_phone'
+  $field_instances['profile2-main-field_user_phone'] = array(
+    'bundle' => 'main',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 8,
+      ),
+    ),
+    'entity_type' => 'profile2',
+    'field_name' => 'field_user_phone',
+    'label' => 'Phone',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 9,
+    ),
+  );
+
   // Exported field_instance: 'profile2-main-field_user_postcode'
   $field_instances['profile2-main-field_user_postcode'] = array(
     'bundle' => 'main',
@@ -252,10 +286,11 @@ function ccis_users_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Address');
   t('City');
+  t('Country');
   t('First Name');
   t('Institution');
   t('Last name');
-  t('Middle name');
+  t('Phone');
   t('Postal code');
 
   return $field_instances;
