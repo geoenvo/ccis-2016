@@ -4,7 +4,7 @@
 * Als Selector hab ich .node-form genommen, sonst muss jeweils fuer
 * .page-node-add + .page-node-edit definiert werden.
 * Font-size nochmal extra zusammengefasst, weil vielleicht zu klein/gross...
-******************/
+*****************
 .node-form .fieldset-legend {
   font-family: 'Pathway Gothic One', 'Open Sans Condensed', 'Arial Narrow', sans-serif;
 }
@@ -53,18 +53,20 @@
   font-size: 1.1em;
   margin: 0 3px;
 }
+*/
 
 /***************
 * ClimateChange 
-***************/
+**************
 .node-article-climatechange.view-mode-teaser.ds-2col > .group-left {
   width: 30%;
 }
 .node-article-climatechange.view-mode-teaser.ds-2col > .group-right {
   width: 70%;
 }
+*/
 
-/* styles.css Zeile 958ff  +++ events teaser +++ */
+/* styles.css Zeile 958ff  +++ events teaser +++ 
 .events .views-row,
 .news .views-row {
   border-bottom: 1px dotted #B3B3B3;
@@ -72,17 +74,20 @@
   margin-bottom: 10px;
   padding: 10px 0;
 }
+*/
 
 /* language switcher styles.css Zeile 766ff 
 * der element.style ist auf 140px kann das hier auch so breit?
 * dann passt es... 
-*/
+
 #edit-lang-dropdown-select_msdd {
   width: 140px !important; 
   }
+*/
 
-/* user-login no description */
+/* user-login no description 
 #user-login .form-item-name .description,
 #user-login .form-item-pass .description {
   display: none;
 }
+*/
