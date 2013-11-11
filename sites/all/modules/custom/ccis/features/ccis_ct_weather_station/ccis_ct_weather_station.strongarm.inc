@@ -21,7 +21,7 @@ function ccis_ct_weather_station_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_weather_station';
-  $strongarm->value = 'edit-comment';
+  $strongarm->value = 'edit-rabbit-hole';
   $export['additional_settings__active_tab_weather_station'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -735,6 +735,13 @@ function ccis_ct_weather_station_strongarm() {
   $strongarm->name = 'pathauto_node_walter_lieth_diagram_pattern';
   $strongarm->value = 'diagram/[node:title]';
   $export['pathauto_node_walter_lieth_diagram_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'rh_node_action_weather_station';
+  $strongarm->value = '1';
+  $export['rh_node_action_weather_station'] = $strongarm;
 
   return $export;
 }
