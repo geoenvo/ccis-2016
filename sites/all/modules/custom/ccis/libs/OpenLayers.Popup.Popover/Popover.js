@@ -30,6 +30,43 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @requires OpenLayers/BaseTypes/Size.js
  */
 
+var head = document.getElementsByTagName("head")[0];
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+	script.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/Popup/alert.js";
+	//head.appendChild(script);
+
+    var script5 = document.createElement("script");
+    script5.type = "text/javascript";
+	script5.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/Popup/Framed.js";
+	head.appendChild(script5);	
+	
+    var script1 = document.createElement("script");
+    script1.type = "text/javascript";
+	script1.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/Util.js";
+	head.appendChild(script1);	
+
+    var script2 = document.createElement("script");
+    script2.type = "text/javascript";
+	script2.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/BaseTypes/Bounds.js";
+	head.appendChild(script2);	
+
+    var script3 = document.createElement("script");
+    script3.type = "text/javascript";
+	script3.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/BaseTypes/Pixel.js";
+	head.appendChild(script3);	
+
+    var script4 = document.createElement("script");
+    script4.type = "text/javascript";
+	script4.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/BaseTypes/Size.js";
+	head.appendChild(script4);	
+		
+    var script6 = document.createElement("script");
+    script6.type = "text/javascript";
+	script6.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers.Popup/Popover/css/openlayerspopovers.css";
+	head.appendChild(script6);	
+
+
 /**
  * Class: OpenLayers.Popup.Popover
  * 
@@ -39,6 +76,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * Inherits from: 
  *  - <OpenLayers.Popup.Framed>
  */
+(function($) {
 OpenLayers.Popup.Popover = 
 	OpenLayers.Class(OpenLayers.Popup.Framed, {
 	autoSize: true,
@@ -48,13 +86,13 @@ OpenLayers.Popup.Popover =
 	popupHTML: '',
 	// delta is about to adjust the popup position vs the marker
 	delta:  {	// }
-		x: 9,	// } ← TWEAK THESE TO FEAT YOUR NEEDS !
-		y: -39	// }
+		x: 0,	// } ← TWEAK THESE TO FEAT YOUR NEEDS !
+		y: -30	// }
 	},
 	// the popup basic dimensions
 	dimensions: {	// }
-		w: 300,		// } ← TWEAK THESE TO FEAT YOUR NEEDS !
-		h: 200		// }
+		w: 150,		// } ← TWEAK THESE TO FEAT YOUR NEEDS !
+		h: 70		// }
 	},
 	/*
 	In order to display things right, you will need to add (and adapt) this piece of css :
@@ -111,3 +149,4 @@ OpenLayers.Popup.Popover =
 	},
 	CLASS_NAME: "OpenLayers.Popup.Popover"
 });
+})(jQuery);

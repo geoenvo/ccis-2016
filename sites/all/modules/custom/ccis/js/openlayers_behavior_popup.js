@@ -10,7 +10,6 @@
  *          OpenLayers feature object.
  * @return Formatted HTML.
  */
-
 Drupal.theme.prototype.openlayersPopup = function(feature) {
   var output = '';
 
@@ -34,6 +33,8 @@ Drupal.openlayers.popup = Drupal.openlayers.popup || {};
  */
 Drupal.openlayers.addBehavior('openlayers_behavior_popup',
     function (data, options) {
+	
+	
       map = data.openlayers;
       var layers = [];
       var selectedFeature;
@@ -71,6 +72,7 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                 // generate the number of stations and a hint as content of a
                 // hover
                 // popup
+                
                 html = '<div class="popup_list">';
                 if (feature.cluster.length > 3) {
                   html += '<p class="popupName">' + feature.cluster.length
@@ -78,37 +80,93 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                       + '<p class="popupAttr">'
                       + Drupal.t('Click to zoom in') + '</p>';
                 }
-                else if (feature.cluster.length <= 3 && feature.cluster.length > 1) {
-                  for ( var i = 0; i < feature.cluster.length; i++) {
-                    html += '<p><a class="popupName" href="'
+                else if (feature.cluster.length == 3) {
+                	html += '<p class="popupName">Select a station:</p>';
+                	for ( var i = 0; i < feature.cluster.length; i++) {
+                  	if (feature.cluster[i].attributes.title.length > 17) {
+                		var titleCut = feature.cluster[i].attributes.title.substring(0,16) + "...";
+                        html += '<p class="popupAttr popupAttrList3_' + i + '"><a href="'
+                            + Drupal.settings.basePath + 'dashboard?='
+                            + feature.cluster[i].data.nid + '">'
+                            + titleCut + '</a></p>';
+                  	}
+                  	else {
+                  		html += '<p class="popupAttr popupAttrList3_' + i + '"><a href="'
                         + Drupal.settings.basePath + 'dashboard?='
                         + feature.cluster[i].data.nid + '">'
                         + feature.cluster[i].attributes.title + '</a></p>';
                   }
+                  }
                 }
+                else if (feature.cluster.length == 2) {
+                	html += '<p class="popupName">Select a station:</p>';
+                	for ( var i = 0; i < feature.cluster.length; i++) {
+                  	if (feature.cluster[i].attributes.title.length > 17) {
+                		var titleCut = feature.cluster[i].attributes.title.substring(0,16) + "...";
+                        html += '<p class="popupAttr popupAttrList2_' + i + '"><a href="'
+                            + Drupal.settings.basePath + 'dashboard?='
+                            + feature.cluster[i].data.nid + '">'
+                            + titleCut + '</a></p>';
+                  	}
+                  	else {
+                  		html += '<p class="popupAttr popupAttrList2_' + i + '"><a href="'
+                        + Drupal.settings.basePath + 'dashboard?='
+                        + feature.cluster[i].data.nid + '">'
+                        + feature.cluster[i].attributes.title + '</a></p>';
+                  }
+                  }
+                }                
                 else if (feature.cluster.length > 0) {
-                  html = '<p class="popupName">'
-                      + feature.cluster[0].attributes.title + '</p>';
+                	if (feature.cluster[0].attributes.title.length > 17) {
+                		var titleCut = feature.cluster[0].attributes.title.substring(0,16) + "...";
+                        html = '<p class="popupName">'
+                            + titleCut + '</p>';
+                	} 
+                	else {
+                        html = '<p class="popupName">'
+                            + feature.cluster[0].attributes.title + '</p>';
+                	}
                   var title = Drupal.t('Station code');
                   var attr = feature.cluster[0].attributes.field_stationcode;
                   if (feature.cluster[0].attributes.field_wmocode != null) {
                     title = Drupal.t('WMO code');
                     attr = feature.cluster[0].attributes.field_wmocode;
                   }
-                  html += '<p class="popupAttr">' + title + ':' + attr + '</p>';
+                  html += '<p class="popupAttr">' + title + ': ' + attr + '</p>';
+                  html += '<img src="sites/all/modules/custom/ccis/css/ol/markers/arrow.png" style="position:relative; left:61px; top: -12px;" alt="arrow">'
                 }
+
                 html += '</div>';
+                
+
+                   
+                    popup = new OpenLayers.Popup.Popover(		 
+                		"popoverPopup",
+                        feature.geometry.getBounds().getCenterLonLat(),
+                        title,
+                         html,
+                        null, true, function(evt) {
+                          while (map.popups.length) {
+                            map.popups[0].destroy();
+                          }
+                        });   
+             
+                
+               
+                /* old standard popup
+                
                 // Generate the popup with the prepared content
-                popup = new OpenLayers.Popup.FramedCloud('popup',
+                popup = new OpenLayers.Popup.FramedCloud('popup',		               		
                     feature.geometry.getBounds().getCenterLonLat(), null, html,
                     null, true, function(evt) {
                       while (map.popups.length) {
                         map.popups[0].destroy();
                       }
-                    });
-
+                    });  */
+                    
+                     
                 // Assign popup to feature and map.
-                popup.panMapIfOutOfView = options.panMapIfOutOfView;
+                popup.panMapIfOutOfView = true; //options.panMapIfOutOfView;
                 popup.keepInMap = options.keepInMap;
                 selectedFeature = feature;
                 feature.popup = popup;
