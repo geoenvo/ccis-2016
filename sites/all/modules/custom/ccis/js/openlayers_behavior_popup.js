@@ -86,13 +86,13 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                   	if (feature.cluster[i].attributes.title.length > 17) {
                 		var titleCut = feature.cluster[i].attributes.title.substring(0,16) + "...";
                         html += '<p class="popupAttr popupAttrList3_' + i + '"><a href="'
-                            + Drupal.settings.basePath + 'dashboard?='
+                            + Drupal.settings.basePath + 'dashboard?nid='
                             + feature.cluster[i].data.nid + '">'
                             + titleCut + '</a></p>';
                   	}
                   	else {
                   		html += '<p class="popupAttr popupAttrList3_' + i + '"><a href="'
-                        + Drupal.settings.basePath + 'dashboard?='
+                        + Drupal.settings.basePath + 'dashboard?nid='
                         + feature.cluster[i].data.nid + '">'
                         + feature.cluster[i].attributes.title + '</a></p>';
                   }
@@ -104,13 +104,13 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                   	if (feature.cluster[i].attributes.title.length > 17) {
                 		var titleCut = feature.cluster[i].attributes.title.substring(0,16) + "...";
                         html += '<p class="popupAttr popupAttrList2_' + i + '"><a href="'
-                            + Drupal.settings.basePath + 'dashboard?='
+                            + Drupal.settings.basePath + 'dashboard?nid='
                             + feature.cluster[i].data.nid + '">'
                             + titleCut + '</a></p>';
                   	}
                   	else {
                   		html += '<p class="popupAttr popupAttrList2_' + i + '"><a href="'
-                        + Drupal.settings.basePath + 'dashboard?='
+                        + Drupal.settings.basePath + 'dashboard?nid='
                         + feature.cluster[i].data.nid + '">'
                         + feature.cluster[i].attributes.title + '</a></p>';
                   }
@@ -144,8 +144,8 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                 		"popoverPopup",
                         feature.geometry.getBounds().getCenterLonLat(),
                         title,
-                         html,
-                        null, true, function(evt) {
+                        html, 
+                        function(evt) {
                           while (map.popups.length) {
                             map.popups[0].destroy();
                           }

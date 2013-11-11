@@ -30,43 +30,6 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @requires OpenLayers/BaseTypes/Size.js
  */
 
-var head = document.getElementsByTagName("head")[0];
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-	script.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/Popup/alert.js";
-	//head.appendChild(script);
-
-    var script5 = document.createElement("script");
-    script5.type = "text/javascript";
-	script5.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/Popup/Framed.js";
-	head.appendChild(script5);	
-	
-    var script1 = document.createElement("script");
-    script1.type = "text/javascript";
-	script1.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/Util.js";
-	head.appendChild(script1);	
-
-    var script2 = document.createElement("script");
-    script2.type = "text/javascript";
-	script2.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/BaseTypes/Bounds.js";
-	head.appendChild(script2);	
-
-    var script3 = document.createElement("script");
-    script3.type = "text/javascript";
-	script3.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/BaseTypes/Pixel.js";
-	head.appendChild(script3);	
-
-    var script4 = document.createElement("script");
-    script4.type = "text/javascript";
-	script4.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers/BaseTypes/Size.js";
-	head.appendChild(script4);	
-		
-    var script6 = document.createElement("script");
-    script6.type = "text/javascript";
-	script6.src = "/ccis/sites/all/modules/custom/ccis/libs/OpenLayers.Popup/Popover/css/openlayerspopovers.css";
-	head.appendChild(script6);	
-
-
 /**
  * Class: OpenLayers.Popup.Popover
  * 
