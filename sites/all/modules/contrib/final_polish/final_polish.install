@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @file
+ * Contains installation hooks.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function final_polish_install() {
+  $front = variable_get('site_frontpage', 'node');
+
+  $paths = array(
+    'filter/tips',
+  );
+
+  // Removing /node and /rss.xml when node is not the frontpage.
+  if ($front != 'node') {
+    $paths[] = 'node';
+    $paths[] = 'rss.xml';
+  }
+
+  variable_set('final_polish_remove_paths', $paths);
+}
+
+/**
+ * Implements hook_enable().
+ */
+function final_polish_enable() {
+  $paths = variable_get('final_polish_remove_paths');
+  if (count($paths)) {
+    $paths = implode(', ', $paths);
+
+    // We should notify the user that specific paths are removed from now and
+    // where they can be configured.
+    drupal_set_message(t('Final Polish module removed following paths: %paths. You can configure them <a href="@config">here</a>.', array('%paths' => $paths, '@config' => url('admin/config/system/final-polish'))), 'warning');
+  }
+}
+
+/**
+ * Implements hook_disable().
+ */
+function final_polish_disable() {
+  $paths = variable_get('final_polish_remove_paths');
+  if (count($paths)) {
+    $paths = implode(', ', $paths);
+
+    // We should notify the user that specific paths are no longer removed.
+    drupal_set_message(t('Following paths are no longer removed: %paths', array('%paths' => $paths)), 'warning');
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function final_polish_uninstall() {
+  // Just deleting our variable.
+  variable_del('final_polish_remove_paths');
+}
+
+/**
+ * Convert Final Polish settings.
+ */
+function final_polish_update_7001(&$sandbox) {
+  // Let's convert the string with the paths to an array.
+  $paths = variable_get('final_polish_remove_paths');
+  // Only convert the variable when it's a string.
+  if (is_string($paths)) {
+    $paths = explode("\n", $paths);
+    variable_set('final_polish_remove_paths', $paths);
+  }
+}

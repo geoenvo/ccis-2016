@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Contains installation hooks.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function final_polish_icon_enable() {
+  $themes = list_themes();
+  foreach ($themes as $theme => $info) {
+    final_polish_icon_get_icon('favicon', TRUE, $theme);
+    final_polish_icon_get_icon('icon', TRUE, $theme);
+  }
+}
+
+/**
+ * Implements hook_disable().
+ */
+function final_polish_icon_disable() {
+  drupal_set_message(t('Notice that probably no %features longer exist.', array('%features' => '/favicon.ico, /apple-touch-icon.png')), 'warning');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function final_polish_icon_uninstall() {
+  // We have to remove following settings.
+  $settings = array('toggle_icon', 'default_icon', 'icon_path', 'icon_upload');
+
+  // We iterate all themes and remove our settings.
+  $themes = list_themes();
+  $themes['theme_settings'] = array();
+
+  foreach (list_themes() as $name => $info) {
+    $name = count($info) ? 'theme_' . $name . '_settings' : $name;
+    $config = variable_get($name);
+    if ($config) {
+      foreach ($settings as $setting) {
+        unset($config[$setting]);
+      }
+
+      variable_set($name, $config);
+    }
+  }
+
+  variable_del('final_polish_icon_sources');
+}

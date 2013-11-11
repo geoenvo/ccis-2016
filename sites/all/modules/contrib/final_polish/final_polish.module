@@ -1,0 +1,205 @@
+<?php
+
+/**
+ * @file
+ * Main module file.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function final_polish_permission() {
+  return array(
+    'administer final polish' => array(
+      'title' => t('Administer Final Polish'),
+      'description' => t('Configure the Final Polish settings.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function final_polish_menu() {
+  $items = array();
+
+  $items['admin/config/system/final-polish'] = array(
+    'title' => 'Final Polish',
+    'description' => 'Configure Final Polish settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('final_polish_configure'),
+    'access arguments' => array('administer Final Polish'),
+    'file' => 'final_polish.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function final_polish_menu_alter(&$items) {
+  $paths = final_polish_get_remove_paths();
+
+  foreach ($items as $key => $item) {
+    $path = final_polish_to_wildcard($key);
+
+    // If the path appears in the set paths we remove it.
+    if (in_array($path, $paths)) {
+      unset($items[$key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_html_head_alter().
+ *
+ * Here we remove every set feed from the <head>.
+ */
+function final_polish_html_head_alter(&$head_elements) {
+  $paths = final_polish_get_remove_paths();
+
+  foreach ($head_elements as $k => $head_element) {
+    if (isset($head_element['#attributes'])) {
+      if (isset($head_element['#attributes']['rel']) && $head_element['#attributes']['rel'] == 'alternate') {
+        if (isset($head_element['#attributes']['href'])) {
+          $href = str_replace($GLOBALS['base_url'] . '/', '', $head_element['#attributes']['href']);
+
+          foreach ($paths as $path) {
+            $pattern = final_polish_wildcard_pattern($path);
+            if (preg_match($pattern, $href)) {
+              unset($head_elements[$k]);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ *
+ * We have to use our own theme function for the feed icon to also remove it.
+ */
+function final_polish_theme_registry_alter(&$theme_registry) {
+  $theme_registry['feed_icon']['function'] = 'final_polish_theme_feed_icon';
+}
+
+/**
+ * Overriding theme_feed_icon().
+ *
+ * We remove the RSS icon when it links to a removed path.
+ */
+function final_polish_theme_feed_icon($variables) {
+  $paths = final_polish_get_remove_paths();
+  $url = $variables['url'];
+
+  foreach ($paths as $path) {
+    $pattern = final_polish_wildcard_pattern($path);
+    if (preg_match($pattern, $url)) {
+      return;
+    }
+  }
+
+  return theme_feed_icon($variables);
+}
+
+/**
+ * Form element validation handler for valid paths.
+ */
+function final_polish_valid_path($element, &$form_state) {
+  $value = $element['#value'];
+
+  // Abort if there is no field value.
+  if ($value == '') {
+    return;
+  }
+
+  // We also need an array here.
+  $paths = explode("\n", $value);
+
+  // Getting path to configuration page.
+  $config = final_polish_get_config_path();
+  // Getting path to frontpage.
+  $frontpage = variable_get('site_frontpage', 'node');
+
+  $items = array();
+  $custom_items = array();
+
+  // We store all menu items in $items.
+  foreach (module_implements('menu') as $module) {
+    $function = $module . '_menu';
+    $items += $function();
+  }
+
+  foreach ($items as $key => $item) {
+    $path = final_polish_to_wildcard($key);
+    $custom_items[] = $path;
+  }
+
+  foreach ($paths as $path) {
+    $path = trim($path);
+    if (!in_array($path, $custom_items)) {
+      form_error($element, t('%path is an invalid path.', array('%path' => $path)));
+    }
+    elseif ($path == $config) {
+      form_error($element, t('You cannot remove the configuration page.'));
+    }
+    elseif ($path == $frontpage) {
+      form_error($element, t('You cannot remove your frontpage.'));
+    }
+  }
+}
+
+/**
+ * Replaces the '*' charachter so that we can use it with preg_match().
+ *
+ * @param string $path
+ */
+function final_polish_wildcard_pattern($path) {
+  return '~^' . str_replace('*', '[^/]*', $path) . '$~';
+}
+
+/**
+ * Replaces the internal % wildcard to '*' charachter.
+ *
+ * @param string $path
+ *
+ * @return string
+ */
+function final_polish_to_wildcard($path) {
+  return preg_replace('~%[^/]*~', '*', $path);
+}
+
+/**
+ * Returns the path to configuration page.
+ *
+ * @return string
+ *   The path to the configuration page.
+ */
+function final_polish_get_config_path() {
+  $info = drupal_get_path('module', 'final_polish') . '/final_polish.info';
+  $info = drupal_parse_info_file($info);
+
+  return $info['configure'];
+}
+
+/**
+ * Return trimmed paths to remove.
+ *
+ * @return array
+ *   An array which contains all the paths which should be removed.
+ */
+function final_polish_get_remove_paths() {
+  // Getting variable.
+  $paths = variable_get('final_polish_remove_paths', array());
+
+  // Trim every item because of the break.
+  foreach ($paths as $k => $path) {
+    $paths[$k] = trim($path);
+  }
+
+  return $paths;
+}

@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * @file
+ * Main module file.
+ */
+
+/**
+ * Implements hook_init().
+ */
+function final_polish_forms_init() {
+  if (module_exists('i18n_variable')) {
+    global $conf;
+    $conf['i18n_variables'][] = 'final_polish_rewrite_forms';
+  }
+}
+
+/**
+ * Implements hook_variable_info().
+ */
+function final_polish_forms_variable_info($options) {
+  $variables = array();
+
+  $variables['final_polish_rewrite_forms'] = array(
+    'title' => t('Final Polish rewrite forms'),
+    'type' => 'array',
+  );
+
+  return $variables;
+}
+
+/**
+ * Implements final_polish_config_alter().
+ */
+function final_polish_forms_final_polish_config_alter(&$form) {
+  $settings = variable_get('final_polish_rewrite_forms');
+
+  $rewrite = final_polish_forms_forms();
+
+  $form['final_polish_rewrite_forms'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Rewrite forms'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#tree' => TRUE,
+  );
+
+  foreach ($rewrite as $form_id => $components) {
+    $form['final_polish_rewrite_forms'][$form_id] = array(
+      '#type' => 'fieldset',
+      '#title' => t($components['#title']), // Translating a variable directly, sure?
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+
+    foreach (element_children($components) as $component) {
+      $form['final_polish_rewrite_forms'][$form_id]['rewrite_' . $component] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Rewrite @name field', array('@name' => $components[$component]['#title'])),
+        '#default_value' => $settings[$form_id]['rewrite_' . $component],
+      );
+
+      $form['final_polish_rewrite_forms'][$form_id][$component] = array(
+        '#type' => 'fieldset',
+        '#title' => t($components[$component]['#title']), // Translating a variable directly, sure?
+        '#states' => array(
+          'visible' => array(
+            ':input[name="final_polish_rewrite_forms[' . $form_id . '][rewrite_' . $component . ']"]' => array('checked' => TRUE),
+          ),
+        ),
+      );
+
+      foreach (element_children($components[$component]) as $key) {
+        $field = $components[$component][$key];
+
+        $form['final_polish_rewrite_forms'][$form_id][$component]['rewrite_' . $field] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Rewrite @property', array('@property' => $field)),
+          '#default_value' => $settings[$form_id][$component]['rewrite_' . $field],
+        );
+
+        $form['final_polish_rewrite_forms'][$form_id][$component][$field] = array(
+          '#type' => 'textfield',
+          '#title' => ucfirst($field),
+          '#description' => t('Here you can rewrite the @field.', array('@field' => $field)),
+          '#default_value' => $settings[$form_id][$component][$field],
+          '#states' => array(
+            'visible' => array(
+              ':input[name="final_polish_rewrite_forms[' . $form_id . '][' . $component . '][rewrite_' . $field . ']"]' => array('checked' => TRUE),
+            ),
+          ),
+        );
+
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function final_polish_forms_form_alter(&$form, &$form_state, $form_id) {
+  $rewrite = variable_get('final_polish_rewrite_forms', array());
+
+  foreach ($rewrite as $id => $settings) {
+    if ($form_id == $id) {
+      foreach ($settings as $name => $fields) {
+        if (array_key_exists($name, $form)) {
+          if ($settings['rewrite_' . $name]) {
+            foreach ($fields as $field => $value) {
+              if (substr($field, 0, 8) != 'rewrite_' && $settings[$name]['rewrite_' . $field]) {
+                $form[$name]['#' . $field] = $value;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Helper function which returns all rewritable form ids.
+ *
+ * @return array
+ */
+function final_polish_forms_forms() {
+  $forms = array(
+    'user_login' => array(
+      '#title' => 'User login',
+      'name' => array(
+        '#title' => 'username',
+        'title',
+        'description',
+      ),
+      'pass' => array(
+        '#title' => 'password',
+        'title',
+        'description',
+      ),
+    ),
+  );
+
+  // Allow other modules to alter the rewritable form ids.
+  drupal_alter('final_polish_forms_forms', $form);
+
+  return $forms;
+}

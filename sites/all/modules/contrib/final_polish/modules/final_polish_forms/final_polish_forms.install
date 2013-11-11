@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Contains installation hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function final_polish_forms_uninstall() {
+  variable_del('final_polish_rewrite_forms');
+}
