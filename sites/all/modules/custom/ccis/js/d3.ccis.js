@@ -1,18 +1,13 @@
 (function($) {
-Drupal.behaviors.ccis = {
-  attach: function(d_context, settings) {
+Drupal.ccis.behaviors.d3 = {
+    init: function() {
+      var D3 = this;
+      D3.container = $("#ccis-weather-d3-block-1, #ccis-weather-d3-block-2");
+      D3.homebox = $("#homebox-block-ccis_d3, #homebox-block-ccis_d3_2");
+    },
+  attach: function(stations, info, settings) {
+    var D3 = this;
   // CUSTOM CODING START
-
-	var d3Block = this;
-	d3Block.container = $("#ccis-weather-d3-block-1");
-	var stations = settings.ccis_dt.stations;
-	if (stations.length > 0) {
-	  var refresh = d3Block.container.data('refresh');
-	  if (refresh != 1) {
-		return;
-	  }
-	  d3Block.container.data('refresh', 0);
-	}
   
 	// Groups of parameters available including the colors, the legend keywords, the legend hover names, the icons and the units
 	// Position 0: Parameter
@@ -100,7 +95,6 @@ Drupal.behaviors.ccis = {
 	function diagram1(blockID, data, dataKeysArray, minDate, maxDate) {					
 		// *** Variables - START ***
 		var block = "_1";
-		
 		var margin = {top: 20, right: 10, bottom: 25, left: 140, left_single: 35};
 		var widthDiv = $("#"+blockID).width();
 		var legendWidth = 150;
@@ -2886,15 +2880,16 @@ Drupal.behaviors.ccis = {
 	var obj2;
 	
 	// Diagram 1
-	if (settings.ccis.stations[0]) {
-		if (settings.ccis.stations[0].selector === "ccis-weather-d3-block-1" && settings.ccis.stations[0].station_name.length>0) {
+	if (stations[0]) {
+		if (stations[0].selector === "ccis-weather-d3-block-1" && stations[0].name.length>0) {
 			$("#homebox-block-ccis_d3").show();
 
-			var blockID = settings.ccis.stations[0].selector;
-			d3.json(settings.ccis.stations[0].path, function(json) {
-				if (json.length===0) {
-					$("#"+blockID).html("");
-				} else {		
+			var blockID = stations[0].selector;
+			var json = stations[0].data;
+			//d3.json(settings.ccis.stations[0].path, function(json) {
+//				if (json.length===0) {
+//					$("#"+blockID).html("");
+//				} else {		
 					$("#"+blockID).html("");
 					
 					drawDiagram1 = true;
@@ -2920,11 +2915,11 @@ Drupal.behaviors.ccis = {
 					
 					// Check the 2nd diagram
 					prepareDiagram2();	
-				}
-			});
+				//}
+			//});
 		}
 	}
-			
+	//diagram1(blockID, data, dataKeysArray, minDate, maxDate);
 	// Find the common date range
 	function findDateRange() {
 		// Latest start Date
@@ -2935,12 +2930,13 @@ Drupal.behaviors.ccis = {
 	
 	// Diagram 2
 	function prepareDiagram2() {
-		if (settings.ccis.stations[1]) {
-			if (settings.ccis.stations[1].selector === "ccis-weather-d3-block-2" && settings.ccis.stations[1].station_name.length>0) {
+		if (typeof stations[1] != 'undefined') {
+			if (stations[1].selector === "ccis-weather-d3-block-2" && stations[1].name.length>0) {
 				$("#homebox-block-ccis_d3_2").show();
 			
-				var blockID2 = settings.ccis.stations[1].selector;
-				d3.json(settings.ccis.stations[1].path, function(json) {
+				var blockID2 = stations[1].selector;
+				var json = stations[1].data;
+				//d3.json(settings.ccis.stations[1].path, function(json) {
 					if (json.length===0) {
 						$("#"+blockID2).html("");
 					} else {		
@@ -2973,12 +2969,13 @@ Drupal.behaviors.ccis = {
 						diagram1(blockID, data, dataKeysArray, minDate, maxDate);
 						diagram2(blockID2, data2, dataKeysArray2, minDate, maxDate);
 					}
-				});
-			} else {
-				// 1 diagram: Draw only the 1st
-				diagram1(blockID, data, dataKeysArray, minDate, maxDate);
+				//});
 			}
 		} 	
+		 else {
+       // 1 diagram: Draw only the 1st
+       diagram1(blockID, data, dataKeysArray, minDate, maxDate);
+     }
 	}
 	
   // CUSTOM CODING END
