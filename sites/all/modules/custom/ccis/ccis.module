@@ -427,6 +427,10 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
           else{
             $doc['shortdate'] = format_date($time, 'datatable');
           }
+          if ($source == 'download') {
+            $doc['date'] = $doc['shortdate'];
+            unset($doc['shortdate']);
+          }
         }
         $output[] = $doc;
       }
