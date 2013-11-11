@@ -51,10 +51,14 @@ function ccis_ct_weather_station_strongarm() {
   $strongarm->name = 'ccis_station_search_terms';
   $strongarm->value = array(
     'field_alias' => 'field_alias',
+    'field_ci_address' => 'field_ci_address',
+    'field_ci_contact' => 'field_ci_contact',
+    'field_extent' => 'field_extent',
+    'field_stationcode' => 'field_stationcode',
+    'field_stationtype' => 'field_stationtype',
+    'field_wmocode' => 'field_wmocode',
     'field_address' => 0,
     'field_category' => 0,
-    'field_ci_address' => 0,
-    'field_ci_contact' => 0,
     'field_ci_onlineresource' => 0,
     'field_ci_responsibleparty' => 0,
     'field_ci_rolecode' => 0,
@@ -67,7 +71,6 @@ function ccis_ct_weather_station_strongarm() {
     'field_dataunits' => 0,
     'field_electronicmailaddress' => 0,
     'field_email' => 0,
-    'field_extent' => 0,
     'field_fax' => 0,
     'field_fileidentifier' => 0,
     'field_instructions' => 0,
@@ -95,7 +98,6 @@ function ccis_ct_weather_station_strongarm() {
     'field_stationaccuracy' => 0,
     'field_stationaddress' => 0,
     'field_stationcity' => 0,
-    'field_stationcode' => 0,
     'field_stationcontact' => 0,
     'field_stationcountry' => 0,
     'field_stationcrs' => 0,
@@ -109,10 +111,8 @@ function ccis_ct_weather_station_strongarm() {
     'field_stationprovince' => 0,
     'field_stationrelocation' => 0,
     'field_stationtopo' => 0,
-    'field_stationtype' => 0,
     'field_traininglevel' => 0,
     'field_units' => 0,
-    'field_wmocode' => 0,
   );
   $export['ccis_station_search_terms'] = $strongarm;
 
