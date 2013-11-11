@@ -77,7 +77,7 @@
               "sLengthMenu" : Drupal.t("Show _MENU_ entries"),
               "sLoadingRecords" : Drupal.t("Loading..."),
               "sProcessing" : Drupal.t("Processing..."),
-              "sSearch" : Drupal.t("Search:"),
+              "sSearch" : "",
               "sZeroRecords" : Drupal.t("No matching records found"),
               "oPaginate" : {
                 "sFirst" : Drupal.t("First"),
