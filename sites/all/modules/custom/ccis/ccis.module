@@ -118,10 +118,10 @@ function ccis_permission() {
 function ccis_help($path, $arg) {
   switch ($path) {
     case 'admin/ccis/search':
-      return t('The selected fields of the weather station are searchable in the filter form of the weather station dashboard.');
+      return t('The selected fields of the climate station are searchable in the filter form of the climate station dashboard.');
       break;
     case 'admin/ccis/permissions':
-      return t('For all selected fields of the weather data you get new view permissions per date range (daily, monthly) etc. .');
+      return t('For all selected fields of the climate data you get new view permissions per date range (daily, monthly) etc. .');
 
   }
 }
