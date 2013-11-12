@@ -482,6 +482,10 @@ function _ccis_block_filter($node) {
  * Filter form.
  */
 function ccis_block_filter_form($form, $form_state, $node = NULL) {
+  $form['messages'] = array(
+    '#prefix' => '<div id="ccis-filter-messages">',
+    '#suffix' => '</div>',
+  );
   $input1 = '';
   if (!empty($node->field_stationcode)) {
     $input1 = $node->field_stationcode['und'][0]['safe_value'];
@@ -607,6 +611,8 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
   $commands[] = ajax_command_replace('#ccis-station-search-result', '<div id="ccis-station-search-result">' . $search_result . '</div>');
 
   $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap(array($station_1, $station_2)));
+
+  $commands[] = ajax_command_replace('#ccis-filter-messages', '<div id="ccis-filter-messages">' . theme('status_messages') . '</div>');
 
   return array('#type' => 'ajax', '#commands' => $commands);
 }
