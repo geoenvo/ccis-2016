@@ -95,6 +95,14 @@ function ccis_dashboard_views_default_views() {
 
   /* Display: Embed Display (Single) */
   $handler = $view->new_display('embed', 'Embed Display (Single)', 'embed_1');
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Please select a station';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $translatables['station_info'] = array(
     t('Master'),
     t('Station-Info'),
@@ -109,6 +117,7 @@ function ccis_dashboard_views_default_views() {
     t('Current Position'),
     t('All'),
     t('Embed Display (Single)'),
+    t('Please select a station'),
   );
   $export['station_info'] = $view;
 
