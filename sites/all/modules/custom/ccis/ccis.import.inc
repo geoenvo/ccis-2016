@@ -63,10 +63,13 @@ function ccis_import_files_form_submit($form, &$form_state) {
 function ccis_import_csv_file(stdClass $file, &$context) {
   $context['message'] = t('Importing @file', array('@file' => $file->filename));
   try{
-    $row = 1;
+    $row = $round = 1;
     $header = $end_data = array();
     $header_count = 0;
+//     debug('Start: ' . format_size(memory_get_usage()));
     if (($handle = fopen($file->uri, "r")) !== FALSE) {
+      $col = mongodb_collection($file->name);
+      $col->drop();
       while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         if ($row == 1) {
           $data = array_map('drupal_strtolower', $data);
@@ -85,13 +88,26 @@ function ccis_import_csv_file(stdClass $file, &$context) {
           array_walk($data, '_ccis_fix_interger');
           $end_data[] = $data;
         }
+        /**
+         * 45.000 rows/2000 each '338.53 KB'/'23: 59.47 MB'
+         */
+        if ($count = count($end_data) >= 3000) {
+          $col->batchInsert($end_data);
+//           debug($round . ': ' . format_size(memory_get_usage()));
+//           debug( format_size(mb_strlen(serialize($end_data), '8bit')));
+          $end_data = array();
+          $round++;
+        }
         $row++;
       }
       fclose($handle);
+      if (!empty($end_data)) {
+        $col->batchInsert($end_data);
+//         debug($round . ': ' . format_size(memory_get_usage()));
+//         debug( format_size(mb_strlen(serialize($end_data), '8bit')));
+        $end_data = array();
+      }
     }
-    $col = mongodb_collection($file->name);
-    $col->drop();
-    $col->batchInsert($end_data);
   }
   catch (Exception $e ) {
     watchdog_exception('ccis', $e);
