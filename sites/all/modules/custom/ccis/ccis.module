@@ -612,7 +612,7 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
     // Reset the block with a empty div.
     $commands[] = ajax_command_data('#ccis-station-info-block-2', 'hide-portlet', '1');
   }
-
+  $commands[] = ajax_command_replace('#ccis-station-search-result', '<div id="ccis-station-search-result"></div>');
   $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap(array($station_1, $station_2)));
 
   return array('#type' => 'ajax', '#commands' => $commands);
