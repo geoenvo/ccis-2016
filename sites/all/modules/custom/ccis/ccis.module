@@ -559,6 +559,11 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#ajax' => array('callback' => 'ccis_block_filter_form_ajax_submit'),
     '#attributes' => array('class' => array('use-ajax-submit')),
   );
+  $form['actions']['clear'] = array(
+    '#type' => 'button',
+    '#value' => t('Clear'),
+    '#attributes' => array('title' => t('Clears all values')),
+  );
   $form['searchresult'] = array(
     '#prefix' => '<div id="ccis-station-search-result">',
     '#suffix' => '</div>',
