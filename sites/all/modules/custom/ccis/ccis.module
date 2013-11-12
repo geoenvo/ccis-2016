@@ -528,10 +528,6 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#title' => t('Search'),
     '#type' => 'textfield',
     '#description' => t('Enter metadata search term'),
-    '#ajax' => array(
-      'callback' => 'ccis_block_filter_form_ajax_searchterms',
-      'wrapper' => 'ccis-station-search-result',
-    ),
   );
   $form['filter']['region'] = array(
     '#title' => t('Region'),
@@ -539,10 +535,6 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#options' => _ccis_get_station_regions(),
     '#empty_value' => '',
     '#empty_option' => t('Select a region'),
-    '#ajax' => array(
-      'callback' => 'ccis_block_filter_form_ajax_searchterms',
-      'wrapper' => 'ccis-station-search-result',
-    ),
   );
   $form['filter']['start'] = array(
     '#title' => t('From'),
@@ -556,10 +548,6 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#date_year_range' => '-100:0',
     '#date_format' => variable_get('date_format_datatable', 'Y-m-d'),
   );
-  $search_result = '';
-  if (!empty($form_state['values'])) {
-    $search_result = ccis_search_terms_finder_list($form_state['values']);
-  }
   $form['actions'] = array('#type' => 'actions', '#weight' => 1);
   $form['actions']['submit'] = array(
     '#type' => 'submit',
@@ -568,7 +556,6 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#attributes' => array('class' => array('use-ajax-submit')),
   );
   $form['searchresult'] = array(
-    '#markup' => $search_result,
     '#prefix' => '<div id="ccis-station-search-result">',
     '#suffix' => '</div>',
     '#weight' => 2,
@@ -613,6 +600,12 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
     $commands[] = ajax_command_data('#ccis-station-info-block-2', 'hide-portlet', '1');
   }
   $commands[] = ajax_command_replace('#ccis-station-search-result', '<div id="ccis-station-search-result"></div>');
+  $search_result = '';
+  if (!empty($form_state['values'])) {
+    $search_result = ccis_search_terms_finder_list($form_state['values']);
+  }
+  $commands[] = ajax_command_replace('#ccis-station-search-result', '<div id="ccis-station-search-result">' . $search_result . '</div>');
+
   $commands[] = ajax_command_replace('#ccis-station-map-block', _ccis_block_stationmap(array($station_1, $station_2)));
 
   return array('#type' => 'ajax', '#commands' => $commands);
@@ -1041,15 +1034,6 @@ function ccis_search_terms_finder_list($values) {
   // TODO Needs Ajax support.
   // return theme('table', $vars). theme('pager');
   return theme('table', $vars);
-}
-
-/**
- * Ajax callback for the search term.
- *
- * @see ccis_block_filter_form
- */
-function ccis_block_filter_form_ajax_searchterms($form, $form_state) {
-  return $form['searchresult'];
 }
 
 /**
