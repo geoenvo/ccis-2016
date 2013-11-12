@@ -48,7 +48,6 @@ dependencies[] = feeds
   dependencies[] = feeds_ui
 dependencies[] = feeds_tamper
 dependencies[] = feeds_xpathparser
-dependencies[] = field_formatter_settings
 dependencies[] = field_group
 dependencies[] = field_permissions
 dependencies[] = final_polish
