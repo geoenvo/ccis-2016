@@ -710,7 +710,7 @@ function _ccis_get_date_range($values) {
     $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
     if ($years < 15) {
       $range = 'monthly';
-      if ($years < 5 && $years > 1) {
+      if ($years < 5 && $years >= 1) {
         $range = '10_days';
       }
       if ($years < 1) {
