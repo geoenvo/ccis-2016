@@ -198,7 +198,7 @@ function ccis_block_view($delta) {
  * Implements hook_page_alter();
  */
 function ccis_page_alter(&$page) {
-  if (request_path() == 'dashboard') {
+  if (current_path() == 'dashboard') {
     $path = libraries_get_path('datatables');
     drupal_add_js($path . '/media/js/jquery.dataTables.js');
     drupal_add_js($path . '/extras/ColVis/media/js/ColVis.min.js');
