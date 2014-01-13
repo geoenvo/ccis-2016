@@ -13,6 +13,26 @@ function ccis_openlayers_openlayers_styles() {
   $openlayers_styles = new stdClass();
   $openlayers_styles->disabled = FALSE; /* Edit this to true to make a default openlayers_styles disabled initially */
   $openlayers_styles->api_version = 1;
+  $openlayers_styles->name = 'boundaries';
+  $openlayers_styles->title = 'boundaries';
+  $openlayers_styles->description = 'Red stroke for boundary polygons';
+  $openlayers_styles->data = array(
+    'pointRadius' => 6,
+    'fillColor' => '#FFFFFF',
+    'strokeColor' => '#BA4040',
+    'strokeWidth' => 1,
+    'fillOpacity' => 0.01,
+    'strokeOpacity' => 1,
+    'strokeLinecap' => 'round',
+    'strokeDashstyle' => 'solid',
+    'graphicOpacity' => 1,
+    'labelAlign' => 'cm',
+  );
+  $export['boundaries'] = $openlayers_styles;
+
+  $openlayers_styles = new stdClass();
+  $openlayers_styles->disabled = FALSE; /* Edit this to true to make a default openlayers_styles disabled initially */
+  $openlayers_styles->api_version = 1;
   $openlayers_styles->name = 'ccis_marker_green_yellow';
   $openlayers_styles->title = 'CCIS Marker Green Yellow';
   $openlayers_styles->description = 'Green yellow Marker for the CCIS map.';
