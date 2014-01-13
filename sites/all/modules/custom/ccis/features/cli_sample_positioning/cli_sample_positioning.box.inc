@@ -21,11 +21,9 @@ function cli_sample_positioning_default_box() {
     'body' => array(
       'value' => '<div class="contactblock">
 <h3>Contact</h3>
+<p class="contactdata web">http://www.climability.org</p>
 <p class="contactdata mail">info@climability.org</p>
-<p class="contactdata phone">0012 34567890</p>
-<h3>Address</h3>
-<p class="contactdata postal">Street 123, Bulding 4<br />
-12345 Jakarta, Indonesia</p>
+<p class="contactdata phone">030 82070657</p>
 </div>',
       'format' => 'full_html',
     ),
