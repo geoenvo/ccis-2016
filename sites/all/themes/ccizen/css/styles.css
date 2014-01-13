@@ -339,7 +339,9 @@ html body.admin-menu {
   width: 25%;
   max-width: 100%;
   border-left: 1px dashed #fff;
-  margin-top: 12px;
+  /*margin-top: 12px;*/
+  padding-top: 12px;
+  height: 123px;  
 }
 
 #footer-columns .block {
@@ -352,11 +354,11 @@ html body.admin-menu {
 }
 
 #footer-columns .region-footer-firstcolumn {
-  width: 55%;
+  width: 20%;
   border-left: 0 none;
 }
 #footer-columns .region-footer-secondcolumn {
-  width: 19%;
+  width: 20%;
 }
 #footer-columns .region-footer-thirdcolumn {
   width: 20%;
@@ -393,7 +395,7 @@ html body.admin-menu {
 }
 .stakeholder .logoimg {
   line-height: 100%;
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 .contactdata {
@@ -412,6 +414,10 @@ html body.admin-menu {
 }
 
 .contactdata.postal {
+  background-position: -18px -115px;
+}
+
+.contactdata.web {
   background-position: -18px -115px;
 }
 
@@ -434,6 +440,7 @@ html body.admin-menu {
 
 .block-simplenews .form-item {
   margin: 5px 0;
+  float: left;
 }
 
 .block-simplenews .compact-form-label {
@@ -446,6 +453,11 @@ html body.admin-menu {
 .block-simplenews .form-submit {
   background-color: transparent;
   color: #c7b299;
+  margin-bottom: 0;
+  margin-left: 5px;
+  margin-top: 8px;
+  padding-bottom: 2px;
+  padding-top: 2px;   
 }
 
 .block-simplenews .form-submit:focus,
@@ -628,8 +640,8 @@ html body.admin-menu {
 #footer-wrapper .menu a:focus,
 #footer-wrapper .menu a:hover,
 #footer-wrapper .menu a:active {
-  color: #2c4563;
-  background-color: #c7b299;
+  background-color: #ccc;
+  color: #000;
 }
 
 
