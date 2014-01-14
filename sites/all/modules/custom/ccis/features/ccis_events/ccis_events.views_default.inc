@@ -123,7 +123,7 @@ function ccis_events_views_default_views() {
   $handler->display->display_options['fields']['nothing']['element_class'] = 'evplace';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
-  /* Sort criterion: Content: Date (field_date_event) */
+  /* Sort criterion: Content: Date -  start date (field_date_event) */
   $handler->display->display_options['sorts']['field_date_event_value']['id'] = 'field_date_event_value';
   $handler->display->display_options['sorts']['field_date_event_value']['table'] = 'field_data_field_date_event';
   $handler->display->display_options['sorts']['field_date_event_value']['field'] = 'field_date_event_value';
@@ -470,6 +470,36 @@ function ccis_events_views_default_views() {
   $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'evplace';
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'event' => 'event',
+  );
+  /* Filter criterion: Content: Language */
+  $handler->display->display_options['filters']['language']['id'] = 'language';
+  $handler->display->display_options['filters']['language']['table'] = 'node';
+  $handler->display->display_options['filters']['language']['field'] = 'language';
+  $handler->display->display_options['filters']['language']['value'] = array(
+    '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+    'und' => 'und',
+  );
+  /* Filter criterion: Content: Date -  start date (field_date_event) */
+  $handler->display->display_options['filters']['field_date_event_value']['id'] = 'field_date_event_value';
+  $handler->display->display_options['filters']['field_date_event_value']['table'] = 'field_data_field_date_event';
+  $handler->display->display_options['filters']['field_date_event_value']['field'] = 'field_date_event_value';
+  $handler->display->display_options['filters']['field_date_event_value']['operator'] = '>';
+  $handler->display->display_options['filters']['field_date_event_value']['default_date'] = 'now';
   $translatables['events'] = array(
     t('Master'),
     t('Upcoming Events'),

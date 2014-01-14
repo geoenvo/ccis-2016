@@ -8,6 +8,7 @@ dependencies[] = ccis_basic_page
 dependencies[] = context
 dependencies[] = ctools
 dependencies[] = date
+dependencies[] = date_views
 dependencies[] = ds
 dependencies[] = features
 dependencies[] = image
