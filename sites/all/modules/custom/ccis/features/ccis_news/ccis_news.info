@@ -11,6 +11,7 @@ dependencies[] = features_aggregator
 dependencies[] = menu
 dependencies[] = strongarm
 dependencies[] = views
+features[aggregator_feed][] = Climability system feed
 features[aggregator_feed][] = IISD
 features[aggregator_feed][] = RTCC
 features[aggregator_feed][] = Service status

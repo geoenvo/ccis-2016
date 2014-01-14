@@ -10,6 +10,14 @@
 function ccis_news_aggregator_default_feeds() {
   $feeds = array();
 
+  // Exported feed: Climability system feed
+  $feeds['Climability system feed'] = array(
+    'title' => 'Climability system feed',
+    'url' => 'http://climability.org/rss/system_feed.xml',
+    'refresh' => 21600,
+    'block' => 2,
+  );
+
   // Exported feed: IISD
   $feeds['IISD'] = array(
     'title' => 'IISD',
