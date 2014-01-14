@@ -232,7 +232,8 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Aggregator: Timestamp */
@@ -266,11 +267,12 @@ function ccis_news_views_default_views() {
   $handler->display->display_options['sorts']['timestamp']['table'] = 'aggregator_item';
   $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
-  /* Filter criterion: Aggregator feed: Link */
-  $handler->display->display_options['filters']['link']['id'] = 'link';
-  $handler->display->display_options['filters']['link']['table'] = 'aggregator_feed';
-  $handler->display->display_options['filters']['link']['field'] = 'link';
-  $handler->display->display_options['filters']['link']['value'] = 'https://drupal.org/planet';
+  /* Filter criterion: Aggregator feed: Description */
+  $handler->display->display_options['filters']['description']['id'] = 'description';
+  $handler->display->display_options['filters']['description']['table'] = 'aggregator_feed';
+  $handler->display->display_options['filters']['description']['field'] = 'description';
+  $handler->display->display_options['filters']['description']['value'] = 'climability.org system news';
+  $handler->display->display_options['filters']['description']['group'] = 1;
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
