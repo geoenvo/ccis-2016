@@ -65,6 +65,8 @@ function ccis_blog_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Blog';
   $handler->display->display_options['path'] = 'blog';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Blog';
@@ -134,8 +136,8 @@ function ccis_blog_views_default_views() {
     t('next ›'),
     t('last »'),
     t('Page'),
-    t('Block'),
     t('Blog'),
+    t('Block'),
     t('Read more...'),
   );
   $export['blogpage'] = $view;
