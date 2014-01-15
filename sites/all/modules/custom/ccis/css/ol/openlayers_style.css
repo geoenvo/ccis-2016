@@ -235,6 +235,30 @@ a.popupName:link {
   text-decoration: none;
 }
 
+#grid_popup {
+	border:2px solid #2C4563; 
+	width:148px; 
+	height:254px;
+}
+
+.popup_table {
+	font-size:13px;
+	border:none;
+  margin-top:-2px; 
+  width:148px !important;	
+  line-height:17px;
+}
+
+.tdleft {
+  text-align:left;	
+  padding-left:5px;
+}
+
+.tdright {
+  text-align:right; 
+  padding-right:5px; 
+}
+
 .olPopupContent {
   padding:5px;
   overflow: auto;
@@ -510,6 +534,12 @@ div.olControlSaveFeaturesItemInactive {
     background-color: #dadad9;  
 }
 
+label.olButton {
+    display: inline-block;
+    margin-bottom: 2px;
+    margin-left: 0.5em;
+}
+
 .olControlLayerSwitcher .maximizeDiv {
     width: 25px;
     height: 25px;
@@ -732,6 +762,8 @@ a.olControlZoomOut {
   top: 70px !important; 
 }
 
-
-
-
+.openlayers-legends {
+	bottom: 101px;
+	font-size:	11px;
+	font-family:	'Open Sans Condensed',​'Arial Narrow',​sans-serif;
+}	
