@@ -73,6 +73,12 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                 // hover
                 // popup
                 
+                if (feature.cluster == undefined) {
+                	
+                }
+                
+                else {
+                
                 html = '<div class="popup_list">';
                 if (feature.cluster.length > 3) {
                   html += '<p class="popupName">' + feature.cluster.length
@@ -138,7 +144,7 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
 
                 html += '</div>';
                 
-
+                
                    
                     popup = new OpenLayers.Popup.Popover(		 
                 		"popoverPopup",
@@ -172,19 +178,21 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                 feature.popup = popup;
                 Drupal.attachBehaviors();
                 map.addPopup(popup);
+                }
               }, // over
               // On mouse-out:
               out : function (feature) {
                 Drupal.openlayers.current_feature = feature;
                 // If the cluster consists of 2 or 3 features,
                 // close the hover popup with a timeout
-                if (feature.cluster.length <= 3 && feature.cluster.length > 1) {
-                  setTimeout("map.removePopup(Drupal.openlayers.current_feature.popup)", 1000);
-                }
-                // Else close the popup immediately
-                else {
-                  map.removePopup(feature.popup);
-                }
+                if (feature.cluster != undefined) {
+	                if (feature.cluster.length <= 3 && feature.cluster.length > 1) {
+	                  setTimeout("map.removePopup(Drupal.openlayers.current_feature.popup)", 1000);
+	                }
+	                else {
+	                    map.removePopup(feature.popup);
+	                }
+                }    
               }
             },
             // On feature select:
@@ -193,29 +201,91 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                 var feature = data.feature;
                 Drupal.openlayers.current_feature = feature;
                 // Close existing popups
-                map.removePopup(feature.popup);
+                //map.removePopup(feature.popup);
                 // Look for the number of features in cluster:
 
                 // If the cluster consists of more than 3 features,
                 // zoom in to see the individual features
-                if (feature.cluster.length > 3) {
-                  var cluster_bounds = new OpenLayers.Bounds();
-                  feature.cluster.forEach(function(_feature) {
-                    cluster_bounds.extend(_feature.geometry);
-                  })
-                  map.zoomToExtent(cluster_bounds);
+                if (feature.cluster == undefined) {
+                	var title = "Grid";
+                	html = '<div class="popup_list" id="grid_popup">';
+                	html += '<p class="popupName">Mean temperature</p>';
+                	html += '<table class="popupAttr popup_table">';
+                	html += '<tr><td class="tdleft">January</td><td class="tdright">' + feature.attributes.airb1sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">February</td><td class="tdright">' + feature.attributes.airb2sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">March</td><td class="tdright">' + feature.attributes.airb3sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">April</td><td class="tdright">' + feature.attributes.airb4sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">May</td><td class="tdright">' + feature.attributes.airb5sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">June</td><td class="tdright">' + feature.attributes.airb6sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">July</td><td class="tdright">' + feature.attributes.airb7sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">August</td><td class="tdright">' + feature.attributes.airb8sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">September</td><td class="tdright">' + feature.attributes.airb9sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">October</td><td class="tdright">' + feature.attributes.airb10sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">November</td><td class="tdright">' + feature.attributes.airb11sub.toFixed(1) + ' &deg;C</td>';
+                	html += '<tr><td class="tdleft">December</td><td class="tdright">' + feature.attributes.airb12sub.toFixed(1) + ' &deg;C</td>';
+                	html += '</tr></table>'
+                	html += '</div>';
+                	
+
+                	
+                    popup = new OpenLayers.Popup.Popover(		 
+                    		"popoverPopup",
+                            feature.geometry.getBounds().getCenterLonLat(),
+                    		title,
+                            html, 
+                            function(evt) {
+                              while (map.popups.length) {
+                                map.popups[0].destroy();
+                              }
+                            });   
+                 
+                    
+                   
+                    /* old standard popup
+                    
+                    // Generate the popup with the prepared content
+                    popup = new OpenLayers.Popup.FramedCloud('popup',		               		
+                        feature.geometry.getBounds().getCenterLonLat(), null, html,
+                        null, true, function(evt) {
+                          while (map.popups.length) {
+                            map.popups[0].destroy();
+                          }
+                        });  */
+                        
+                         
+                    // Assign popup to feature and map.
+                    popup.panMapIfOutOfView = true; //options.panMapIfOutOfView;
+                    popup.keepInMap = options.keepInMap;
+                    selectedFeature = feature;
+                    feature.popup = popup;
+                    Drupal.attachBehaviors();
+                    map.addPopup(popup);
+                	
                 }
-                // If the cluster consists of 1 feature,
-                // call dashboard for the selected station
-                else if (feature.cluster.length == 1) {
-                  // Call dashboard with the NID of the selected feature as station 1
-                  window.location.href = "dashboard?nid="
-                      + feature.cluster[0].data.nid;
+                
+                else {
+
+                	// Close existing popups
+                    
+	                if (feature.cluster.length > 3) {
+	                  var cluster_bounds = new OpenLayers.Bounds();
+	                  feature.cluster.forEach(function(_feature) {
+	                    cluster_bounds.extend(_feature.geometry);
+	                  })
+	                  map.zoomToExtent(cluster_bounds);
+	                }
+	                // If the cluster consists of 1 feature,
+	                // call dashboard for the selected station
+	                else if (feature.cluster.length == 1) {
+	                  // Call dashboard with the NID of the selected feature as station 1
+	                  window.location.href = "dashboard?nid="
+	                      + feature.cluster[0].data.nid;
+	                }
                 }
               },
               // On unselect close popup
               featureunhighlighted : function(feature) {
-                map.removePopup(feature.popup);
+               map.removePopup(popup);
               }
             }
           });
