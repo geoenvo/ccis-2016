@@ -33,7 +33,7 @@
  * CSS fix, see #1646646
  */
 label.olButton {
-  display: inline;
+  display: inline-block;
   margin-left: .5em;
 }
 
