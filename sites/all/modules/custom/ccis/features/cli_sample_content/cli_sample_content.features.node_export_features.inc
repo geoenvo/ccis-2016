@@ -1656,6 +1656,9 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
+        \'source\' => \'node/11\',
+        \'alias\' => \'legal\',
+        \'language\' => \'en\',
         \'pathauto\' => FALSE,
       ),
       \'picture\' => \'0\',
@@ -2192,6 +2195,9 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
+        \'source\' => \'node/15\',
+        \'alias\' => \'help\',
+        \'language\' => \'en\',
         \'pathauto\' => FALSE,
       ),
       \'picture\' => \'0\',
