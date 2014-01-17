@@ -56,11 +56,11 @@ Drupal.openlayers.addBehavior('openlayers_behavior_cluster', function (data, opt
       symbolizer: {
         fillColor: '#54673c',
         strokeColor: '#ffffff',
-        fillOpacity: 0.9,
+        fillOpacity: 1,
         pointRadius: 16,
         strokeWidth: 2,
         label: showLabel,
-        labelOutlineWidth: 1,
+        labelOutlineWidth: 0,
         fontColor: '#fcce00',
         fontSize: "16px"
       }
@@ -75,11 +75,11 @@ Drupal.openlayers.addBehavior('openlayers_behavior_cluster', function (data, opt
       symbolizer: {
         fillColor: '#54673c',
         strokeColor: '#ffffff',
-        fillOpacity: 0.9,
+        fillOpacity: 1,
         pointRadius: 20,
         strokeWidth: 3,
         label: showLabel,
-        labelOutlineWidth: 1,
+        labelOutlineWidth: 0,
         fontColor: '#fcce00',
         fontSize: "18px"
       }
@@ -93,11 +93,11 @@ Drupal.openlayers.addBehavior('openlayers_behavior_cluster', function (data, opt
       symbolizer: {
         fillColor: '#54673c',
         strokeColor: '#ffffff',
-        fillOpacity: 0.9,
+        fillOpacity: 1,
         pointRadius: 24,
         strokeWidth: 4,
         label: showLabel,
-        labelOutlineWidth: 1,
+        labelOutlineWidth: 0,
         fontColor: '#fcce00',
         fontSize: "20px"
       }

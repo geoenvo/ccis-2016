@@ -459,7 +459,7 @@ div.olControlSaveFeaturesItemInactive {
    background-color: #D5D5D5;
    -moz-border-radius: 5px 0 5px 5px;
    border-radius: 5px 0 5px 5px;
-   border: 1px solid black;                
+   border: 1px solid #808080;                
 }
 
 .olControlLayerSwitcher .layersDiv .dataLbl {
@@ -544,7 +544,7 @@ label.olButton {
     width: 25px;
     height: 25px;
     top: 0px;
-    left: -1px; 
+    left: -2px; 
     right: 12px;
     cursor: pointer;
 }
@@ -552,7 +552,7 @@ label.olButton {
 .olControlLayerSwitcher .minimizeDiv {
     height: 25px;
     width: 25px;
-    left: 159px;
+    left: 158px;
     top: 0px;
     cursor: pointer;
 }
