@@ -331,7 +331,7 @@ html body.admin-menu {
 #footer-columns {
   position: relative;
   top: -12px;
-  padding-top: 5px;
+  padding-top: 6px;
 }
 
 #footer-columns .region {
@@ -1689,6 +1689,7 @@ tr.odd td.sorting_1 {
 #edit-filter .form-type-select label {
   width: 65px;
   float: left;
+  padding-top: 5px;
 }
 
 #edit-filter .description {
@@ -1732,6 +1733,7 @@ tr.odd td.sorting_1 {
   float: left;
   width: auto;
   margin-bottom: .75em;
+  padding-top: 5px;
 }
 
 #edit-filter .container-inline-date .date-padding {
@@ -1765,6 +1767,9 @@ tr.odd td.sorting_1 {
   margin: 0;
 }
 
+#edit-actions input{
+  margin-right:10px;	
+}
 
 /* ++ filter search results ++ */
 
