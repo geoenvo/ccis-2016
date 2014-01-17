@@ -338,10 +338,11 @@ html body.admin-menu {
   float: left;
   width: 25%;
   max-width: 100%;
-  border-left: 1px dashed #fff;
+  border-left: 1px dotted #fff;
   /*margin-top: 12px;*/
   padding-top: 12px;
-  height: 123px;  
+  height: 120px;  
+  padding-left: 15px;
 }
 
 #footer-columns .block {
