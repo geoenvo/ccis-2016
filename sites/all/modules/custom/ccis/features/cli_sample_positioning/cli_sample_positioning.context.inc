@@ -48,7 +48,7 @@ function cli_sample_positioning_context_default_contexts() {
           'module' => 'views',
           'delta' => 'blogpage-block',
           'region' => 'content',
-          'weight' => '-4',
+          'weight' => '-22',
         ),
         'views-status_feed-block' => array(
           'module' => 'views',
