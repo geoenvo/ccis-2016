@@ -22,7 +22,7 @@ function cli_menus_menu_default_menu_custom() {
   $menus['menu-footer-menu'] = array(
     'menu_name' => 'menu-footer-menu',
     'title' => 'Footer Menu',
-    'description' => '',
+    'description' => 'Footer Menu',
     'language' => 'und',
     'i18n_mode' => 0,
   );
