@@ -766,4 +766,21 @@ a.olControlZoomOut {
 	bottom: 101px;
 	font-size:	11px;
 	font-family:	'Open Sans Condensed',​'Arial Narrow',​sans-serif;
+	border: 1px solid #808080;    
+	padding: 10px;
+}	
+
+.legend-item {
+	padding: 0px;
+	margin: 0px !important;
+}	
+
+.openlayers-legends .legend .legend-item {
+    margin: 0px !important;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.swatch {
+	margin-top: 2px;	
 }	
