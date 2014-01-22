@@ -425,7 +425,7 @@ Drupal.ccis.behaviors.d3 = {
 
 				var lr = linearRegression(trendArrayY, trendArrayX);
 				// We get: lr.slope - lr.intercept - lr.r2
-console.log(lr.slope);
+				
 				var max = d3.max(trendArrayX);
 				var myLine = d3.select("#svg"+block).append("svg:line")
 					.attr("x1", 0)
