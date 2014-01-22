@@ -8,7 +8,7 @@ Drupal.ccis.behaviors.d3 = {
   attach: function(stations, info, settings) {
     var D3 = this;
   // CUSTOM CODING START
-  
+
 	// Groups of parameters available including the colors, the legend keywords, the legend hover names, the icons and the units
 	// Position 0: Parameter
 	// Position 1: Color
@@ -381,6 +381,63 @@ Drupal.ccis.behaviors.d3 = {
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");	  
 			}
+			
+			// Trendline - START	
+			if ($("#d3_checkboxTrendline"+block).is(":checked")) {
+
+				var trendArrayX = [];
+				var trendArrayY = [];
+				for (var i=0; i<data.length; i++) {
+					// Don't use data if isNaN
+					if (!isNaN(data[i][graphType])) {
+						trendArrayX.push(xScale(data[i].date));
+						trendArrayY.push(yScaleType(data[i][graphType]));
+					}
+				}
+				
+				// Calculate Linear Regression
+				function linearRegression(y,x){
+
+						var lr = {};
+						var n = y.length;
+						var sum_x = 0;
+						var sum_y = 0;
+						var sum_xy = 0;
+						var sum_xx = 0;
+						var sum_yy = 0;
+
+						for (var i = 0; i < y.length; i++) {
+
+							sum_x += x[i];
+							sum_y += y[i];
+							sum_xy += (x[i]*y[i]);
+							sum_xx += (x[i]*x[i]);
+							sum_yy += (y[i]*y[i]);
+						} 
+
+						lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n*sum_xx - sum_x * sum_x);
+						lr['intercept'] = (sum_y - lr.slope * sum_x)/n;
+						lr['r2'] = Math.pow((n*sum_xy - sum_x*sum_y)/Math.sqrt((n*sum_xx-sum_x*sum_x)*(n*sum_yy-sum_y*sum_y)),2);
+
+						return lr;
+
+				};
+
+				var lr = linearRegression(trendArrayY, trendArrayX);
+				// We get: lr.slope - lr.intercept - lr.r2
+console.log(lr.slope);
+				var max = d3.max(trendArrayX);
+				var myLine = d3.select("#svg"+block).append("svg:line")
+					.attr("x1", 0)
+					.attr("y1", lr.intercept)
+					.attr("x2", max)
+					.attr("y2", ( (max * lr.slope) + lr.intercept ))
+					.attr("stroke", color)
+					.attr("stroke-width", "2")
+					.style("stroke-dasharray", ("3, 3"))
+					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");			
+			}	
+			// Trendline - END
 		}
 
 		function drawGraphs() {
@@ -1011,6 +1068,9 @@ Drupal.ccis.behaviors.d3 = {
 			.css("height", heightPrintSelect);
 
 		$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'>Select up to 4 indices</div>");		
+		
+		$("#printSelectWrapper"+block).append("<div id='d3_SelectTrendline"+block+"' class='d3_SelectTrendlineClass'><input id='d3_checkboxTrendline"+block+"' class='d3_checkboxTrendlineClass' type='checkbox' value='trendline'>Trendline</div>");		
+		
 		$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><span style='font-size:14px;'>&nbsp;&nbsp;Print</span></div>");
 		$("#d3_printPreviewId"+block).hover(function() {
 			$(this).css("cursor","pointer");
@@ -1156,6 +1216,15 @@ Drupal.ccis.behaviors.d3 = {
 		}	
 		// *** Redraw the Graph - END *** 
 		
+		// Not Yearly Data? Disable Trendline checkbox
+		if (info.range === "Yearly") {
+			$("#d3_checkboxTrendline"+block).attr("disabled", "");
+			$("#d3_SelectTrendline"+block).css("color", "black");
+		} else {
+			$("#d3_checkboxTrendline"+block).attr("disabled", "disabled");
+			$("#d3_SelectTrendline"+block).css("color", "#808080");
+		}
+
 		// Click checkbox
 		$("#"+blockID+" :checkbox").click(function() {
 			// Maximum checkboxes checked: 4 / Minimum: 1
@@ -1167,7 +1236,7 @@ Drupal.ccis.behaviors.d3 = {
 				$("#d3_SelectDiagramsText"+block).removeClass("d3_tooManySelectionsTextClass");
 			}
 			var minChecked = $("#"+blockID+" :checkbox.d3_checkboxClass:checked").length <= 1;
-			$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled", minChecked);
+			$("#"+blockID+" :checkbox.d3_checkboxClass:checked").attr("disabled", minChecked);	
 			
 			// Redraw graph
 			redrawGraph();
@@ -1175,17 +1244,19 @@ Drupal.ccis.behaviors.d3 = {
 		
 		// Maximize-minimize Window	
 		$(".portlet-maximize").click(function(){
-			// Get new width
-			widthDiv = $("#"+blockID).width();
-			width = widthDiv - margin.left - margin.right - legendWidth;
-			height = width/2;
-			$("#d3_legendDiv"+block).css("height", height + margin.top + margin.bottom - heightPrintSelect);
+			setTimeout(function() { 
+				// Get new width
+				widthDiv = $("#"+blockID).width();
+				width = widthDiv - margin.left - margin.right - legendWidth;
+				height = width/2;
+				$("#d3_legendDiv"+block).css("height", height + margin.top + margin.bottom - heightPrintSelect);
+				
+				// Update scrollbar height
+				$("#ccis-weather-d3-block-1").children(".slimScrollDiv")[0].style.setProperty("height", height + margin.top + margin.bottom - heightPrintSelect+"px");
 			
-			// Update scrollbar height
-			$("#ccis-weather-d3-block-1").children(".slimScrollDiv")[0].style.setProperty("height", height + margin.top + margin.bottom - heightPrintSelect+"px");
-		
-			// Redraw graph
-			redrawGraph();
+				// Redraw graph
+				redrawGraph();
+			}, 1);
 		});
 		
 		// *** Diagram Hover function - START ***
@@ -1429,7 +1500,7 @@ Drupal.ccis.behaviors.d3 = {
 				var html = clone.html();
 
 				// Get the name of the Station
-				var stationName = settings.ccis.stations[0].station_name;
+				var stationName = stations[0].name;
 				
 				var printKeys = "";
 				for (var i=0; i<temperatureGroupShown.length; i++) {
@@ -1769,6 +1840,63 @@ Drupal.ccis.behaviors.d3 = {
 					.attr("fill", "none")
 					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");	  
 			}
+			
+			// Trendline - START	
+			if ($("#d3_checkboxTrendline"+block).is(":checked")) {
+
+				var trendArrayX = [];
+				var trendArrayY = [];
+				for (var i=0; i<data.length; i++) {
+					// Don't use data if isNaN
+					if (!isNaN(data[i][graphType])) {
+						trendArrayX.push(xScale(data[i].date));
+						trendArrayY.push(yScaleType(data[i][graphType]));
+					}
+				}
+				
+				// Calculate Linear Regression
+				function linearRegression(y,x){
+
+						var lr = {};
+						var n = y.length;
+						var sum_x = 0;
+						var sum_y = 0;
+						var sum_xy = 0;
+						var sum_xx = 0;
+						var sum_yy = 0;
+
+						for (var i = 0; i < y.length; i++) {
+
+							sum_x += x[i];
+							sum_y += y[i];
+							sum_xy += (x[i]*y[i]);
+							sum_xx += (x[i]*x[i]);
+							sum_yy += (y[i]*y[i]);
+						} 
+
+						lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n*sum_xx - sum_x * sum_x);
+						lr['intercept'] = (sum_y - lr.slope * sum_x)/n;
+						lr['r2'] = Math.pow((n*sum_xy - sum_x*sum_y)/Math.sqrt((n*sum_xx-sum_x*sum_x)*(n*sum_yy-sum_y*sum_y)),2);
+
+						return lr;
+
+				};
+
+				var lr = linearRegression(trendArrayY, trendArrayX);
+				// We get: lr.slope - lr.intercept - lr.r2
+				
+				var max = d3.max(trendArrayX);
+				var myLine = d3.select("#svg"+block).append("svg:line")
+					.attr("x1", 0)
+					.attr("y1", lr.intercept)
+					.attr("x2", max)
+					.attr("y2", ( (max * lr.slope) + lr.intercept ))
+					.attr("stroke", color)
+					.attr("stroke-width", "2")
+					.style("stroke-dasharray", ("3, 3"))
+					.attr("transform", "translate(" + (margin.left-((margin.left_single*axis_sum)-(margin.left_single*axis_selection))) + "," + margin.top + ")");			
+			}	
+			// Trendline - END
 		}
 		
 		function drawGraphs() {
@@ -2399,6 +2527,9 @@ Drupal.ccis.behaviors.d3 = {
 			.css("height", heightPrintSelect);
 
 		$("#printSelectWrapper"+block).append("<div id='d3_SelectDiagramsText"+block+"' class='d3_SelectDiagramsTextClass'>Select up to 4 indices</div>");		
+		
+		$("#printSelectWrapper"+block).append("<div id='d3_SelectTrendline"+block+"' class='d3_SelectTrendlineClass'><input id='d3_checkboxTrendline"+block+"' class='d3_checkboxTrendlineClass' type='checkbox' value='trendline'>Trendline</div>");		
+		
 		$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><span style='font-size:14px;'>&nbsp;Print</span></div>");
 		$("#d3_printPreviewId"+block).hover(function() {
 			$(this).css("cursor","pointer");
@@ -2544,6 +2675,15 @@ Drupal.ccis.behaviors.d3 = {
 		}	
 		// *** Redraw the Graph - END *** 
 		
+		// Not Yearly Data? Disable Trendline checkbox
+		if (info.range === "Yearly") {
+			$("#d3_checkboxTrendline"+block).attr("disabled", "");
+			$("#d3_SelectTrendline"+block).css("color", "black");
+		} else {
+			$("#d3_checkboxTrendline"+block).attr("disabled", "disabled");
+			$("#d3_SelectTrendline"+block).css("color", "#808080");
+		}
+		
 		// Click checkbox
 		$("#"+blockID+" :checkbox").click(function() {
 			// Maximum checkboxes checked: 4 / Minimum: 1
@@ -2563,17 +2703,19 @@ Drupal.ccis.behaviors.d3 = {
 		
 		// Maximize-minimize Window	
 		$(".portlet-maximize").click(function(){
-			// Get new width
-			widthDiv = $("#"+blockID).width();
-			width = widthDiv - margin.left - margin.right - legendWidth;
-			height = width/2;
-			$("#d3_legendDiv"+block).css("height", height + margin.top + margin.bottom - heightPrintSelect);
+			setTimeout(function() {
+				// Get new width
+				widthDiv = $("#"+blockID).width();
+				width = widthDiv - margin.left - margin.right - legendWidth;
+				height = width/2;
+				$("#d3_legendDiv"+block).css("height", height + margin.top + margin.bottom - heightPrintSelect);
 
-			// Update scrollbar height
-			$("#ccis-weather-d3-block-2").children(".slimScrollDiv")[0].style.setProperty("height", height + margin.top + margin.bottom - heightPrintSelect+"px");
-			
-			// Redraw graph
-			redrawGraph();
+				// Update scrollbar height
+				$("#ccis-weather-d3-block-2").children(".slimScrollDiv")[0].style.setProperty("height", height + margin.top + margin.bottom - heightPrintSelect+"px");
+				
+				// Redraw graph
+				redrawGraph();
+			}, 1);
 		});
 		
 		// *** Diagram Hover function - START ***
@@ -2817,7 +2959,7 @@ Drupal.ccis.behaviors.d3 = {
 				var html = clone.html();
 
 				// Get the name of the Station
-				var stationName = settings.ccis.stations[0].station_name;
+				var stationName = stations[0].name;
 				
 				var printKeys = "";
 				for (var i=0; i<temperatureGroupShown.length; i++) {
