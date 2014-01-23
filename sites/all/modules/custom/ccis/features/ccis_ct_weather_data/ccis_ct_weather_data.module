@@ -5,3 +5,224 @@
  */
 
 include_once 'ccis_ct_weather_data.features.inc';
+
+
+/**
+ * Edit the form of the content type climate data for saving information for the D3 graph
+ */
+function ccis_ct_weather_data_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
+
+	// Check environment for getting the field_name
+	$action = $form['#action'];
+	
+	// Only add form fields for content type weather data
+	if (strpos($action,'weather-data') !== false) {
+		
+		// Get field_name of parameter
+		$length = strlen($action);
+		$posa = strpos($action,'weather-data/fields/');
+		$pos1 = $posa + 20;
+		
+		if (strpos($action,'?') !== false) {
+			$pos2 = strpos($action,'?');
+		}
+		else {
+			$pos2 = $length;
+		}
+		
+		$pos3 = $pos2 - $pos1;
+		$fieldname = substr($action, $pos1, $pos3);
+		
+		// Query all available climate groups
+		$climateParametersRaw = db_query("SELECT title FROM {node} WHERE type = 'climate_group'");
+		$climateParameters = $climateParametersRaw -> fetchAll();
+
+		$groups = array();
+		
+		// If no group is available, use dummy text, else save group names in an array
+		if ($climateParameters == null) {
+			$groups[0] = "No group available";
+		}	
+	
+		else {
+			for($y = 0; $y < count($climateParameters); $y++) {    
+				$groups[$y] = $climateParameters[$y]->title;					
+			}
+		}	
+		
+		// Query all available climate units
+		$climateUnitsRaw = db_query("SELECT title FROM {node} WHERE type = 'climate_unit'");
+		$climateUnits = $climateUnitsRaw -> fetchAll();
+
+		$units = array();
+		
+		// If no unit is available, use dummy text, else save unit names in an array
+		if ($climateUnits == null) {
+			$units[0] = "No group available";
+		}	
+	
+		else {
+			for($z = 0; $z < count($climateUnits); $z++) {    
+				$units[$z] = $climateUnits[$z]->title;					
+			}
+		}			
+		
+		// Query all existing climate parameters
+		$existingParametersRaw = db_query('SELECT * FROM {climate_parameter}');
+		$existingParameters = $existingParametersRaw -> fetchAll();
+		
+		if ($existingParameters == null) {
+			$counter = 1;
+		}	
+		
+		else {
+			$counter = count($existingParameters);
+		}
+		
+		// Check all existing climate parameters
+		for($x = 0; $x < $counter; $x++) {    
+
+			// If the parameter allready exists, set variables for forms with according values
+			if ($fieldname == $existingParameters[$x]->field_name) {
+				
+				$choosenType = $existingParameters[$x]-> graph_type;
+				$choosenGroupKey = $existingParameters[$x]-> climate_group;
+				$choosenColor = $existingParameters[$x]-> color;
+				$choosenUnitKey = $existingParameters[$x]-> climate_unit;
+				
+				// Hidden form for fieldname
+				$form['fieldname'] = array('#type' => 'hidden', '#value' => $fieldname);
+				
+				// Select list form for graph type
+				$form['graph_type'] = array(
+					'#type' => 'select',
+					'#title' => t('Graph type'),
+					'#description' => 'Select the type of the graph',
+					'#options' => array(
+						0 => t('Line chart'),
+						1 => t('Bar chart'),
+					),
+					'#default_value' => $choosenType
+				);
+			
+				// Save existing climate groups in an array
+				$groups = array();
+			
+				for($y = 0; $y < count($climateParameters); $y++) {    
+					$groups[$y] = $climateParameters[$y]->title;	
+				}
+				
+				// Get the key of the choosen group for select list entry
+				$choosenGroup = array_search($choosenGroupKey, $groups);
+				
+				// Select list form for climate groups 
+				$form['climate_group'] = array(
+					'#type' => 'select',
+					'#title' => t('Climate Group'),
+					'#options' => $groups,
+					'#description' => 'Select an element of the content type "Climate group"',
+					'#default_value' => $choosenGroup
+				);				
+
+				// jQuery color picker form for graph color
+				$form['color'] = array (
+					'#type' => 'jquery_colorpicker',
+					'#title' => t('Chart color'),
+					'#description' => 'Select the color of the chart',
+					'#default_value' => $choosenColor
+				);
+
+				// Save existing climate units in an array
+				$units = array();
+			
+				for($z = 0; $z < count($climateUnits); $z++) {    
+					$units[$z] = $climateUnits[$z]->title;					
+				}			
+			
+				// Get the key of the choosen unit for select list entry
+				$choosenUnit = array_search($choosenUnitKey, $units);
+				
+				// Select list form for climate units 
+				$form['climate_unit'] = array(
+					'#type' => 'select',
+					'#title' => t('Climate unit'),
+					'#options' => $units,
+					'#description' => 'Select an element of the content type "Climate unit"',
+					'#default_value' => $choosenUnit
+				);				
+			
+				// Stop searching after existing parameter was found
+				break;
+			 }	 
+			 
+			 
+			// If the parameter doesn't exists, set variables for forms with default values
+			else {
+				
+				// Hidden form for fieldname
+				$form['fieldname'] = array('#type' => 'hidden', '#value' => $fieldname);
+				
+				// Select list form for graph type
+				$form['graph_type'] = array(
+					'#type' => 'select',
+					'#title' => t('Graph type'),
+					'#description' => 'Select the type of the graph',
+					'#options' => array(
+						0 => t('Line chart'),
+						1 => t('Bar chart'),
+				));
+				
+				// Select list form for climate groups 
+				$form['climate_group'] = array(
+					'#type' => 'select',
+					'#title' => t('Climate group'),
+					'#options' => $groups,
+					'#description' => 'Select an element of the content type "Climate group"',
+				);	
+						
+				// jQuery color picker form for graph color
+				$form['color'] = array (
+					'#type' => 'jquery_colorpicker',
+					'#title' => t('Chart color'),
+					'#description' => 'Select the color of the chart',
+					'#default_value' => '000000',
+				);	
+			
+				// Select list form for climate units 
+				$form['climate_unit'] = array(
+					'#type' => 'select',
+					'#title' => t('Climate unit'),
+					'#options' => $units,
+					'#description' => 'Select an element of the content type "Climate unit"',
+				);				
+			 }
+		}
+		
+		// Call custom submit function to save the selected values
+		$form['#submit'][] = 'ccis_ct_weather_data_form_alter_submit';
+	}	
+}
+
+/**
+ * Custom submit function to save the selected values in the database
+ */
+function ccis_ct_weather_data_form_alter_submit($form, $form_state) {
+	
+	// Get the keys of the choosen unit / group of select list entry
+	$cgrooupKey = $form_state['values']['climate_group'];
+	$unitKey = $form_state['values']['climate_unit'];
+	
+	// Five variables of the forms to be saved in the database, all as values
+	$field = $form_state['values']['fieldname'];
+    $gtype = $form_state['values']['graph_type'];
+	$cgroup = $form['climate_group']['#options'][$cgrooupKey];	
+	$color = $form_state['values']['color'];
+	$unit = $form['climate_unit']['#options'][$unitKey];		
+
+	// If exists, delete old entry and save new parameters (edit mode) 
+	db_delete('climate_parameter')->condition('field_name', $field)->execute();
+	
+	// Save new parameters in the database
+	db_insert('climate_parameter')->fields(array('field_name' => $field, 'graph_type' => $gtype, 'color' => $color, 'climate_group' => $cgroup, 'climate_unit' => $unit))->execute();
+
+}

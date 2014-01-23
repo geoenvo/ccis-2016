@@ -10,24 +10,21 @@
 function ccis_ct_weather_data_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-weather_data-field_avg_max_temp'
-  $field_instances['node-weather_data-field_avg_max_temp'] = array(
-    'bundle' => 'weather_data',
-    'default_value' => NULL,
+  // Exported field_instance: 'node-climate_group-field_icon'
+  $field_instances['node-climate_group-field_icon'] = array(
+    'bundle' => 'climate_group',
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
+        'module' => 'image',
         'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
+          'image_link' => '',
+          'image_style' => '',
         ),
-        'type' => 'number_decimal',
-        'weight' => 11,
+        'type' => 'image',
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -37,43 +34,49 @@ function ccis_ct_weather_data_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_avg_max_temp',
-    'label' => 'Average max temperature',
+    'field_name' => 'field_icon',
+    'label' => 'icon',
     'required' => 0,
     'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '°C',
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '100x100',
+      'min_resolution' => '',
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 7,
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 32,
     ),
   );
 
-  // Exported field_instance: 'node-weather_data-field_avg_min_temp'
-  $field_instances['node-weather_data-field_avg_min_temp'] = array(
-    'bundle' => 'weather_data',
-    'default_value' => NULL,
+  // Exported field_instance: 'node-climate_unit-field_decimal_places_for_tooltip'
+  $field_instances['node-climate_unit-field_decimal_places_for_tooltip'] = array(
+    'bundle' => 'climate_unit',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Select the number of decimal places for the tooltips',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 10,
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -83,43 +86,36 @@ function ccis_ct_weather_data_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_avg_min_temp',
-    'label' => 'Average min temperature',
-    'required' => 0,
+    'field_name' => 'field_decimal_places_for_tooltip',
+    'label' => 'Decimal places for tooltip',
+    'required' => 1,
     'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '°C',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'number',
+      'active' => 1,
+      'module' => 'options',
       'settings' => array(),
-      'type' => 'number',
-      'weight' => 6,
+      'type' => 'options_select',
+      'weight' => 31,
     ),
   );
 
-  // Exported field_instance: 'node-weather_data-field_avg_prec'
-  $field_instances['node-weather_data-field_avg_prec'] = array(
-    'bundle' => 'weather_data',
-    'default_value' => NULL,
+  // Exported field_instance: 'node-climate_unit-field_icon_unit'
+  $field_instances['node-climate_unit-field_icon_unit'] = array(
+    'bundle' => 'climate_unit',
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
+        'module' => 'image',
         'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
+          'image_link' => '',
+          'image_style' => '',
         ),
-        'type' => 'number_decimal',
-        'weight' => 8,
+        'type' => 'image',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -129,43 +125,45 @@ function ccis_ct_weather_data_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_avg_prec',
-    'label' => 'Average precipitation amount',
+    'field_name' => 'field_icon_unit',
+    'label' => 'Icon',
     'required' => 0,
     'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => 'mm',
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'units',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '100x100',
+      'min_resolution' => '',
+      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 4,
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 35,
     ),
   );
 
-  // Exported field_instance: 'node-weather_data-field_avg_press'
-  $field_instances['node-weather_data-field_avg_press'] = array(
-    'bundle' => 'weather_data',
+  // Exported field_instance: 'node-climate_unit-field_label_axis'
+  $field_instances['node-climate_unit-field_label_axis'] = array(
+    'bundle' => 'climate_unit',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The label for the diagram axis',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 9,
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -175,43 +173,37 @@ function ccis_ct_weather_data_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_avg_press',
-    'label' => 'Average sea level pressure',
-    'required' => 0,
+    'field_name' => 'field_label_axis',
+    'label' => 'Label axis',
+    'required' => 1,
     'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => 'hPa',
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 5,
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 33,
     ),
   );
 
-  // Exported field_instance: 'node-weather_data-field_avg_temp'
-  $field_instances['node-weather_data-field_avg_temp'] = array(
-    'bundle' => 'weather_data',
+  // Exported field_instance: 'node-climate_unit-field_label_tooltip'
+  $field_instances['node-climate_unit-field_label_tooltip'] = array(
+    'bundle' => 'climate_unit',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'The label for the tooltips',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 2,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_decimal',
-        'weight' => 7,
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -221,22 +213,21 @@ function ccis_ct_weather_data_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_avg_temp',
-    'label' => 'Average mean temperature',
-    'required' => 0,
+    'field_name' => 'field_label_tooltip',
+    'label' => 'Label tooltip',
+    'required' => 1,
     'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '°C',
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 3,
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 34,
     ),
   );
 
@@ -2135,11 +2126,6 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('Annual total PRCP when RR > 95p');
   t('Annual total PRCP when RR > 99p');
   t('Annual total precipitation in wet days');
-  t('Average max temperature');
-  t('Average mean temperature');
-  t('Average min temperature');
-  t('Average precipitation amount');
-  t('Average sea level pressure');
   t('CC');
   t('CDD');
   t('CSDI');
@@ -2161,6 +2147,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('Daily temperature range (°C)');
   t('Daily wind direction');
   t('Date');
+  t('Decimal places for tooltip');
   t('FD');
   t('FG');
   t('FX');
@@ -2168,6 +2155,9 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('Growing season length');
   t('HU');
   t('ID');
+  t('Icon');
+  t('Label axis');
+  t('Label tooltip');
   t('Maximum length of dry spell with RR < 1mm');
   t('Maximum length of wet spell (days with RR ≥ 1mm)');
   t('Monthly maximum 1-day precipitation');
@@ -2198,6 +2188,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('SDII');
   t('SS');
   t('SU');
+  t('Select the number of decimal places for the tooltips');
   t('Simple pricipitation intensity index');
   t('Station');
   t('TG');
@@ -2208,12 +2199,15 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('TX');
   t('TX10p');
   t('TX90p');
+  t('The label for the diagram axis');
+  t('The label for the tooltips');
   t('Tnn');
   t('Tnx');
   t('Txn');
   t('Txx');
   t('WSDI');
   t('Warm speel duration index (days)');
+  t('icon');
 
   return $field_instances;
 }
