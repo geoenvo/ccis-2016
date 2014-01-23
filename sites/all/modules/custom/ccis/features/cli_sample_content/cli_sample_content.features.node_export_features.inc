@@ -98,7 +98,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/30\',
+        \'source\' => \'node/27\',
         \'alias\' => \'event/adaptation-futures-2014-third-international-climate-change-adaptation-conference\',
         \'language\' => \'und\',
         \'pathauto\' => FALSE,
@@ -175,6 +175,240 @@ function cli_sample_content_node_export_features_default() {
       \'uuid\' => \'00855260-a0d3-4737-a907-bf7945cba28d\',
       \'vid\' => NULL,
       \'vuuid\' => \'7bd2e755-497f-47c8-83b4-34191f5b81cd\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'1\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'cm\',
+            \'format\' => NULL,
+            \'safe_value\' => \'cm\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'cm\',
+            \'format\' => NULL,
+            \'safe_value\' => \'cm\',
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Centimeter\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'01a02df5-8222-4aca-ac99-8a65646e7cfc\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'8975654f-4b26-493c-b42c-f8d4fe1289c3\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'1\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'m/s\',
+            \'format\' => NULL,
+            \'safe_value\' => \'m/s\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'m/s\',
+            \'format\' => NULL,
+            \'safe_value\' => \'m/s\',
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Meter per second\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'07aa81c0-0701-4ee8-bddd-f0fd484879c8\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'eb9caf49-b93c-4f79-ab49-ee880a9098dd\',
     ),
   (object) array(
       \'body\' => array(
@@ -264,7 +498,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/31\',
+        \'source\' => \'node/28\',
         \'alias\' => \'event/world-future-energy-summit-wfes-2014\',
         \'language\' => \'und\',
         \'pathauto\' => FALSE,
@@ -440,6 +674,123 @@ function cli_sample_content_node_export_features_default() {
       \'vuuid\' => \'2c09f13f-786f-4df8-8076-b20396312c5b\',
     ),
   (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'0\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'hPa\',
+            \'format\' => NULL,
+            \'safe_value\' => \'hPa\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'hPa\',
+            \'format\' => NULL,
+            \'safe_value\' => \'hPa\',
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Hektopascal\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'1279ac15-1a1f-44d5-a99e-86db2268d51b\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'ab9896d9-759d-491d-8ad1-8539ed18a5dc\',
+    ),
+  (object) array(
       \'body\' => array(
         \'und\' => array(
           array(
@@ -547,6 +898,123 @@ function cli_sample_content_node_export_features_default() {
       \'uuid\' => \'2efaadcb-7a7f-4379-b6f1-ee723b909d44\',
       \'vid\' => NULL,
       \'vuuid\' => \'d3652c76-6231-4e6c-9e42-29722d26c604\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'0\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'Days\',
+            \'format\' => NULL,
+            \'safe_value\' => \'Days\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'Days\',
+            \'format\' => NULL,
+            \'safe_value\' => \'Days\',
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Days\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'34544f1f-2d7e-4d9e-8804-3109fc6d2f7f\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'f3ae0c43-d52d-423a-a63f-b1c1bc242050\',
     ),
   (object) array(
       \'body\' => array(
@@ -710,6 +1178,117 @@ function cli_sample_content_node_export_features_default() {
       \'uuid\' => \'34bb65e2-ead6-4131-b45d-5a9378cd4574\',
       \'vid\' => NULL,
       \'vuuid\' => \'4aa79390-6a12-4215-a4e5-bcc18ecf5290\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_icon\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => \'17\',
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'7\',
+            \'height\' => \'21\',
+            \'uid\' => \'1\',
+            \'filename\' => \'symbol_legende_thermometer.png\',
+            \'uri\' => \'public://symbol_legende_thermometer.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'243\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'9fa082c3-9e1c-4dc7-a4a7-07263b4de733\',
+            \'rdf_mapping\' => array(),
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Temperature\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_group\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'359fa4ea-8279-48e4-8b10-e0450a4263ce\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'45b1c754-6ccc-4847-b39d-daf11541e6a4\',
     ),
   (object) array(
       \'body\' => array(
@@ -896,7 +1475,7 @@ function cli_sample_content_node_export_features_default() {
         \'und\' => array(
           array(
             \'fid\' => NULL,
-            \'alt\' => "Trikshaw in water, photographed from bird\'s eye",
+            \'alt\' => NULL,
             \'title\' => NULL,
             \'width\' => \'960\',
             \'height\' => \'249\',
@@ -1187,7 +1766,7 @@ function cli_sample_content_node_export_features_default() {
         \'und\' => array(
           array(
             \'fid\' => NULL,
-            \'alt\' => \'Drought ground\',
+            \'alt\' => NULL,
             \'title\' => NULL,
             \'width\' => \'960\',
             \'height\' => \'249\',
@@ -1414,6 +1993,123 @@ function cli_sample_content_node_export_features_default() {
       \'vuuid\' => \'d709ceaf-6845-490f-b760-177bdccaef70\',
     ),
   (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'1\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'Octas\',
+            \'format\' => NULL,
+            \'safe_value\' => \'Octas\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'octas\',
+            \'format\' => NULL,
+            \'safe_value\' => \'octas\',
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Octas\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'55ab85af-12e2-45e7-94b3-7f6a2929aae4\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'9e36a5c2-b260-461d-ab56-6a7c731e1ecf\',
+    ),
+  (object) array(
       \'body\' => array(
         \'und\' => array(
           array(
@@ -1519,6 +2215,345 @@ function cli_sample_content_node_export_features_default() {
       \'uuid\' => \'5d3d9b60-64fb-4e0c-9585-0c8247b85d33\',
       \'vid\' => NULL,
       \'vuuid\' => \'be139c78-fcbb-46b1-9db6-7cf07f063707\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_icon\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => \'19\',
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'17\',
+            \'height\' => \'13\',
+            \'uid\' => \'1\',
+            \'filename\' => \'symbol_legende_wind_black.png\',
+            \'uri\' => \'public://symbol_legende_wind_black.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'498\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'5922593f-b58d-417f-9fa5-34bdd03147f8\',
+            \'rdf_mapping\' => array(),
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Wind\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_group\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'655c949a-9744-4069-b7a9-9e3f1987792a\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'6e816267-b37d-44e0-a919-0287598fd94b\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'1\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'mm\',
+            \'format\' => NULL,
+            \'safe_value\' => \'mm\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'mm\',
+            \'format\' => NULL,
+            \'safe_value\' => \'mm\',
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Milimeter\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'6a7adb31-fd5b-4cee-be29-689f0c00ef6e\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'b86ccea0-7012-43e7-9bbf-e295d91757c1\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_icon\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => \'18\',
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'11\',
+            \'height\' => \'17\',
+            \'uid\' => \'1\',
+            \'filename\' => \'symbol_legende_drop.png\',
+            \'uri\' => \'public://symbol_legende_drop.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'314\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'5c6b3fda-44d9-4469-9a6f-120f53f89c83\',
+            \'rdf_mapping\' => array(),
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Precipitation\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_group\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'70009bc3-47a1-45ec-b75d-85b73210101f\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'e8450ce1-2f85-4251-bd25-4e82cfc164fa\',
     ),
   (object) array(
       \'body\' => array(
@@ -1628,6 +2663,117 @@ function cli_sample_content_node_export_features_default() {
       \'vuuid\' => \'def2ac16-cca4-41dc-8e2f-c9da9e51afc7\',
     ),
   (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_icon\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => \'20\',
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'16\',
+            \'height\' => \'4\',
+            \'uid\' => \'1\',
+            \'filename\' => \'symbol_legende_other.png\',
+            \'uri\' => \'public://symbol_legende_other.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'184\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'e3aa6330-1a06-4c58-b6c1-0501349a17b2\',
+            \'rdf_mapping\' => array(),
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Other\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_group\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'7e6c26cb-0cc1-4643-b7ca-dedbf917b61c\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'19e0f412-7913-4943-9338-b9a3e5229d2c\',
+    ),
+  (object) array(
       \'body\' => array(
         \'und\' => array(
           array(
@@ -1733,6 +2879,215 @@ function cli_sample_content_node_export_features_default() {
       \'uuid\' => \'7e9207c1-b85c-4b82-a44f-8a0076daf335\',
       \'vid\' => NULL,
       \'vuuid\' => \'947b26aa-9583-4687-b195-0d7b104935fd\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'1\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'%\',
+            \'format\' => NULL,
+            \'safe_value\' => \'%\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'%\',
+            \'format\' => NULL,
+            \'safe_value\' => \'%\',
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Percent\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'8409744c-0b35-4d6f-abaa-f32ab1d31a70\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'39684b3c-1268-493b-85f2-00e801a3ef50\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_icon\' => array(),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Extreme Precipitation\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_group\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'86c0d6e9-f772-455a-acbc-0d8d4e1da2ce\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'9134d84c-036c-4345-bafa-58822d61c93b\',
     ),
   (object) array(
       \'body\' => array(
@@ -1919,7 +3274,7 @@ function cli_sample_content_node_export_features_default() {
         \'und\' => array(
           array(
             \'fid\' => NULL,
-            \'alt\' => \'Storm clouds over sea water\',
+            \'alt\' => NULL,
             \'title\' => NULL,
             \'width\' => \'960\',
             \'height\' => \'249\',
@@ -2024,6 +3379,216 @@ function cli_sample_content_node_export_features_default() {
       \'uuid\' => \'91796cc2-8fe5-4b67-82e6-cbd238329002\',
       \'vid\' => NULL,
       \'vuuid\' => \'f24eda28-149f-49fb-abc9-0d4e63d11d5b\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_icon\' => array(),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Warm Extremes\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_group\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'9de98110-7a69-49b3-8db6-7ba53b3ef1c2\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'93a009bb-e578-4c7d-80e7-885f81618f47\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'1\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'Celsius\',
+            \'format\' => NULL,
+            \'safe_value\' => \'Celsius\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'°C\',
+            \'format\' => NULL,
+            \'safe_value\' => \'°C\',
+          ),
+        ),
+      ),
+      \'field_symbol\' => array(),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Celsius\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'ab518fe1-5399-47a5-9fa6-a6451ac94d48\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'9bb8b035-93f9-4b49-b408-d6692c9472af\',
     ),
   (object) array(
       \'body\' => array(
@@ -2274,6 +3839,123 @@ function cli_sample_content_node_export_features_default() {
       \'vuuid\' => \'64888120-7e46-430b-a9e4-4f73c1ff013e\',
     ),
   (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'1\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'hours\',
+            \'format\' => NULL,
+            \'safe_value\' => \'hours\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'hours\',
+            \'format\' => NULL,
+            \'safe_value\' => \'hours\',
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Hours\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'bbd6752f-0afc-469f-9c1b-6609d07da83c\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'9c845bb3-6fe7-4036-b906-86c4758da164\',
+    ),
+  (object) array(
       \'body\' => array(
         \'und\' => array(
           array(
@@ -2391,6 +4073,215 @@ function cli_sample_content_node_export_features_default() {
       \'uuid\' => \'d83deba5-06f2-44a7-b9e6-a1abda3df055\',
       \'vid\' => NULL,
       \'vuuid\' => \'813b9cab-d0a6-4340-9f10-943d6614d67f\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_icon\' => array(),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Cold Extremes\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_group\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'e793b178-dc8b-4a5c-b948-37bcad7924b2\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'615c125b-f329-4c08-8300-569d50c3e545\',
+    ),
+  (object) array(
+      \'changed\' => NULL,
+      \'cid\' => \'0\',
+      \'comment\' => \'2\',
+      \'comment_count\' => \'0\',
+      \'created\' => NULL,
+      \'data\' => NULL,
+      \'field_decimal_places_for_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'0\',
+          ),
+        ),
+      ),
+      \'field_icon_unit\' => NULL,
+      \'field_label_axis\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'degrees\',
+            \'format\' => NULL,
+            \'safe_value\' => \'degrees\',
+          ),
+        ),
+      ),
+      \'field_label_tooltip\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'°\',
+            \'format\' => NULL,
+            \'safe_value\' => \'°\',
+          ),
+        ),
+      ),
+      \'files\' => array(),
+      \'language\' => \'und\',
+      \'last_comment_name\' => NULL,
+      \'last_comment_timestamp\' => NULL,
+      \'last_comment_uid\' => NULL,
+      \'log\' => \'\',
+      \'menu\' => NULL,
+      \'name\' => \'admin\',
+      \'nid\' => NULL,
+      \'node_export_drupal_version\' => \'7\',
+      \'path\' => NULL,
+      \'picture\' => \'0\',
+      \'promote\' => \'1\',
+      \'rdf_mapping\' => array(
+        \'rdftype\' => array(
+          \'sioc:Item\',
+          \'foaf:Document\',
+        ),
+        \'title\' => array(
+          \'predicates\' => array(
+            \'dc:title\',
+          ),
+        ),
+        \'created\' => array(
+          \'predicates\' => array(
+            \'dc:date\',
+            \'dc:created\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'changed\' => array(
+          \'predicates\' => array(
+            \'dc:modified\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+        \'body\' => array(
+          \'predicates\' => array(
+            \'content:encoded\',
+          ),
+        ),
+        \'uid\' => array(
+          \'predicates\' => array(
+            \'sioc:has_creator\',
+          ),
+          \'type\' => \'rel\',
+        ),
+        \'name\' => array(
+          \'predicates\' => array(
+            \'foaf:name\',
+          ),
+        ),
+        \'comment_count\' => array(
+          \'predicates\' => array(
+            \'sioc:num_replies\',
+          ),
+          \'datatype\' => \'xsd:integer\',
+        ),
+        \'last_activity\' => array(
+          \'predicates\' => array(
+            \'sioc:last_activity_date\',
+          ),
+          \'datatype\' => \'xsd:dateTime\',
+          \'callback\' => \'date_iso8601\',
+        ),
+      ),
+      \'revision_timestamp\' => NULL,
+      \'revision_uid\' => \'1\',
+      \'rh_action\' => NULL,
+      \'rh_redirect\' => NULL,
+      \'rh_redirect_response\' => NULL,
+      \'status\' => \'1\',
+      \'sticky\' => \'0\',
+      \'title\' => \'Degrees\',
+      \'tnid\' => \'0\',
+      \'translate\' => \'0\',
+      \'type\' => \'climate_unit\',
+      \'uid\' => \'1\',
+      \'uuid\' => \'ea0248dc-4ff6-40b5-b4be-98f05af747eb\',
+      \'vid\' => NULL,
+      \'vuuid\' => \'2a741ba7-54d2-4277-8bf8-e8977811abaf\',
     ),
   (object) array(
       \'body\' => array(
