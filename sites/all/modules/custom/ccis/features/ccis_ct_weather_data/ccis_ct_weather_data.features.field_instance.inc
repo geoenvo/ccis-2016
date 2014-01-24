@@ -40,7 +40,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
-      'file_directory' => '',
+      'file_directory' => 'climate_group_icons',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '100x100',
@@ -131,7 +131,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
-      'file_directory' => 'units',
+      'file_directory' => 'climate_unit_icons',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
       'max_resolution' => '100x100',

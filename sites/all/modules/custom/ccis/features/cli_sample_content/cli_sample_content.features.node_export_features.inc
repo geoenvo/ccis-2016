@@ -190,7 +190,7 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -307,7 +307,7 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -687,7 +687,7 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -913,7 +913,7 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -1189,19 +1189,19 @@ function cli_sample_content_node_export_features_default() {
       \'field_icon\' => array(
         \'und\' => array(
           array(
-            \'fid\' => \'17\',
+            \'fid\' => \'22\',
             \'alt\' => NULL,
             \'title\' => NULL,
             \'width\' => \'7\',
             \'height\' => \'21\',
             \'uid\' => \'1\',
             \'filename\' => \'symbol_legende_thermometer.png\',
-            \'uri\' => \'public://symbol_legende_thermometer.png\',
+            \'uri\' => \'public://climate_group_icons/symbol_legende_thermometer.png\',
             \'filemime\' => \'image/png\',
             \'filesize\' => \'243\',
             \'status\' => \'1\',
             \'timestamp\' => NULL,
-            \'uuid\' => \'9fa082c3-9e1c-4dc7-a4a7-07263b4de733\',
+            \'uuid\' => \'e554f4cb-ca32-4128-beff-51b7410ed3e9\',
             \'rdf_mapping\' => array(),
           ),
         ),
@@ -2006,7 +2006,7 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -2226,19 +2226,19 @@ function cli_sample_content_node_export_features_default() {
       \'field_icon\' => array(
         \'und\' => array(
           array(
-            \'fid\' => \'19\',
+            \'fid\' => \'24\',
             \'alt\' => NULL,
             \'title\' => NULL,
             \'width\' => \'17\',
             \'height\' => \'13\',
             \'uid\' => \'1\',
             \'filename\' => \'symbol_legende_wind_black.png\',
-            \'uri\' => \'public://symbol_legende_wind_black.png\',
+            \'uri\' => \'public://climate_group_icons/symbol_legende_wind_black.png\',
             \'filemime\' => \'image/png\',
             \'filesize\' => \'498\',
             \'status\' => \'1\',
             \'timestamp\' => NULL,
-            \'uuid\' => \'5922593f-b58d-417f-9fa5-34bdd03147f8\',
+            \'uuid\' => \'cb02de37-5a0f-4e09-9e55-d17193978898\',
             \'rdf_mapping\' => array(),
           ),
         ),
@@ -2341,7 +2341,26 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => \'26\',
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'11\',
+            \'height\' => \'17\',
+            \'uid\' => \'1\',
+            \'filename\' => \'symbol_legende_drop.png\',
+            \'uri\' => \'public://climate_unit_icons/symbol_legende_drop.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'314\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'86191035-4ae8-43f9-bf16-d7aa6368a669\',
+            \'rdf_mapping\' => array(),
+          ),
+        ),
+      ),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -2435,7 +2454,7 @@ function cli_sample_content_node_export_features_default() {
       \'rh_redirect_response\' => NULL,
       \'status\' => \'1\',
       \'sticky\' => \'0\',
-      \'title\' => \'Milimeter\',
+      \'title\' => \'Millimeter\',
       \'tnid\' => \'0\',
       \'translate\' => \'0\',
       \'type\' => \'climate_unit\',
@@ -2454,19 +2473,19 @@ function cli_sample_content_node_export_features_default() {
       \'field_icon\' => array(
         \'und\' => array(
           array(
-            \'fid\' => \'18\',
+            \'fid\' => \'25\',
             \'alt\' => NULL,
             \'title\' => NULL,
             \'width\' => \'11\',
             \'height\' => \'17\',
             \'uid\' => \'1\',
             \'filename\' => \'symbol_legende_drop.png\',
-            \'uri\' => \'public://symbol_legende_drop.png\',
+            \'uri\' => \'public://climate_group_icons/symbol_legende_drop.png\',
             \'filemime\' => \'image/png\',
             \'filesize\' => \'314\',
             \'status\' => \'1\',
             \'timestamp\' => NULL,
-            \'uuid\' => \'5c6b3fda-44d9-4469-9a6f-120f53f89c83\',
+            \'uuid\' => \'7fa1f912-3948-4c5f-ad29-6fe790ce17ee\',
             \'rdf_mapping\' => array(),
           ),
         ),
@@ -2672,19 +2691,19 @@ function cli_sample_content_node_export_features_default() {
       \'field_icon\' => array(
         \'und\' => array(
           array(
-            \'fid\' => \'20\',
+            \'fid\' => \'23\',
             \'alt\' => NULL,
             \'title\' => NULL,
             \'width\' => \'16\',
             \'height\' => \'4\',
             \'uid\' => \'1\',
             \'filename\' => \'symbol_legende_other.png\',
-            \'uri\' => \'public://symbol_legende_other.png\',
+            \'uri\' => \'public://climate_group_icons/symbol_legende_other.png\',
             \'filemime\' => \'image/png\',
             \'filesize\' => \'184\',
             \'status\' => \'1\',
             \'timestamp\' => NULL,
-            \'uuid\' => \'e3aa6330-1a06-4c58-b6c1-0501349a17b2\',
+            \'uuid\' => \'c3c201d5-316e-4dc1-af2f-9716e94da4e9\',
             \'rdf_mapping\' => array(),
           ),
         ),
@@ -2894,7 +2913,7 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -3486,7 +3505,26 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => \'27\',
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'7\',
+            \'height\' => \'21\',
+            \'uid\' => \'1\',
+            \'filename\' => \'symbol_legende_thermometer.png\',
+            \'uri\' => \'public://climate_unit_icons/symbol_legende_thermometer.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'243\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'93a79792-c7d4-49cf-95c1-95bf5f20d740\',
+            \'rdf_mapping\' => array(),
+          ),
+        ),
+      ),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -3505,7 +3543,6 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_symbol\' => array(),
       \'files\' => array(),
       \'language\' => \'und\',
       \'last_comment_name\' => NULL,
@@ -3852,7 +3889,7 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -4180,7 +4217,7 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => NULL,
+      \'field_icon_unit\' => array(),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
