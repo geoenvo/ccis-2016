@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implement hook_menu().
+ */
+
+function climateparameters_menu() {
+ 
+ $items['climateparameters'] = array(
+ 'title' => 'climateparameters View',
+ 'page callback' => 'climateparameters_view',
+ 'access arguments' => array('access content'),
+ );
+ 
+ return $items;
+}
+ 
+function climateparameters_view()
+{
+ return 'test';
+}
+ 
+?>
