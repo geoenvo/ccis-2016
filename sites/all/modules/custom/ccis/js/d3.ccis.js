@@ -139,7 +139,7 @@ Drupal.ccis.behaviors.d3 = {
 	// Position 1: Icon filename
 	var groupIconsArray = [];
 	for (var i=0; i<info.groups.length; i++) {
-		var iconTitle = info_test.groups[i].title;
+		var iconTitle = info.groups[i].title;
 		if (Object.prototype.toString.call(info.groups[i].field_icon) === "[object Object]") {
 			var iconFilename = "sites/default/files/climate_group_icons/"+info.groups[i].field_icon.und[0].filename;
 		} else {
