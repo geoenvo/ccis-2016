@@ -328,7 +328,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Cold speel duration index (days)',
+    'description' => 'Cold speel duration index',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -519,7 +519,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Daily temperature range (°C)',
+    'description' => 'Daily temperature range',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1163,7 +1163,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Daily precipitation amount (mm)',
+    'description' => 'Daily precipitation amount',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1525,7 +1525,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Daily mean temperature (°C)',
+    'description' => 'Daily mean temperature',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1571,7 +1571,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Daily minimum temperature (°C)',
+    'description' => 'Daily minimum temperature',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1709,7 +1709,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Monthly minimum value of TN (°C)',
+    'description' => 'Monthly minimum value of TN',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1755,7 +1755,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Monthly maximum value of TN (°C)',
+    'description' => 'Monthly maximum value of TN',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1847,7 +1847,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Daily maximum temperature (°C)',
+    'description' => 'Daily maximum temperature',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1985,7 +1985,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Monthly minimum value of TX (°C)',
+    'description' => 'Monthly minimum value of TX',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2031,7 +2031,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Monthly maximum value of TX (°C)',
+    'description' => 'Monthly maximum value of TX',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2077,7 +2077,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
     'bundle' => 'weather_data',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Warm speel duration index (days)',
+    'description' => 'Warm speel duration index',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2130,21 +2130,21 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('CDD');
   t('CSDI');
   t('CWD');
-  t('Cold speel duration index (days)');
+  t('Cold speel duration index');
   t('DD');
   t('DTR');
   t('Daily cloud cover');
   t('Daily humidity');
-  t('Daily maximum temperature (°C)');
+  t('Daily maximum temperature');
   t('Daily maximum wind gust');
   t('Daily mean sea level pressure');
-  t('Daily mean temperature (°C)');
+  t('Daily mean temperature');
   t('Daily mean wind speed');
-  t('Daily minimum temperature (°C)');
-  t('Daily precipitation amount (mm)');
+  t('Daily minimum temperature');
+  t('Daily precipitation amount');
   t('Daily snow depth');
   t('Daily sunshine duration');
-  t('Daily temperature range (°C)');
+  t('Daily temperature range');
   t('Daily wind direction');
   t('Date');
   t('Decimal places for tooltip');
@@ -2162,10 +2162,10 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('Maximum length of wet spell (days with RR ≥ 1mm)');
   t('Monthly maximum 1-day precipitation');
   t('Monthly maximum consecutive 5-day precipitation');
-  t('Monthly maximum value of TN (°C)');
-  t('Monthly maximum value of TX (°C)');
-  t('Monthly minimum value of TN (°C)');
-  t('Monthly minimum value of TX (°C)');
+  t('Monthly maximum value of TN');
+  t('Monthly maximum value of TX');
+  t('Monthly minimum value of TN');
+  t('Monthly minimum value of TX');
   t('Number of frost days');
   t('Number of icing days');
   t('Number of summer days');
@@ -2206,7 +2206,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('Txn');
   t('Txx');
   t('WSDI');
-  t('Warm speel duration index (days)');
+  t('Warm speel duration index');
   t('icon');
 
   return $field_instances;
