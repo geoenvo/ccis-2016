@@ -650,9 +650,69 @@ function ccis_get_dashboard_settings($list = 'unknown', $values = array(), $id =
     'legends' => _ccis_get_weather_data_labels($list),
     'range' => _ccis_get_range_label($range),
     'download' => $download,
+	'parameter' => getD3InfoDatabase(),
+    'groups' => getD3InfoGroups(),
+	'units' => getD3InfoUnits(),
   );
   $settings['ccis']['stations'] = $stations;
   return $settings;
+}
+
+/**
+ * Runs a query to get information about all climate parameters. Used in function ccis_get_dashboard_settings.
+ */
+function getD3InfoDatabase() {
+    $result1 = db_query('SELECT * FROM {climate_parameter}');
+    $result = $result1 -> fetchAll();
+    return $result;
+}
+
+/**
+ * Runs a query to get information about all climate groups. Used in function ccis_get_dashboard_settings.
+ */
+function getD3InfoGroups() {
+
+	$nidsObj = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'climate_group'));
+	$nids = $nidsObj -> fetchAll();
+	
+	$lengthObj = db_query("SELECT COUNT(*) AS counter FROM {node} WHERE type = :type", array(':type' => 'climate_group'));
+	$lengthAll = $lengthObj -> fetchAll();
+	$lengthString = $lengthAll[0]->counter;
+	$length = intval($lengthString);
+	
+	$groups = array();
+	
+	 for ($i = 0; $i < $length; $i++) {		
+		$nidInt = $nids[$i]->nid;
+		$nid = intval($nidInt);
+		$node = node_load($nid);
+		array_push($groups, $node);
+	}  
+	return $groups;
+}
+
+/**
+ * Runs a query to get information about all climate units. Used in function ccis_get_dashboard_settings.
+ */
+function getD3InfoUnits() {
+
+	$nidsObj = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'climate_unit'));
+	$nids = $nidsObj -> fetchAll();
+	
+	$lengthObj = db_query("SELECT COUNT(*) AS counter FROM {node} WHERE type = :type", array(':type' => 'climate_unit'));
+	$lengthAll = $lengthObj -> fetchAll();
+	$lengthString = $lengthAll[0]->counter;
+	$length = intval($lengthString);
+	
+	$units = array();
+	
+	 for ($i = 0; $i < $length; $i++) {		
+		$nidInt = $nids[$i]->nid;
+		$nid = intval($nidInt);
+		$node = node_load($nid);
+		array_push($units, $node);
+	}  
+	return $units;
 }
 
 /**
