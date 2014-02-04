@@ -109,6 +109,11 @@ Drupal.behaviors.ccis_base = {
         var mapdata = map.data('openlayers');
         map.width(hb.width()).height(hb.height());
         mapdata.openlayers.updateSize();
+        if (typeof Drupal.homebox.$columns != 'undefined') {
+          // We need this delay so that homebox get the recalcuted width/height
+          // of the elements.
+          window.setTimeout(Drupal.homebox.equalizeColumnsHeights, 400);
+        }
       }
     });
 
