@@ -73,7 +73,7 @@ Drupal.behaviors.ccis_base = {
           this.container.html("");
         if (this.homebox.length > 0)
           this.homebox.show();
-        
+
         if ($.isFunction(this.attach)) {
           this.attach(settings.ccis.stations, settings.ccis.info, Drupal.settings);
         }
@@ -111,13 +111,15 @@ Drupal.behaviors.ccis_base = {
         mapdata.openlayers.updateSize();
       }
     });
-    
+
   },
   resetHomebox: function(context) {
     var groups = $('.field-group-format-title, .horizontal-tab-button a');
     groups.click(function() {
       if (typeof Drupal.homebox.$columns != 'undefined') {
-       Drupal.homebox.equalizeColumnsHeights();
+        // We need this delay so that homebox get the recalcuted width/height
+        // of the elements.
+        window.setTimeout(Drupal.homebox.equalizeColumnsHeights, 400);
       }
     });
   },
