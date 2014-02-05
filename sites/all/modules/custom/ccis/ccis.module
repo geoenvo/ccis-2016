@@ -319,7 +319,7 @@ function ccis_form_field_ui_field_edit_form_alter(&$form, $form_state) {
     '#type' => 'select',
     '#title' => t('Climate Group' ),
     '#options' => $groups,
-    '#description' => 'Select an element of the content type "Climate group"',
+    '#description' => t('Select an element of the content type "Climate group"'),
     '#default_value' => isset($form['#instance']['settings']['climate_group']) ? $form['#instance']['settings']['climate_group'] : 0,
     '#empty_value' => '',
   );
@@ -328,7 +328,7 @@ function ccis_form_field_ui_field_edit_form_alter(&$form, $form_state) {
   $form['instance']['settings']['color'] = array(
     '#type' => 'jquery_colorpicker',
     '#title' => t('Chart color' ),
-    '#description' => 'Select the color of the chart',
+    '#description' => t('Select the color of the chart'),
     '#default_value' => isset($form['#instance']['settings']['color']) ? $form['#instance']['settings']['color'] : '000000',
   );
   $results = db_query("SELECT title FROM {node} WHERE type = 'climate_unit'")->fetchAll();
@@ -343,7 +343,7 @@ function ccis_form_field_ui_field_edit_form_alter(&$form, $form_state) {
     '#type' => 'select',
     '#title' => t('Climate unit' ),
     '#options' => $units,
-    '#description' => 'Select an element of the content type "Climate unit"',
+    '#description' => t('Select an element of the content type "Climate unit"'),
     '#default_value' => isset($form['#instance']['settings']['climate_unit']) ? $form['#instance']['settings']['climate_unit'] : 0,
     '#empty_value' => '',
   );
