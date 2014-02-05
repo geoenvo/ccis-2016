@@ -1,10 +1,12 @@
+/*jslint sloppy: true, indent: 2 */
 (function($) {
+
 Drupal.ccis = Drupal.ccis || {'behaviors': {}};
 
 Drupal.behaviors.ccis_base = {
   attach: function(context, settings) {
     this.fetchStationData(settings);
-    this.searchResultClicker();
+    this.searchResult();
     this.hidePortlets();
     this.addToolTipFieldsets();
     this.resetHomebox();
@@ -41,7 +43,7 @@ Drupal.behaviors.ccis_base = {
   },
   fetchStationData: function (settings) {
     var $body = $('body');
-    if (typeof $body.data('dashboardrefresh') == 'undefined') {
+    if (typeof $body.data('dashboardrefresh') === 'undefined') {
       $body.data('dashboardrefresh', 1);
     }
     if ($body.data('dashboardrefresh') != 1) {
@@ -52,7 +54,7 @@ Drupal.behaviors.ccis_base = {
         this.init();
       }
     });
-    if (typeof settings.ccis.stations != 'undefined') {
+    if (typeof settings.ccis.stations !== 'undefined') {
       $body.data('dashboardrefresh', 0);
       $.each(settings.ccis.stations, function(index, station) {
         station.data = {};
@@ -109,14 +111,13 @@ Drupal.behaviors.ccis_base = {
         var mapdata = map.data('openlayers');
         map.width(hb.width()).height(hb.height());
         mapdata.openlayers.updateSize();
-        if (typeof Drupal.homebox.$columns != 'undefined') {
+        if (typeof Drupal.homebox.$columns !== 'undefined') {
           // We need this delay so that homebox get the recalcuted width/height
           // of the elements.
           window.setTimeout(Drupal.homebox.equalizeColumnsHeights, 400);
         }
       }
     });
-
   },
   resetHomebox: function(context) {
     var groups = $('.field-group-format-title, .horizontal-tab-button a');
@@ -136,7 +137,7 @@ Drupal.behaviors.ccis_base = {
     });
     ankers.tipsy({gravity: 's'});
   },
-  searchResultClicker: function(context) {
+  searchResult: function(context) {
     var $list = $('#ccis-station-search-result', context);
     var $radios = $list.find("[type=radio]");
     var checked, station_number, station_input, form;
@@ -152,6 +153,24 @@ Drupal.behaviors.ccis_base = {
       if (checked.length > 1) {
         form.find("[type=submit]").mousedown();
       }
+    });
+    // Provided by pager plugin. See ccis_page_alter().
+    var wrap = $('#ccis-station-search-result tbody');
+    wrap.once('jquerypager', function() {
+      wrap.pager({
+        perPage: 10,
+        useHash: true,
+      });
+    });
+    wrap.first().show();
+    // set up click events to trigger the pagination plugins' behaviour
+    $('.prev').click(function () {
+        wrap.trigger('pager:prev');
+        return false;
+    });
+    $('.next').click(function () {
+      wrap.trigger('pager:next');
+      return false;
     });
   },
   hidePortlets: function() {

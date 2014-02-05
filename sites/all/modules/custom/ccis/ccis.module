@@ -218,6 +218,7 @@ function ccis_page_alter(&$page) {
     drupal_add_js(ccis_get_dashboard_settings($list, $params), 'setting');
 
     $path = drupal_get_path('module', 'ccis');
+    drupal_add_js($path . '/js/jquery.pager.js', array('weight' => 3));
     drupal_add_js($path . '/js/base.ccis.js', array('weight' => 4));
     drupal_add_js($path . '/js/datatables.ccis.js', array('weight' => 6));
 
@@ -674,20 +675,20 @@ function getD3InfoGroups() {
 
 	$nidsObj = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'climate_group'));
 	$nids = $nidsObj -> fetchAll();
-	
+
 	$lengthObj = db_query("SELECT COUNT(*) AS counter FROM {node} WHERE type = :type", array(':type' => 'climate_group'));
 	$lengthAll = $lengthObj -> fetchAll();
 	$lengthString = $lengthAll[0]->counter;
 	$length = intval($lengthString);
-	
+
 	$groups = array();
-	
-	 for ($i = 0; $i < $length; $i++) {		
+
+	 for ($i = 0; $i < $length; $i++) {
 		$nidInt = $nids[$i]->nid;
 		$nid = intval($nidInt);
 		$node = node_load($nid);
 		array_push($groups, $node);
-	}  
+	}
 	return $groups;
 }
 
@@ -698,20 +699,20 @@ function getD3InfoUnits() {
 
 	$nidsObj = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'climate_unit'));
 	$nids = $nidsObj -> fetchAll();
-	
+
 	$lengthObj = db_query("SELECT COUNT(*) AS counter FROM {node} WHERE type = :type", array(':type' => 'climate_unit'));
 	$lengthAll = $lengthObj -> fetchAll();
 	$lengthString = $lengthAll[0]->counter;
 	$length = intval($lengthString);
-	
+
 	$units = array();
-	
-	 for ($i = 0; $i < $length; $i++) {		
+
+	 for ($i = 0; $i < $length; $i++) {
 		$nidInt = $nids[$i]->nid;
 		$nid = intval($nidInt);
 		$node = node_load($nid);
 		array_push($units, $node);
-	}  
+	}
 	return $units;
 }
 
@@ -1018,12 +1019,12 @@ function ccis_js_alter(&$javascript) {
   if (!empty($javascript[$js_file])) {
     $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_behavior_popup.js';
   }
-  
+
   $js_file = drupal_get_path('module', 'openlayers_plus') . '/behaviors/openlayers_plus_behavior_blocktoggle.js';
   if (!empty($javascript[$js_file])) {
     $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_plus_behavior_blocktoggle.js';
   }
-  
+
   $js_file = drupal_get_path('module', 'openlayers_plus') . '/behaviors/openlayers_plus_behavior_legend.js';
   if (!empty($javascript[$js_file])) {
     $javascript[$js_file]['data'] = drupal_get_path('module', 'ccis') . '/js/openlayers_plus_behavior_legend.js';
@@ -1048,8 +1049,6 @@ function ccis_search_terms_finder_list($values) {
   if (empty($search_fields)) {
     return '';
   }
-  // TODO Needs ajax support.
-  #$query = db_select('node', 'n')->extend('PagerDefault')->limit(2);
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_wmocode', 'f', 'n.nid = f.entity_id');
   $query->leftJoin('field_data_field_stationcode', 'sc', 'n.nid = sc.entity_id');
@@ -1106,10 +1105,13 @@ function ccis_search_terms_finder_list($values) {
   catch (Exception $e) {
     watchdog_exception('ccis', $e);
   }
+  $max = 10;
+  $pager = '';
+  if (count($rows) > $max) {
+    $pager = '<div id="ccis-station-search-result-pager"><a class="prev" href="#">' . t('Prev') . '</a> | <a class="next" href="#">' . t('Next') . '</a></div>';
+  }
   $vars = array('header' => $header, 'rows' => $rows, 'empty' => t('Did not found a station'));
-  // TODO Needs Ajax support.
-  // return theme('table', $vars). theme('pager');
-  return theme('table', $vars);
+  return theme('table', $vars) . $pager;
 }
 
 /**
