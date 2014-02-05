@@ -297,6 +297,59 @@ function ccis_features_pipe_user_permission_alter(&$pipe, $data, $export) {
 }
 
 /**
+ * Implements hook_FORM_ID_form_alter().
+ */
+function ccis_form_field_ui_field_edit_form_alter(&$form, $form_state) {
+  $form['instance']['settings']['graph_type'] = array(
+    '#type' => 'select',
+    '#title' => t('Graph type'),
+    '#description' => t('Select the type of the graph'),
+    '#options' => array(t('Line chart'),t('Bar chart')),
+	'#default_value' => isset($form['#instance']['settings']['graph_type']) ? $form['#instance']['settings']['graph_type'] : 0,
+  );
+  $results = db_query("SELECT title FROM {node} WHERE type = 'climate_group'")->fetchAll();
+  $groups = array();
+  if (! empty($results )) {
+    foreach ($results as $result ) {
+      $groups[$result->title] = $result->title;
+    }
+  }
+    // Select list form for climate groups
+  $form['instance']['settings']['climate_group'] = array(
+    '#type' => 'select',
+    '#title' => t('Climate Group' ),
+    '#options' => $groups,
+    '#description' => 'Select an element of the content type "Climate group"',
+    '#default_value' => isset($form['#instance']['settings']['climate_group']) ? $form['#instance']['settings']['climate_group'] : 0,
+    '#empty_value' => '',
+  );
+
+  // jQuery color picker form for graph color
+  $form['instance']['settings']['color'] = array(
+    '#type' => 'jquery_colorpicker',
+    '#title' => t('Chart color' ),
+    '#description' => 'Select the color of the chart',
+    '#default_value' => isset($form['#instance']['settings']['color']) ? $form['#instance']['settings']['color'] : '000000',
+  );
+  $results = db_query("SELECT title FROM {node} WHERE type = 'climate_unit'")->fetchAll();
+  $units = array();
+  if (! empty($results )) {
+    foreach ( $results as $result ) {
+      $units[$result->title] = $result->title;
+    }
+  }
+    // Select list form for climate units
+  $form['instance']['settings']['climate_unit'] = array(
+    '#type' => 'select',
+    '#title' => t('Climate unit' ),
+    '#options' => $units,
+    '#description' => 'Select an element of the content type "Climate unit"',
+    '#default_value' => isset($form['#instance']['settings']['climate_unit']) ? $form['#instance']['settings']['climate_unit'] : 0,
+    '#empty_value' => '',
+  );
+}
+
+/**
  * Implements hook_node_export_node_import_alter().
  *
  * Resets the uid to 1.
@@ -908,8 +961,21 @@ function _ccis_get_weather_data_labels($list = NULL) {
       $label = '<span class="ccis-datatable-title" ' . $desc . '>';
       $label .= check_plain($info['label']);
       $label .= '</span>';
-      if (!empty($info['settings']['suffix'])) {
-        $label .= ' <span class="ccis-datatable-unit">' . check_plain($info['settings']['suffix']) . '</span>';
+      if (!empty($info['settings']['climate_unit'])) {
+        $query = new EntityFieldQuery();
+        $entities = $query->entityCondition('entity_type', 'node')
+          ->propertyCondition('type', 'climate_unit')
+          ->propertyCondition('title', $info['settings']['climate_unit'])
+          ->propertyCondition('status', 1)
+          ->range(0,1)
+          ->execute();
+        if (!empty($entities['node'])) {
+          $nids = array_keys($entities['node']);
+          $node = node_load(reset($nids));
+          if (!empty($node->field_label_tooltip['und'][0])) {
+            $label .= ' <span class="ccis-datatable-unit">' . $node->field_label_tooltip['und'][0]['safe_value'] . '</span>';
+          }
+        }
       }
       $tmp[$field_name] = array(
         'label' => $label,
