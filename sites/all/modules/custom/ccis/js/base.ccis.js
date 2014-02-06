@@ -141,15 +141,21 @@ Drupal.behaviors.ccis_base = {
     var $list = $('#ccis-station-search-result', context);
     var $radios = $list.find("[type=radio]");
     var checked, station_number, station_input, form;
-
+    var inputs = [$('#edit-input1'), $('#edit-input2')];
     if ($list.find("[data-station=1]").filter(":checked").length !== 1) {
       $list.find("[data-station=2]").attr('disabled', true);
     }
+    inputs[0].bind('keyup', function() {
+      if (this.id === 'edit-input1' && this.value === '') {
+        // Clear the hidden input 2. Which will be hidden by form states.
+        inputs[1].val('');
+      }
+    });
     $radios.click( function(e) {
       var _this = $(this);
       station_number = _this.data('station');
       station_input = _this.data('station-input');
-      form = $('#edit-input' + station_number)
+      form = inputs[station_number - 1]
         .trigger('keyup')
         .val(station_input)
         .closest('form');

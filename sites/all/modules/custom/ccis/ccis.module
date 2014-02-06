@@ -570,9 +570,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#attributes' => array('class' => array('form-autocomplete-mousedown')),
     '#states' => array(
       'visible' => array(
-        array('#edit-input2' => array('filled' => TRUE)),
         array('#edit-input1' => array('filled' => TRUE)),
-        array(':input[name="station[2]"]' => array('checked' => TRUE))
       ),
     ),
   );
@@ -650,7 +648,8 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
 
   $commands[] = ajax_command_data('body', 'dashboardrefresh', 1);
 
-  $settings = ccis_get_dashboard_settings($list1, $form_state['values']);
+  // The settings are static cached.
+  ccis_get_dashboard_settings($list1, $form_state['values']);
   $settings = ccis_get_dashboard_settings($list2, $form_state['values'], 2);
   $commands[] = ajax_command_settings($settings, FALSE);
 
