@@ -570,9 +570,7 @@ function ccis_block_filter_form($form, $form_state, $node = NULL) {
     '#attributes' => array('class' => array('form-autocomplete-mousedown')),
     '#states' => array(
       'visible' => array(
-        array('#edit-input2' => array('filled' => TRUE)),
         array('#edit-input1' => array('filled' => TRUE)),
-        array(':input[name="station[2]"]' => array('checked' => TRUE))
       ),
     ),
   );
