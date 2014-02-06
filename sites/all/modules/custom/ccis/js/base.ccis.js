@@ -141,14 +141,20 @@ Drupal.behaviors.ccis_base = {
     var $list = $('#ccis-station-search-result', context);
     var $radios = $list.find("[type=radio]");
     var checked, station_number, station_input, form;
+
+    if ($list.find("[data-station=1]").filter(":checked").length !== 1) {
+      $list.find("[data-station=2]").attr('disabled', true);
+    }
     $radios.click( function(e) {
       var _this = $(this);
       station_number = _this.data('station');
       station_input = _this.data('station-input');
       form = $('#edit-input' + station_number)
+        .trigger('keyup')
         .val(station_input)
         .closest('form');
       checked = $radios.filter(":checked");
+      $list.find("[data-station=2]").attr('disabled', false);
       // Submit only the form when both stations are clicked.
       if (checked.length > 1) {
         form.find("[type=submit]").mousedown();
