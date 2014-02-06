@@ -1,0 +1,12 @@
+diff --git a/field_group.js b/field_group.js
+index 0824968..eef6aaa 100644
+--- a/field_group.js
++++ b/field_group.js
+@@ -183,6 +183,7 @@ Drupal.FieldGroup.Effects.processDiv = {
+  */
+ Drupal.behaviors.fieldGroup = {
+   attach: function (context, settings) {
++    settings.field_group = settings.field_group || Drupal.settings.field_group;
+     if (settings.field_group == undefined) {
+       return;
+     }
