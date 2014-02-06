@@ -67,13 +67,15 @@ function ccis_content_exchanger_strongarm() {
     'page' => 'page',
     'blog_article' => 'blog_article',
     'article_climatechange' => 'article_climatechange',
+    'climate_group' => 'climate_group',
+    'climate_unit' => 'climate_unit',
     'event' => 'event',
     'sponsor_logo' => 'sponsor_logo',
     'article' => 0,
-    'simplenews' => 0,
-    'walter_lieth_diagram' => 0,
     'weather_station' => 0,
     'weather_data' => 0,
+    'simplenews' => 0,
+    'walter_lieth_diagram' => 0,
   );
   $export['node_export_file_types'] = $strongarm;
 
