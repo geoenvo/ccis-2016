@@ -98,7 +98,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/27\',
+        \'source\' => \'node/1\',
         \'alias\' => \'event/adaptation-futures-2014-third-international-climate-change-adaptation-conference\',
         \'language\' => \'und\',
         \'pathauto\' => FALSE,
@@ -264,7 +264,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/28\',
+        \'source\' => \'node/2\',
         \'alias\' => \'event/world-future-energy-summit-wfes-2014\',
         \'language\' => \'und\',
         \'pathauto\' => FALSE,
@@ -361,7 +361,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/1\',
+        \'source\' => \'node/3\',
         \'alias\' => \'start\',
         \'language\' => \'und\',
         \'pathauto\' => FALSE,
@@ -453,7 +453,27 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => array(),
+      \'field_icon_unit\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => NULL,
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'19\',
+            \'height\' => \'16\',
+            \'uid\' => \'1\',
+            \'filename\' => \'units_hpa.png\',
+            \'uri\' => \'public://climate_unit_icons/units_hpa.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'203\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'76d8a8c1-bcf2-4c44-a78c-9512bf6acfb4\',
+            \'rdf_mapping\' => array(),
+            \'node_export_file_data\' => \'iVBORw0KGgoAAAANSUhEUgAAABMAAAAQCAYAAAD0xERiAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAG1JREFUeNpiZKAAxHQ4FwCpfig3kYmBMiCAxFag1DAUQFXDWCgIo0JKXSaAg01nbwK9pQCkEqDcB5SGGciweij7ABAfJMkwoGsakLgHKPVmPdmGAV2SAPUOCCygNALigdiBHJfQNGkMXsMAAgwAJkERj6Y1iUQAAAAASUVORK5CYII=\',
+          ),
+        ),
+      ),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -888,7 +908,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/2\',
+        \'source\' => \'node/8\',
         \'alias\' => \'blog/why-adaptation-climate-change-necessary\',
         \'language\' => \'en\',
         \'pathauto\' => FALSE,
@@ -1576,7 +1596,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/5\',
+        \'source\' => \'node/13\',
         \'alias\' => \'climatechange/monsoon2013\',
         \'language\' => \'en\',
         \'pathauto\' => FALSE,
@@ -1867,7 +1887,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/7\',
+        \'source\' => \'node/15\',
         \'alias\' => \'climatechange/drought2013\',
         \'language\' => \'en\',
         \'pathauto\' => FALSE,
@@ -2046,7 +2066,7 @@ function cli_sample_content_node_export_features_default() {
       \'rh_redirect\' => NULL,
       \'rh_redirect_response\' => NULL,
       \'simplenews\' => (object) array(
-          \'nid\' => \'8\',
+          \'nid\' => \'16\',
           \'tid\' => \'1\',
           \'status\' => \'0\',
           \'sent_subscriber_count\' => \'0\',
@@ -2072,7 +2092,27 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
-      \'field_icon\' => array(),
+      \'field_icon\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => NULL,
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'11\',
+            \'height\' => \'17\',
+            \'uid\' => \'1\',
+            \'filename\' => \'groups_precipitation.png\',
+            \'uri\' => \'public://climate_group_icons/groups_precipitation.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'314\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'42b5d86c-e932-467e-bf03-4c0d6750e97d\',
+            \'rdf_mapping\' => array(),
+            \'node_export_file_data\' => \'iVBORw0KGgoAAAANSUhEUgAAAAsAAAARCAYAAAAL4VbbAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNpiYMACdIJLDLCJM2FRKACk5hOlGAgKgNgAqCkBXYIRi6n3gRhEPwBiwytrez7gMnk+VCEIKABxPbIkM5KpBVAnIAMLMS2ri6+uH7sBdwZQIciU80imIgOQMxRBzmFCs/4BFsXw0GEEmuoApPcD8QKoRAADduAIMjkfypkIxA4MuEE8E1TBBaCbLuBwMwwYMEEVfGAgDAxgHlSARsgDPIofMEE9pgD1ZCMeWxYyISkwQItBZADyzwQmoMdAVjtCBbCBAyB5UKSgJ6QAqA0wsAEaSmAAEGAAr548ZstlevAAAAAASUVORK5CYII=\',
+          ),
+        ),
+      ),
       \'files\' => array(),
       \'language\' => \'und\',
       \'last_comment_name\' => NULL,
@@ -2186,7 +2226,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/9\',
+        \'source\' => \'node/18\',
         \'alias\' => \'403\',
         \'language\' => \'und\',
         \'pathauto\' => FALSE,
@@ -2293,7 +2333,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/10\',
+        \'source\' => \'node/19\',
         \'alias\' => \'404\',
         \'language\' => \'und\',
         \'pathauto\' => FALSE,
@@ -2378,7 +2418,27 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
-      \'field_icon\' => array(),
+      \'field_icon\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => NULL,
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'17\',
+            \'height\' => \'13\',
+            \'uid\' => \'1\',
+            \'filename\' => \'groups_wind.png\',
+            \'uri\' => \'public://climate_group_icons/groups_wind.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'498\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'0cc9db6f-a101-446b-992f-f8d13020f4c0\',
+            \'rdf_mapping\' => array(),
+            \'node_export_file_data\' => \'iVBORw0KGgoAAAANSUhEUgAAABEAAAANCAYAAABPeYUaAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB90KHQwGOP311M4AAAFySURBVCjPlVI9awJREBwxiEWyuV+gcmB5bMqY6lLbiGUKSSBFqhCsrDw7W7FLZRACdofNYRerg2CTS2FtlzJhsIohL807uIjkY2Hg7bJvdvYjhx3W7/fbqnqWz+f3a7XasYi84T9G0ldVo6rG87wPkg7+ayRDAIbkTSZWIelbOH8hebAkFevfADBZkDz6jaQHwLiu+0rSB2CKxeLnZDK5T1Va/EjikAzH4/EtyZ6qmuFwGOxQ6qexvfQjgABAKnPaarUGVhXiOD7M1LkgWRGR+TcSAGG5XPZLpRI2mw2Wy2U6wBUALBaLa5LPqZ9u0T5XsEMyruu+t9vtk263exmGofE878Mmj7YHm0W1WuUeAEdVEQTBrNlsxgDiKIqu0tZE5ILkNNPqtj3lSDoi8qqqqNfrs06n8xhFUbVQKBys1+uXbHaj0cj6byIyAICclXwuIiNVRZIkUNWdJZMk2d7kqYjMc9mrBOADqPzxuFcicgcAX0VB0ZG4y+FoAAAAAElFTkSuQmCC\',
+          ),
+        ),
+      ),
       \'files\' => array(),
       \'language\' => \'und\',
       \'last_comment_name\' => NULL,
@@ -2492,7 +2552,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/11\',
+        \'source\' => \'node/21\',
         \'alias\' => \'legal\',
         \'language\' => \'en\',
         \'pathauto\' => FALSE,
@@ -2783,7 +2843,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/13\',
+        \'source\' => \'node/23\',
         \'alias\' => \'climatechange/extremeweather2013\',
         \'language\' => \'en\',
         \'pathauto\' => FALSE,
@@ -2924,7 +2984,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/14\',
+        \'source\' => \'node/24\',
         \'alias\' => \'blog/adaptation-climate-change-–-strategies-climate-protection-programme\',
         \'language\' => \'en\',
         \'pathauto\' => FALSE,
@@ -3148,7 +3208,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/15\',
+        \'source\' => \'node/26\',
         \'alias\' => \'help\',
         \'language\' => \'en\',
         \'pathauto\' => FALSE,
@@ -3240,7 +3300,27 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => array(),
+      \'field_icon_unit\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => NULL,
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'7\',
+            \'height\' => \'21\',
+            \'uid\' => \'1\',
+            \'filename\' => \'units_celsius.png\',
+            \'uri\' => \'public://climate_unit_icons/units_celsius.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'243\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'11832552-3c42-45a4-b676-c8528bc4d3bd\',
+            \'rdf_mapping\' => array(),
+            \'node_export_file_data\' => \'iVBORw0KGgoAAAANSUhEUgAAAAcAAAAVCAYAAACKTPRDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJVJREFUeNpiZICCj1Eq84FUAhAfAOJA/mV3PjBBJQKAlAMQCwLxByAuAIkzQTUaAPFCkGogfRFmGkwSK6CHJNDV6/HpDKC3g6gvqY8m7g8iGIEeB8XIfmg8gvz5ABptC5mgAguQAkABiC8AsT0TVKUDVIABqksAJM4IDdPzUEWgiOaHJhdDmIMcoZL2UF2GwFTxACDAAD6VJWZFmEj7AAAAAElFTkSuQmCC\',
+          ),
+        ),
+      ),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -3350,7 +3430,27 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
-      \'field_icon\' => array(),
+      \'field_icon\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => NULL,
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'7\',
+            \'height\' => \'21\',
+            \'uid\' => \'1\',
+            \'filename\' => \'groups_temperature.png\',
+            \'uri\' => \'public://climate_group_icons/groups_temperature.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'243\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'b2966f31-6799-4315-9cea-253445a92177\',
+            \'rdf_mapping\' => array(),
+            \'node_export_file_data\' => \'iVBORw0KGgoAAAANSUhEUgAAAAcAAAAVCAYAAACKTPRDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJVJREFUeNpiZICCj1Eq84FUAhAfAOJA/mV3PjBBJQKAlAMQCwLxByAuAIkzQTUaAPFCkGogfRFmGkwSK6CHJNDV6/HpDKC3g6gvqY8m7g8iGIEeB8XIfmg8gvz5ABptC5mgAguQAkABiC8AsT0TVKUDVIABqksAJM4IDdPzUEWgiOaHJhdDmIMcoZL2UF2GwFTxACDAAD6VJWZFmEj7AAAAAElFTkSuQmCC\',
+          ),
+        ),
+      ),
       \'files\' => array(),
       \'language\' => \'und\',
       \'last_comment_name\' => NULL,
@@ -3559,7 +3659,27 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
-      \'field_icon\' => array(),
+      \'field_icon\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => NULL,
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'16\',
+            \'height\' => \'4\',
+            \'uid\' => \'1\',
+            \'filename\' => \'groups_other.png\',
+            \'uri\' => \'public://climate_group_icons/groups_other.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'184\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'277fce78-dc2d-4185-87fc-a4ca76824bd3\',
+            \'rdf_mapping\' => array(),
+            \'node_export_file_data\' => \'iVBORw0KGgoAAAANSUhEUgAAABAAAAAECAYAAACHtL/sAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFpJREFUeNpiZGBgMADiACD+AMQLoDQDmvgEBgRwgGK4+H0g/g/FDUgK3yOJF0DFFJDEQDiBCSoIA/pICgWQxAWQxJEBmN8PNe091NkwMB+H+H6oOMjlCgABBgD+SRoxvr/j5wAAAABJRU5ErkJggg==\',
+          ),
+        ),
+      ),
       \'files\' => array(),
       \'language\' => \'und\',
       \'last_comment_name\' => NULL,
@@ -4103,7 +4223,27 @@ function cli_sample_content_node_export_features_default() {
           ),
         ),
       ),
-      \'field_icon_unit\' => array(),
+      \'field_icon_unit\' => array(
+        \'und\' => array(
+          array(
+            \'fid\' => NULL,
+            \'alt\' => NULL,
+            \'title\' => NULL,
+            \'width\' => \'11\',
+            \'height\' => \'17\',
+            \'uid\' => \'1\',
+            \'filename\' => \'units_mm.png\',
+            \'uri\' => \'public://climate_unit_icons/units_mm.png\',
+            \'filemime\' => \'image/png\',
+            \'filesize\' => \'314\',
+            \'status\' => \'1\',
+            \'timestamp\' => NULL,
+            \'uuid\' => \'6ecfb12c-eeaa-406a-b9cc-98bf73710b0a\',
+            \'rdf_mapping\' => array(),
+            \'node_export_file_data\' => \'iVBORw0KGgoAAAANSUhEUgAAAAsAAAARCAYAAAAL4VbbAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNpiYMACdIJLDLCJM2FRKACk5hOlGAgKgNgAqCkBXYIRi6n3gRhEPwBiwytrez7gMnk+VCEIKABxPbIkM5KpBVAnIAMLMS2ri6+uH7sBdwZQIciU80imIgOQMxRBzmFCs/4BFsXw0GEEmuoApPcD8QKoRAADduAIMjkfypkIxA4MuEE8E1TBBaCbLuBwMwwYMEEVfGAgDAxgHlSARsgDPIofMEE9pgD1ZCMeWxYyISkwQItBZADyzwQmoMdAVjtCBbCBAyB5UKSgJ6QAqA0wsAEaSmAAEGAAr548ZstlevAAAAAASUVORK5CYII=\',
+          ),
+        ),
+      ),
       \'field_label_axis\' => array(
         \'und\' => array(
           array(
@@ -4272,7 +4412,7 @@ function cli_sample_content_node_export_features_default() {
       \'nid\' => NULL,
       \'node_export_drupal_version\' => \'7\',
       \'path\' => array(
-        \'source\' => \'node/17\',
+        \'source\' => \'node/36\',
         \'alias\' => \'blog/developing-countries-are-especially-vulnerable\',
         \'language\' => \'und\',
         \'pathauto\' => FALSE,
