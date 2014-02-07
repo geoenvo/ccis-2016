@@ -1,6 +1,6 @@
 ﻿/**
  * @file
- * Plain CSS for climability.org
+ * Plain CSS for climability.org		#ccis-station-search-result th, #ccis-station-search-result td {
  *
  * When you turn on CSS aggregation at admin/config/development/performance, all
  * of these @include files will be combined into a single file.
@@ -1674,6 +1674,11 @@ tr.odd td.sorting_1 {
   font-weight: bold;
 }
 
+#ccis-station-search-result-pager a{
+  color: white;
+  margin: 0 5px 5px;
+}
+
 #edit-station-input .form-autocomplete {
   width: 190px;
   border: 0 none;
@@ -1776,6 +1781,7 @@ tr.odd td.sorting_1 {
 #ccis-station-search-result table {
   background-color: #566982;
   border: 0 none;
+  margin-bottom: 5px;
 }
 
 #ccis-station-search-result tr.odd,
@@ -1791,6 +1797,8 @@ tr.odd td.sorting_1 {
   color: #ffffff;
   border: 0 none;
   text-align: left;
+  max-width: 97px;
+  padding-left: 5px;
 }
 
 #ccis-station-search-result th {
