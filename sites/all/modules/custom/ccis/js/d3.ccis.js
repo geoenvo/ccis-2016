@@ -175,7 +175,7 @@ Drupal.ccis.behaviors.d3 = {
 		var tooltipWidth = 200;
 		var width = widthDiv - margin.left - margin.right - legendWidth;
 		var height = width/2;
-		var heightPrintSelect = 40;
+		var heightPrintSelect = 45;
 		var axis_sum = 4;	// MAX: 4
 		var axis_selection;
 		var svg;	
@@ -566,9 +566,10 @@ Drupal.ccis.behaviors.d3 = {
 				.css("background-color", "#fcce00")
 				.css("border", "solid 1px #e6e6e6")
 				.css("border-radius", "8px 8px 8px 8px")
-				.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-				.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-				.css("box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+				.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 1)")
+				.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 1)")
+				.css("box-shadow", "4px 4px 10px rgba(0, 0, 0, 1)")
+				.css("padding", "3px")
 				.css("font-size","12px")
 				.html(text);
 		}
@@ -720,8 +721,8 @@ Drupal.ccis.behaviors.d3 = {
 		
 		$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><span style='font-size:14px;'>&nbsp;&nbsp;Print</span></div>");
 		$("#d3_printPreviewId"+block).hover(function() {
-			$(this).css("cursor","pointer");
-		});
+			$(this).css("cursor","pointer").css("background-color", "#9E9E9E");
+		}, function () {$(this).css("cursor","default").css("background-color", "#b3b3b3");});
 		$("#d3_printPreviewId"+block).click(function() {
 			printPreview();
 		});
@@ -928,7 +929,7 @@ Drupal.ccis.behaviors.d3 = {
 						
 						tooltipText += "<tr>";
 							tooltipText += "<td>&nbsp;<img src='"+settings.basePath+dateIcon+"' width='11' height='12'></td>";
-							tooltipText += "<td>&nbsp;Date: </td>";
+							tooltipText += "<td>&nbsp;Date </td>";
 							tooltipText += "<td>"+date+"</td>";
 						tooltipText += "</tr>";	
 						
@@ -1038,7 +1039,7 @@ Drupal.ccis.behaviors.d3 = {
 		var tooltipWidth = 200;
 		var width = widthDiv - margin.left - margin.right - legendWidth;
 		var height = width/2;
-		var heightPrintSelect = 40;
+		var heightPrintSelect = 45;
 		var axis_sum = 4;	// MAX: 4
 		var axis_selection;
 		var svg;	
@@ -1429,9 +1430,10 @@ Drupal.ccis.behaviors.d3 = {
 				.css("background-color", "#fcce00")
 				.css("border", "solid 1px #e6e6e6")
 				.css("border-radius", "8px 8px 8px 8px")
-				.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-				.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
-				.css("box-shadow", "4px 4px 10px rgba(0, 0, 0, 0.4)")
+				.css("-webkit-box-shadow", "4px 4px 10px rgba(0, 0, 0, 1)")
+				.css("-moz-box-shadow", "4px 4px 10px rgba(0, 0, 0, 1)")
+				.css("box-shadow", "4px 4px 10px rgba(0, 0, 0, 1)")
+				.css("padding", "3px")
 				.css("font-size","12px")
 				.html(text);
 		}
@@ -1583,8 +1585,8 @@ Drupal.ccis.behaviors.d3 = {
 		
 		$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><span style='font-size:14px;'>&nbsp;&nbsp;Print</span></div>");
 		$("#d3_printPreviewId"+block).hover(function() {
-			$(this).css("cursor","pointer");
-		});
+			$(this).css("cursor","pointer").css("background-color", "#9E9E9E");
+		}, function () {$(this).css("cursor","default").css("background-color", "#b3b3b3");});
 		$("#d3_printPreviewId"+block).click(function() {
 			printPreview();
 		});
@@ -1791,7 +1793,7 @@ Drupal.ccis.behaviors.d3 = {
 						
 						tooltipText += "<tr>";
 							tooltipText += "<td>&nbsp;<img src='"+settings.basePath+dateIcon+"' width='11' height='12'></td>";
-							tooltipText += "<td>&nbsp;Date: </td>";
+							tooltipText += "<td>&nbsp;Date </td>";
 							tooltipText += "<td>"+date+"</td>";
 						tooltipText += "</tr>";	
 						

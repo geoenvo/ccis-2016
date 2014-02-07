@@ -5,7 +5,8 @@
 	position: relative; 
 	margin-top: 1px; 
 	zoom: 1; 
-	border: 1px solid #e6e6e6;
+	border: 0;
+	border-bottom: 1px solid #e6e6e6;
 }
 #ccis-weather-d3-block-1 .ui-accordion-li-fix, #ccis-weather-d3-block-2 .ui-accordion-li-fix{ 
 	display: inline;
@@ -27,6 +28,7 @@
 }
 #ccis-weather-d3-block-1 .ui-accordion-content, #ccis-weather-d3-block-2 .ui-accordion-content { 
 	border-top: 0; 
+border-bottom: 1px solid #e6e6e6;
 	margin-top: -2px; 
 	margin-bottom: 0px;
 	position: relative; 
@@ -137,6 +139,9 @@
 	right: 28px;
 	font-size:12px;
 	margin-left: 30px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding: 1px;
 	border: 1px solid #b3b3b3;
 }
 .d3_tooManySelectionsTextClass {
