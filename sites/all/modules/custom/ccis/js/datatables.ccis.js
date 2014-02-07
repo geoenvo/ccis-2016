@@ -16,11 +16,11 @@
       prepareData : function() {
         var datatable = this;
         datatable.data = {};
-        datatable.data.aaData = datatable.current_station.data.slice();
+        datatable.data.aaData = datatable.current_station.data;
         var fields = [];
         delete datatable.current_station.data;
         datatable.data.aaData = datatable.data.aaData.map(function(value) {
-          if (typeof value.shortdate != 'undefined') {
+          if (typeof value.shortdate !== 'undefined') {
             value.date = value.shortdate;
             delete value.shortdate;
           }
@@ -30,12 +30,21 @@
           });
         });
         datatable.data.aoColumns = [];
-        // We need todo this to get the right order.
-        $.each(fields, function(key, value) {
-          datatable.data.aoColumns.push({
-            "sTitle" : datatable.info.legends['field_' + value]
+        if (fields.length > 0) {
+          // We need todo this to get the right order.
+          $.each(fields, function(key, value) {
+            datatable.data.aoColumns.push({
+              "sTitle" : datatable.info.legends['field_' + value]
+            });
           });
-        });
+        }
+        else{
+          $.each(datatable.info.legends, function(key, value) {
+            datatable.data.aoColumns.push({
+              "sTitle" : value
+            });
+          });
+        }
         datatable.drawTable();
       },
       drawTable : function() {

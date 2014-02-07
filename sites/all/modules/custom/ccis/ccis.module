@@ -648,10 +648,12 @@ function ccis_block_filter_form_ajax_submit($form, &$form_state) {
 
   $commands[] = ajax_command_data('body', 'dashboardrefresh', 1);
 
+  // Resets existing values.
+  $commands[] = ajax_command_settings(array('ccis' => array()), TRUE);
   // The settings are static cached.
   ccis_get_dashboard_settings($list1, $form_state['values']);
   $settings = ccis_get_dashboard_settings($list2, $form_state['values'], 2);
-  $commands[] = ajax_command_settings($settings, FALSE);
+  $commands[] = ajax_command_settings($settings);
 
   $commands[] = ajax_command_replace('#ccis-station-info-block-1', _ccis_block_stationinfo($station_1));
   if (!empty($station_2)) {
@@ -986,6 +988,7 @@ function _ccis_get_weather_data_labels($list = NULL) {
       }
     }
   }
+
   if ($list && !user_access('access_ccis_all_weather_data')) {
     $ranges = _ccis_get_range_label(TRUE);
     $fields_per_range = variable_get('ccis_weather_data_perms_range', array());

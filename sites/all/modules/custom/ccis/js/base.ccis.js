@@ -56,8 +56,9 @@ Drupal.behaviors.ccis_base = {
     });
     if (typeof settings.ccis.stations !== 'undefined') {
       $body.data('dashboardrefresh', 0);
+      var data_found = false;
       $.each(settings.ccis.stations, function(index, station) {
-        station.data = {};
+        station.data = [];
         $.ajax({
           dataType: "json",
           url: station.path,
@@ -66,39 +67,50 @@ Drupal.behaviors.ccis_base = {
           success: function(json, status) {
             if (json.length > 0) {
               station.data = json;
+              data_found = true;
             }
           },
         });
       });
       $.each(Drupal.ccis.behaviors, function() {
-        if (this.homebox.length > 0)
+        if (this.homebox.length > 0) {
           this.container.html("");
-        if (this.homebox.length > 0)
+        }
+        if (this.homebox.length > 0 && data_found) {
           this.homebox.show();
-
-        if ($.isFunction(this.attach)) {
+        }
+        if ($.isFunction(this.attach) && data_found) {
           this.attach(settings.ccis.stations, settings.ccis.info, Drupal.settings);
         }
       });
-      var hb = $('#homebox-column-3');
-      this.moveMap(hb);
-      hb.parent().show();
+      if (data_found) {
+        var hb = $('#homebox-column-3');
+        this.moveMap(hb);
+        hb.parent().show();
+      }
+      else{
+        // We need this delay to get the right height for the map.
+        window.setTimeout(Drupal.behaviors.ccis_base.fallback, 400);
+      }
     }
     else {
-      var hb = $('#homebox-column-2');
-      var hbFrom = $('#homebox-column-3');
-      this.moveMap(hb);
-      hbFrom.data('move', 0).parent().hide();
-      $.each(Drupal.ccis.behaviors, function() {
-        if (this.homebox.length > 0)
-          this.homebox.hide();
-        if (this.container.length > 0)
-          this.container.html("");
-        if ($.isFunction(this.hide)) {
-          this.hide();
-        }
-      });
+      this.fallback();
     }
+  },
+  fallback: function() {
+    var hb = $('#homebox-column-2');
+    var hbFrom = $('#homebox-column-3');
+    Drupal.behaviors.ccis_base.moveMap(hb);
+    hbFrom.data('move', 0).parent().hide();
+    $.each(Drupal.ccis.behaviors, function() {
+      if (this.homebox.length > 0)
+        this.homebox.hide();
+      if (this.container.length > 0)
+        this.container.html("");
+      if ($.isFunction(this.hide)) {
+        this.hide();
+      }
+    });
   },
   moveMap: function(hb) {
     var ids = Object.keys(Drupal.settings.openlayers.maps);
