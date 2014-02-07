@@ -8,10 +8,6 @@
  */
 
 function homebox_admin_page($form, &$form_state, $page = FALSE) {
-  if ($page) {
-    drupal_set_title(t('Edit !title', array('!title' => $page->settings['title'])));
-  }
-
   if (!$page) {
     $form['page'] = array(
       '#type' => 'fieldset',
@@ -51,6 +47,7 @@ function homebox_admin_page($form, &$form_state, $page = FALSE) {
     '#size' => 32,
     '#default_value' => $page ? $page->settings['title'] : '',
     '#maxlength' => 64,
+    '#required' => TRUE,
     '#prefix' => theme('advanced_help_topic', array('module' => 'homebox', 'topic' => 'new-page')),
     '#description' => t('The title of the page that will be created.'),
   );
@@ -58,10 +55,11 @@ function homebox_admin_page($form, &$form_state, $page = FALSE) {
   $form['page']['options']['path'] = array(
     '#type' => 'textfield',
     '#title' => t('Path'),
+    '#required' => TRUE,
     '#size' => 32,
     '#default_value' => $page ? $page->settings['path'] : '',
     '#maxlength' => 255,
-    '#description' => t('Optionally specify an alternative URL by which this page can be accessed. For example, type "dashboard" when creating a Dashboard page. Use a relative path and don\'t add a trailing slash or the URL alias won\'t work.'),
+    '#description' => t('Apecify a URL by which this page can be accessed. For example, type "dashboard" when creating a Dashboard page. Use a relative path and don\'t add a trailing slash or the URL alias won\'t work.'),
   );
 
   $form['page']['options']['menu'] = array(
@@ -118,17 +116,6 @@ function homebox_admin_page($form, &$form_state, $page = FALSE) {
     );
   }
   else {
-    $form['page']['import_fieldset'] = array(
-      '#type' => 'fieldset',
-      '#title' => 'Import Homebox',
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
-    $form['page']['import_fieldset']['import'] = array(
-      '#title' => t('Import data'),
-      '#type' => 'textarea',
-      '#description' => t('Optionally include an exported Homebox to import settings and block layout. Ensure that the path is currently not in use. The machine name supplied in the import data will be ignored.'),
-    );
     $form['page']['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Add page'),
@@ -137,6 +124,26 @@ function homebox_admin_page($form, &$form_state, $page = FALSE) {
     $form['#submit'][] = 'homebox_admin_page_submit';
     $form['#validate'][] = 'homebox_admin_page_validate';
   }
+
+  return $form;
+}
+
+/**
+ * Form callback for cloning a homebox.
+ */
+function homebox_clone_page($form, &$form_state, $page = FALSE) {
+  $form = homebox_admin_page($form, $form_state, $page);
+  unset($form['page']['name']['#disabled']);
+  unset($form['page']['name']['#value']);
+  $form['page']['options']['title']['#default_value'] = '';
+  $form['page']['options']['path']['#default_value'] = '';
+
+  $form['import']['#type'] = 'value';
+  $form['import']['#value'] = $page;
+
+  $form['submit']['#value'] = t('Add page');
+  $form['#submit'][] = 'homebox_clone_page_submit';
+  $form['#validate'][] = 'homebox_admin_page_validate';
 
   return $form;
 }
@@ -154,7 +161,7 @@ function theme_homebox_admin_new_page($variables) {
 
   $header = array(t('Name'), array(
       'data' => t('Operations'),
-      'colspan' => 5,
+      'colspan' => 6,
     ));
   if (is_array($pages) && !empty($pages)) {
     foreach ($pages as $page) {
@@ -164,7 +171,8 @@ function theme_homebox_admin_new_page($variables) {
       $settings = l(t('Settings'), 'admin/structure/homebox/settings/' . $page->name);
       $flush = l(t('Flush'), 'admin/structure/homebox/flush/' . $page->name);
       $export = l(t('Export'), 'admin/structure/homebox/export/' . $page->name);
-      $rows[] = array($link, $edit, $layout, $settings, $flush, $export);
+      $clone = l(t('Clone'), 'admin/structure/homebox/clone/' . $page->name);
+      $rows[] = array($link, $edit, $layout, $settings, $flush, $export, $clone);
     }
     $output .= theme('table', array('header' => $header, 'rows' => $rows));
   }
@@ -202,7 +210,8 @@ function homebox_admin_page_validate($form, &$form_state) {
     if (empty($form_state['values']['path'])) {
       form_set_error('path', t('You must enter a path.'));
     }
-    // If so, make sure it's valid
+    
+    // Make sure it's valid
     else {
       homebox_check_path($form_state['values']['path'], $form_state['values']['name'], 'path');
     }
@@ -213,16 +222,7 @@ function homebox_admin_page_validate($form, &$form_state) {
     }
   }
   else {
-    /*
-     * The following checks the import data object and validates
-     * all of the components as done above
-     */
-    // Add object back to the form
-    $form_state['values']['import'] = homebox_check_page_object(
-      $form_state['values']['import'],
-      $form_state['values']['name'],
-      'import'
-    );
+    return homebox_check_page_object($form_state['values']['import']);
   }
 }
 
@@ -283,6 +283,23 @@ function homebox_admin_page_submit($form, &$form_state) {
   $form_state['redirect'] = 'admin/structure/homebox';
   menu_rebuild();
   return;
+}
+
+/**
+ * Submit callback for clone form.
+ */
+function homebox_clone_page_submit($form, &$form_state) {
+  $page = new stdClass();
+  $page->name = $form_state['values']['name'];
+  if ($form_state['values']['import']) {
+    // First get the settings from the cloned homebox.
+    $page->settings = $form_state['values']['import']->settings;
+    // Now overwrite with the values from the form.
+    homebox_admin_form_to_page($page, $form_state);
+  }
+  homebox_save_page($page);
+  $form_state['redirect'] = 'admin/structure/homebox';
+  menu_rebuild();
 }
 
 /**

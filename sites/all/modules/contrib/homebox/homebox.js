@@ -40,10 +40,10 @@
 
         // Populate hidden form element with block order and values.
         Drupal.homebox.$pageSave.mousedown(function () {
-          var blocks = {};
-          Drupal.homebox.$columns.each(function (colIndex) {
-            // Determine region
-            colIndex = colIndex + 1;
+          var blocks = {}, regionIndex;
+          Drupal.homebox.$columns.each(function () {
+            // Determine region out of column-id.
+            regionIndex = $(this).attr('id').replace(/homebox-column-/, '');
             $(this).find('.homebox-portlet').each(function (boxIndex) {
               var $this = $(this),
                 color = 'default';
@@ -57,7 +57,7 @@
 
               // Build blocks object
               blocks[$this.attr('id').replace(/^homebox-block-/, '')] = $.param({
-                region: colIndex,
+                region: regionIndex,
                 status: $this.is(':visible') ? 1 : 0,
                 color: color,
                 open: $this.find('.portlet-content').is(':visible') ? 1 : 0
@@ -81,16 +81,14 @@
    * Set all column heights equal
    */
   Drupal.homebox.equalizeColumnsHeights = function () {
-    var maxHeight = 0;
+    var maxHeight = {}, row;
     Drupal.homebox.$columns.each(function () {
-      if ($(this).parent('.homebox-column-wrapper').attr('style').match(/width: 100%/i) == null) {
-        $(this).height('auto');
-        maxHeight = Math.max($(this).height(), maxHeight);
-      }
+      row = $(this).parent('.homebox-column-wrapper').attr('class').match(/homebox-row-(\d+)/i)[1];
+      $(this).height('auto');
+      maxHeight[row] = maxHeight[row] ? Math.max($(this).height(), maxHeight[row]) : $(this).height();
     }).each(function () {
-      if ($(this).parent('.homebox-column-wrapper').attr('style').match(/width: 100%/i) == null) {
-        $(this).height(maxHeight);
-      }
+      row = $(this).parent('.homebox-column-wrapper').attr('class').match(/homebox-row-(\d+)/i)[1];
+      $(this).height(maxHeight[row]);
     });
   };
 
