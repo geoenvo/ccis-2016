@@ -60,20 +60,19 @@
         .style("stroke-width", 1);
 
     var node = graph.selectAll("g.node")
-        .data(nodes, function(d) { return d.id;});
-
-    var nodeEnter = node.enter().append("svg:g")
+        .data(nodes)
+      .enter().append("svg:g")
         .attr("class", "node")
         .call(force.drag);
 
-      nodeEnter.append("svg:circle")
-        .attr("class", "node")
-        .attr("r", function(d) { return (d.is_source) ? 7 : 5; })
-        .style("fill", function (d) { return (d.is_source) ? d3.hsl('black') : d3.hsl('white'); })
-        .style("stroke", function(d) { return d3.hsl(d.data.fill); })
-        .style("stroke-width", function(d) { return (d.is_source) ? 0 : 3; });
+    node.append("svg:circle")
+      .attr("class", "node")
+      .attr("r", function(d) { return (d.is_source) ? 7 : 5; })
+      .style("fill", function (d) { return (d.is_source) ? d3.hsl('black') : d3.hsl('white'); })
+      .style("stroke", function(d) { return d3.hsl(d.data.fill); })
+      .style("stroke-width", function(d) { return (d.is_source) ? 0 : 3; });
 
-    nodeEnter.append("svg:text")
+    node.append("svg:text")
         .attr("class", "nodetext")
         .attr("dx", 10)
         .attr("dy", ".35em")

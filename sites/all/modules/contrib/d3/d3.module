@@ -303,7 +303,7 @@ function d3_graphapi_settings_form($values) {
     '#description' => t('Use this d3 library as the default to render graphapi visualizations'),
     '#type' => 'select',
     '#options' => $options,
-    '#default_value' => variable_get('d3_graphapi_default_library', 'forcedirected'),
+    '#default_value' => $values['library'],
   );
 
   return $form;
@@ -359,11 +359,11 @@ function _d3_graphapi_format_graph_data($graph) {
  * Displays the visualization for graphapi's selected library.
  */
 function theme_d3_graphapi($vars) {
-  $library = variable_get('d3_graphapi_default_library', 'forcedirected');
-
+  $default_library = variable_get('d3_graphapi_default_library', 'forcedirected');
+  $library = empty($vars['config']['library']) ? $default_library : $vars['config']['library']; 
   $graph = _d3_graphapi_format_graph_data($vars['graph']);
   $chart = array(
-    'id' => 'visualization',
+    'id' => $vars['config']['id'],
     'type' => $library,
     'links' => $graph['links'],
     'nodes' => $graph['nodes'],

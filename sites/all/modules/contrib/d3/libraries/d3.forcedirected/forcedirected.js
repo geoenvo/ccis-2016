@@ -37,7 +37,6 @@
     force.charge(-100);
     force.distance(100);
     force.gravity(.05);
-
     var svg = d3.select('#' + settings.id).append("svg")
         .attr("width", width)
         .attr("height", height);
@@ -58,25 +57,24 @@
         .style("stroke-width", 1);
 
     var node = graph.selectAll("g.node")
-        .data(nodes, function(d) { return d.id;});
-
-    var nodeEnter = node.enter().append("svg:g")
+        .data(nodes)
+      .enter().append("svg:g")
         .attr("class", "node")
         .call(force.drag);
 
-      nodeEnter.append("svg:circle")
-        .attr("class", "node")
-        .attr("r", function(d) { console.log(d); return (d.data.d) ? d.data.d : 5; })
-        .style("fill", d3.hsl('white'))
-        .style("stroke", function(d) { return d3.hsl(d.data.fill); })
-        .style("stroke-width", 3);
+    node.append("svg:circle")
+      .attr("class", "node")
+      .attr("r", function(d) { return (d.data.d) ? d.data.d : 5; })
+      .style("fill", d3.hsl('white'))
+      .style("stroke", function(d) { return d3.hsl(d.data.fill); })
+      .style("stroke-width", 3);
 
-    nodeEnter.append("svg:text")
-        .attr("class", "nodetext")
-        .attr("dx", 10)
-        .attr("dy", ".35em")
-        .attr('font-size', '10')
-        .text(function(d) { return d.name });
+    node.append("svg:text")
+      .attr("class", "nodetext")
+      .attr("dx", 10)
+      .attr("dy", ".35em")
+      .attr('font-size', '10')
+      .text(function(d) { return d.name });
 
     force.on("tick", function() {
       link.attr("x1", function(d) { return d.source.x; })

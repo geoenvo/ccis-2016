@@ -282,11 +282,10 @@ class d3_views_plugin_style_d3 extends views_plugin_style {
     foreach ($columns as $column => $info) {
       $legend[] = $this->view->field[$column]->label();
     }
-
     $this->get_libraries();
     $type = $this->libraries[$this->options['library']]['js callback'];
     $chart = array(
-      'id' => 'visualization',
+      'id' => 'view-d3-vis-' . $this->view->dom_id,
       'type' => $type,
       'legend' => $legend,
       'rows' => $rows,
