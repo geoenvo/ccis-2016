@@ -76,6 +76,7 @@ projects[feeds_xpathparser][version] = "1.0-beta4"
 
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.3"
+projects[field_group][patch][] = http://drupal.org/files/issues/field_group-2190425.patch
 
 projects[field_permissions][subdir] = "contrib"
 projects[field_permissions][version] = "1.0-beta2"

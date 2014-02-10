@@ -815,6 +815,7 @@ function _ccis_get_station_node($values = array(), $key = 'input1') {
 function _ccis_get_date_range($values) {
   static $range;
   if (empty($range)) {
+    $range = 'yearly';
     if (empty($values['start']) || empty($values['end'])) {
       $range = 'yearly';
       return $range;
