@@ -122,6 +122,7 @@ function ccis_roles_permissions_user_default_roles_plus() {
       'access_ccis_field_tx_monthly' => TRUE,
       'access_ccis_field_tx_yearly' => TRUE,
       'access_ccis_field_wsdi' => TRUE,
+      'edit own main profile' => TRUE,
       'search content' => TRUE,
       'subscribe to newsletters' => TRUE,
       'use text format filtered_html' => TRUE,
@@ -153,6 +154,7 @@ function ccis_roles_permissions_user_default_roles_plus() {
       'view field_stationpostcode' => TRUE,
       'view field_stationprovince' => TRUE,
       'view field_stationtopo' => TRUE,
+      'view own main profile' => TRUE,
     ),
   );
 
