@@ -122,6 +122,10 @@ Drupal.behaviors.ccis_base = {
         map.parent().width(hb.width()).height(hb.height());
         var mapdata = map.data('openlayers');
         map.width(hb.width()).height(hb.height());
+        var layer = mapdata.openlayers.getLayersByName("Placeholder for Geofield Formatter");
+        if (layer.length > 0 && typeof layer[0] !== undefined) {
+          layer[0].destroy();
+        }
         mapdata.openlayers.updateSize();
         if (typeof Drupal.homebox.$columns !== 'undefined') {
           // We need this delay so that homebox get the recalcuted width/height
