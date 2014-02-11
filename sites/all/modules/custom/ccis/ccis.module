@@ -701,13 +701,12 @@ function ccis_get_dashboard_settings($list = 'unknown', $values = array(), $id =
     $link =  l(t('Export data'), "ccis/dataquery/$list/download/csv", array('query' => $values));
     $download = '<div class="ccis-data-download">' . $link . '</div>';
   }
+  $legends = _ccis_get_weather_data_labels($list);
   $settings['ccis']['info'] = array(
-    'legends' => _ccis_get_weather_data_labels($list),
+    'legends' => $legends,
     'range' => _ccis_get_range_label($range),
     'download' => $download,
-	'parameter' => getD3InfoDatabase(),
-    'groups' => getD3InfoGroups(),
-	'units' => getD3InfoUnits(),
+    'd3' => ccis_get_d3_info($legends),
   );
   $settings['ccis']['stations'] = $stations;
   return $settings;
@@ -716,10 +715,54 @@ function ccis_get_dashboard_settings($list = 'unknown', $values = array(), $id =
 /**
  * Runs a query to get information about all climate parameters. Used in function ccis_get_dashboard_settings.
  */
-function getD3InfoDatabase() {
-    $result1 = db_query('SELECT * FROM {climate_parameter}');
-    $result = $result1 -> fetchAll();
-    return $result;
+function ccis_get_d3_info($legends) {
+  static $return = array();
+  if (empty($return)) {
+    $groups = $units = $units_data = $groups_data = array();
+    $field_infos = field_info_instances('node', 'weather_data');
+    $default = array('climate_group' => TRUE, 'climate_unit' => TRUE, 'color' => TRUE, 'graph_type' => TRUE);
+    foreach ($field_infos as $key => $info) {
+      if (!empty($legends[$key])) {
+        $parameters[$key] = array_intersect_key($info['settings'], $default);
+        if (!empty($parameters[$key])) {
+          $groups[$parameters[$key]['climate_group']] = $parameters[$key]['climate_group'];
+          $units[$parameters[$key]['climate_unit']] = $parameters[$key]['climate_unit'];
+        }
+      }
+    }
+    foreach ($units as $unit) {
+      $units_data[$unit] = _ccis_get_d3_info_helper('climate_unit', $unit);
+    }
+    foreach ($groups as $group) {
+      $groups_data[$group] = _ccis_get_d3_info_helper('climate_group', $group);
+    }
+    $return = array('parameter' => $parameters, 'units' => $units_data, 'groups' => $groups_data);
+  }
+  return $return;
+}
+
+function _ccis_get_d3_info_helper($bundle, $title) {
+  $data = array();
+  $query = new EntityFieldQuery();
+  $field_infos = field_info_instances('node', $bundle);
+  $entities = $query->entityCondition('entity_type', 'node' )
+  ->propertyCondition('type', $bundle)
+  ->propertyCondition('title', $title)
+  ->propertyCondition('status', 1)
+  ->range(0, 1 )->execute();
+  if (!empty($entities['node'])) {
+    $nids = array_keys($entities['node'] );
+    $node = node_load(reset($nids));
+    $node = entity_metadata_wrapper('node', $node);
+    foreach ($field_infos as $key => $info) {
+      $value = $node->{$key}->value();
+      if (is_array($value) && array_key_exists('uri', $value)) {
+        $value = file_create_url($value['uri']);
+      }
+      $data[$key] = $value;
+    }
+  }
+  return array_filter($data);
 }
 
 /**
