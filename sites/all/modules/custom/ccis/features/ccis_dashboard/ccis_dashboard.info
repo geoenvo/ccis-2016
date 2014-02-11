@@ -16,7 +16,6 @@ dependencies[] = views
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[homebox][] = weather_dashboard
-features[menu_links][] = main-menu_dashboard:dashboard
 features[views_view][] = station_info
 features[views_view][] = station_map
 project path = sites/all/modules/custom/ccis/features
