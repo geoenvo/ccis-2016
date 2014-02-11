@@ -74,7 +74,8 @@
             } ],
             "oColVis" : {
               "bRestore" : true,
-              "sAlign" : "right"
+              "sAlign" : "right",
+              "aiExclude": [0]
             },
             "oLanguage" : {
               "sEmptyTable" : Drupal.t("No data available in table"),
