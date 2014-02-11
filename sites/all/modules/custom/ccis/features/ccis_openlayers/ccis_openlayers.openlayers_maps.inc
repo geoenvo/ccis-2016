@@ -221,8 +221,8 @@ function ccis_openlayers_openlayers_maps() {
     'behaviors' => array(
       'openlayers_behavior_cluster' => array(
         'clusterlayer' => array(
+          'map_block_for_climate_stations_openlayers_1' => 'map_block_for_climate_stations_openlayers_1',
           'administrative_boundaries' => 0,
-          'map_block_for_climate_stations_openlayers_1' => 0,
           'geofield_formatter' => 0,
         ),
         'distance' => '20',
@@ -257,8 +257,8 @@ function ccis_openlayers_openlayers_maps() {
       ),
       'openlayers_behavior_popup' => array(
         'layers' => array(
+          'map_block_for_climate_stations_openlayers_1' => 'map_block_for_climate_stations_openlayers_1',
           'administrative_boundaries' => 0,
-          'map_block_for_climate_stations_openlayers_1' => 0,
           'geofield_formatter' => 0,
         ),
         'panMapIfOutOfView' => 0,
