@@ -13,7 +13,6 @@ $realm_variables = array();
   $realm_variables['language']['en'] = array();
   $realm_variables['language']['es'] = array();
   $realm_variables['language']['fr'] = array();
-  $realm_variables['language']['id'] = array();
 
 return $realm_variables;
 }
