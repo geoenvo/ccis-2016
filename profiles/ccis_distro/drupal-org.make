@@ -188,6 +188,7 @@ projects[views_slideshow][version] = "3.1"
 
 projects[views_slideshow_xtra][subdir] = "contrib"
 projects[views_slideshow_xtra][version] = "3.8"
+projects[views_slideshow_xtra][patch][] = http://drupal.org/files/issues/views_slideshow_xtra-2111515.patch
 
 ; Themes
 projects[zen][version] = "5.4"

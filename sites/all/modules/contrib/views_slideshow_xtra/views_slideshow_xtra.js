@@ -6,7 +6,9 @@
   Drupal.viewsSlideshowXtra = Drupal.viewsSlideshowXtra || {};
   var pageX = 0, pageY = 0, timeout;
   Drupal.viewsSlideshowXtra.transitionBegin = function (options) {
-
+    if (typeof Drupal.settings.viewsSlideshowXtra === "undefined") {
+      return;
+    }
     // Find our views slideshow xtra elements
     $('[id^="views-slideshow-xtra-"]:not(.views-slideshow-xtra-processed)').addClass('views-slideshow-xtra-processed').each(function() {
 
