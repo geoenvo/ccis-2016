@@ -3768,10 +3768,10 @@ function cli_sample_content_node_export_features_default() {
       \'body\' => array(
         \'und\' => array(
           array(
-            \'value\' => \'(to do)\',
+            \'value\' => \'The Climability Platform is based on the widespread open-source content management framework Drupal and uses different JavaScript frameworks for visualisation. Climate data is imported to MongoDB, a cross-platform document-oriented database system optimised for big data and fast data access. The architecture is robust and flexible for adaptations and extensions. An elaborate user management allows the fine-grained control of data access and visualisation. Different languages are already implemented into the platform. \',
             \'summary\' => \'\',
             \'format\' => \'filtered_html\',
-            \'safe_value\' => "<p>(to do)</p>\\n",
+            \'safe_value\' => "<p>The Climability Platform is based on the widespread open-source content management framework Drupal and uses different JavaScript frameworks for visualisation. Climate data is imported to MongoDB, a cross-platform document-oriented database system optimised for big data and fast data access. The architecture is robust and flexible for adaptations and extensions. An elaborate user management allows the fine-grained control of data access and visualisation. Different languages are already implemented into the platform.</p>\\n",
             \'safe_summary\' => \'\',
           ),
         ),
