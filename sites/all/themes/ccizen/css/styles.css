@@ -134,6 +134,7 @@ h3.teasertitle {
 #main h2.block-title,
 #homebox h3.dashboard-title {
   height: 38px;
+  width: 257px;
   margin-bottom: .5em;
   background: url('../img/titel_background_left.png') no-repeat left -2px;
   padding: 0 0 0 23px;
@@ -268,7 +269,7 @@ html body.admin-menu {
 }
 
 #block-search-form {
-  margin-right: 10px;
+/*   margin-right: 10px; */
   clear: right;
 }
 
@@ -767,7 +768,7 @@ html.js input.throbbing {
 #search-block-form .form-text {
   background: url(../img/sprites_ccizen.png) no-repeat right -155px;
   background-color: transparent;
-  padding-right: 38px;
+  /* padding-right: 38px; */
 }
 
 #search-block-form input.form-text:focus,
@@ -990,11 +991,34 @@ html.js input.throbbing {
   clear: left;
   border-bottom: 2px dotted #b3b3b3;
   padding: 8px 0 10px;
+  /* padding: 0px; */
   margin-bottom: 10px;
 }
 
+.view-news-via-feeds .view-content .views-row {
+  padding: 0px;
+}	
+
+.views-row .teasertitle {
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.4em;
+  font-family: 'Open Sans',Arial,Helvetica,sans-serif;  
+}
+
+.teasertitle span a{
+  
+  text-decoration: none;
+}
+
+.view-blogpage {
+  font-size: 12px;
+  line-height: 1.4em;	
+}	
+
 .compact {
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.4em;
 }
 
@@ -1013,7 +1037,21 @@ html.js input.throbbing {
   font-size: 1.143em;
 }
 
+.field-content a {
+  text-decoration: none;
+}	
 
+.more-link a {
+  text-decoration: none;
+}	
+
+.field-content a:hover {
+  text-decoration: underline;
+}	
+
+.more-link a:hover {
+  text-decoration: underline;
+}
 
 /* ++ events node page ++ */
 
@@ -1903,7 +1941,7 @@ tr.odd td.sorting_1 {
 }
 
 .bean-image-teaser {
-  margin: 10px 10px 0 5px;
+  margin: 5px 10px 0 5px;
   border: 1px solid #2c4563;
   -moz-box-shadow: 1px 3px 2px rgba(0,0,0,.3);
   -webkit-shadow: 1px 3px 2px rgba(0,0,0,.3);
@@ -1919,12 +1957,23 @@ tr.odd td.sorting_1 {
 .bean-image-teaser .field-name-field-title-visible {
   font-size: 1.75em;
   padding: 5px 5px 10px;
+  text-align: center;
+}
+
+.bean-image-teaser .field-name-field-title-visible:hover {
+  font-size: 1.75em;
+  padding: 5px 5px 10px;
+  text-align: left;
+  text-decoration: underline;  
 }
 
 .bean-image-teaser a {
   text-decoration: none;
 }
 
+.bean-image-teaser:hover {
+  border: 2px solid grey;
+}
 
 
 /* +++++ tabs +++++ */
