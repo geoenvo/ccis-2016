@@ -5,7 +5,7 @@
 
 /**
  * Javascript Drupal Theming function for inside of Popups To override
- * 
+ *
  * @param feature
  *          OpenLayers feature object.
  * @return Formatted HTML.
@@ -33,8 +33,8 @@ Drupal.openlayers.popup = Drupal.openlayers.popup || {};
  */
 Drupal.openlayers.addBehavior('openlayers_behavior_popup',
     function (data, options) {
-	
-	
+
+
       map = data.openlayers;
       var layers = [];
       var selectedFeature;
@@ -72,13 +72,13 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                 // generate the number of stations and a hint as content of a
                 // hover
                 // popup
-                
+
                 if (feature.cluster == undefined) {
-                	
+
                 }
-                
+
                 else {
-                
+
                 html = '<div class="popup_list">';
                 if (feature.cluster.length > 3) {
                   html += '<p class="popupName">' + feature.cluster.length
@@ -121,13 +121,13 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                         + feature.cluster[i].attributes.title + '</a></p>';
                   }
                   }
-                }                
+                }
                 else if (feature.cluster.length > 0) {
                 	if (feature.cluster[0].attributes.title.length > 17) {
                 		var titleCut = feature.cluster[0].attributes.title.substring(0,16) + "...";
                         html = '<p class="popupName">'
                             + titleCut + '</p>';
-                	} 
+                	}
                 	else {
                         html = '<p class="popupName">'
                             + feature.cluster[0].attributes.title + '</p>';
@@ -139,38 +139,38 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                     attr = feature.cluster[0].attributes.field_wmocode;
                   }
                   html += '<p class="popupAttr">' + title + ': ' + attr + '</p>';
-                  html += '<img src="sites/all/modules/custom/ccis/css/ol/markers/arrow.png" style="position:relative; left:61px; top: -12px;" alt="arrow">'
+                  html += '<img src="' + Drupal.settings.basePath + 'sites/all/modules/custom/ccis/css/ol/markers/arrow.png" style="position:relative; left:61px; top: -12px;" alt="arrow">'
                 }
 
                 html += '</div>';
-                
-                
-                   
-                    popup = new OpenLayers.Popup.Popover(		 
+
+
+
+                    popup = new OpenLayers.Popup.Popover(
                 		"popoverPopup",
                         feature.geometry.getBounds().getCenterLonLat(),
                         title,
-                        html, 
+                        html,
                         function(evt) {
                           while (map.popups.length) {
                             map.popups[0].destroy();
                           }
-                        });   
-             
-                
-               
+                        });
+
+
+
                 /* old standard popup
-                
+
                 // Generate the popup with the prepared content
-                popup = new OpenLayers.Popup.FramedCloud('popup',		               		
+                popup = new OpenLayers.Popup.FramedCloud('popup',
                     feature.geometry.getBounds().getCenterLonLat(), null, html,
                     null, true, function(evt) {
                       while (map.popups.length) {
                         map.popups[0].destroy();
                       }
                     });  */
-                    
-                     
+
+
                 // Assign popup to feature and map.
                 popup.panMapIfOutOfView = true; //options.panMapIfOutOfView;
                 popup.keepInMap = options.keepInMap;
@@ -192,7 +192,7 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
 	                else {
 	                    map.removePopup(feature.popup);
 	                }
-                }    
+                }
               }
             },
             // On feature select:
@@ -225,34 +225,34 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                 	html += '<tr><td class="tdleft">December</td><td class="tdright">' + feature.attributes.airb12sub.toFixed(1) + ' &deg;C</td>';
                 	html += '</tr></table>'
                 	html += '</div>';
-                	
 
-                	
-                    popup = new OpenLayers.Popup.Popover(		 
+
+
+                    popup = new OpenLayers.Popup.Popover(
                     		"popoverPopup",
                             feature.geometry.getBounds().getCenterLonLat(),
                     		title,
-                            html, 
+                            html,
                             function(evt) {
                               while (map.popups.length) {
                                 map.popups[0].destroy();
                               }
-                            });   
-                 
-                    
-                   
+                            });
+
+
+
                     /* old standard popup
-                    
+
                     // Generate the popup with the prepared content
-                    popup = new OpenLayers.Popup.FramedCloud('popup',		               		
+                    popup = new OpenLayers.Popup.FramedCloud('popup',
                         feature.geometry.getBounds().getCenterLonLat(), null, html,
                         null, true, function(evt) {
                           while (map.popups.length) {
                             map.popups[0].destroy();
                           }
                         });  */
-                        
-                         
+
+
                     // Assign popup to feature and map.
                     popup.panMapIfOutOfView = true; //options.panMapIfOutOfView;
                     popup.keepInMap = options.keepInMap;
@@ -260,13 +260,13 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                     feature.popup = popup;
                     Drupal.attachBehaviors();
                     map.addPopup(popup);
-                	
+
                 }
-                
+
                 else {
 
                 	// Close existing popups
-                    
+
 	                if (feature.cluster.length > 3) {
 	                  var cluster_bounds = new OpenLayers.Bounds();
 	                  feature.cluster.forEach(function(_feature) {
