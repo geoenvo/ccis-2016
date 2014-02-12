@@ -30,7 +30,6 @@ features[fe_block_settings][] = bean-image-teaser-map
 features[fe_block_settings][] = menu-menu-footer-menu
 features[fe_block_settings][] = system-user-menu
 features[features_api][] = api:2
-features[menu_links][] = main-menu_about:node/31
 features[menu_links][] = main-menu_blog:blog
 features[menu_links][] = main-menu_climate-change:climate-change
 features[menu_links][] = main-menu_dashboard:dashboard
