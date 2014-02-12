@@ -16,40 +16,59 @@ Drupal.ccis.behaviors.d3 = {
 	// Position 3: Tick format for the axis label
 	// Position 4: Tooltip label
 	var unitsArray = [];
-	for (var i=0; i<info.units.length; i++) {
-		var unitsArrayKeyword = info.units[i].title; // Position 0
-		if (Object.prototype.toString.call(info.units[i].field_icon_unit) === "[object Object]") {
-			var unitsArrayIconFilename = "sites/default/files/climate_unit_icons/"+info.units[i].field_icon_unit.und[0].filename; // Position 1
-		} else {
-			var unitsArrayIconFilename = ""; // Position 1
+	var unitsObj = info.d3.units;
+	for (var key in unitsObj) {
+		if (unitsObj.hasOwnProperty(key)) {
+
+			var unitsArrayKeyword = key; // Position 0
+
+			if (unitsObj[key].field_icon_unit) {
+				var unitsArrayIconFilename = unitsObj[key].field_icon_unit; // Position 1
+			} else {
+				var unitsArrayIconFilename = ""; // Position 1
+			}
+
+			if (unitsObj[key].field_label_axis) {
+				var unitsArrayAxisLabel = unitsObj[key].field_label_axis; // Position 2
+			} else {
+				var unitsArrayAxisLabel = ""; // Position 2
+			}
+
+			if (unitsObj[key].field_decimal_places_for_tooltip) {
+				var unitsArrayTickFormat = "."+unitsObj[key].field_decimal_places_for_tooltip+"f"; // Position 3
+			} else {
+				var unitsArrayTickFormat = ".0f"; // Position 3
+			}
+
+			if (unitsObj[key].field_label_tooltip) {
+				var unitsArrayTooltipLabel = unitsObj[key].field_label_tooltip; // Position 4
+			} else {
+				var unitsArrayTooltipLabel = ""; // Position 4
+			}
+
+			unitsArray.push([unitsArrayKeyword, unitsArrayIconFilename, unitsArrayAxisLabel, unitsArrayTickFormat, unitsArrayTooltipLabel]);
+
 		}
-		var unitsArrayAxisLabel = info.units[i].field_label_axis.und[0].value; // Position 2
-		var unitsArrayTickFormat = "."+info.units[i].field_decimal_places_for_tooltip.und[0].value+"f"; // Position 3
-		var unitsArrayTooltipLabel = info.units[i].field_label_tooltip.und[0].value; // Position 4
-		
-		unitsArray.push([unitsArrayKeyword, unitsArrayIconFilename, unitsArrayAxisLabel, unitsArrayTickFormat, unitsArrayTooltipLabel]);
 	}
 	
-	// All legends that are available in server
-	var legendsArray = Object.keys(info.legends);
-	
-	// Get unique values of groups and fill groupArray
+	// Fill groupArray
+	// Position 1: Name of group
+	// Position 2: Name of group withour whitespaces (we use it for the ids of divs later in legend)
+	// Position 3: Group order
 	var groupArray = [];
-	for (var i=0; i<info.parameter.length; i++) {
-		for (var j=0; j<legendsArray.length; j++) {
-			if (legendsArray[j]===info.parameter[i].field_name) {
-				var groupFirstTime = 0;
-				for (var k=0; k<groupArray.length; k++) {
-					if (info.parameter[i].climate_group === groupArray[k][0]) {
-						groupFirstTime++;
-					}
-				}	
-				if (groupFirstTime === 0) {
-					// Position 1: Name of group
-					// Position 2: Name of group withour whitespaces (we use it for the ids of divs later in legend)
-					groupArray.push([info.parameter[i].climate_group, info.parameter[i].climate_group.replace(/ /g,'')]);
-				}
+	var groupsObj = info.d3.groups;
+	for (var key in groupsObj) {
+		if (groupsObj.hasOwnProperty(key)) {
+			if (groupsObj[key].field_group_order) {
+				var groupOrder = groupsObj[key].field_group_order;
+			} else {
+				var groupOrder = "0";
 			}
+			groupArray.push([key, key.replace(/ /g,''), groupOrder]);
+			// Sort the groups by the group order value
+			groupArray.sort(function(a, b) {
+				return a[2] - b[2];
+			});
 		}
 	}
 
@@ -68,20 +87,30 @@ Drupal.ccis.behaviors.d3 = {
 	}
 
 	// Fill Arrays with group information
-	for (var i=0; i<info.parameter.length; i++) {
-		for (var j=0; j<legendsArray.length; j++) {
-			if (legendsArray[j]===info.parameter[i].field_name) {
-				var climate_group = info.parameter[i].climate_group;	// Get group
-
-				var field_name = info.parameter[i].field_name;	// Get field_name
-				
-				// Position 0: Parameter Name
-				var parameterName = field_name.slice(6); // Position 0
-
-				// Position 1: Color
-				var parameterColor = "#" + info.parameter[i].color; // Position 1
-
-				// Position 2: Legend Keyword
+	var parameterObj = info.d3.parameter;
+	for (var key in parameterObj) {
+		if (parameterObj.hasOwnProperty(key)) {
+		
+			var field_name = key; // Get field_name
+		
+			if (parameterObj[field_name].climate_group) {
+				var climate_group = parameterObj[field_name].climate_group; // Get group
+			} else {
+				var climate_group = "";
+			}
+			
+			// Position 0: Parameter Name
+			var parameterName = field_name.slice(6); // Position 0
+			
+			// Position 1: Color
+			if (parameterObj[field_name].color) {
+				var parameterColor = "#" + parameterObj[field_name].color; // Position 1
+			} else {
+				var parameterColor = "#000000";
+			}
+			
+			// Position 2: Legend Keyword
+			if (info.legends[field_name]) {
 				var parameterKeyword = info.legends[field_name];
 				if (parameterKeyword.indexOf('<span class="ccis-datatable-title" title=')!==-1 || parameterKeyword.indexOf('<span class="ccis-datatable-title"  title=')!==-1) {
 					var parIndex1 = parameterKeyword.indexOf('">');
@@ -93,63 +122,77 @@ Drupal.ccis.behaviors.d3 = {
 				var parIndex2 = parameterKeyword.indexOf('</span');
 				var parameterKeywordTemp = parameterKeyword.slice(parIndex2);
 				parameterKeyword = parameterKeyword.replace(parameterKeywordTemp, ""); // Position 2
-				
-				// Position 5: Units
-				var climateUnit = info.parameter[i].climate_unit; // Position 5
-				
-				// Position 3: Legend Hover Name
-				var parameterHoverName;
-				var parameterHoverNameInitial = info.legends[field_name];
-				if (parameterHoverNameInitial.indexOf('<span class="ccis-datatable-title" title="')!==-1 ) {
-					parameterHoverName = parameterHoverNameInitial.replace('<span class="ccis-datatable-title" title="', '');
-					var parIndex3 = parameterHoverName.indexOf('">');
-					var parameterHoverNameTemp = parameterHoverName.slice(parIndex3);
-					parameterHoverName = parameterHoverName.replace(parameterHoverNameTemp, ""); // Position 3
-				} else if (parameterHoverNameInitial.indexOf('<span class="ccis-datatable-title"  title="')!==-1 ) {
-					parameterHoverName = parameterHoverNameInitial.replace('<span class="ccis-datatable-title"  title="', '');
-					var parIndex3 = parameterHoverName.indexOf('">');
-					var parameterHoverNameTemp = parameterHoverName.slice(parIndex3);
+			}
+			
+			// Position 5: Units
+			if (parameterObj[field_name].climate_unit) {
+				var climateUnit = parameterObj[field_name].climate_unit; // Position 5
+			}
+			
+			// Position 3: Legend Hover Name
+			var parameterHoverName;
+			var parameterHoverNameInitial = info.legends[field_name];
+			if (parameterHoverNameInitial.indexOf('<span class="ccis-datatable-title" title="')!==-1 ) {
+				parameterHoverName = parameterHoverNameInitial.replace('<span class="ccis-datatable-title" title="', '');
+				var parIndex3 = parameterHoverName.indexOf('">');
+				var parameterHoverNameTemp = parameterHoverName.slice(parIndex3);
 				parameterHoverName = parameterHoverName.replace(parameterHoverNameTemp, ""); // Position 3
-				} else {
-					parameterHoverName = ""; // Position 3
+			} else if (parameterHoverNameInitial.indexOf('<span class="ccis-datatable-title"  title="')!==-1 ) {
+				parameterHoverName = parameterHoverNameInitial.replace('<span class="ccis-datatable-title"  title="', '');
+				var parIndex3 = parameterHoverName.indexOf('">');
+				var parameterHoverNameTemp = parameterHoverName.slice(parIndex3);
+			parameterHoverName = parameterHoverName.replace(parameterHoverNameTemp, ""); // Position 3
+			} else {
+				parameterHoverName = ""; // Position 3
+			}
+			for (var k=0; k<unitsArray.length; k++) {
+				if (climateUnit === unitsArray[k][0]) {
+					parameterHoverName = parameterHoverName + " (" + unitsArray[k][4] + ")"; // Position 3
 				}
-				
-				for (var k=0; k<unitsArray.length; k++) {
-					if (climateUnit === unitsArray[k][0]) {
-						parameterHoverName = parameterHoverName + " (" + unitsArray[k][4] + ")"; // Position 3
-					}
-				}
-
-				// Position 4: Graph Type (0:Line / 1:Bar)
-				var graphType = info.parameter[i].graph_type; // Position 4
-
-				var parameterArray = [parameterName, parameterColor, parameterKeyword, parameterHoverName, graphType, climateUnit];
-				
-				for (var k=0; k<groupArray.length; k++) {
-					if (climate_group === groupArray[k][0]) {
+			}
+			
+			// Position 4: Graph Type (0:Line / 1:Bar)
+			if (parameterObj[field_name].graph_type) {
+				var graphType = parameterObj[field_name].graph_type.toString(); // Position 4
+			} else {
+				var graphType = "0";
+			}
+			
+			// Fill group arrays
+			var parameterArray = [parameterName, parameterColor, parameterKeyword, parameterHoverName, graphType, climateUnit];
+			for (var k=0; k<groupArray.length; k++) {
+				if (parameterObj[key].climate_group) {
+					if (parameterObj[key].climate_group === groupArray[k][0]) {
 						group[groupArray[k][1]].push(parameterArray);
 					}
-				}	
-			}
+				}
+			}	
 		}
 	}
-	
+		
 	// Icons used for groups
 	// Position 0: Group name
 	// Position 1: Icon filename
 	var groupIconsArray = [];
-	for (var i=0; i<info.groups.length; i++) {
-		var iconTitle = info.groups[i].title;
-		if (Object.prototype.toString.call(info.groups[i].field_icon) === "[object Object]") {
-			var iconFilename = "sites/default/files/climate_group_icons/"+info.groups[i].field_icon.und[0].filename;
-		} else {
-			var iconFilename = "";
+
+	var groupsObj = info.d3.groups;
+	for (var key in groupsObj) {
+		if (groupsObj.hasOwnProperty(key)) {
+			var iconTitle = key;
+			if (groupsObj[iconTitle].field_icon) {
+				var iconFilename = groupsObj[iconTitle].field_icon;
+			} else {
+				var iconFilename = "";
+			}
+			groupIconsArray.push([iconTitle, iconFilename]);
 		}
-		groupIconsArray.push([iconTitle, iconFilename]);
 	}
 	
 	// Date Icon for Diagram Tooltip
 	var dateIcon = "sites/all/modules/custom/ccis/images/d3/symbol_infobereich_clock.png";
+	
+	// Print Icon
+	var printIcon = "sites/all/modules/custom/ccis/images/d3/symbol_printer.png";
 
 	// SVG legend icons (Line and Bar)
 	var partOfSVGLine1 = "<svg width='25' height='13'><g transform='translate(0,-1039.3622)'><path style='fill:none;stroke:";
@@ -417,7 +460,7 @@ Drupal.ccis.behaviors.d3 = {
 					yAxisLabelOffset = -30;
 					yAxisTickFormat = unitsArray[i][3];
 					if (unitsArray[i][1].length>0) {
-						iconLink = settings.basePath+unitsArray[i][1];
+						iconLink = unitsArray[i][1];
 					} else {
 						iconLink = "";
 					}
@@ -597,7 +640,7 @@ Drupal.ccis.behaviors.d3 = {
 			for (var k=0; k<groupIconsArray.length; k++) {
 				if (groupArray[i][0]===groupIconsArray[k][0]) {
 					if (groupIconsArray[k][1].length>0) {
-						$("#legend"+groupArray[i][1]+"Group"+block).append("<div id='d3_iconLegend"+block+"' class='d3_iconLegendClass'><img src='"+settings.basePath+groupIconsArray[k][1]+"' width='15' height='20'> "+groupArray[i][0]+"</div>");
+						$("#legend"+groupArray[i][1]+"Group"+block).append("<div id='d3_iconLegend"+block+"' class='d3_iconLegendClass'><img src='"+groupIconsArray[k][1]+"' width='15' height='20'> "+groupArray[i][0]+"</div>");
 					} else {
 						$("#legend"+groupArray[i][1]+"Group"+block).append("<div id='d3_iconLegend"+block+"' class='d3_iconLegendClass'> "+groupArray[i][0]+"</div>");
 					}
@@ -719,7 +762,7 @@ Drupal.ccis.behaviors.d3 = {
 		
 		$("#printSelectWrapper"+block).append("<div id='d3_SelectTrendline"+block+"' class='d3_SelectTrendlineClass'><input id='d3_checkboxTrendline"+block+"' class='d3_checkboxTrendlineClass' type='checkbox' value='trendline'>Trendline</div>");		
 		
-		$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><span style='font-size:14px;'>&nbsp;&nbsp;Print</span></div>");
+		$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+printIcon+"' width='16' height='16'><span style='font-size:14px;'>&nbsp;&nbsp;Print</span></div>");
 		$("#d3_printPreviewId"+block).hover(function() {
 			$(this).css("cursor","pointer").css("background-color", "#9E9E9E");
 		}, function () {$(this).css("cursor","default").css("background-color", "#b3b3b3");});
@@ -944,7 +987,7 @@ Drupal.ccis.behaviors.d3 = {
 									}
 									tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 									if (iconFilename.length>0) {
-										tooltipText += "<td>&nbsp;<img src='"+settings.basePath+iconFilename+"' width='7' height='21'></td>";
+										tooltipText += "<td>&nbsp;<img src='"+iconFilename+"' width='7' height='21'></td>";
 									} else {
 										tooltipText += "<td>&nbsp;</td>";
 									}
@@ -1281,7 +1324,7 @@ Drupal.ccis.behaviors.d3 = {
 					yAxisLabelOffset = -30;
 					yAxisTickFormat = unitsArray[i][3];
 					if (unitsArray[i][1].length>0) {
-						iconLink = settings.basePath+unitsArray[i][1];
+						iconLink = unitsArray[i][1];
 					} else {
 						iconLink = "";
 					}
@@ -1461,7 +1504,7 @@ Drupal.ccis.behaviors.d3 = {
 			for (var k=0; k<groupIconsArray.length; k++) {
 				if (groupArray[i][0]===groupIconsArray[k][0]) {
 					if (groupIconsArray[k][1].length>0) {
-						$("#legend"+groupArray[i][1]+"Group"+block).append("<div id='d3_iconLegend"+block+"' class='d3_iconLegendClass'><img src='"+settings.basePath+groupIconsArray[k][1]+"' width='15' height='20'> "+groupArray[i][0]+"</div>");
+						$("#legend"+groupArray[i][1]+"Group"+block).append("<div id='d3_iconLegend"+block+"' class='d3_iconLegendClass'><img src='"+groupIconsArray[k][1]+"' width='15' height='20'> "+groupArray[i][0]+"</div>");
 					} else {
 						$("#legend"+groupArray[i][1]+"Group"+block).append("<div id='d3_iconLegend"+block+"' class='d3_iconLegendClass'> "+groupArray[i][0]+"</div>");
 					}
@@ -1583,7 +1626,7 @@ Drupal.ccis.behaviors.d3 = {
 		
 		$("#printSelectWrapper"+block).append("<div id='d3_SelectTrendline"+block+"' class='d3_SelectTrendlineClass'><input id='d3_checkboxTrendline"+block+"' class='d3_checkboxTrendlineClass' type='checkbox' value='trendline'>Trendline</div>");		
 		
-		$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+"sites/all/modules/custom/ccis/images/d3/symbol_printer.png' width='16' height='16'><span style='font-size:14px;'>&nbsp;&nbsp;Print</span></div>");
+		$("#printSelectWrapper"+block).append("<div id='d3_printPreviewId"+block+"' class='d3_printPreviewClass'><img src='"+settings.basePath+printIcon+"' width='16' height='16'><span style='font-size:14px;'>&nbsp;&nbsp;Print</span></div>");
 		$("#d3_printPreviewId"+block).hover(function() {
 			$(this).css("cursor","pointer").css("background-color", "#9E9E9E");
 		}, function () {$(this).css("cursor","default").css("background-color", "#b3b3b3");});
@@ -1808,7 +1851,7 @@ Drupal.ccis.behaviors.d3 = {
 									}
 									tooltipText += "<tr style='border-top: 1px solid #e6e6e6;'>";
 									if (iconFilename.length>0) {
-										tooltipText += "<td>&nbsp;<img src='"+settings.basePath+iconFilename+"' width='7' height='21'></td>";
+										tooltipText += "<td>&nbsp;<img src='"+iconFilename+"' width='7' height='21'></td>";
 									} else {
 										tooltipText += "<td>&nbsp;</td>";
 									}
