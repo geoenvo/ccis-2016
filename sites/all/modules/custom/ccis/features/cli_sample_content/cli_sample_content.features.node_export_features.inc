@@ -583,6 +583,13 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
+      \'field_group_order\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'3\',
+          ),
+        ),
+      ),
       \'field_icon\' => array(),
       \'files\' => array(),
       \'language\' => \'und\',
@@ -792,6 +799,13 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
+      \'field_group_order\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'2\',
+          ),
+        ),
+      ),
       \'field_icon\' => array(),
       \'files\' => array(),
       \'language\' => \'und\',
@@ -2092,6 +2106,13 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
+      \'field_group_order\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'4\',
+          ),
+        ),
+      ),
       \'field_icon\' => array(
         \'und\' => array(
           array(
@@ -2418,6 +2439,13 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
+      \'field_group_order\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'6\',
+          ),
+        ),
+      ),
       \'field_icon\' => array(
         \'und\' => array(
           array(
@@ -3430,6 +3458,13 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
+      \'field_group_order\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'1\',
+          ),
+        ),
+      ),
       \'field_icon\' => array(
         \'und\' => array(
           array(
@@ -3659,6 +3694,13 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
+      \'field_group_order\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'7\',
+          ),
+        ),
+      ),
       \'field_icon\' => array(
         \'und\' => array(
           array(
@@ -4010,6 +4052,13 @@ function cli_sample_content_node_export_features_default() {
       \'comment_count\' => \'0\',
       \'created\' => NULL,
       \'data\' => NULL,
+      \'field_group_order\' => array(
+        \'und\' => array(
+          array(
+            \'value\' => \'5\',
+          ),
+        ),
+      ),
       \'field_icon\' => array(),
       \'files\' => array(),
       \'language\' => \'und\',

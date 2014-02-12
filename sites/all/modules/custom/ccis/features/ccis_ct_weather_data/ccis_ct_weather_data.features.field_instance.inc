@@ -10,6 +10,56 @@
 function ccis_ct_weather_data_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-climate_group-field_group_order'
+  $field_instances['node-climate_group-field_group_order'] = array(
+    'bundle' => 'climate_group',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Determines the order of the groups in the legend of the graph in the dashboard.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_group_order',
+    'label' => 'group order',
+    'required' => 1,
+    'settings' => array(
+      'climate_group' => '',
+      'climate_unit' => '',
+      'color' => '000000',
+      'graph_type' => 0,
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 33,
+    ),
+  );
+
   // Exported field_instance: 'node-climate_group-field_icon'
   $field_instances['node-climate_group-field_icon'] = array(
     'bundle' => 'climate_group',
@@ -2304,6 +2354,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('Daily wind direction');
   t('Date');
   t('Decimal places for tooltip');
+  t('Determines the order of the groups in the legend of the graph in the dashboard.');
   t('FD');
   t('FG');
   t('FX');
@@ -2363,6 +2414,7 @@ function ccis_ct_weather_data_field_default_field_instances() {
   t('Txx');
   t('WSDI');
   t('Warm speel duration index');
+  t('group order');
   t('icon');
 
   return $field_instances;
