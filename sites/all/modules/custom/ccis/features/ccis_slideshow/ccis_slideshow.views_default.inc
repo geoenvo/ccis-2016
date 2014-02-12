@@ -33,7 +33,6 @@ function ccis_slideshow_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'slideshow';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
-  $handler->display->display_options['style_options']['wrapper_class'] = 'slideshow';
   $handler->display->display_options['style_options']['slideshow_type'] = 'views_slideshow_cycle';
   $handler->display->display_options['style_options']['slideshow_skin'] = 'default';
   $handler->display->display_options['style_options']['skin_info'] = array(
@@ -138,6 +137,7 @@ function ccis_slideshow_views_default_views() {
   $handler->display->display_options['filters']['language']['field'] = 'language';
   $handler->display->display_options['filters']['language']['value'] = array(
     '***CURRENT_LANGUAGE***' => '***CURRENT_LANGUAGE***',
+    '***DEFAULT_LANGUAGE***' => '***DEFAULT_LANGUAGE***',
     'und' => 'und',
   );
 
