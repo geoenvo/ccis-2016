@@ -130,6 +130,7 @@ projects[node_export][version] = "3.0"
 
 projects[openlayers][subdir] = "contrib"
 projects[openlayers][version] = "2.0-beta7"
+projects[openlayers][patch][] = http://drupal.org/files/issues/openlayers-1404912-7.x-2.0-beta7-do-not-test.patch
 
 projects[openlayers_plus][subdir] = "contrib"
 projects[openlayers_plus][version] = "3.0-beta1"
