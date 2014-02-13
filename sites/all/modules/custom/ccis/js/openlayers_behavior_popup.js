@@ -58,6 +58,8 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
       if (layers.length == 1) {
         layers = layers[0];
       }
+	  
+	  
 
       // Select control for hover / select popup behaviour
       var selectControl = new OpenLayers.Control.SelectFeature(layers,
@@ -72,14 +74,12 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                 // generate the number of stations and a hint as content of a
                 // hover
                 // popup
-
+				
                 if (feature.cluster == undefined) {
 
                 }
 
                 else {
-					
-				var pos = feature.geometry.getBounds().getCenterLonLat();	
 
                 html = '<div class="popup_list">';
                 if (feature.cluster.length > 3) {
@@ -105,9 +105,12 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                         + feature.cluster[i].attributes.title + '</a></p>';
                   }
                   }
-				  var posa = map.getLayerPxFromViewPortPx(map.getViewPortPxFromLonLat(pos));
-				  posa.y = posa.y - 35;
-				  pos = map.getLonLatFromViewPortPx(posa);	
+				  
+				  // Set offset for marker position
+				  pos = feature.geometry.getBounds().getCenterLonLat();	
+				  viewPortPx = map.getViewPortPxFromLonLat(pos);
+				  viewPortPx.y = viewPortPx.y -35;
+				  posneu = map.getLonLatFromViewPortPx(viewPortPx);
                 }
                 else if (feature.cluster.length == 2) {
                 	html += '<p class="popupName">Select a station:</p>';
@@ -126,9 +129,12 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                         + feature.cluster[i].attributes.title + '</a></p>';
                   }
                   }
-				  var posa = map.getLayerPxFromViewPortPx(map.getViewPortPxFromLonLat(pos));
-				  posa.y = posa.y - 15;
-				  pos = map.getLonLatFromViewPortPx(posa);	
+				  
+				  // Set offset for marker position
+				  pos = feature.geometry.getBounds().getCenterLonLat();	
+				  viewPortPx = map.getViewPortPxFromLonLat(pos);
+				  viewPortPx.y = viewPortPx.y -15;
+				  posneu = map.getLonLatFromViewPortPx(viewPortPx);	
                 }
                 else if (feature.cluster.length > 0) {
                 	if (feature.cluster[0].attributes.title.length > 17) {
@@ -148,24 +154,27 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                   }
                   html += '<p class="popupAttr">' + title + ': ' + attr + '</p>';
                   html += '<img src="' + Drupal.settings.basePath + 'sites/all/modules/custom/ccis/css/ol/markers/arrow.png" style="position:relative; left:61px; top: -12px;" alt="arrow">'
-					  
-				  var posa = map.getLayerPxFromViewPortPx(map.getViewPortPxFromLonLat(pos));
-				  posa.y = posa.y - 30;
-				  pos = map.getLonLatFromViewPortPx(posa);	  
+				  			
+				  // Set offset for marker position
+				  pos = feature.geometry.getBounds().getCenterLonLat();	
+				  viewPortPx = map.getViewPortPxFromLonLat(pos);
+				  viewPortPx.y = viewPortPx.y -30;
+				  posneu = map.getLonLatFromViewPortPx(viewPortPx);
                 }
-
+	
                 html += '</div>';
-
+				
 
                     popup = new OpenLayers.Popup.Popover(
                 		"popoverPopup",
                         //feature.geometry.getBounds().getCenterLonLat(),
-						pos,
+						posneu,
                         title,
                         html,
                         function(evt) {
                           while (map.popups.length) {
                             map.popups[0].destroy();
+							
                           }
                         });
 
@@ -184,26 +193,13 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
 
 
                 // Assign popup to feature and map.
-				//var offset = {'size':new OpenLayers.Size(0,0),'offset':new OpenLayers.Pixel(-74,-10)};
-                //popup.anchor = offset;		
-				//popup.moveTo: function(50,50);	
-						
-				// var widthPixel = 50;
-				// var heightPixel = 50;
-				// popup.moveTo(new OpenLayers.Pixel(widthPixel, heightPixel));		
 				
-				/*pos = map.getLayerPxFromViewPortPx(map.getViewPortPxFromLonLat(pos));
-				console.log("pos.x: " + pos.x + " pos.y: " + pos.y);
-				pos.y = pos.y + 20;
-				console.log("pos.x: " + pos.x + " pos.y: " + pos.y);
-				this.map = map;
-				popup.moveTo(pos);*/
 						
                 popup.panMapIfOutOfView = true; //options.panMapIfOutOfView;
                 popup.keepInMap = options.keepInMap;
                 selectedFeature = feature;
                 feature.popup = popup;
-                //Drupal.attachBehaviors();
+                //Drupal.attachBehaviors();		// Disabled to avoid map size adaption after popup visualization in map of empty dashboard
                 map.addPopup(popup);
                 }
               }, // over
