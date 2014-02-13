@@ -131,8 +131,17 @@ h3.teasertitle {
   margin: 0;
 }
 
-#main h2.block-title,
-#homebox h3.dashboard-title {
+h2.teasertitle a,
+h3.teasertitle a{
+  text-decoration: none;
+}
+
+h2.teasertitle a:hover,
+h3.teasertitle a:hover {
+  text-decoration: underline;
+}
+
+#main h2.block-title {
   height: 38px;
   width: 257px;
   margin-bottom: .5em;
@@ -144,6 +153,20 @@ h3.teasertitle {
   clear: left;
   color: #2c4563;
 }
+
+#homebox h3.dashboard-title {
+  height: 38px;
+  width: auto;
+  margin-bottom: .5em;
+  background: url('../img/titel_background_left.png') no-repeat left -2px;
+  padding: 0 0 0 23px;
+  font-size: 1.5em;
+  line-height: 100%;
+  text-align: center;
+  clear: left;
+  color: #2c4563;
+}
+
 #main h2.block-title span,
 #homebox h3.dashboard-title span {
   display: block;
@@ -1007,12 +1030,7 @@ html.js input.throbbing {
   font-family: 'Open Sans',Arial,Helvetica,sans-serif;  
 }
 
-.teasertitle span a{
-  
-  text-decoration: none;
-}
-
-.view-blogpage {
+.block-inner .view-blogpage { 
   font-size: 12px;
   line-height: 1.4em;	
 }	
@@ -1180,6 +1198,14 @@ html.js input.throbbing {
   top: -2px;
 }
 
+.evbody a {
+  text-decoration: none;
+}
+
+.evbody a:hover {
+  text-decoration: underline;
+}
+
 
 /* ++ climate change node page ++ */
 
@@ -1196,6 +1222,14 @@ html.js input.throbbing {
 
 .view-ClimateChange .field-name-field-cc-image {
   padding: 10px;
+}
+
+.field-item a {
+  text-decoration: none;
+}
+
+.field-item a:hover {
+  text-decoration: underline;
 }
 
 
