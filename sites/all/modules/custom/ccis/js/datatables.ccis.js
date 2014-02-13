@@ -75,7 +75,10 @@
             "oColVis" : {
               "bRestore" : true,
               "sAlign" : "right",
-              "aiExclude": [0]
+              "aiExclude": [0],
+              "fnStateChange": function( iColumn, bVisible) {
+                _trigger_tipsy();
+              },
             },
             "oLanguage" : {
               "sEmptyTable" : Drupal.t("No data available in table"),
@@ -105,11 +108,15 @@
         options = $.extend(true, _datatable.data, options);
         var tableid = '#ccis-datatable-' + _datatable.current_station.nr;
         $(tableid).dataTable(options);
-        $('.ccis-datatable-title[title]').tipsy({
-          gravity : 's'
-        });
+        _trigger_tipsy();
       }
   };
+
+  function _trigger_tipsy() {
+    $('.ccis-datatable-title[title]').tipsy({
+      "gravity" : "s"
+    });
+  }
 
   function table(id) {
     return '<table class="display" id="ccis-datatable-' + id + '"></table>';
