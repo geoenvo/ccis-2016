@@ -495,6 +495,8 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
         $header = array_keys(reset($output));
         $output = array_merge(array($header), $output);
         drupal_add_http_header('Content-Type', 'text/csv; charset=utf-8');
+        drupal_add_http_header('Content-Disposition', 'attachment; filename=' . $list . '.csv');
+        drupal_add_http_header('Cache-Control', 'must-revalidate');
         echo _ccis_outputCSV($output);
       }
     }
