@@ -301,4 +301,66 @@ function ccis_distro_install() {
     'ccis_ct_weather_station' => array('field_base'),
   );
   features_revert($features);
+
+  _ccis_distro_create_bean();
+}
+
+function _ccis_distro_create_bean() {
+  $file_data = file_get_contents(dirname(__FILE__) . '/img/image_dashboard.png');
+  $file = file_save_data($file_data, 'public://image_dashboard.png');
+  $bean = bean_create(array('type' => 'image_teaser'));
+
+  $bean->label = 'Image teaser: Dashboard';
+  $bean->title = '';
+  $bean->delta = 'image-teaser-dashboard';
+  $bean->field_title_visible = array(
+    'und' => array(array(
+      'value' => 'Check out the dashboard',
+      'format' => 'plain_text',
+    )),
+  );
+  $bean->field_internal_link_url = array(
+    'und' => array(array(
+      'value' => 'dashboard',
+      'format' => 'plain_text',
+    )),
+  );
+  $bean->field_teaser_image = array(
+    'und' => array((array) $file),
+  );
+  try{
+    $bean->save();
+  }
+  catch (Exception $e) {
+    watchdog_exception('ccis_distro', $e);
+  }
+
+  $file_data = file_get_contents(dirname(__FILE__) . '/img/image_map.png');
+  $file = file_save_data($file_data);
+  $bean = bean_create(array('type' => 'image_teaser'));
+
+  $bean->label = 'Image teaser: Map';
+  $bean->title = '';
+  $bean->delta = 'image-teaser-map';
+  $bean->field_title_visible = array(
+    'und' => array(array(
+      'value' => 'Explore our interactive map',
+      'format' => 'plain_text',
+    )),
+  );
+  $bean->field_internal_link_url = array(
+    'und' => array(array(
+      'value' => 'map',
+      'format' => 'plain_text',
+    )),
+  );
+  $bean->field_teaser_image = array(
+    'und' => array((array) $file),
+  );
+  try{
+    $bean->save();
+  }
+  catch (Exception $e) {
+    watchdog_exception('ccis_distro', $e);
+  }
 }
