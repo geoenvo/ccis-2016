@@ -78,6 +78,8 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                 }
 
                 else {
+					
+				var pos = feature.geometry.getBounds().getCenterLonLat();	
 
                 html = '<div class="popup_list">';
                 if (feature.cluster.length > 3) {
@@ -103,6 +105,9 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                         + feature.cluster[i].attributes.title + '</a></p>';
                   }
                   }
+				  var posa = map.getLayerPxFromViewPortPx(map.getViewPortPxFromLonLat(pos));
+				  posa.y = posa.y - 35;
+				  pos = map.getLonLatFromViewPortPx(posa);	
                 }
                 else if (feature.cluster.length == 2) {
                 	html += '<p class="popupName">Select a station:</p>';
@@ -121,6 +126,9 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                         + feature.cluster[i].attributes.title + '</a></p>';
                   }
                   }
+				  var posa = map.getLayerPxFromViewPortPx(map.getViewPortPxFromLonLat(pos));
+				  posa.y = posa.y - 15;
+				  pos = map.getLonLatFromViewPortPx(posa);	
                 }
                 else if (feature.cluster.length > 0) {
                 	if (feature.cluster[0].attributes.title.length > 17) {
@@ -140,15 +148,19 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
                   }
                   html += '<p class="popupAttr">' + title + ': ' + attr + '</p>';
                   html += '<img src="' + Drupal.settings.basePath + 'sites/all/modules/custom/ccis/css/ol/markers/arrow.png" style="position:relative; left:61px; top: -12px;" alt="arrow">'
+					  
+				  var posa = map.getLayerPxFromViewPortPx(map.getViewPortPxFromLonLat(pos));
+				  posa.y = posa.y - 30;
+				  pos = map.getLonLatFromViewPortPx(posa);	  
                 }
 
                 html += '</div>';
 
 
-
                     popup = new OpenLayers.Popup.Popover(
                 		"popoverPopup",
-                        feature.geometry.getBounds().getCenterLonLat(),
+                        //feature.geometry.getBounds().getCenterLonLat(),
+						pos,
                         title,
                         html,
                         function(evt) {
@@ -172,11 +184,26 @@ Drupal.openlayers.addBehavior('openlayers_behavior_popup',
 
 
                 // Assign popup to feature and map.
+				//var offset = {'size':new OpenLayers.Size(0,0),'offset':new OpenLayers.Pixel(-74,-10)};
+                //popup.anchor = offset;		
+				//popup.moveTo: function(50,50);	
+						
+				// var widthPixel = 50;
+				// var heightPixel = 50;
+				// popup.moveTo(new OpenLayers.Pixel(widthPixel, heightPixel));		
+				
+				/*pos = map.getLayerPxFromViewPortPx(map.getViewPortPxFromLonLat(pos));
+				console.log("pos.x: " + pos.x + " pos.y: " + pos.y);
+				pos.y = pos.y + 20;
+				console.log("pos.x: " + pos.x + " pos.y: " + pos.y);
+				this.map = map;
+				popup.moveTo(pos);*/
+						
                 popup.panMapIfOutOfView = true; //options.panMapIfOutOfView;
                 popup.keepInMap = options.keepInMap;
                 selectedFeature = feature;
                 feature.popup = popup;
-                Drupal.attachBehaviors();
+                //Drupal.attachBehaviors();
                 map.addPopup(popup);
                 }
               }, // over

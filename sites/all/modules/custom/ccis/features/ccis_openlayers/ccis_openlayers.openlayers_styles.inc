@@ -46,7 +46,11 @@ function ccis_openlayers_openlayers_styles() {
     'strokeOpacity' => 1,
     'strokeLinecap' => 'round',
     'strokeDashstyle' => 'solid',
+    'graphicWidth' => 33,
+    'graphicHeight' => 45,
     'graphicOpacity' => 1,
+    'graphicXOffset' => -16,
+    'graphicYOffset' => -45,
     'labelAlign' => 'cm',
   );
   $export['ccis_marker_green_yellow'] = $openlayers_styles;
@@ -67,7 +71,11 @@ function ccis_openlayers_openlayers_styles() {
     'strokeOpacity' => 1,
     'strokeLinecap' => 'round',
     'strokeDashstyle' => 'solid',
+    'graphicWidth' => 33,
+    'graphicHeight' => 45,
     'graphicOpacity' => 1,
+    'graphicXOffset' => -16,
+    'graphicYOffset' => -45,
     'labelAlign' => 'cm',
   );
   $export['ccis_marker_green_yellow_active'] = $openlayers_styles;
@@ -88,7 +96,11 @@ function ccis_openlayers_openlayers_styles() {
     'strokeOpacity' => 1,
     'strokeLinecap' => 'round',
     'strokeDashstyle' => 'solid',
+    'graphicWidth' => 33,
+    'graphicHeight' => 45,
     'graphicOpacity' => 1,
+    'graphicXOffset' => -16,
+    'graphicYOffset' => -45,
     'labelAlign' => 'cm',
   );
   $export['ccis_marker_green_yellow_active_1'] = $openlayers_styles;
@@ -109,7 +121,11 @@ function ccis_openlayers_openlayers_styles() {
     'strokeOpacity' => 1,
     'strokeLinecap' => 'round',
     'strokeDashstyle' => 'solid',
+    'graphicWidth' => 33,
+    'graphicHeight' => 45,
     'graphicOpacity' => 1,
+    'graphicXOffset' => -16,
+    'graphicYOffset' => -45,
     'labelAlign' => 'cm',
   );
   $export['ccis_marker_green_yellow_active_2'] = $openlayers_styles;

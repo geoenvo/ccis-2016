@@ -210,7 +210,7 @@ function ccis_openlayers_openlayers_maps() {
     'hide_empty_map' => 0,
     'center' => array(
       'initial' => array(
-        'centerpoint' => '9.931640608848388, 50.903032833474754',
+        'centerpoint' => '9.931640587288822, 51.78143561993024',
         'zoom' => '5',
       ),
       'restrict' => array(
@@ -307,7 +307,7 @@ function ccis_openlayers_openlayers_maps() {
       'map_page_for_climate_stations_openlayers_1' => '0',
       'administrative_boundaries' => 'boundaries',
       'map_block_for_climate_stations_openlayers_1' => 'ccis_marker_green_yellow',
-      'geofield_formatter' => 'ccis_marker_green_yellow_active_1',
+      'geofield_formatter' => 'ccis_marker_green_yellow_active',
     ),
     'layer_styles_select' => array(
       'big_map_for_climate_stations' => '0',
@@ -319,7 +319,7 @@ function ccis_openlayers_openlayers_maps() {
       'map_page_for_climate_stations_openlayers_1' => '0',
       'administrative_boundaries' => '0',
       'map_block_for_climate_stations_openlayers_1' => 'ccis_marker_green_yellow',
-      'geofield_formatter' => 'ccis_marker_green_yellow_active_1',
+      'geofield_formatter' => 'ccis_marker_green_yellow_active',
     ),
     'layer_styles_temporary' => array(
       'big_map_for_climate_stations' => '0',
@@ -331,7 +331,7 @@ function ccis_openlayers_openlayers_maps() {
       'map_page_for_climate_stations_openlayers_1' => '0',
       'administrative_boundaries' => '0',
       'map_block_for_climate_stations_openlayers_1' => 'ccis_marker_green_yellow',
-      'geofield_formatter' => 'ccis_marker_green_yellow_active_1',
+      'geofield_formatter' => 'ccis_marker_green_yellow_active',
     ),
     'layer_activated' => array(
       'administrative_boundaries' => 'administrative_boundaries',
