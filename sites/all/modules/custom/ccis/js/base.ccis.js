@@ -57,9 +57,9 @@ Drupal.behaviors.ccis_base = {
         this.init();
       }
     });
-    $body.data('dashboardrefresh', 0);
     if (typeof settings.ccis.stations !== 'undefined') {
       var data_found = false;
+      $body.data('dashboardrefresh', 0);
       $.each(settings.ccis.stations, function(index, station) {
         station.data = [];
         $.ajax({
