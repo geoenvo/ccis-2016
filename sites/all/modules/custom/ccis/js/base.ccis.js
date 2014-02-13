@@ -10,38 +10,41 @@ Drupal.behaviors.ccis_base = {
     this.hidePortlets();
     this.addToolTipFieldsets();
     this.resetHomebox();
-    this.clearForm();
+    this.clearForm(context);
   },
   clearForm: function(context) {
     var form = $('#ccis-block-filter-form #edit-clear', context);
+    if (form.length < 1) {
+      return;
+    }
     form.click(function(e) {
       e.preventDefault();
       var elements = this.form.elements;
       $.each(elements, function(i, value) {
         var field_type = elements[i].type.toLowerCase();
         switch (field_type) {
-        case "text":
-        case "password":
-        case "textarea":
-          elements[i].value = "";
-            break;
-        case "radio":
-        case "checkbox":
-            if (elements[i].checked) {
-               elements[i].checked = false;
-            }
-            break;
-        case "select-one":
-        case "select-multi":
-            elements[i].selectedIndex = 0;
-            break;
-        default:
-            break;
+          case "text":
+          case "password":
+          case "textarea":
+            elements[i].value = "";
+              break;
+          case "radio":
+          case "checkbox":
+              if (elements[i].checked) {
+                 elements[i].checked = false;
+              }
+              break;
+          case "select-one":
+          case "select-multi":
+              elements[i].selectedIndex = 0;
+              break;
+          default:
+              break;
         }
       });
     });
   },
-  fetchStationData: function (settings) {
+  fetchStationData: function(settings) {
     var $body = $('body');
     if (typeof $body.data('dashboardrefresh') === 'undefined') {
       $body.data('dashboardrefresh', 1);
@@ -54,8 +57,8 @@ Drupal.behaviors.ccis_base = {
         this.init();
       }
     });
+    $body.data('dashboardrefresh', 0);
     if (typeof settings.ccis.stations !== 'undefined') {
-      $body.data('dashboardrefresh', 0);
       var data_found = false;
       $.each(settings.ccis.stations, function(index, station) {
         station.data = [];
