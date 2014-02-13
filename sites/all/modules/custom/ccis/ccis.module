@@ -116,8 +116,6 @@ function ccis_permission() {
  * Implement hook_help().
  */
 function ccis_help($path, $arg) {
-  include_once DRUPAL_ROOT . '/profiles/ccis_distro/ccis_distro.install';
-//   _ccis_distro_create_bean();
   switch ($path) {
     case 'admin/ccis/search':
       return t('The selected fields of the climate station are searchable in the filter form of the climate station dashboard.');
