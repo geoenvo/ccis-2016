@@ -90,7 +90,6 @@ dependencies[] = ccis
 dependencies[] = features_date
 dependencies[] = features_user_role_plus
 dependencies[] = features_aggregator
-dependencies[] = climateparameters
 
 ; Features
 dependencies[] = ccis_basic_page
