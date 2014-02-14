@@ -1,6 +1,0 @@
-name = CCIS Climate parameters
-description = Creates the table climate_parameter to store information about climate parameters in the dashboard graph
-core = 7.x
-package = ccis
-dependencies[] = jquery_colorpicker
-dependencies[] = ccis
