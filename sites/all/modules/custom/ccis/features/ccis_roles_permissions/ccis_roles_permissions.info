@@ -5,6 +5,7 @@ version = 7.x-1.0-rc1
 project = ccis_roles_permissions
 dependencies[] = admin_menu
 dependencies[] = aggregator
+dependencies[] = bean
 dependencies[] = ccis
 dependencies[] = contact
 dependencies[] = features_user_role_plus

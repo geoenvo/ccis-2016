@@ -52,6 +52,7 @@ function ccis_roles_permissions_user_default_roles_plus() {
       'search content' => TRUE,
       'subscribe to newsletters' => TRUE,
       'use text format filtered_html' => TRUE,
+      'view any image_teaser bean' => TRUE,
     ),
   );
 
@@ -126,6 +127,7 @@ function ccis_roles_permissions_user_default_roles_plus() {
       'search content' => TRUE,
       'subscribe to newsletters' => TRUE,
       'use text format filtered_html' => TRUE,
+      'view any image_teaser bean' => TRUE,
       'view field_address' => TRUE,
       'view field_beginposition' => TRUE,
       'view field_city' => TRUE,
