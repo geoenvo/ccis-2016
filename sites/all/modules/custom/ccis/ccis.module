@@ -227,7 +227,6 @@ function ccis_page_alter(&$page) {
     drupal_add_js($d3. '/d3.v3.min.js', array('group' => JS_LIBRARY));
     drupal_add_js($path . '/js/jquery.slimscroll.js', array('group' => JS_LIBRARY));
     drupal_add_library('system', 'ui.accordion');
-   # drupal_add_js($path . '/js/d3new.ccis.js', array('weight' => 5));
     drupal_add_js($path . '/js/d3.ccis.js', array('weight' => 5));
     drupal_add_css($path . '/css/d3.css');
 
@@ -456,6 +455,11 @@ function ccis_dataquery_page($list, $source = 'unknown', $format = 'json') {
     }
     $limit = variable_get('ccis_default_displayed_data_limit', 180);
     $labels = _ccis_get_weather_data_labels($list);
+
+    if ($source == 'download' && !empty($params['filter_fields'])) {
+      $filter_fields = array_fill_keys(explode(',', $params['filter_fields']), TRUE);
+      $labels = array_intersect_key($labels, $filter_fields);
+    }
     $fields = array();
     foreach ($labels as $key => $label) {
       $_key = str_replace('field_', '', $key);
@@ -691,23 +695,25 @@ function ccis_get_dashboard_settings($list = 'unknown', $values = array(), $id =
   $node = _ccis_get_station_node($values, 'input' . $id);
   $range = _ccis_get_date_range($values);
   $values = array_merge($values, array('range' => $range));
+
+  $download = '';
+  if (user_access('access_ccis_download_link')) {
+    $url = url("ccis/dataquery/$list/download/csv", array('query' => $values));
+    $link = "<a data-origin-href='$url' href='$url' >" . t('Export data') . '</a>';
+    $download = '<div class="ccis-data-download">' . $link . '</div>';
+  }
   $stations[] = array(
     'path' => url("ccis/dataquery/$list/data", array('query' => $values)),
     'name' => isset($node->title) ? check_plain($node->title) : '',
     'data' => array(),
     'selector' => 'ccis-weather-d3-block-' . $id,
     'nr' => $id,
+    'download' => $download,
   );
-  $download = '';
-  if (user_access('access_ccis_download_link')) {
-    $link =  l(t('Export data'), "ccis/dataquery/$list/download/csv", array('query' => $values));
-    $download = '<div class="ccis-data-download">' . $link . '</div>';
-  }
   $legends = _ccis_get_weather_data_labels($list);
   $settings['ccis']['info'] = array(
     'legends' => $legends,
     'range' => _ccis_get_range_label($range),
-    'download' => $download,
     'd3' => ccis_get_d3_info($legends),
   );
   $settings['ccis']['stations'] = $stations;
@@ -761,58 +767,10 @@ function _ccis_get_d3_info_helper($bundle, $title) {
       if (is_array($value) && array_key_exists('uri', $value)) {
         $value = file_create_url($value['uri']);
       }
-      $data[$key] = $value;
+      $data[$key] = check_plain($value);
     }
   }
   return array_filter($data);
-}
-
-/**
- * Runs a query to get information about all climate groups. Used in function ccis_get_dashboard_settings.
- */
-function getD3InfoGroups() {
-
-	$nidsObj = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'climate_group'));
-	$nids = $nidsObj -> fetchAll();
-
-	$lengthObj = db_query("SELECT COUNT(*) AS counter FROM {node} WHERE type = :type", array(':type' => 'climate_group'));
-	$lengthAll = $lengthObj -> fetchAll();
-	$lengthString = $lengthAll[0]->counter;
-	$length = intval($lengthString);
-
-	$groups = array();
-
-	 for ($i = 0; $i < $length; $i++) {
-		$nidInt = $nids[$i]->nid;
-		$nid = intval($nidInt);
-		$node = node_load($nid);
-		array_push($groups, $node);
-	}
-	return $groups;
-}
-
-/**
- * Runs a query to get information about all climate units. Used in function ccis_get_dashboard_settings.
- */
-function getD3InfoUnits() {
-
-	$nidsObj = db_query("SELECT nid FROM {node} WHERE type = :type", array(':type' => 'climate_unit'));
-	$nids = $nidsObj -> fetchAll();
-
-	$lengthObj = db_query("SELECT COUNT(*) AS counter FROM {node} WHERE type = :type", array(':type' => 'climate_unit'));
-	$lengthAll = $lengthObj -> fetchAll();
-	$lengthString = $lengthAll[0]->counter;
-	$length = intval($lengthString);
-
-	$units = array();
-
-	 for ($i = 0; $i < $length; $i++) {
-		$nidInt = $nids[$i]->nid;
-		$nid = intval($nidInt);
-		$node = node_load($nid);
-		array_push($units, $node);
-	}
-	return $units;
 }
 
 /**

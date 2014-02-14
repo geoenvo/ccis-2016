@@ -1,4 +1,16 @@
 (function($) {
+  jQuery.fn.entireHtml = function() {
+    if(this.length == 1) {
+      return this.clone().wrap('<div></div>').parent().html();
+    }
+    else {
+      var html = '';
+      $(this).each(function() {
+        html+= $(this).entireHtml();
+      });
+      return html;
+    }
+  }
   Drupal.ccis.behaviors.datatables = {
       init : function() {
         var datatable = this;
@@ -17,22 +29,22 @@
         var datatable = this;
         datatable.data = {};
         datatable.data.aaData = datatable.current_station.data;
-        var fields = [];
+        datatable.current_station.fields = [];
         delete datatable.current_station.data;
         datatable.data.aaData = datatable.data.aaData.map(function(value) {
           if (typeof value.shortdate !== 'undefined') {
             value.date = value.shortdate;
             delete value.shortdate;
           }
-          fields = Object.keys(value);
-          return fields.map(function (key) {
+          datatable.current_station.fields = Object.keys(value);
+          return datatable.current_station.fields.map(function (key) {
             return value[key];
           });
         });
         datatable.data.aoColumns = [];
-        if (fields.length > 0) {
+        if (datatable.current_station.fields.length > 0) {
           // We need todo this to get the right order.
-          $.each(fields, function(key, value) {
+          $.each(datatable.current_station.fields, function(key, value) {
             datatable.data.aoColumns.push({
               "sTitle" : datatable.info.legends['field_' + value]
             });
@@ -53,8 +65,8 @@
         var $div = $(dt_c);
         $div.append("<div class='ccis-datatable-station-number'>" + _datatable.current_station.nr + "</div>");
         $div.append("<div class='ccis-datatable-station-range'>" + Drupal.t("Data: ") + _datatable.info.range + "</div>");
-        if (_datatable.info.download) {
-          $div.append(_datatable.info.download);
+        if (_datatable.current_station.download) {
+          $div.append(_datatable.current_station.download);
         }
         $div.append(table(_datatable.current_station.nr));
         _datatable.container.append($div);
@@ -76,9 +88,25 @@
               "bRestore" : true,
               "sAlign" : "right",
               "aiExclude": [0],
-              "fnStateChange": function( iColumn, bVisible) {
-                _trigger_tipsy();
-              },
+            },
+            "fields" : _datatable.current_station.fields,
+            "fnDrawCallback": function( oSettings ) {
+              var dl_link = $(oSettings.nTableWrapper).prev().find('a');
+              var filter = [];
+              $.each(oSettings.aoColumns, function(i, v) {
+                if (v.bVisible) {
+                  filter.push("field_" + oSettings.oInit.fields[i]);
+                }
+              });
+              dl_link.data('filter', filter.join());
+              dl_link.once('filter-click', function() {
+                $(this).click(function(e) {
+                  var _this = $(this);
+                  var href = _this.data('origin-href') + "&filter_fields=" + _this.data('filter');
+                  _this.attr('href', href);
+                });
+              });
+              _trigger_tipsy();
             },
             "oLanguage" : {
               "sEmptyTable" : Drupal.t("No data available in table"),
@@ -100,8 +128,7 @@
               },
               "oAria" : {
                 "sSortAscending" : Drupal.t(": activate to sort column ascending"),
-                "sSortDescending" : Drupal
-                .t(": activate to sort column descending")
+                "sSortDescending" : Drupal.t(": activate to sort column descending")
               }
             }
         };
