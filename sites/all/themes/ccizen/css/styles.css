@@ -1542,7 +1542,7 @@ tr.odd td.sorting_1 {
 }
 
 .view-station-info .horizontal-tabs ul.horizontal-tabs-list li {
-  width: 25%;
+  width: 24%;
   height: 30px;
   min-width: 50px;
   padding: 0;
@@ -1939,6 +1939,12 @@ tr.odd td.sorting_1 {
   width: 100%;
 }
 
+.view-station-info .view-content .views-row .node-weather-station .field-name-title .field-items .field-item{
+  width: 113px;
+  /* height: 22px; */
+  /* overflow: hidden; */
+}
+
 
 /* tooltips */
 
@@ -1992,13 +1998,6 @@ tr.odd td.sorting_1 {
   font-size: 1.75em;
   padding: 5px 5px 10px;
   text-align: center;
-}
-
-.bean-image-teaser .field-name-field-title-visible:hover {
-  font-size: 1.75em;
-  padding: 5px 5px 10px;
-  text-align: left;
-  text-decoration: underline;  
 }
 
 .bean-image-teaser a {
