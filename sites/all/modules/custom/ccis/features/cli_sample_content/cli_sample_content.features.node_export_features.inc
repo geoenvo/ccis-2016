@@ -2225,7 +2225,7 @@ function cli_sample_content_node_export_features_default() {
             \'value\' => "You are not authorized to access this page.\\r\\nPlease <a href=\\"/login\\">log in</a> or visit the <a href=\\"/\\">home page</a> for reorientation.",
             \'summary\' => \'\',
             \'format\' => \'simple_html\',
-            \'safe_value\' => "<p>You are not authorized to access this page.<br />\\nPlease <a href=\\"http://192.168.56.100/ccis20/login\\">log in</a> or visit the <a href=\\"http://192.168.56.100/ccis20/\\">home page</a> for reorientation.</p>\\n",
+            \'safe_value\' => "<p>You are not authorized to access this page.<br />\\nPlease <a href=\\"http://192.168.56.100/ccis22/login\\">log in</a> or visit the <a href=\\"http://192.168.56.100/ccis22/\\">home page</a> for reorientation.</p>\\n",
             \'safe_summary\' => \'\',
           ),
         ),
@@ -2332,7 +2332,7 @@ function cli_sample_content_node_export_features_default() {
             \'value\' => "The requested page could not be found.\\r\\nMaybe you followed an outdated link. Please visit the <a href=\\"/\\">home page</a> for reorientation.\\r\\n\\r\\nThank you for your patience.",
             \'summary\' => \'\',
             \'format\' => \'simple_html\',
-            \'safe_value\' => "<p>The requested page could not be found.<br />\\nMaybe you followed an outdated link. Please visit the <a href=\\"http://192.168.56.100/ccis20/\\">home page</a> for reorientation.</p>\\n<p>Thank you for your patience.</p>\\n",
+            \'safe_value\' => "<p>The requested page could not be found.<br />\\nMaybe you followed an outdated link. Please visit the <a href=\\"http://192.168.56.100/ccis22/\\">home page</a> for reorientation.</p>\\n<p>Thank you for your patience.</p>\\n",
             \'safe_summary\' => \'\',
           ),
         ),
@@ -2555,10 +2555,10 @@ function cli_sample_content_node_export_features_default() {
       \'body\' => array(
         \'und\' => array(
           array(
-            \'value\' => \'to do\',
+            \'value\' => "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\\r\\n\\r\\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\\r\\n\\r\\nYou should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.\\r\\n\\r\\nclimability.org - info@climability.org \\r\\n",
             \'summary\' => \'\',
             \'format\' => \'filtered_html\',
-            \'safe_value\' => "<p>to do</p>\\n",
+            \'safe_value\' => "<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>\\n<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>\\n<p>You should have received a copy of the GNU General Public License along with this program. If not, see .</p>\\n<p>climability.org - <a href=\\"mailto:info@climability.org\\">info@climability.org</a></p>\\n",
             \'safe_summary\' => \'\',
           ),
         ),
@@ -2570,7 +2570,7 @@ function cli_sample_content_node_export_features_default() {
       \'created\' => NULL,
       \'data\' => NULL,
       \'files\' => array(),
-      \'language\' => \'en\',
+      \'language\' => \'und\',
       \'last_comment_name\' => NULL,
       \'last_comment_timestamp\' => NULL,
       \'last_comment_uid\' => NULL,
@@ -2582,7 +2582,7 @@ function cli_sample_content_node_export_features_default() {
       \'path\' => array(
         \'source\' => \'node/21\',
         \'alias\' => \'legal\',
-        \'language\' => \'en\',
+        \'language\' => \'und\',
         \'pathauto\' => FALSE,
       ),
       \'picture\' => \'0\',
@@ -3211,10 +3211,10 @@ function cli_sample_content_node_export_features_default() {
       \'body\' => array(
         \'und\' => array(
           array(
-            \'value\' => "<h2>FAQ</h2>\\r\\n<dl>\\r\\n<dt>Question 1</dt>\\r\\n<dd>Answer</dd>\\r\\n<dt>Question 2</dt>\\r\\n<dd>Answer</dd>\\r\\n</dl>\\r\\n\\r\\n<h2>HowTo</h2>\\r\\n",
+            \'value\' => "For information on using the <strong>open climability suite</strong>, please refer to the \\r\\n<ul>\\r\\n<li><a href=\\"sites/default/files/help/User_Guide.pdf\\" alt=\\"User Guide.pdf\\">CCIS User Guide</a></li>\\r\\n</ul>",
             \'summary\' => \'\',
             \'format\' => \'filtered_html\',
-            \'safe_value\' => "<h2>FAQ</h2>\\n<dl><dt>Question 1</dt>\\n<dd>Answer</dd>\\n<dt>Question 2</dt>\\n<dd>Answer</dd>\\n</dl><h2>HowTo</h2>\\n",
+            \'safe_value\' => "<p>For information on using the <strong>open climability suite</strong>, please refer to the </p>\\n<ul><li><a href=\\"http://192.168.56.100/ccis22/sites/default/files/help/User_Guide.pdf\\" alt=\\"User Guide.pdf\\">CCIS User Guide</a></li>\\n</ul>",
             \'safe_summary\' => \'\',
           ),
         ),
@@ -3226,7 +3226,7 @@ function cli_sample_content_node_export_features_default() {
       \'created\' => NULL,
       \'data\' => NULL,
       \'files\' => array(),
-      \'language\' => \'en\',
+      \'language\' => \'und\',
       \'last_comment_name\' => NULL,
       \'last_comment_timestamp\' => NULL,
       \'last_comment_uid\' => NULL,
@@ -3238,7 +3238,7 @@ function cli_sample_content_node_export_features_default() {
       \'path\' => array(
         \'source\' => \'node/26\',
         \'alias\' => \'help\',
-        \'language\' => \'en\',
+        \'language\' => \'und\',
         \'pathauto\' => FALSE,
       ),
       \'picture\' => \'0\',
@@ -3810,10 +3810,10 @@ function cli_sample_content_node_export_features_default() {
       \'body\' => array(
         \'und\' => array(
           array(
-            \'value\' => \'The Climability Platform is based on the widespread open-source content management framework Drupal and uses different JavaScript frameworks for visualisation. Climate data is imported to MongoDB, a cross-platform document-oriented database system optimised for big data and fast data access. The architecture is robust and flexible for adaptations and extensions. An elaborate user management allows the fine-grained control of data access and visualisation. Different languages are already implemented into the platform. \',
+            \'value\' => "The development of the Open Climability Suite is based on the project \\"Database for managing information on climate adaptation (Indonesia)\\", which was contracted by The International Climate Initiative of the Federal Ministry of the Environment, Nature Conservation and Nuclear Safety (BMU) in Germany to the Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) GmbH or GIZ and the Meteorological, Climatological and Geophysical Agency (BMKG) of Indonesia. The companies geoSYS from Germany and iRiskio from Indonesia have jointly accomplished the project.\\r\\n\\r\\nThe Open Climability Suite aims at supporting Indonesia in the adaptation to climate change by providing useful products in usable ways for Indonesian stakeholders. These products were developed based on dialogs with the sectors to identify needs and availability and data from Indonesian weather stations. This strengthens the national weather service BMKG in its mandate to provide the essential climate change data and information as described in the goals of the Indonesian mid-term development plan 2010-2014. The current version contains observed historical climate data. Future projections of climate information from climate models are planned to be included in the future.\\r\\n\\r\\nThe Open Climability Suite is an open-source project, and only contains open-source software components. The software can be freely used under the terms of the GPL license.\\r\\nThe following software has been used: Drupal, OpenLayers, D3, JQuery, MongoDB, R\\r\\n",
             \'summary\' => \'\',
             \'format\' => \'filtered_html\',
-            \'safe_value\' => "<p>The Climability Platform is based on the widespread open-source content management framework Drupal and uses different JavaScript frameworks for visualisation. Climate data is imported to MongoDB, a cross-platform document-oriented database system optimised for big data and fast data access. The architecture is robust and flexible for adaptations and extensions. An elaborate user management allows the fine-grained control of data access and visualisation. Different languages are already implemented into the platform.</p>\\n",
+            \'safe_value\' => "<p>The development of the Open Climability Suite is based on the project \\"Database for managing information on climate adaptation (Indonesia)\\", which was contracted by The International Climate Initiative of the Federal Ministry of the Environment, Nature Conservation and Nuclear Safety (BMU) in Germany to the Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) GmbH or GIZ and the Meteorological, Climatological and Geophysical Agency (BMKG) of Indonesia. The companies geoSYS from Germany and iRiskio from Indonesia have jointly accomplished the project.</p>\\n<p>The Open Climability Suite aims at supporting Indonesia in the adaptation to climate change by providing useful products in usable ways for Indonesian stakeholders. These products were developed based on dialogs with the sectors to identify needs and availability and data from Indonesian weather stations. This strengthens the national weather service BMKG in its mandate to provide the essential climate change data and information as described in the goals of the Indonesian mid-term development plan 2010-2014. The current version contains observed historical climate data. Future projections of climate information from climate models are planned to be included in the future.</p>\\n<p>The Open Climability Suite is an open-source project, and only contains open-source software components. The software can be freely used under the terms of the GPL license.<br />\\nThe following software has been used: Drupal, OpenLayers, D3, JQuery, MongoDB, R</p>\\n",
             \'safe_summary\' => \'\',
           ),
         ),
@@ -3825,7 +3825,7 @@ function cli_sample_content_node_export_features_default() {
       \'created\' => NULL,
       \'data\' => NULL,
       \'files\' => array(),
-      \'language\' => \'en\',
+      \'language\' => \'und\',
       \'last_comment_name\' => NULL,
       \'last_comment_timestamp\' => NULL,
       \'last_comment_uid\' => NULL,
@@ -3852,7 +3852,7 @@ function cli_sample_content_node_export_features_default() {
       \'path\' => array(
         \'source\' => \'node/31\',
         \'alias\' => \'about\',
-        \'language\' => \'en\',
+        \'language\' => \'und\',
         \'pathauto\' => FALSE,
       ),
       \'picture\' => \'0\',
