@@ -993,6 +993,39 @@ function _ccis_get_weather_data_labels($list = NULL) {
     }
   }
 
+  /**
+    IRISIKO START
+    if there is no field of the indices in the
+    mongo collection remove it from the legend
+  */
+  if ($list) {
+    $doc_fields = array();
+    
+    $col = mongodb_collection($list);
+    $docs = $col->find()->limit(1);
+    
+    if ($docs->hasNext()) {
+        foreach ($docs as $doc) {
+            $doc_fields = array_keys($doc);
+        }
+    }
+    
+    foreach ($labels as $fieldname => $label) {
+        $field = str_replace('field_', '', $fieldname);
+        
+        if (preg_match("/station/i", $field)) {
+            continue;
+        }
+        
+        if (!in_array($field, $doc_fields)) {
+            unset($labels[$fieldname]);
+        }
+    }
+  }
+  /**
+    IRISIKO END
+  */
+
   if ($list && !user_access('access_ccis_all_weather_data')) {
     $ranges = _ccis_get_range_label(TRUE);
     $fields_per_range = variable_get('ccis_weather_data_perms_range', array());
